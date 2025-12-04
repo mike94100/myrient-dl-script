@@ -1,5 +1,5 @@
-configs = [
-    "gb.toml",
-    "gbc.toml",
-    "gba.toml"
+platform_tomls = [
+    "gb/gb.toml",
+    "gbc/gbc.toml",
+    "gba/gba.toml"
 ]

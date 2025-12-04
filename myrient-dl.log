@@ -1,0 +1,94 @@
+[2025-12-04 01:40:19] Global base URL: https://myrient.erista.me/files/
+[2025-12-04 01:40:19] Global base directory: ./roms/
+[2025-12-04 01:40:19] Processing meta TOML: testconfigs/testconfigs.toml
+[2025-12-04 01:40:19] Processing site: testconfigs/gb.toml
+[2025-12-04 01:40:19] Prepared URL: https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/Pokemon%20-%20Yellow%20Version%20-%20Special%20Pikachu%20Edition%20%28USA%2C%20Europe%29%20%28CGB%2BSGB%20Enhanced%29.zip -> ./roms/gb/
+[2025-12-04 01:40:19] Prepared URL: https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/Super%20Mario%20Land%20%28World%29%20%28Rev%201%29.zip -> ./roms/gb/
+[2025-12-04 01:40:19] Prepared URL: https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/Legend%20of%20Zelda%2C%20The%20-%20Link%27s%20Awakening%20%28USA%2C%20Europe%29%20%28Rev%202%29.zip -> ./roms/gb/
+[2025-12-04 01:40:19] Total files for testconfigs/gb.toml: 3
+[2025-12-04 01:40:19] Create directory: ./roms/gb/
+[2025-12-04 01:40:19] Downloading: Pokemon - Yellow Version - Special Pikachu Edition (USA, Europe) (CGB+SGB Enhanced).zip
+[0] Downloading 'https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/Pokemon%20-%20Yellow%20Version%20-%20Special%20Pikachu%20Edition%20%28USA%2C%20Europe%29%20%28CGB%2BSGB%20Enhanced%29.zip' ...
+HTTP response 302 Moved Temporarily [https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/Pokemon%20-%20Yellow%20Version%20-%20Special%20Pikachu%20Edition%20%28USA%2C%20Europe%29%20%28CGB%2BSGB%20Enhanced%29.zip]
+Adding URL: https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/Pokemon%20-%20Yellow%20Version%20-%20Special%20Pikachu%20Edition%20(USA,%20Europe)%20(CGB+SGB%20Enhanced).zip
+Adding URL: https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/Pokemon%20-%20Yellow%20Version%20-%20Special%20Pikachu%20Edition%20(USA,%20Europe)%20(CGB+SGB%20Enhanced).zip
+[0] Downloading 'https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/Pokemon%20-%20Yellow%20Version%20-%20Special%20Pikachu%20Edition%20(USA,%20Europe)%20(CGB+SGB%20Enhanced).zip' ...
+Saving './roms/gb//Pokemon - Yellow Version - Special Pikachu Edition (USA, Europe) (CGB+SGB Enhanced).zip'
+HTTP response 200 OK [https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/Pokemon%20-%20Yellow%20Version%20-%20Special%20Pikachu%20Edition%20(USA,%20Europe)%20(CGB+SGB%20Enhanced).zip]
+[2025-12-04 01:40:20] Downloading: Super Mario Land (World) (Rev 1).zip
+[0] Downloading 'https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/Super%20Mario%20Land%20%28World%29%20%28Rev%201%29.zip' ...
+HTTP response 302 Moved Temporarily [https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/Super%20Mario%20Land%20%28World%29%20%28Rev%201%29.zip]
+Adding URL: https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/Super%20Mario%20Land%20(World)%20(Rev%201).zip
+Adding URL: https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/Super%20Mario%20Land%20(World)%20(Rev%201).zip
+[0] Downloading 'https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/Super%20Mario%20Land%20(World)%20(Rev%201).zip' ...
+Saving './roms/gb//Super Mario Land (World) (Rev 1).zip'
+HTTP response 200 OK [https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/Super%20Mario%20Land%20(World)%20(Rev%201).zip]
+[2025-12-04 01:40:21] Downloading: Legend of Zelda, The - Link's Awakening (USA, Europe) (Rev 2).zip
+[0] Downloading 'https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/Legend%20of%20Zelda%2C%20The%20-%20Link%27s%20Awakening%20%28USA%2C%20Europe%29%20%28Rev%202%29.zip' ...
+HTTP response 302 Moved Temporarily [https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/Legend%20of%20Zelda%2C%20The%20-%20Link%27s%20Awakening%20%28USA%2C%20Europe%29%20%28Rev%202%29.zip]
+Adding URL: https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/Legend%20of%20Zelda,%20The%20-%20Link's%20Awakening%20(USA,%20Europe)%20(Rev%202).zip
+Adding URL: https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/Legend%20of%20Zelda,%20The%20-%20Link's%20Awakening%20(USA,%20Europe)%20(Rev%202).zip
+[0] Downloading 'https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/Legend%20of%20Zelda,%20The%20-%20Link's%20Awakening%20(USA,%20Europe)%20(Rev%202).zip' ...
+Saving './roms/gb//Legend of Zelda, The - Link's Awakening (USA, Europe) (Rev 2).zip'
+HTTP response 200 OK [https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/Legend%20of%20Zelda,%20The%20-%20Link's%20Awakening%20(USA,%20Europe)%20(Rev%202).zip]
+[2025-12-04 01:40:22] Processing site: testconfigs/gbc.toml
+[2025-12-04 01:40:22] Prepared URL: https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/Pokemon%20-%20Crystal%20Version%20%28USA%2C%20Europe%29%20%28Rev%201%29.zip -> ./roms/gbc/
+[2025-12-04 01:40:22] Prepared URL: https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/Super%20Mario%20Bros.%20Deluxe%20%28USA%2C%20Europe%29%20%28Rev%201%29.zip -> ./roms/gbc/
+[2025-12-04 01:40:22] Prepared URL: https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/Legend%20of%20Zelda%2C%20The%20-%20Link%27s%20Awakening%20DX%20%28USA%2C%20Europe%29%20%28Rev%202%29%20%28SGB%20Enhanced%29%20%28GB%20Compatible%29.zip -> ./roms/gbc/
+[2025-12-04 01:40:22] Total files for testconfigs/gbc.toml: 3
+[2025-12-04 01:40:22] Create directory: ./roms/gbc/
+[2025-12-04 01:40:22] Downloading: Pokemon - Crystal Version (USA, Europe) (Rev 1).zip
+[0] Downloading 'https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/Pokemon%20-%20Crystal%20Version%20%28USA%2C%20Europe%29%20%28Rev%201%29.zip' ...
+HTTP response 302 Moved Temporarily [https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/Pokemon%20-%20Crystal%20Version%20%28USA%2C%20Europe%29%20%28Rev%201%29.zip]
+Adding URL: https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/Pokemon%20-%20Crystal%20Version%20(USA,%20Europe)%20(Rev%201).zip
+Adding URL: https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/Pokemon%20-%20Crystal%20Version%20(USA,%20Europe)%20(Rev%201).zip
+[0] Downloading 'https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/Pokemon%20-%20Crystal%20Version%20(USA,%20Europe)%20(Rev%201).zip' ...
+Saving './roms/gbc//Pokemon - Crystal Version (USA, Europe) (Rev 1).zip'
+HTTP response 200 OK [https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/Pokemon%20-%20Crystal%20Version%20(USA,%20Europe)%20(Rev%201).zip]
+[2025-12-04 01:40:24] Downloading: Super Mario Bros. Deluxe (USA, Europe) (Rev 1).zip
+[0] Downloading 'https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/Super%20Mario%20Bros.%20Deluxe%20%28USA%2C%20Europe%29%20%28Rev%201%29.zip' ...
+HTTP response 302 Moved Temporarily [https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/Super%20Mario%20Bros.%20Deluxe%20%28USA%2C%20Europe%29%20%28Rev%201%29.zip]
+Adding URL: https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/Super%20Mario%20Bros.%20Deluxe%20(USA,%20Europe)%20(Rev%201).zip
+Adding URL: https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/Super%20Mario%20Bros.%20Deluxe%20(USA,%20Europe)%20(Rev%201).zip
+[0] Downloading 'https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/Super%20Mario%20Bros.%20Deluxe%20(USA,%20Europe)%20(Rev%201).zip' ...
+Saving './roms/gbc//Super Mario Bros. Deluxe (USA, Europe) (Rev 1).zip'
+HTTP response 200 OK [https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/Super%20Mario%20Bros.%20Deluxe%20(USA,%20Europe)%20(Rev%201).zip]
+[2025-12-04 01:40:25] Downloading: Legend of Zelda, The - Link's Awakening DX (USA, Europe) (Rev 2) (SGB Enhanced) (GB Compatible).zip
+[0] Downloading 'https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/Legend%20of%20Zelda%2C%20The%20-%20Link%27s%20Awakening%20DX%20%28USA%2C%20Europe%29%20%28Rev%202%29%20%28SGB%20Enhanced%29%20%28GB%20Compatible%29.zip' ...
+HTTP response 302 Moved Temporarily [https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/Legend%20of%20Zelda%2C%20The%20-%20Link%27s%20Awakening%20DX%20%28USA%2C%20Europe%29%20%28Rev%202%29%20%28SGB%20Enhanced%29%20%28GB%20Compatible%29.zip]
+Adding URL: https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/Legend%20of%20Zelda,%20The%20-%20Link's%20Awakening%20DX%20(USA,%20Europe)%20(Rev%202)%20(SGB%20Enhanced)%20(GB%20Compatible).zip
+Adding URL: https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/Legend%20of%20Zelda,%20The%20-%20Link's%20Awakening%20DX%20(USA,%20Europe)%20(Rev%202)%20(SGB%20Enhanced)%20(GB%20Compatible).zip
+[0] Downloading 'https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/Legend%20of%20Zelda,%20The%20-%20Link's%20Awakening%20DX%20(USA,%20Europe)%20(Rev%202)%20(SGB%20Enhanced)%20(GB%20Compatible).zip' ...
+Saving './roms/gbc//Legend of Zelda, The - Link's Awakening DX (USA, Europe) (Rev 2) (SGB Enhanced) (GB Compatible).zip'
+HTTP response 200 OK [https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/Legend%20of%20Zelda,%20The%20-%20Link's%20Awakening%20DX%20(USA,%20Europe)%20(Rev%202)%20(SGB%20Enhanced)%20(GB%20Compatible).zip]
+[2025-12-04 01:40:27] Processing site: testconfigs/gba.toml
+[2025-12-04 01:40:27] Prepared URL: https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/Pokemon%20-%20Emerald%20Version%20%28USA%2C%20Europe%29.zip -> ./roms/gba/
+[2025-12-04 01:40:27] Prepared URL: https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/Super%20Mario%20Advance%204%20-%20Super%20Mario%20Bros.%203%20%28USA%2C%20Australia%29%20%28Rev%201%29.zip -> ./roms/gba/
+[2025-12-04 01:40:27] Prepared URL: https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/Legend%20of%20Zelda%2C%20The%20-%20The%20Minish%20Cap%20%28USA%29.zip -> ./roms/gba/
+[2025-12-04 01:40:27] Total files for testconfigs/gba.toml: 3
+[2025-12-04 01:40:27] Create directory: ./roms/gba/
+[2025-12-04 01:40:27] Downloading: Pokemon - Emerald Version (USA, Europe).zip
+[0] Downloading 'https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/Pokemon%20-%20Emerald%20Version%20%28USA%2C%20Europe%29.zip' ...
+HTTP response 302 Moved Temporarily [https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/Pokemon%20-%20Emerald%20Version%20%28USA%2C%20Europe%29.zip]
+Adding URL: https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/Pokemon%20-%20Emerald%20Version%20(USA,%20Europe).zip
+Adding URL: https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/Pokemon%20-%20Emerald%20Version%20(USA,%20Europe).zip
+[0] Downloading 'https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/Pokemon%20-%20Emerald%20Version%20(USA,%20Europe).zip' ...
+Saving './roms/gba//Pokemon - Emerald Version (USA, Europe).zip'
+HTTP response 200 OK [https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/Pokemon%20-%20Emerald%20Version%20(USA,%20Europe).zip]
+[2025-12-04 01:40:29] Downloading: Super Mario Advance 4 - Super Mario Bros. 3 (USA, Australia) (Rev 1).zip
+[0] Downloading 'https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/Super%20Mario%20Advance%204%20-%20Super%20Mario%20Bros.%203%20%28USA%2C%20Australia%29%20%28Rev%201%29.zip' ...
+HTTP response 302 Moved Temporarily [https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/Super%20Mario%20Advance%204%20-%20Super%20Mario%20Bros.%203%20%28USA%2C%20Australia%29%20%28Rev%201%29.zip]
+Adding URL: https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/Super%20Mario%20Advance%204%20-%20Super%20Mario%20Bros.%203%20(USA,%20Australia)%20(Rev%201).zip
+Adding URL: https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/Super%20Mario%20Advance%204%20-%20Super%20Mario%20Bros.%203%20(USA,%20Australia)%20(Rev%201).zip
+[0] Downloading 'https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/Super%20Mario%20Advance%204%20-%20Super%20Mario%20Bros.%203%20(USA,%20Australia)%20(Rev%201).zip' ...
+Saving './roms/gba//Super Mario Advance 4 - Super Mario Bros. 3 (USA, Australia) (Rev 1).zip'
+HTTP response 200 OK [https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/Super%20Mario%20Advance%204%20-%20Super%20Mario%20Bros.%203%20(USA,%20Australia)%20(Rev%201).zip]
+[2025-12-04 01:40:31] Downloading: Legend of Zelda, The - The Minish Cap (USA).zip
+[0] Downloading 'https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/Legend%20of%20Zelda%2C%20The%20-%20The%20Minish%20Cap%20%28USA%29.zip' ...
+HTTP response 302 Moved Temporarily [https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/Legend%20of%20Zelda%2C%20The%20-%20The%20Minish%20Cap%20%28USA%29.zip]
+Adding URL: https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/Legend%20of%20Zelda,%20The%20-%20The%20Minish%20Cap%20(USA).zip
+Adding URL: https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/Legend%20of%20Zelda,%20The%20-%20The%20Minish%20Cap%20(USA).zip
+[0] Downloading 'https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/Legend%20of%20Zelda,%20The%20-%20The%20Minish%20Cap%20(USA).zip' ...
+Saving './roms/gba//Legend of Zelda, The - The Minish Cap (USA).zip'
+HTTP response 200 OK [https://f5.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/Legend%20of%20Zelda,%20The%20-%20The%20Minish%20Cap%20(USA).zip]
+[2025-12-04 01:40:33] All downloads complete.
