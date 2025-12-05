@@ -1,0 +1,13 @@
+# Import multiple filter tomls
+filter_imports = []
+
+# Exclude patterns used during generation:
+exclude_patterns = []
+
+# Include pattern groups used during generation:
+include_groups = [
+  [
+    "(USA",
+    "(World)"
+  ]
+]

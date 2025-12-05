@@ -1,0 +1,12 @@
+# Import multiple filter tomls
+filter_imports = [
+    "ex_unreleased.toml",
+    "in_name_EX.toml",
+    "in_region_USA.toml"
+]
+
+# Exclude patterns used during generation:
+exclude_patterns = []
+
+# Include pattern groups used during generation:
+include_groups = []

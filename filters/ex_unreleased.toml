@@ -1,0 +1,15 @@
+# Import multiple filter tomls
+filter_imports = []
+
+# Exclude patterns used during generation:
+exclude_patterns = [
+  "(Beta",
+  "(Demo",
+  "(Pirate",
+  "(Proto",
+  "(Unl",
+  "[BIOS]"
+]
+
+# Include pattern groups used during generation:
+include_groups = []

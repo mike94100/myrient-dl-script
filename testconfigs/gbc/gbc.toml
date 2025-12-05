@@ -1,7 +1,0 @@
-subdomain = "No-Intro/Nintendo%20-%20Game%20Boy%20Color/"
-directory = "gbc/"
-files = [
-  "Pokemon%20-%20Crystal%20Version%20%28USA%2C%20Europe%29%20%28Rev%201%29.zip",
-  "Super%20Mario%20Bros.%20Deluxe%20%28USA%2C%20Europe%29%20%28Rev%201%29.zip",
-  "Legend%20of%20Zelda%2C%20The%20-%20Link%27s%20Awakening%20DX%20%28USA%2C%20Europe%29%20%28Rev%202%29%20%28SGB%20Enhanced%29%20%28GB%20Compatible%29.zip",
-]

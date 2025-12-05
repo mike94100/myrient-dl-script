@@ -1,5 +1,0 @@
-platform_tomls = [
-    "gb/gb.toml",
-    "gbc/gbc.toml",
-    "gba/gba.toml"
-]

@@ -1,0 +1,33 @@
+# Import multiple filter tomls
+#filter_imports = [
+#   "filter1.toml",
+#   "filter2.toml",
+#]
+# Exclude patterns used during generation:
+#exclude_patterns = [
+#  "(Beta)",
+#  "(Proto)"
+#]
+# Include pattern groups used during generation:
+#include_groups = [
+#  [
+#    "String1",
+#    "String2",
+#    "String3"
+#  ],
+#  [
+#    "(USA",
+#    "(World)"
+#  ]
+#]
+
+# Import multiple filter tomls
+filter_imports = []
+
+
+# Exclude patterns used during generation:
+exclude_patterns = []
+
+
+# Include pattern groups used during generation:
+include_groups = []

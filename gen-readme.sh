@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -uo pipefail
 
+# Source utility functions
+. ./url-utils.sh
+
 # Generate README.md from platform TOML file
 # Usage: gen-readme.sh <toml_file>
 
@@ -21,9 +24,52 @@ print(json.dumps(data))
 EOF
 }
 
-# URL decode using Python
-url_decode() {
-python3 -c "import sys, urllib.parse; print(urllib.parse.unquote(sys.argv[1]))" "$1"
+# Convert file size from one unit to another
+# Usage: format_file_size <size> <from_unit> <to_unit>
+format_file_size() {
+    local size="$1"
+    local from_unit="$2"
+    local to_unit="$3"
+
+    # Define unit indices (powers of 1024 from B)
+    declare -A unit_indices=(
+        ["B"]=0
+        ["KiB"]=1
+        ["MiB"]=2
+        ["GiB"]=3
+        ["TiB"]=4
+        ["PiB"]=5
+    )
+
+    # Get unit indices
+    local from_index="${unit_indices[$from_unit]}"
+    local to_index="${unit_indices[$to_unit]}"
+
+    # If units are not recognized, log error and return 0
+    if [[ -z "$from_index" || -z "$to_index" ]]; then
+        log "ERROR: Unknown size units - from: '$from_unit' (index: $from_index), to: '$to_unit' (index: $to_index)"
+        echo "0"
+        return
+    fi
+
+    # Calculate number of 1024 multiplications/divisions needed
+    local num_repeats=$((to_index - from_index))
+
+    # Perform the conversion using awk for floating point arithmetic
+    local result
+    if [[ $num_repeats -gt 0 ]]; then
+        # Converting to larger unit (e.g., B to KiB), divide by 1024^num_repeats
+        result=$(awk "BEGIN {printf \"%.0f\", $size / (1024 ^ $num_repeats)}")
+    elif [[ $num_repeats -lt 0 ]]; then
+        # Converting to smaller unit (e.g., KiB to B), multiply by 1024^|num_repeats|
+        num_repeats=$(( -num_repeats ))
+        result=$(awk "BEGIN {printf \"%.0f\", $size * (1024 ^ $num_repeats)}")
+    else
+        # Same unit, no conversion needed
+        result=$(awk "BEGIN {printf \"%.0f\", $size}")
+    fi
+
+    echo "$result"
 }
 
 # Check if a TOML is a meta config (contains platform_tomls[] array)
@@ -99,7 +145,7 @@ done
 
 # Check arguments
 if [[ $# -ne 1 ]]; then
-    log "Usage: $0 [OPTIONS] <toml_file>"
+    log "Usage: gen-readme.sh [OPTIONS] <toml_file>"
     log "Use -h or --help for detailed help"
     exit 1
 fi
@@ -120,6 +166,7 @@ fi
 CONFIG_JSON=$(parse_toml "./config.toml")
 BASE_URL=$(printf "%s" "$CONFIG_JSON" | jq -r '.base_url')
 
+log "DEBUG: BASE_URL='$BASE_URL'"
 if [[ -z "$BASE_URL" ]]; then
     log "ERROR: base_url not found in config.toml"
     exit 1
@@ -165,18 +212,21 @@ if is_meta_toml "$TOML_FILE"; then
 
             platform_size_bytes=0
             for file in "${platform_files[@]}"; do
-                size_info=$(echo "$platform_html" | grep -A2 "$file" | grep '<td class="size">' | sed 's/.*<td class="size">//;s/<\/td>.*//' | head -1)
+                # URL-encode the filename for matching against the HTML href attributes
+                encoded_file=$(url_encode "$file")
+
+                # Try to find the size using the URL-encoded filename first
+                size_info=$(echo "$platform_html" | grep -A2 "$encoded_file" | grep '<td class="size">' | sed 's/.*<td class="size">//;s/<\/td>.*//' | head -1)
+
+                # If that didn't work, try with the original filename
+                if [[ -z "$size_info" ]]; then
+                    size_info=$(echo "$platform_html" | grep -A2 "$file" | grep '<td class="size">' | sed 's/.*<td class="size">//;s/<\/td>.*//' | head -1)
+                fi
+
                 if [[ -n "$size_info" && "$size_info" != "-" ]]; then
                     size_num=$(echo "$size_info" | sed 's/^\([0-9.]*\).*/\1/')
                     size_unit=$(echo "$size_info" | sed 's/^[0-9.]*\s*//' | sed 's/\s*$//')
-                    case "$size_unit" in
-                        B)    file_bytes=$(awk "BEGIN {printf \"%.0f\", $size_num}") ;;
-                        KiB)  file_bytes=$(awk "BEGIN {printf \"%.0f\", $size_num * 1024}") ;;
-                        MiB)  file_bytes=$(awk "BEGIN {printf \"%.0f\", $size_num * 1024 * 1024}") ;;
-                        GiB)  file_bytes=$(awk "BEGIN {printf \"%.0f\", $size_num * 1024 * 1024 * 1024}") ;;
-                        TiB)  file_bytes=$(awk "BEGIN {printf \"%.0f\", $size_num * 1024 * 1024 * 1024 * 1024}") ;;
-                        *)    file_bytes=0 ;;
-                    esac
+                    file_bytes=$(format_file_size "$size_num" "$size_unit" "B")
                     platform_size_bytes=$((platform_size_bytes + file_bytes))
                 fi
             done
@@ -192,7 +242,20 @@ if is_meta_toml "$TOML_FILE"; then
     elif command -v bc >/dev/null 2>&1; then
         size_gb=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1000000000" | bc)
         size_gib=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1073741824" | bc)
-        if [[ $(echo "$size_gb >= 1" | bc) -eq 1 ]]; then
+        size_tb=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1000000000000" | bc)
+        size_tib=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1099511627776" | bc)
+        size_pb=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1000000000000000" | bc)
+        size_pib=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1125899906842624" | bc)
+
+        if [[ $(echo "$size_pb >= 1" | bc) -eq 1 ]]; then
+            pb_fmt=$( [[ $(echo "$size_pb >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
+            pib_fmt=$( [[ $(echo "$size_pib >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
+            TOTAL_SIZE_FORMATTED="$(printf "$pb_fmt PB" "$size_pb") ($(printf "$pib_fmt PiB" "$size_pib"))"
+        elif [[ $(echo "$size_tb >= 1" | bc) -eq 1 ]]; then
+            tb_fmt=$( [[ $(echo "$size_tb >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
+            tib_fmt=$( [[ $(echo "$size_tib >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
+            TOTAL_SIZE_FORMATTED="$(printf "$tb_fmt TB" "$size_tb") ($(printf "$tib_fmt TiB" "$size_tib"))"
+        elif [[ $(echo "$size_gb >= 1" | bc) -eq 1 ]]; then
             gb_fmt=$( [[ $(echo "$size_gb >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
             gib_fmt=$( [[ $(echo "$size_gib >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
             TOTAL_SIZE_FORMATTED="$(printf "$gb_fmt GB" "$size_gb") ($(printf "$gib_fmt GiB" "$size_gib"))"
@@ -204,7 +267,11 @@ if is_meta_toml "$TOML_FILE"; then
             TOTAL_SIZE_FORMATTED="$(printf "$mb_fmt MB" "$size_mb") ($(printf "$mib_fmt MiB" "$size_mib"))"
         fi
     else
-        if [[ $TOTAL_SIZE_BYTES -gt $((1000 * 1000 * 1000)) ]]; then
+        if [[ $TOTAL_SIZE_BYTES -gt $((1000 * 1000 * 1000 * 1000)) ]]; then
+            tb_size=$(awk "BEGIN {tb = $TOTAL_SIZE_BYTES / 1000000000000; printf tb >= 100 ? \"%.0f\" : \"%.1f\", tb}")
+            tib_size=$(awk "BEGIN {tib = $TOTAL_SIZE_BYTES / 1099511627776; printf tib >= 100 ? \"%.0f\" : \"%.1f\", tib}")
+            TOTAL_SIZE_FORMATTED="${tb_size} TB (${tib_size} TiB)"
+        elif [[ $TOTAL_SIZE_BYTES -gt $((1000 * 1000 * 1000)) ]]; then
             gb_size=$(awk "BEGIN {gb = $TOTAL_SIZE_BYTES / 1000000000; printf gb >= 100 ? \"%.0f\" : \"%.1f\", gb}")
             gib_size=$(awk "BEGIN {gib = $TOTAL_SIZE_BYTES / 1073741824; printf gib >= 100 ? \"%.0f\" : \"%.1f\", gib}")
             TOTAL_SIZE_FORMATTED="${gb_size} GB (${gib_size} GiB)"
@@ -259,8 +326,33 @@ fi
 JSON=$(parse_toml "$TOML_FILE")
 
 # Extract data
+BASE_URL=$(printf "%s" "$JSON" | jq -r '.base_url // empty')
 SUBDOMAIN=$(printf "%s" "$JSON" | jq -r '.subdomain // empty')
 DIRECTORY=$(printf "%s" "$JSON" | jq -r '.directory // empty')
+mapfile -t EXCLUDE_PATTERNS < <(printf "%s" "$JSON" | jq -r '.exclude_patterns[] // empty')
+
+    # Extract include_groups for display
+    INCLUDE_GROUPS_JSON=$(printf "%s" "$JSON" | jq -r '.include_groups // empty')
+    if [[ -n "$INCLUDE_GROUPS_JSON" && "$INCLUDE_GROUPS_JSON" != "null" ]]; then
+        # Format include groups for display
+        INCLUDE_LOGIC=""
+        # Parse each group and format as (pattern1 | pattern2) AND (pattern3 | pattern4)
+        while IFS= read -r group; do
+            if [[ -n "$group" ]]; then
+                # Remove brackets and quotes, clean up formatting
+                group_clean=$(echo "$group" | sed 's/^\[//' | sed 's/\]$//' | sed 's/"//g' | sed 's/, /|/g')
+                if [[ -n "$group_clean" ]]; then
+                    group_formatted="($group_clean)"
+                    if [[ -z "$INCLUDE_LOGIC" ]]; then
+                        INCLUDE_LOGIC="$group_formatted"
+                    else
+                        INCLUDE_LOGIC="$INCLUDE_LOGIC AND $group_formatted"
+                    fi
+                fi
+            fi
+        done < <(printf "%s" "$JSON" | jq -r '.include_groups[] // empty' 2>/dev/null || echo "")
+    fi
+
 mapfile -t FILES < <(printf "%s" "$JSON" | jq -r '.files[]')
 
 if [[ -z "$SUBDOMAIN" ]]; then
@@ -307,7 +399,19 @@ for file in "${FILES[@]}"; do
     # Extract file size from Myrient's table format
     # Find the row containing the file link and extract the size from the next cell
     # Format: <tr><td class="link"><a href="filename.zip">...</a></td><td class="size">SIZE</td>...
-    size_info=$(echo "$HTML" | grep -A2 "$file" | grep '<td class="size">' | sed 's/.*<td class="size">//;s/<\/td>.*//' | head -1)
+
+    # URL-encode the filename for matching against the HTML href attributes
+    # Escape single quotes for Python by replacing ' with '\''
+    escaped_file=$(printf '%s\n' "$file" | sed "s/'/'\\\\''/g")
+    encoded_file=$(python3 -c "import sys, urllib.parse; print(urllib.parse.quote('$escaped_file'))")
+
+    # Try to find the size using the URL-encoded filename first
+    size_info=$(echo "$HTML" | grep -A2 "$encoded_file" | grep '<td class="size">' | sed 's/.*<td class="size">//;s/<\/td>.*//' | head -1)
+
+    # If that didn't work, try with the original filename
+    if [[ -z "$size_info" ]]; then
+        size_info=$(echo "$HTML" | grep -A2 "$file" | grep '<td class="size">' | sed 's/.*<td class="size">//;s/<\/td>.*//' | head -1)
+    fi
     
     if [[ -n "$size_info" && "$size_info" != "-" ]]; then
         # Parse size (e.g., "35.9 KiB" -> bytes)
@@ -316,15 +420,8 @@ for file in "${FILES[@]}"; do
         size_unit=$(echo "$size_info" | sed 's/^[0-9.]*\s*//' | sed 's/\s*$//')
 
         if [[ -n "$size_num" && -n "$size_unit" ]]; then
-            # Convert to bytes using awk for floating point arithmetic
-            case "$size_unit" in
-                B)    size_bytes=$(awk "BEGIN {printf \"%.0f\", $size_num}") ;;
-                KiB)  size_bytes=$(awk "BEGIN {printf \"%.0f\", $size_num * 1024}") ;;
-                MiB)  size_bytes=$(awk "BEGIN {printf \"%.0f\", $size_num * 1024 * 1024}") ;;
-                GiB)  size_bytes=$(awk "BEGIN {printf \"%.0f\", $size_num * 1024 * 1024 * 1024}") ;;
-                TiB)  size_bytes=$(awk "BEGIN {printf \"%.0f\", $size_num * 1024 * 1024 * 1024 * 1024}") ;;
-                *)    size_bytes=0 ;;
-            esac
+            # Convert to bytes using the format_file_size function
+            size_bytes=$(format_file_size "$size_num" "$size_unit" "B")
 
             TOTAL_SIZE_BYTES=$((TOTAL_SIZE_BYTES + size_bytes))
 
@@ -350,8 +447,14 @@ else
         size_gib=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1073741824" | bc)
         size_tb=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1000000000000" | bc)
         size_tib=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1099511627776" | bc)
+        size_pb=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1000000000000000" | bc)
+        size_pib=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1125899906842624" | bc)
 
-        if [[ $(echo "$size_tb >= 1" | bc) -eq 1 ]]; then
+        if [[ $(echo "$size_pb >= 1" | bc) -eq 1 ]]; then
+            pb_fmt=$( [[ $(echo "$size_pb >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
+            pib_fmt=$( [[ $(echo "$size_pib >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
+            TOTAL_SIZE_FORMATTED="$(printf "$pb_fmt PB" "$size_pb") ($(printf "$pib_fmt PiB" "$size_pib"))"
+        elif [[ $(echo "$size_tb >= 1" | bc) -eq 1 ]]; then
             tb_fmt=$( [[ $(echo "$size_tb >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
             tib_fmt=$( [[ $(echo "$size_tib >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
             TOTAL_SIZE_FORMATTED="$(printf "$tb_fmt TB" "$size_tb") ($(printf "$tib_fmt TiB" "$size_tib"))"
@@ -409,6 +512,17 @@ README_FILE="$(dirname "$TOML_FILE")/README.md"
     echo "- **Total Files**: ${#FILES[@]}"
     echo "- **Total Size**: $TOTAL_SIZE_FORMATTED"
     echo "- **Platform Directory**: $DIRECTORY"
+
+    # Include exclude patterns information if any were used
+    if [[ ${#EXCLUDE_PATTERNS[@]} -gt 0 ]]; then
+        echo "- **Excluded Patterns**: ${EXCLUDE_PATTERNS[*]}"
+    fi
+
+    # Include include groups information if any were used
+    if [[ -n "$INCLUDE_LOGIC" ]]; then
+        echo "- **Include Logic**: $INCLUDE_LOGIC"
+    fi
+
     echo ""
     echo "## ROM Files"
     echo ""

@@ -1,7 +1,0 @@
-subdomain = "No-Intro/Nintendo%20-%20Game%20Boy/"
-directory = "gb/"
-files = [
-  "Pokemon%20-%20Yellow%20Version%20-%20Special%20Pikachu%20Edition%20%28USA%2C%20Europe%29%20%28CGB%2BSGB%20Enhanced%29.zip",
-  "Super%20Mario%20Land%20%28World%29%20%28Rev%201%29.zip",
-  "Legend%20of%20Zelda%2C%20The%20-%20Link%27s%20Awakening%20%28USA%2C%20Europe%29%20%28Rev%202%29.zip"
-]
