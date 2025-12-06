@@ -1,0 +1,35 @@
+#base_url = "https://myrient.erista.me/files/"
+#subdomain = "No-Intro/Nintendo - Game Boy/"
+#directory = "gb/"
+#exclude_patterns = [
+#  "(Beta",
+#  "(Demo"
+#]
+#include_groups = [
+#  [
+#    "(USA",
+#    "(World)",
+#  ],
+#]
+#files = [
+#  "Game1.zip",
+#  "Game2.zip"
+#]
+
+# Base URL used for downloading files:
+base_url = "https://myrient.erista.me/files/"
+
+# Subdomain path appended to base_url:
+subdomain = ""
+
+# Directory where files will be downloaded:
+directory = ""
+
+# Exclude patterns used during generation:
+exclude_patterns = []
+
+# Include pattern groups used during generation:
+include_groups = []
+
+# List of files to download:
+files = []

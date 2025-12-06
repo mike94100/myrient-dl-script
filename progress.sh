@@ -121,7 +121,7 @@ show_spinner() {
     # Animate while process is running
     while kill -0 "$pid" 2>/dev/null; do
         for frame in "${spin_array[@]}"; do
-            printf "\r%s%s%s" "$prepend" "$frame" "$append" >&2
+            printf "\r\033[K%s%s%s" "$prepend" "$frame" "$append" >&2
             sleep "$speed"
         done
     done
@@ -271,9 +271,9 @@ show_progress() {
         fi
 
         if [[ -n "$message" ]]; then
-            printf "\r%s [%s%s] %3d%% (%d/%d)" "$message" "$bar" "$spaces" "$progress" "$current" "$total" >&2
+            printf "\r\033[K%s [%s%s] %3d%% (%d/%d)" "$message" "$bar" "$spaces" "$progress" "$current" "$total" >&2
         else
-            printf "\r[%s%s] %3d%% (%d/%d)" "$bar" "$spaces" "$progress" "$current" "$total" >&2
+            printf "\r\033[K[%s%s] %3d%% (%d/%d)" "$bar" "$spaces" "$progress" "$current" "$total" >&2
         fi
     fi
 }

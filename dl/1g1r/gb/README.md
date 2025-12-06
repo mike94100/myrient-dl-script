@@ -1,20 +1,18 @@
 # GB ROM Collection
 
-This collection contains ROMs for the GB platform.
+This collection contains ROMs for the GB.
 
 ## Metadata
 
-- **Generated**: 2025-12-05 07:52:16 UTC
-- **Source URL**: https://myrient.erista.me/files/No-Intro/Nintendo - Game Boy/
+- **Generated**: 2025-12-06 08:44:39 UTC
+- **Source URL**: [https://myrient.erista.me/files/No-Intro/Nintendo - Game Boy/](https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/)
 - **Total Files**: 564
-- **Total Size**: Unknown (unable to determine from source)
+- **Total Size**: 59 MiB (62 MB)
 - **Platform Directory**: gb/
-- **Excluded Patterns**: (Beta (Demo (Pirate (Proto (Unl [BIOS]
-- **Include Logic**: (  (USA,) AND (  (World))
 
 ## ROM Files
-
-The following 564 ROM files are included in this collection:
+<details>
+<summary>The following 564 ROM files are included in this collection:</summary>
 
 - 4-in-1 Fun Pak (USA, Europe).zip
 - 4-in-1 Funpak - Volume II (USA, Europe).zip
@@ -580,6 +578,8 @@ The following 564 ROM files are included in this collection:
 - Zen - Intergalactic Ninja (USA).zip
 - Zool - Ninja of the 'Nth' Dimension (USA).zip
 - Zoop (USA, Europe).zip
+
+</details>
 
 ## Download
 

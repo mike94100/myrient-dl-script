@@ -7,27 +7,9 @@ log() {
     printf "[%s] %s\n" "$(date '+%Y-%m-%d %H:%M:%S')" "$*" | tee -a "$LOG_FILE"
 }
 
-# Parse TOML using Python
-parse_toml() {
-python3 - "$1" <<'EOF'
-import sys, json
-
-try:
-    import tomllib  # Python 3.11+
-except ImportError:
-    import tomli as tomllib  # fallback for older Python
-
-with open(sys.argv[1], "rb") as f:
-    data = tomllib.load(f)
-
-print(json.dumps(data))
-EOF
-}
-
-# URL decode using Python
-url_decode() {
-python3 -c "import sys, urllib.parse; print(urllib.parse.unquote(sys.argv[1]))" "$1"
-}
+# Source utility functions
+. ./toml-utils.sh
+. ./url-utils.sh
 
 # Get human-readable filename from URL
 get_filename() {

@@ -3,82 +3,11 @@ set -uo pipefail
 
 # Source utility functions
 . ./url-utils.sh
+. ./progress.sh
+. ./toml-utils.sh
 
 # Generate README.md from platform TOML file
 # Usage: gen-readme.sh <toml_file>
-
-# Parse TOML using Python
-parse_toml() {
-python3 - "$1" <<'EOF'
-import sys, json
-
-try:
-    import tomllib  # Python 3.11+
-except ImportError:
-    import tomli as tomllib  # fallback for older Python
-
-with open(sys.argv[1], "rb") as f:
-    data = tomllib.load(f)
-
-print(json.dumps(data))
-EOF
-}
-
-# Convert file size from one unit to another
-# Usage: format_file_size <size> <from_unit> <to_unit>
-format_file_size() {
-    local size="$1"
-    local from_unit="$2"
-    local to_unit="$3"
-
-    # Define unit indices (powers of 1024 from B)
-    declare -A unit_indices=(
-        ["B"]=0
-        ["KiB"]=1
-        ["MiB"]=2
-        ["GiB"]=3
-        ["TiB"]=4
-        ["PiB"]=5
-    )
-
-    # Get unit indices
-    local from_index="${unit_indices[$from_unit]}"
-    local to_index="${unit_indices[$to_unit]}"
-
-    # If units are not recognized, log error and return 0
-    if [[ -z "$from_index" || -z "$to_index" ]]; then
-        log "ERROR: Unknown size units - from: '$from_unit' (index: $from_index), to: '$to_unit' (index: $to_index)"
-        echo "0"
-        return
-    fi
-
-    # Calculate number of 1024 multiplications/divisions needed
-    local num_repeats=$((to_index - from_index))
-
-    # Perform the conversion using awk for floating point arithmetic
-    local result
-    if [[ $num_repeats -gt 0 ]]; then
-        # Converting to larger unit (e.g., B to KiB), divide by 1024^num_repeats
-        result=$(awk "BEGIN {printf \"%.0f\", $size / (1024 ^ $num_repeats)}")
-    elif [[ $num_repeats -lt 0 ]]; then
-        # Converting to smaller unit (e.g., KiB to B), multiply by 1024^|num_repeats|
-        num_repeats=$(( -num_repeats ))
-        result=$(awk "BEGIN {printf \"%.0f\", $size * (1024 ^ $num_repeats)}")
-    else
-        # Same unit, no conversion needed
-        result=$(awk "BEGIN {printf \"%.0f\", $size}")
-    fi
-
-    echo "$result"
-}
-
-# Check if a TOML is a meta config (contains platform_tomls[] array)
-is_meta_toml() {
-    local file="$1"
-    local json=$(parse_toml "$file")
-    local platform_tomls=$(printf "%s" "$json" | jq -r '.platform_tomls // empty')
-    [[ -n "$platform_tomls" ]]
-}
 
 log() {
     echo "$*" >&2
@@ -157,43 +86,37 @@ if [[ ! -f "$TOML_FILE" ]]; then
     exit 1
 fi
 
-# Get base URL from config.toml first (needed for both meta and platform handling)
-if [[ ! -f "./config.toml" ]]; then
-    log "ERROR: config.toml not found in current directory"
-    exit 1
-fi
-
 CONFIG_JSON=$(parse_toml "./config.toml")
 BASE_URL=$(printf "%s" "$CONFIG_JSON" | jq -r '.base_url')
 
-log "DEBUG: BASE_URL='$BASE_URL'"
 if [[ -z "$BASE_URL" ]]; then
     log "ERROR: base_url not found in config.toml"
     exit 1
 fi
 
+log "Generating README for $TOML_FILE"
+
+# Parse TOML into JSON
+JSON=$(parse_toml "$TOML_FILE")
+
 # Check if this is a meta TOML
-if is_meta_toml "$TOML_FILE"; then
-    # Handle meta TOML - first generate READMEs for all platforms, then create summary
-    JSON=$(parse_toml "$TOML_FILE")
+if printf "%s" "$JSON" | jq -e 'has("platform_tomls")' > /dev/null 2>&1; then
+    # Handle meta TOML
     mapfile -t PLATFORM_FILES < <(printf "%s" "$JSON" | jq -r '.platform_tomls[]')
 
-    log "Processing meta TOML with ${#PLATFORM_FILES[@]} platforms"
-
-    # First, generate READMEs for all individual platforms
+    # Generate READMEs for all individual platforms
     for platform_file in "${PLATFORM_FILES[@]}"; do
         platform_path="$(dirname "$TOML_FILE")/$platform_file"
-        if [[ -f "$platform_path" ]]; then
-            log "Generating README for platform: $platform_file"
-            # Recursively call gen-readme.sh for this platform
-            "$0" "$platform_path" >/dev/null 2>&1
+        platform_readme_path="$(dirname "$platform_path")/README.md"
+        if [[ -f "$platform_path" && ! -f "$platform_readme_path" ]]; then
+            "$0" "$platform_path"
         fi
     done
-
+    
     # Now calculate summary info for all platforms
     TOTAL_FILES=0
     TOTAL_SIZE_BYTES=0
-    PLATFORM_SUMMARY=""
+    PLATFORM_SUMMARY="| PLATFORM | FILES | SIZE | DIRECTORY |\n| --- | --- | --- | --- |\n"
 
     for platform_file in "${PLATFORM_FILES[@]}"; do
         platform_path="$(dirname "$TOML_FILE")/$platform_file"
@@ -205,107 +128,160 @@ if is_meta_toml "$TOML_FILE"; then
 
             TOTAL_FILES=$((TOTAL_FILES + ${#platform_files[@]}))
 
-            # Scrape sizes for this platform
-            platform_subdomain=$(printf "%s" "$platform_json" | jq -r '.subdomain // empty')
-            platform_source_url="${BASE_URL%/}/${platform_subdomain#/}"
-            platform_html=$(curl -s "$platform_source_url")
-
-            platform_size_bytes=0
-            for file in "${platform_files[@]}"; do
-                # URL-encode the filename for matching against the HTML href attributes
-                encoded_file=$(url_encode "$file")
-
-                # Try to find the size using the URL-encoded filename first
-                size_info=$(echo "$platform_html" | grep -A2 "$encoded_file" | grep '<td class="size">' | sed 's/.*<td class="size">//;s/<\/td>.*//' | head -1)
-
-                # If that didn't work, try with the original filename
-                if [[ -z "$size_info" ]]; then
-                    size_info=$(echo "$platform_html" | grep -A2 "$file" | grep '<td class="size">' | sed 's/.*<td class="size">//;s/<\/td>.*//' | head -1)
+            # Extract size and add
+            platform_readme_path="$(dirname "$platform_path")/README.md"
+            if [[ -f "$platform_readme_path" ]]; then
+                # Extract size line and remove label
+                platform_size_line=$(grep '\- \*\*Total Size\*\*:' "$platform_readme_path" | sed 's/.*: //' | head -1)
+                if [[ -n "$platform_size_line" && "$platform_size_line" != "Unknown" ]]; then
+                    # Extract the IEC size, remove B and " "
+                    platform_size_iec=$(echo "$platform_size_line" | sed 's/(.*)//; s/B//; s/ //')
+                    if [[ -n "$platform_size_iec" ]]; then
+                        platform_size_bytes=$(numfmt --from=iec-i "$platform_size_iec")
+                        TOTAL_SIZE_BYTES=$((TOTAL_SIZE_BYTES + platform_size_bytes))
+                    fi
                 fi
-
-                if [[ -n "$size_info" && "$size_info" != "-" ]]; then
-                    size_num=$(echo "$size_info" | sed 's/^\([0-9.]*\).*/\1/')
-                    size_unit=$(echo "$size_info" | sed 's/^[0-9.]*\s*//' | sed 's/\s*$//')
-                    file_bytes=$(format_file_size "$size_num" "$size_unit" "B")
-                    platform_size_bytes=$((platform_size_bytes + file_bytes))
-                fi
-            done
-
-            TOTAL_SIZE_BYTES=$((TOTAL_SIZE_BYTES + platform_size_bytes))
-            PLATFORM_SUMMARY="${PLATFORM_SUMMARY}- [${platform_name}](${platform_directory}) (${#platform_files[@]} files) → ${platform_directory}\n"
+            fi
+            relative_platform_readme_path="$(dirname "$platform_file")/README.md"
+            PLATFORM_SUMMARY="${PLATFORM_SUMMARY}| [${platform_name}](${relative_platform_readme_path}) | ${#platform_files[@]} Files | ${platform_size_line} | ${platform_directory} |\n"
         fi
     done
-    
-    # Format total size with intelligent formatting
+
     if [[ $TOTAL_SIZE_BYTES -eq 0 ]]; then
         TOTAL_SIZE_FORMATTED="Unknown"
-    elif command -v bc >/dev/null 2>&1; then
-        size_gb=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1000000000" | bc)
-        size_gib=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1073741824" | bc)
-        size_tb=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1000000000000" | bc)
-        size_tib=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1099511627776" | bc)
-        size_pb=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1000000000000000" | bc)
-        size_pib=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1125899906842624" | bc)
-
-        if [[ $(echo "$size_pb >= 1" | bc) -eq 1 ]]; then
-            pb_fmt=$( [[ $(echo "$size_pb >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
-            pib_fmt=$( [[ $(echo "$size_pib >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
-            TOTAL_SIZE_FORMATTED="$(printf "$pb_fmt PB" "$size_pb") ($(printf "$pib_fmt PiB" "$size_pib"))"
-        elif [[ $(echo "$size_tb >= 1" | bc) -eq 1 ]]; then
-            tb_fmt=$( [[ $(echo "$size_tb >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
-            tib_fmt=$( [[ $(echo "$size_tib >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
-            TOTAL_SIZE_FORMATTED="$(printf "$tb_fmt TB" "$size_tb") ($(printf "$tib_fmt TiB" "$size_tib"))"
-        elif [[ $(echo "$size_gb >= 1" | bc) -eq 1 ]]; then
-            gb_fmt=$( [[ $(echo "$size_gb >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
-            gib_fmt=$( [[ $(echo "$size_gib >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
-            TOTAL_SIZE_FORMATTED="$(printf "$gb_fmt GB" "$size_gb") ($(printf "$gib_fmt GiB" "$size_gib"))"
-        else
-            size_mb=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1000000" | bc)
-            size_mib=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1048576" | bc)
-            mb_fmt=$( [[ $(echo "$size_mb >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
-            mib_fmt=$( [[ $(echo "$size_mib >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
-            TOTAL_SIZE_FORMATTED="$(printf "$mb_fmt MB" "$size_mb") ($(printf "$mib_fmt MiB" "$size_mib"))"
-        fi
     else
-        if [[ $TOTAL_SIZE_BYTES -gt $((1000 * 1000 * 1000 * 1000)) ]]; then
-            tb_size=$(awk "BEGIN {tb = $TOTAL_SIZE_BYTES / 1000000000000; printf tb >= 100 ? \"%.0f\" : \"%.1f\", tb}")
-            tib_size=$(awk "BEGIN {tib = $TOTAL_SIZE_BYTES / 1099511627776; printf tib >= 100 ? \"%.0f\" : \"%.1f\", tib}")
-            TOTAL_SIZE_FORMATTED="${tb_size} TB (${tib_size} TiB)"
-        elif [[ $TOTAL_SIZE_BYTES -gt $((1000 * 1000 * 1000)) ]]; then
-            gb_size=$(awk "BEGIN {gb = $TOTAL_SIZE_BYTES / 1000000000; printf gb >= 100 ? \"%.0f\" : \"%.1f\", gb}")
-            gib_size=$(awk "BEGIN {gib = $TOTAL_SIZE_BYTES / 1073741824; printf gib >= 100 ? \"%.0f\" : \"%.1f\", gib}")
-            TOTAL_SIZE_FORMATTED="${gb_size} GB (${gib_size} GiB)"
-        else
-            mb_size=$(awk "BEGIN {mb = $TOTAL_SIZE_BYTES / 1000000; printf mb >= 100 ? \"%.0f\" : \"%.1f\", mb}")
-            mib_size=$(awk "BEGIN {mib = $TOTAL_SIZE_BYTES / 1048576; printf mib >= 100 ? \"%.0f\" : \"%.1f\", mib}")
-            TOTAL_SIZE_FORMATTED="${mb_size} MB (${mib_size} MiB)"
-        fi
+        # Generate initial string as IEC (SI), then add spaces
+        TOTAL_SIZE_FORMATTED="$(numfmt --to=iec-i "$TOTAL_SIZE_BYTES")B ($(numfmt --to=si "$TOTAL_SIZE_BYTES")B)"
+        TOTAL_SIZE_FORMATTED=$(echo "$TOTAL_SIZE_FORMATTED" | sed 's/\([0-9]\)\([A-Z]\)/\1 \2/g')
+
+        # Generate meta README
+        README_FILE="$(dirname "$TOML_FILE")/README.md"
+    
+        {
+            echo "# Multi-Platform ROM Collection"
+            echo ""
+            echo "This collection contains ROMs for multiple gaming platforms."
+            echo ""
+            echo "## Metadata"
+            echo ""
+            echo "- **Generated**: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+            echo "- **Total Platforms**: ${#PLATFORM_FILES[@]}"
+            echo "- **Total Files**: $TOTAL_FILES"
+            echo "- **Total Size**: $TOTAL_SIZE_FORMATTED"
+            echo ""
+            echo "## Included Platforms"
+            echo ""
+            printf "%b" "$PLATFORM_SUMMARY"
+            echo ""
+            echo "## Download"
+            echo ""
+            echo "To download all platforms in this collection:"
+            echo ""
+            echo "\`\`\`bash"
+            echo "./myrient-dl.sh \"$TOML_FILE\""
+            echo "\`\`\`"
+            echo ""
+            echo "Or download to a custom directory:"
+            echo ""
+            echo "\`\`\`bash"
+            echo "./myrient-dl.sh -o /path/to/directory \"$TOML_FILE\""
+            echo "\`\`\`"
+        } > "$README_FILE" & show_spinner -i $! -p "Writing README: " -s 0.2
+    
+        log "Generated summary README.md for $TOML_FILE"
+        exit 0
     fi
-    
-    # Generate meta README
+else
+ # Extract data
+    BASE_URL=$(printf "%s" "$JSON" | jq -r '.base_url // empty')
+    SUBDOMAIN=$(printf "%s" "$JSON" | jq -r '.subdomain // empty')
+    DIRECTORY=$(printf "%s" "$JSON" | jq -r '.directory // empty')
+    mapfile -t FILES < <(printf "%s" "$JSON" | jq -r '.files[]')
+
+    if [[ -z "$SUBDOMAIN" ]]; then
+        log "ERROR: subdomain not found in $TOML_FILE"
+        exit 1
+    fi
+
+    # Construct source URL
+    SOURCE_URL_DEC="${BASE_URL%/}/${SUBDOMAIN#/}"
+    SOURCE_URL_ENC="${BASE_URL%/}/$(url_encode "${SUBDOMAIN#/}")"
+
+    # Generate platform name from directory
+    PLATFORM_NAME=$(basename "$DIRECTORY" / | tr '[:lower:]' '[:upper:]')
+
+    # Scrape file sizes from the source page
+    log "Scraping file sizes from: $SOURCE_URL_DEC"
+    HTML=$(curl -s "$SOURCE_URL_ENC")
+
+    # Calculate total size
+    TOTAL_SIZE_BYTES=0
+    FILE_INDEX=0
+    FILES_TOTAL=${#FILES[@]}
+
+    for file in "${FILES[@]}"; do
+        # Extract file size from Myrient & strip the " " and "B"
+        # Find the row containing the file name and extract the size from 2 rows after
+        file_size=$(echo "$HTML" | grep -A2 "$file" | grep '<td class="size">' | sed 's/.*<td class="size">//;s/B<\/td>.*//;s/ //' |  head -1)
+
+        # Progress Bar
+        if [[ -t 1 ]]; then
+            show_progress -c $FILE_INDEX -t $FILES_TOTAL -m "Parsing file sizes"
+        else
+            log "Size of $file: ${file_size}B"
+        fi
+        
+        if [[ -n "$file_size" && "$file_size" != "-" ]]; then
+            # Convert size to bytes
+            file_bytes=$(numfmt --from=iec-i "$file_size")
+            TOTAL_SIZE_BYTES=$((TOTAL_SIZE_BYTES + file_bytes))
+        fi
+        ((FILE_INDEX++))
+    done
+    # Clear progress bar line
+    if [[ -t 1 ]]; then
+        printf "\r%*s\r" "$(tput cols)" "" >&2
+    fi
+
+    # Format total size using numfmt for automatic IEC/SI formatting
+    if [[ $TOTAL_SIZE_BYTES -eq 0 ]]; then
+        TOTAL_SIZE_FORMATTED="Unknown"
+    else
+        # Generate initial string as IEC Size (SI Size), then add spaces
+        TOTAL_SIZE_FORMATTED="$(numfmt --to=iec-i "$TOTAL_SIZE_BYTES")B ($(numfmt --to=si "$TOTAL_SIZE_BYTES")B)"
+        TOTAL_SIZE_FORMATTED=$(echo "$TOTAL_SIZE_FORMATTED" | sed 's/\([0-9]\)\([A-Z]\)/\1 \2/g')
+    fi
+
+    # Generate README
     README_FILE="$(dirname "$TOML_FILE")/README.md"
-    
+
     {
-        echo "# Multi-Platform ROM Collection"
+        echo "# $PLATFORM_NAME ROM Collection"
         echo ""
-        echo "This collection contains ROMs for multiple gaming platforms."
+        echo "This collection contains ROMs for the $PLATFORM_NAME."
         echo ""
         echo "## Metadata"
         echo ""
         echo "- **Generated**: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
-        echo "- **Total Platforms**: ${#PLATFORM_FILES[@]}"
-        echo "- **Total Files**: $TOTAL_FILES"
+        echo "- **Source URL**: [$SOURCE_URL_DEC]($SOURCE_URL_ENC)"
+        echo "- **Total Files**: ${#FILES[@]}"
         echo "- **Total Size**: $TOTAL_SIZE_FORMATTED"
+        echo "- **Platform Directory**: $DIRECTORY"
+
         echo ""
-        echo "## Included Platforms"
+        echo "## ROM Files"
+        echo "<details>"
+        echo "<summary>The following ${#FILES[@]} ROM files are included in this collection:</summary>"
         echo ""
-        echo "This collection includes the following platforms:"
+        for file in "${FILES[@]}"; do
+            echo "- $file"
+        done
         echo ""
-        printf "%b" "$PLATFORM_SUMMARY"
+        echo "</details>"
         echo ""
         echo "## Download"
         echo ""
-        echo "To download all platforms in this collection:"
+        echo "To download all ROMs in this collection:"
         echo ""
         echo "\`\`\`bash"
         echo "./myrient-dl.sh \"$TOML_FILE\""
@@ -316,236 +292,7 @@ if is_meta_toml "$TOML_FILE"; then
         echo "\`\`\`bash"
         echo "./myrient-dl.sh -o /path/to/directory \"$TOML_FILE\""
         echo "\`\`\`"
-    } > "$README_FILE"
-    
-    log "Generated summary README.md for meta collection (${#PLATFORM_FILES[@]} platforms, $TOTAL_FILES files)"
-    exit 0
+    } > "$README_FILE" & show_spinner -i $! -p "Writing README: " -s 0.2
+
+    log "Generated README.md for $TOML_FILE"
 fi
-
-# Handle platform TOML
-JSON=$(parse_toml "$TOML_FILE")
-
-# Extract data
-BASE_URL=$(printf "%s" "$JSON" | jq -r '.base_url // empty')
-SUBDOMAIN=$(printf "%s" "$JSON" | jq -r '.subdomain // empty')
-DIRECTORY=$(printf "%s" "$JSON" | jq -r '.directory // empty')
-mapfile -t EXCLUDE_PATTERNS < <(printf "%s" "$JSON" | jq -r '.exclude_patterns[] // empty')
-
-    # Extract include_groups for display
-    INCLUDE_GROUPS_JSON=$(printf "%s" "$JSON" | jq -r '.include_groups // empty')
-    if [[ -n "$INCLUDE_GROUPS_JSON" && "$INCLUDE_GROUPS_JSON" != "null" ]]; then
-        # Format include groups for display
-        INCLUDE_LOGIC=""
-        # Parse each group and format as (pattern1 | pattern2) AND (pattern3 | pattern4)
-        while IFS= read -r group; do
-            if [[ -n "$group" ]]; then
-                # Remove brackets and quotes, clean up formatting
-                group_clean=$(echo "$group" | sed 's/^\[//' | sed 's/\]$//' | sed 's/"//g' | sed 's/, /|/g')
-                if [[ -n "$group_clean" ]]; then
-                    group_formatted="($group_clean)"
-                    if [[ -z "$INCLUDE_LOGIC" ]]; then
-                        INCLUDE_LOGIC="$group_formatted"
-                    else
-                        INCLUDE_LOGIC="$INCLUDE_LOGIC AND $group_formatted"
-                    fi
-                fi
-            fi
-        done < <(printf "%s" "$JSON" | jq -r '.include_groups[] // empty' 2>/dev/null || echo "")
-    fi
-
-mapfile -t FILES < <(printf "%s" "$JSON" | jq -r '.files[]')
-
-if [[ -z "$SUBDOMAIN" ]]; then
-    log "ERROR: subdomain not found in $TOML_FILE"
-    exit 1
-fi
-
-# Check if we're already in the correct platform directory
-CURRENT_DIR_NAME=$(basename "$(dirname "$TOML_FILE")")
-PLATFORM_DIR_NAME=$(basename "$TOML_FILE" .toml)
-
-if [[ "$CURRENT_DIR_NAME" == "$PLATFORM_DIR_NAME" ]]; then
-    # Already in correct directory structure
-    PLATFORM_DIR="$(dirname "$TOML_FILE")"
-    log "Already in correct platform directory: $PLATFORM_DIR"
-else
-    # Create platform directory and move files
-    PLATFORM_DIR="$(dirname "$TOML_FILE")/$PLATFORM_DIR_NAME"
-    log "Creating platform directory: $PLATFORM_DIR"
-    mkdir -p "$PLATFORM_DIR"
-
-    # Move TOML file to platform directory
-    mv "$TOML_FILE" "$PLATFORM_DIR/"
-
-    # Update TOML_FILE path for README generation
-    TOML_FILE="$PLATFORM_DIR/$(basename "$TOML_FILE")"
-fi
-
-# Construct source URL
-SOURCE_URL="${BASE_URL%/}/${SUBDOMAIN#/}"
-
-# Generate platform name from directory
-PLATFORM_NAME=$(basename "$DIRECTORY" / | tr '[:lower:]' '[:upper:]')
-
-# Scrape file sizes from the source page
-log "Scraping file sizes from: $SOURCE_URL"
-HTML=$(curl -s "$SOURCE_URL")
-
-# Calculate total size
-TOTAL_SIZE_BYTES=0
-SIZE_SUMMARY=""
-
-for file in "${FILES[@]}"; do
-    # Extract file size from Myrient's table format
-    # Find the row containing the file link and extract the size from the next cell
-    # Format: <tr><td class="link"><a href="filename.zip">...</a></td><td class="size">SIZE</td>...
-
-    # URL-encode the filename for matching against the HTML href attributes
-    # Escape single quotes for Python by replacing ' with '\''
-    escaped_file=$(printf '%s\n' "$file" | sed "s/'/'\\\\''/g")
-    encoded_file=$(python3 -c "import sys, urllib.parse; print(urllib.parse.quote('$escaped_file'))")
-
-    # Try to find the size using the URL-encoded filename first
-    size_info=$(echo "$HTML" | grep -A2 "$encoded_file" | grep '<td class="size">' | sed 's/.*<td class="size">//;s/<\/td>.*//' | head -1)
-
-    # If that didn't work, try with the original filename
-    if [[ -z "$size_info" ]]; then
-        size_info=$(echo "$HTML" | grep -A2 "$file" | grep '<td class="size">' | sed 's/.*<td class="size">//;s/<\/td>.*//' | head -1)
-    fi
-    
-    if [[ -n "$size_info" && "$size_info" != "-" ]]; then
-        # Parse size (e.g., "35.9 KiB" -> bytes)
-        # Extract number and unit separately
-        size_num=$(echo "$size_info" | sed 's/^\([0-9.]*\).*/\1/')
-        size_unit=$(echo "$size_info" | sed 's/^[0-9.]*\s*//' | sed 's/\s*$//')
-
-        if [[ -n "$size_num" && -n "$size_unit" ]]; then
-            # Convert to bytes using the format_file_size function
-            size_bytes=$(format_file_size "$size_num" "$size_unit" "B")
-
-            TOTAL_SIZE_BYTES=$((TOTAL_SIZE_BYTES + size_bytes))
-
-            if [[ -z "$SIZE_SUMMARY" ]]; then
-                SIZE_SUMMARY="$size_info"
-            fi
-        fi
-    fi
-done
-
-# Format total size with both decimal and binary units
-if [[ $TOTAL_SIZE_BYTES -eq 0 ]]; then
-    TOTAL_SIZE_FORMATTED="Unknown (unable to determine from source)"
-else
-    # Calculate both decimal (KB, MB, GB) and binary (KiB, MiB, GiB) representations
-    if command -v bc >/dev/null 2>&1; then
-        # Use bc for precise calculations
-        size_kb=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1000" | bc)
-        size_kib=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1024" | bc)
-        size_mb=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1000000" | bc)
-        size_mib=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1048576" | bc)
-        size_gb=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1000000000" | bc)
-        size_gib=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1073741824" | bc)
-        size_tb=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1000000000000" | bc)
-        size_tib=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1099511627776" | bc)
-        size_pb=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1000000000000000" | bc)
-        size_pib=$(echo "scale=1; $TOTAL_SIZE_BYTES / 1125899906842624" | bc)
-
-        if [[ $(echo "$size_pb >= 1" | bc) -eq 1 ]]; then
-            pb_fmt=$( [[ $(echo "$size_pb >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
-            pib_fmt=$( [[ $(echo "$size_pib >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
-            TOTAL_SIZE_FORMATTED="$(printf "$pb_fmt PB" "$size_pb") ($(printf "$pib_fmt PiB" "$size_pib"))"
-        elif [[ $(echo "$size_tb >= 1" | bc) -eq 1 ]]; then
-            tb_fmt=$( [[ $(echo "$size_tb >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
-            tib_fmt=$( [[ $(echo "$size_tib >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
-            TOTAL_SIZE_FORMATTED="$(printf "$tb_fmt TB" "$size_tb") ($(printf "$tib_fmt TiB" "$size_tib"))"
-        elif [[ $(echo "$size_gb >= 1" | bc) -eq 1 ]]; then
-            gb_fmt=$( [[ $(echo "$size_gb >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
-            gib_fmt=$( [[ $(echo "$size_gib >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
-            TOTAL_SIZE_FORMATTED="$(printf "$gb_fmt GB" "$size_gb") ($(printf "$gib_fmt GiB" "$size_gib"))"
-        elif [[ $(echo "$size_mb >= 1" | bc) -eq 1 ]]; then
-            mb_fmt=$( [[ $(echo "$size_mb >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
-            mib_fmt=$( [[ $(echo "$size_mib >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
-            TOTAL_SIZE_FORMATTED="$(printf "$mb_fmt MB" "$size_mb") ($(printf "$mib_fmt MiB" "$size_mib"))"
-        elif [[ $(echo "$size_kb >= 1" | bc) -eq 1 ]]; then
-            kb_fmt=$( [[ $(echo "$size_kb >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
-            kib_fmt=$( [[ $(echo "$size_kib >= 100" | bc) -eq 1 ]] && echo "%.0f" || echo "%.1f" )
-            TOTAL_SIZE_FORMATTED="$(printf "$kb_fmt KB" "$size_kb") ($(printf "$kib_fmt KiB" "$size_kib"))"
-        else
-            TOTAL_SIZE_FORMATTED="$TOTAL_SIZE_BYTES B"
-        fi
-    else
-        # Fallback without bc - use awk for decimal calculations with intelligent formatting
-        if [[ $TOTAL_SIZE_BYTES -gt $((1000 * 1000 * 1000 * 1000)) ]]; then
-            kb_size=$(awk "BEGIN {printf \"%.2f\", $TOTAL_SIZE_BYTES / 1000}")
-            kib_size=$(awk "BEGIN {printf \"%.2f\", $TOTAL_SIZE_BYTES / 1024}")
-            TOTAL_SIZE_FORMATTED="${kb_size} KB (${kib_size} KiB)"
-        elif [[ $TOTAL_SIZE_BYTES -gt $((1000 * 1000 * 1000)) ]]; then
-            gb_size=$(awk "BEGIN {gb = $TOTAL_SIZE_BYTES / 1000000000; printf gb >= 100 ? \"%.0f\" : \"%.1f\", gb}")
-            gib_size=$(awk "BEGIN {gib = $TOTAL_SIZE_BYTES / 1073741824; printf gib >= 100 ? \"%.0f\" : \"%.1f\", gib}")
-            TOTAL_SIZE_FORMATTED="${gb_size} GB (${gib_size} GiB)"
-        elif [[ $TOTAL_SIZE_BYTES -gt $((1000 * 1000)) ]]; then
-            mb_size=$(awk "BEGIN {mb = $TOTAL_SIZE_BYTES / 1000000; printf mb >= 100 ? \"%.0f\" : \"%.1f\", mb}")
-            mib_size=$(awk "BEGIN {mib = $TOTAL_SIZE_BYTES / 1048576; printf mib >= 100 ? \"%.0f\" : \"%.1f\", mib}")
-            TOTAL_SIZE_FORMATTED="${mb_size} MB (${mib_size} MiB)"
-        elif [[ $TOTAL_SIZE_BYTES -gt 1000 ]]; then
-            kb_size=$(awk "BEGIN {kb = $TOTAL_SIZE_BYTES / 1000; printf kb >= 100 ? \"%.0f\" : \"%.1f\", kb}")
-            kib_size=$(awk "BEGIN {kib = $TOTAL_SIZE_BYTES / 1024; printf kib >= 100 ? \"%.0f\" : \"%.1f\", kib}")
-            TOTAL_SIZE_FORMATTED="${kb_size} KB (${kib_size} KiB)"
-        else
-            TOTAL_SIZE_FORMATTED="$TOTAL_SIZE_BYTES B"
-        fi
-    fi
-fi
-
-# Generate README
-README_FILE="$(dirname "$TOML_FILE")/README.md"
-
-{
-    echo "# $PLATFORM_NAME ROM Collection"
-    echo ""
-    echo "This collection contains ROMs for the $PLATFORM_NAME platform."
-    echo ""
-    echo "## Metadata"
-    echo ""
-    echo "- **Generated**: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
-    echo "- **Source URL**: $SOURCE_URL"
-    echo "- **Total Files**: ${#FILES[@]}"
-    echo "- **Total Size**: $TOTAL_SIZE_FORMATTED"
-    echo "- **Platform Directory**: $DIRECTORY"
-
-    # Include exclude patterns information if any were used
-    if [[ ${#EXCLUDE_PATTERNS[@]} -gt 0 ]]; then
-        echo "- **Excluded Patterns**: ${EXCLUDE_PATTERNS[*]}"
-    fi
-
-    # Include include groups information if any were used
-    if [[ -n "$INCLUDE_LOGIC" ]]; then
-        echo "- **Include Logic**: $INCLUDE_LOGIC"
-    fi
-
-    echo ""
-    echo "## ROM Files"
-    echo ""
-    echo "The following ${#FILES[@]} ROM files are included in this collection:"
-    echo ""
-    for file in "${FILES[@]}"; do
-        human_name=$(url_decode "$file")
-        echo "- $human_name"
-    done
-    echo ""
-    echo "## Download"
-    echo ""
-    echo "To download all ROMs in this collection:"
-    echo ""
-    echo "\`\`\`bash"
-    echo "./myrient-dl.sh \"$TOML_FILE\""
-    echo "\`\`\`"
-    echo ""
-    echo "Or download to a custom directory:"
-    echo ""
-    echo "\`\`\`bash"
-    echo "./myrient-dl.sh -o /path/to/directory \"$TOML_FILE\""
-    echo "\`\`\`"
-} > "$README_FILE"
-
-log "Generated README.md for $PLATFORM_NAME (${#FILES[@]} files)"

@@ -6,8 +6,7 @@ url_decode() {
     python3 -c "import sys, urllib.parse; print(urllib.parse.unquote(sys.argv[1]))" "$1"
 }
 
-# URL encode using Python (handles both encoded and decoded input by decoding first)
+# URL encode using Python
 url_encode() {
-    local decoded=$(url_decode "$1")
-    python3 -c "import sys, urllib.parse; print(urllib.parse.quote('$decoded'))"
+    python3 -c "import sys, urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$1"
 }
