@@ -7,8 +7,7 @@ NAME
     show_spinner - Display an animated spinner attached to a process
 
 SYNOPSIS
-    show_spinner -i|--pid PID [-p|--prepend TEXT] [-a|--append TEXT]
-                 [-s|--speed SECONDS] [-h|--help]
+    show_spinner -i|--pid PID [-p|--prepend TEXT] [-a|--append TEXT] [-h|--help]
 
 DESCRIPTION
     Displays an animated spinner that runs while the specified process is active.
@@ -29,10 +28,6 @@ OPTIONS
     -a, --append TEXT
         Text to display after the spinner animation.
 
-    -s, --speed SECONDS
-        Animation speed in seconds between frames. Default is 0.1 seconds.
-        Lower values make the spinner animate faster.
-
     -h, --help
         Display this help message and exit.
 
@@ -40,8 +35,8 @@ EXAMPLES
     Basic usage with background process:
         sleep 10 & show_spinner -i $!
 
-    With custom text and speed:
-        long_command & show_spinner -i $! -p "Working: " -s 0.2
+    With custom text:
+        long_command & show_spinner -i $! -p "Working: "
 
     Multiple spinners for different processes:
         task1 & pid1=$!
@@ -56,10 +51,10 @@ show_spinner() {
     local prepend=""
     local append=""
     local spin_array=('|' '/' '-' '\')
-    local speed="0.1"
+    local speed="0.25"
 
     # Parse options using getopt
-    TEMP=$(getopt -o 'i:p:a:s:h' --long 'pid:,prepend:,append:,speed:,help' -n 'show_spinner' -- "$@")
+    TEMP=$(getopt -o 'i:p:a:h' --long 'pid:,prepend:,append:,help' -n 'show_spinner' -- "$@")
     if [[ $? -ne 0 ]]; then
         echo "Use -h or --help for usage" >&2
         return 1
@@ -81,10 +76,6 @@ show_spinner() {
                 append="$2"
                 shift 2
                 ;;
-            -s|--speed)
-                speed="$2"
-                shift 2
-                ;;
             -h|--help)
                 spinner_help
                 return 0
@@ -94,7 +85,7 @@ show_spinner() {
                 break
                 ;;
             *)
-                echo "Usage: show_spinner -i|--pid PID [-p|--prepend PREPEND] [-a|--append APPEND] [-s|--speed SPEED] [-h|--help]" >&2
+                echo "Usage: show_spinner -i|--pid PID [-p|--prepend PREPEND] [-a|--append APPEND] [-h|--help]" >&2
                 echo "Example: sleep 8 & show_spinner -i \$!" >&2
                 return 1
                 ;;
@@ -109,12 +100,6 @@ show_spinner() {
     # Validate PID is a number
     if ! [[ "$pid" =~ ^[0-9]+$ ]]; then
         echo "Error: PID must be a valid process ID number." >&2
-        return 1
-    fi
-
-    # Validate speed is a number
-    if ! [[ "$speed" =~ ^[0-9]*\.?[0-9]+$ ]]; then
-        echo "Error: Speed must be a positive number." >&2
         return 1
     fi
 
@@ -275,5 +260,11 @@ show_progress() {
         else
             printf "\r\033[K[%s%s] %3d%% (%d/%d)" "$bar" "$spaces" "$progress" "$current" "$total" >&2
         fi
+    fi
+}
+
+clear_progress() {
+    if [[ -t 1 ]]; then
+        printf "\r\033[K" >&2
     fi
 }

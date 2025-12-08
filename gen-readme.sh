@@ -2,16 +2,10 @@
 set -uo pipefail
 
 # Source utility functions
-. ./url-utils.sh
-. ./progress.sh
-. ./toml-utils.sh
-
-# Generate README.md from platform TOML file
-# Usage: gen-readme.sh <toml_file>
-
-log() {
-    echo "$*" >&2
-}
+. ./scripts/url-utils.sh
+. ./scripts/progress.sh
+. ./scripts/toml-utils.sh
+. ./scripts/log.sh
 
 show_help() {
     cat << EOF
@@ -87,10 +81,10 @@ if [[ ! -f "$TOML_FILE" ]]; then
 fi
 
 CONFIG_JSON=$(parse_toml "./config.toml")
-BASE_URL=$(printf "%s" "$CONFIG_JSON" | jq -r '.base_url')
+SITE=$(printf "%s" "$CONFIG_JSON" | jq -r '.site')
 
-if [[ -z "$BASE_URL" ]]; then
-    log "ERROR: base_url not found in config.toml"
+if [[ -z "$SITE" ]]; then
+    log "ERROR: site not found in config.toml"
     exit 1
 fi
 
@@ -186,26 +180,26 @@ if printf "%s" "$JSON" | jq -e 'has("platform_tomls")' > /dev/null 2>&1; then
             echo "\`\`\`bash"
             echo "./myrient-dl.sh -o /path/to/directory \"$TOML_FILE\""
             echo "\`\`\`"
-        } > "$README_FILE" & show_spinner -i $! -p "Writing README: " -s 0.2
+        } > "$README_FILE" & show_spinner -i $! -p "Writing README: "
     
         log "Generated summary README.md for $TOML_FILE"
         exit 0
     fi
 else
  # Extract data
-    BASE_URL=$(printf "%s" "$JSON" | jq -r '.base_url // empty')
-    SUBDOMAIN=$(printf "%s" "$JSON" | jq -r '.subdomain // empty')
+    SITE=$(printf "%s" "$JSON" | jq -r '.site // empty')
+    PATH_DIRECTORY=$(printf "%s" "$JSON" | jq -r '.path_directory // empty')
     DIRECTORY=$(printf "%s" "$JSON" | jq -r '.directory // empty')
     mapfile -t FILES < <(printf "%s" "$JSON" | jq -r '.files[]')
 
-    if [[ -z "$SUBDOMAIN" ]]; then
-        log "ERROR: subdomain not found in $TOML_FILE"
+    if [[ -z "$PATH_DIRECTORY" ]]; then
+        log "ERROR: path_directory not found in $TOML_FILE"
         exit 1
     fi
 
     # Construct source URL
-    SOURCE_URL_DEC="${BASE_URL%/}/${SUBDOMAIN#/}"
-    SOURCE_URL_ENC="${BASE_URL%/}/$(url_encode "${SUBDOMAIN#/}")"
+    SOURCE_URL_DEC="${SITE}/${PATH_DIRECTORY}"
+    SOURCE_URL_ENC="${SITE}/$(url_encode "${PATH_DIRECTORY}")"
 
     # Generate platform name from directory
     PLATFORM_NAME=$(basename "$DIRECTORY" / | tr '[:lower:]' '[:upper:]')
@@ -214,34 +208,40 @@ else
     log "Scraping file sizes from: $SOURCE_URL_DEC"
     HTML=$(curl -s "$SOURCE_URL_ENC")
 
+    # Initialize arrays for game names and file sizes
+    GAME_NAMES=()
+    FILE_SIZES=()
+
     # Calculate total size
     TOTAL_SIZE_BYTES=0
     FILE_INDEX=0
     FILES_TOTAL=${#FILES[@]}
+    FILE_SUMMARY="| GAME | TAGS | SIZE |\n| --- | --- | --- |\n"
 
     for file in "${FILES[@]}"; do
-        # Extract file size from Myrient & strip the " " and "B"
-        # Find the row containing the file name and extract the size from 2 rows after
-        file_size=$(echo "$HTML" | grep -A2 "$file" | grep '<td class="size">' | sed 's/.*<td class="size">//;s/B<\/td>.*//;s/ //' |  head -1)
-
         # Progress Bar
         if [[ -t 1 ]]; then
-            show_progress -c $FILE_INDEX -t $FILES_TOTAL -m "Parsing file sizes"
+            show_progress -c $FILE_INDEX -t $FILES_TOTAL -m "Parsing files"
         else
-            log "Size of $file: ${file_size}B"
+            log "Parsing $file"
         fi
-        
+
+        # Extract file size from Myrient & strip the " " and "B"
+        file_size=$(echo "$HTML" | grep -A2 "$file" | grep '<td class="size">' | sed 's/.*<td class="size">//;s/B<\/td>.*//;s/ //' | head -1)
+        game_name=$(echo "$file" | sed 's/ (.*//' | head -1)
+        game_tags=$(echo "$file" | sed 's/\.[^.]*$//; s/[^()]*//')
+
+        FILE_SUMMARY="${FILE_SUMMARY}| ${game_name} | ${game_tags} | ${file_size}B |\n"
+
         if [[ -n "$file_size" && "$file_size" != "-" ]]; then
-            # Convert size to bytes
             file_bytes=$(numfmt --from=iec-i "$file_size")
             TOTAL_SIZE_BYTES=$((TOTAL_SIZE_BYTES + file_bytes))
         fi
+
         ((FILE_INDEX++))
     done
     # Clear progress bar line
-    if [[ -t 1 ]]; then
-        printf "\r%*s\r" "$(tput cols)" "" >&2
-    fi
+    clear_progress
 
     # Format total size using numfmt for automatic IEC/SI formatting
     if [[ $TOTAL_SIZE_BYTES -eq 0 ]]; then
@@ -273,9 +273,7 @@ else
         echo "<details>"
         echo "<summary>The following ${#FILES[@]} ROM files are included in this collection:</summary>"
         echo ""
-        for file in "${FILES[@]}"; do
-            echo "- $file"
-        done
+        printf "%b" "$FILE_SUMMARY"
         echo ""
         echo "</details>"
         echo ""
@@ -292,7 +290,7 @@ else
         echo "\`\`\`bash"
         echo "./myrient-dl.sh -o /path/to/directory \"$TOML_FILE\""
         echo "\`\`\`"
-    } > "$README_FILE" & show_spinner -i $! -p "Writing README: " -s 0.2
+    } > "$README_FILE" & show_spinner -i $! -p "Writing README: "
 
-    log "Generated README.md for $TOML_FILE"
+    log "Generated $README_FILE"
 fi

@@ -1,0 +1,2 @@
+site = "https://myrient.erista.me" # Main domain hosting all files
+root_directory = "./roms/" # Local root directory for all downloads

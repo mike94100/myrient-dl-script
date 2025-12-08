@@ -1,22 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-LOG_FILE="myrient-dl.log"
-
-log() {
-    printf "[%s] %s\n" "$(date '+%Y-%m-%d %H:%M:%S')" "$*" | tee -a "$LOG_FILE"
-}
-
 # Source utility functions
-. ./toml-utils.sh
-. ./url-utils.sh
-
-# Get human-readable filename from URL
-get_filename() {
-    local url="$1"
-    local filename="${url##*/}"
-    url_decode "$filename"
-}
+. ./scripts/toml-utils.sh
+. ./scripts/url-utils.sh
+. ./scripts/progress.sh
+. ./scripts/log.sh
 
 # Read each platform toml
 process_platform_toml() {
@@ -26,9 +15,9 @@ process_platform_toml() {
 
     json=$(parse_toml "$file")
 
-    subdomain=$(printf "%s" "$json" | jq -r '.subdomain // empty')
-    if [[ -z "$subdomain" ]]; then
-        log "ERROR: subdomain missing in $file"
+    path_directory=$(validate_directory_path "$(printf "%s" "$json" | jq -r '.path_directory // empty')")
+    if [[ $? -ne 0 ]]; then
+        log "ERROR: Invalid directory path in $file"
         exit 1
     fi
 
@@ -37,7 +26,7 @@ process_platform_toml() {
         directory=""
     fi
 
-    full_dir="${GLOBAL_BASE_DIRECTORY}${directory}"
+    full_dir="${ROOT_DIRECTORY}${directory}"
 
     mapfile -t files < <(printf "%s" "$json" | jq -r '.files[]')
 
@@ -46,38 +35,22 @@ process_platform_toml() {
         exit 1
     fi
 
-    local URLS=()
-    for f in "${files[@]}"; do
-        if [[ "$f" =~ [[:space:]\(\)\[\]\{\}\|\\\^\~\'\"\<\>\#] ]]; then
-            log "WARNING: File entry '$f' contains characters that may need URL encoding."
-        fi
-
-        full_url="${GLOBAL_BASE}${subdomain}${f}"
-        URLS+=("$full_url")
-
-        log "Prepared URL: $full_url -> $full_dir"
-    done
-
-    log "Total files for $file: ${#URLS[@]}"
-
     if [[ "$DRY_RUN" != true ]]; then
-        # Download for this site
+        # Create output directory
         mkdir -p "$full_dir"
         log "Create directory: $full_dir"
-        for url in "${URLS[@]}"; do
-            filename=$(get_filename "$url")
-            log "Downloading: $filename"
-            wget -P "$full_dir" -nd -c -e robots=off -R "index.html*" "$url" \
-                >> "$LOG_FILE" 2>&1 || {
-                    log "ERROR downloading $url"
-                }
+
+        # Generate encoded urls
+        for i in "${!files[@]}"; do
+            files[$i]="${SITE}$(url_encode "${path_directory}${files[$i]}")"
         done
+
+        # Download files
+        printf '%s\n' "${files[@]}" | wget --progress=bar -i - -P "$full_dir" -np -c -e robots=off -R "index.html*"
+
     else
         log "DRYRUN: Create directory: $full_dir"
-        for url in "${URLS[@]}"; do
-            filename=$(get_filename "$url")
-            log "DRYRUN: Downloading: $filename"
-        done
+        log "DRYRUN: Download ${#files[@]} files"
     fi
 }
 
@@ -213,36 +186,36 @@ main() {
         exit 1
     fi
 
-    # Load global config
+    # Load config
     if [[ ! -f "./config.toml" ]]; then
         log "ERROR: config.toml not found in current directory"
         exit 1
     fi
 
-    GLOBAL_TOML=$(parse_toml "./config.toml")
+    CONFIG_TOML=$(parse_toml "./config.toml")
 
-    GLOBAL_BASE=$(printf "%s" "$GLOBAL_TOML" | jq -r '.base_url')
-    if [[ -z "$GLOBAL_BASE" ]]; then
-        log "ERROR: base_url missing in config.toml"
+    SITE=$(printf "%s" "$CONFIG_TOML" | jq -r '.site')
+    if [[ -z "$SITE" ]]; then
+        log "ERROR: site is missing in config.toml"
         exit 1
     fi
 
-    GLOBAL_BASE_DIRECTORY=$(printf "%s" "$GLOBAL_TOML" | jq -r '.base_directory // empty')
-    if [[ -z "$GLOBAL_BASE_DIRECTORY" ]]; then
-        GLOBAL_BASE_DIRECTORY="./roms/"
+    ROOT_DIRECTORY=$(printf "%s" "$CONFIG_TOML" | jq -r '.root_directory // empty')
+    if [[ -z "$ROOT_DIRECTORY" ]]; then
+        ROOT_DIRECTORY="./roms/"
     fi
 
     # Apply output directory override
     if [[ -n "$output_dir" ]]; then
         # Remove leading ./ from base_directory if present
-        base_dir="${GLOBAL_BASE_DIRECTORY#./}"
-        GLOBAL_BASE_DIRECTORY="${output_dir%/}/${base_dir}"
+        base_dir="${ROOT_DIRECTORY#./}"
+        ROOT_DIRECTORY="${output_dir%/}/${base_dir}"
     fi
 
     DRY_RUN=$dry_run
 
-    log "Global base URL: $GLOBAL_BASE"
-    log "Global base directory: $GLOBAL_BASE_DIRECTORY"
+    log "SITE URL: $SITE"
+    log "Root directory: $ROOT_DIRECTORY"
     if [[ "$DRY_RUN" == true ]]; then
         log "Dry run mode: no downloads will be performed"
     fi

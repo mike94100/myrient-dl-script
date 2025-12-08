@@ -1,6 +1,5 @@
 # Log files
 *.log
-myrient-dl.log
 
 # Temporary files
 *.tmp
@@ -25,6 +24,3 @@ Thumbs.db
 # Downloaded files (ROMs, etc.)
 roms/
 downloads/
-
-# Configuration files that might contain sensitive data
-config.local.toml
