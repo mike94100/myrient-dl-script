@@ -13,63 +13,60 @@
 #   Set KEEP_ALL_REVISIONS = 1 to keep all game revisions instead of deduplicating
 #   Set KEEP_ALL_REVISIONS = 0 to deduplicate (keep only best version)
 #
-# Modify the patterns below to customize filtering.
-#
 # ============================================================================
 
 BEGIN {
     # Configuration flags
     KEEP_ALL_REVISIONS = 0  # Set to 1 to keep all revisions, 0 to deduplicate
 
-    # Games tracking for deduplication (only used if KEEP_ALL_REVISIONS = 0)
-    if (KEEP_ALL_REVISIONS == 0) {
-        delete games
-    }
+    # Arrays for maintaining ordered output
+    count = 0
+    delete all_games
+    delete base_to_index
+    delete seen
 }
 
 {
     filename = $0
 
     # Skip already excluded files (start with #)
-    if (filename ~ /^#/) {
-        print filename
-        next
-    }
+    if (filename ~ /^#/) { print filename; next }
+
+    # Exact deduplication - skip duplicate filenames
+    if (filename in seen) { next }
+    seen[filename] = 1
 
     # ============================================================================
     # EXCLUDE
     # ============================================================================
 
     # Exclude development/unreleased content
-    if (filename ~ /\(Beta/) { print "#" filename; next }
-    if (filename ~ /\(Demo/) { print "#" filename; next }
-    if (filename ~ /\(Tech Demo/) { print "#" filename; next }
-    if (filename ~ /\(Proto/) { print "#" filename; next }
-    if (filename ~ /\(Sample/) { print "#" filename; next }
+    if (filename ~ /\(Beta/) { all_games[++count] = "#" filename; next }
+    if (filename ~ /\(Demo/) { all_games[++count] = "#" filename; next }
+    if (filename ~ /\(Tech Demo/) { all_games[++count] = "#" filename; next }
+    if (filename ~ /\(Proto/ || filename ~ /Proto\)/) { all_games[++count] = "#" filename; next }
+    if (filename ~ /\(Sample/) { all_games[++count] = "#" filename; next }
 
     # Exclude unauthorized content
-    if (filename ~ /\(Pirate/) { print "#" filename; next }
-    if (filename ~ /\(Unl/) { print "#" filename; next }
-    if (filename ~ /\(Hack/) { print "#" filename; next }
+    if (filename ~ /\(Pirate/) { all_games[++count] = "#" filename; next }
+    if (filename ~ /\(Unl/) { all_games[++count] = "#" filename; next }
+    if (filename ~ /\(Hack/) { all_games[++count] = "#" filename; next }
 
     # Exclude technical files
-    if (filename ~ /\[BIOS\]/) { print "#" filename; next }
-    if (filename ~ /\(Test Program/) { print "#" filename; next }
+    if (filename ~ /\[BIOS\]/) { all_games[++count] = "#" filename; next }
+    if (filename ~ /\(Test Program/) { all_games[++count] = "#" filename; next }
 
     # Exclude specific collections
-    if (filename ~ /Retro Collection/) { print "#" filename; next }
-    if (filename ~ /Limited Run Games/) { print "#" filename; next }
-    if (filename ~ /Evercade/) { print "#" filename; next }
+    #if (filename ~ /Retro Collection/) { all_games[++count] = "#" filename; next }
+    #if (filename ~ /Limited Run Games/) { all_games[++count] = "#" filename; next }
+    #if (filename ~ /Evercade/) { all_games[++count] = "#" filename; next }
+    #if (filename ~ /Disney Classic Games/) { all_games[++count] = "#" filename; next }
 
-    # Exclude non-English
-    if (filename ~ /\(Ja\)/) { print "#" filename; next }
+    # Exclude if not English
+    if (filename ~ /\(Ja\)/) { all_games[++count] = "#" filename; next }
 
-    # ============================================================================
-    # INCLUDE
-    # ============================================================================
-
-    # Include USA or World region only
-    if (filename !~ /\(USA/ && filename !~ /\(World\)/) { print "#" filename; next }
+    # Exclude if not USA, World, or English
+    if (filename !~ /\(USA/ && filename !~ /\(World\)/ && filename !~ /\(En/) { all_games[++count] = "#" filename; next }
 
     # ============================================================================
     # DEDUPLICATION - Keep only the best version of each game
@@ -77,7 +74,7 @@ BEGIN {
 
     if (KEEP_ALL_REVISIONS == 1) {
         # Skip deduplication - include all files that pass other filters
-        print filename
+        all_games[++count] = filename
     } else {
         # Extract base game name (everything before first parenthesis)
         base_name = extract_base_name(filename)
@@ -90,19 +87,21 @@ BEGIN {
 
             if (is_better_version(current_version, existing_version)) {
                 # This version is better - exclude the old one and keep this
-                print "#" games[base_name]["filename"]
+                all_games[base_to_index[base_name]] = "#" all_games[base_to_index[base_name]]
                 games[base_name]["filename"] = filename
                 games[base_name]["version"] = current_version
-                print filename
+                base_to_index[base_name] = ++count
+                all_games[count] = filename
             } else {
                 # This version is worse or equal - exclude it
-                print "#" filename
+                all_games[++count] = "#" filename
             }
         } else {
             # First occurrence of this game
             games[base_name]["filename"] = filename
             games[base_name]["version"] = extract_version(filename)
-            print filename
+            base_to_index[base_name] = ++count
+            all_games[count] = filename
         }
     }
 }
@@ -163,6 +162,12 @@ function is_better_version(new_ver, old_ver) {
     }
 
     return 0
+}
+
+END {
+    for (i = 1; i <= count; i++) {
+        print all_games[i]
+    }
 }
 
 # ============================================================================

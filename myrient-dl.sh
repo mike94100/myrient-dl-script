@@ -10,47 +10,37 @@ set -euo pipefail
 # Read each platform toml
 process_platform_toml() {
     local file="$1"
-
-    log "Processing site: $file"
-
-    json=$(parse_toml "$file")
+    json=$(parse_toml "$file"); info "Processing file: $file"
 
     path_directory=$(validate_directory_path "$(printf "%s" "$json" | jq -r '.path_directory // empty')")
-    if [[ $? -ne 0 ]]; then
-        log "ERROR: Invalid directory path in $file"
-        exit 1
-    fi
+    if [[ $? -ne 0 ]]; then error "Invalid directory path: $file"; exit 1; fi
+
+    # Create URL for directory
+    directory_url="${SITE}$(url_encode "${path_directory}")"
 
     directory=$(printf "%s" "$json" | jq -r '.directory // empty')
-    if [[ -z "$directory" ]]; then
-        directory=""
-    fi
+    if [[ -z "$directory" ]]; then directory=""; fi
 
     full_dir="${ROOT_DIRECTORY}${directory}"
 
     mapfile -t files < <(printf "%s" "$json" | jq -r '.files[]')
-
-    if [[ "${#files[@]}" -eq 0 ]]; then
-        log "ERROR: files[] missing or empty in $file"
-        exit 1
-    fi
+    if [[ "${#files[@]}" -eq 0 ]]; then error "files[] missing or empty: $file"; exit 1; fi
 
     if [[ "$DRY_RUN" != true ]]; then
         # Create output directory
-        mkdir -p "$full_dir"
-        log "Create directory: $full_dir"
+        mkdir -p "$full_dir"; info "Creating directory: $full_dir"
 
         # Generate encoded urls
-        for i in "${!files[@]}"; do
-            files[$i]="${SITE}$(url_encode "${path_directory}${files[$i]}")"
-        done
+        for i in "${!files[@]}"; do files[$i]="${SITE}$(url_encode "${path_directory}${files[$i]}")"; done
 
         # Download files
+        info "Downloading from: $directory_url | Downloading to: $full_dir"
         printf '%s\n' "${files[@]}" | wget --progress=bar -i - -P "$full_dir" -np -c -e robots=off -R "index.html*"
 
     else
-        log "DRYRUN: Create directory: $full_dir"
-        log "DRYRUN: Download ${#files[@]} files"
+        info "DRYRUN: Create directory: $full_dir"
+        info "DRYRUN: Download from: $directory_url | Download to: $full_dir"
+        info "DRYRUN: Download ${#files[@]} files"
     fi
 }
 
@@ -66,14 +56,14 @@ is_meta_toml() {
 process_meta_toml() {
     local meta_file="$1"
     local meta_dir=$(dirname "$meta_file")
-    
-    log "Processing meta TOML: $meta_file"
-    
+
+    info "Processing Meta-TOML: $meta_file"
+
     json=$(parse_toml "$meta_file")
     mapfile -t platform_tomls < <(printf "%s" "$json" | jq -r '.platform_tomls[]')
 
     if [[ "${#platform_tomls[@]}" -eq 0 ]]; then
-        log "ERROR: platform_tomls[] missing or empty in $meta_file"
+        error "platform_tomls[] missing or empty: $meta_file"
         exit 1
     fi
 
@@ -87,12 +77,12 @@ process_meta_toml() {
             # Relative path
             config_path="$meta_dir/$config"
         fi
-        
+
         if [[ ! -f "$config_path" ]]; then
-            log "ERROR: Config file not found: $config_path"
+            error "Config file not found: $config_path"
             exit 1
         fi
-        
+
         process_platform_toml "$config_path"
     done
 }
@@ -130,7 +120,7 @@ EOF
 # Main
 main() {
     : > "$LOG_FILE"
-
+    
     local inputs=()
     local dry_run=false
     local output_dir=""
@@ -145,7 +135,7 @@ main() {
                     inputs+=("${files[@]}")
                     shift 2
                 else
-                    log "ERROR: -i/--input requires file arguments"
+                    error "-i/--input requires file arguments"
                     exit 1
                 fi
                 ;;
@@ -154,7 +144,7 @@ main() {
                     output_dir="$2"
                     shift 2
                 else
-                    log "ERROR: -o/--output requires a directory argument"
+                    error "-o/--output requires a directory argument"
                     exit 1
                 fi
                 ;;
@@ -168,7 +158,7 @@ main() {
                 ;;
             -*)
                 show_help
-                log "ERROR: Unknown option: $1"
+                error "Unknown option: $1"
                 exit 1
                 ;;
             *)
@@ -181,65 +171,35 @@ main() {
 
     # Check for arguments
     if [[ ${#inputs[@]} -eq 0 ]]; then
-        log "ERROR: No input files specified"
-        log "Use -h or --help for usage"
+        error "No input files specified"
+        info "Use -h or --help for usage"
         exit 1
     fi
 
     # Load config
-    if [[ ! -f "./config.toml" ]]; then
-        log "ERROR: config.toml not found in current directory"
-        exit 1
-    fi
-
+    if [[ ! -f "./config.toml" ]]; then error "config.toml not found in current directory"; exit 1; fi
     CONFIG_TOML=$(parse_toml "./config.toml")
-
-    SITE=$(printf "%s" "$CONFIG_TOML" | jq -r '.site')
-    if [[ -z "$SITE" ]]; then
-        log "ERROR: site is missing in config.toml"
-        exit 1
-    fi
-
-    ROOT_DIRECTORY=$(printf "%s" "$CONFIG_TOML" | jq -r '.root_directory // empty')
-    if [[ -z "$ROOT_DIRECTORY" ]]; then
-        ROOT_DIRECTORY="./roms/"
-    fi
+    SITE=$(printf "%s" "$CONFIG_TOML" | jq -r '.site // "https://myrient.erista.me"')
+    ROOT_DIRECTORY=$(printf "%s" "$CONFIG_TOML" | jq -r '.root_directory // "./roms/"')
 
     # Apply output directory override
-    if [[ -n "$output_dir" ]]; then
-        # Remove leading ./ from base_directory if present
-        base_dir="${ROOT_DIRECTORY#./}"
-        ROOT_DIRECTORY="${output_dir%/}/${base_dir}"
-    fi
+    if [[ -n "$output_dir" ]]; then ROOT_DIRECTORY="${output_dir%/}"; fi
 
     DRY_RUN=$dry_run
 
-    log "SITE URL: $SITE"
-    log "Root directory: $ROOT_DIRECTORY"
-    if [[ "$DRY_RUN" == true ]]; then
-        log "Dry run mode: no downloads will be performed"
-    fi
+    if [[ "$DRY_RUN" == true ]]; then info "Dry run mode: no downloads will be performed"; fi
 
     # Process each input file
     for toml_arg in "${inputs[@]}"; do
-        if [[ ! -f "$toml_arg" ]]; then
-            log "ERROR: File not found: $toml_arg"
-            exit 1
-        fi
+        if [[ ! -f "$toml_arg" ]]; then error "File not found: $toml_arg"; exit 1; fi
 
         # Check if it's a meta TOML or a site TOML
-        if is_meta_toml "$toml_arg"; then
-            process_meta_toml "$toml_arg"
-        else
-            process_platform_toml "$toml_arg"
-        fi
+        if is_meta_toml "$toml_arg"; then process_meta_toml "$toml_arg"
+        else process_platform_toml "$toml_arg"; fi
     done
 
-    if [[ "$DRY_RUN" == true ]]; then
-        log "Dry run complete."
-    else
-        log "All downloads complete."
-    fi
+    if [[ "$DRY_RUN" == true ]]; then info "Dry run complete."
+    else info "Downloads complete."; fi
 }
 
 main "$@"

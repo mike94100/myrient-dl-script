@@ -7,27 +7,14 @@ set -uo pipefail
 . ./scripts/progress.sh
 . ./scripts/log.sh
 
-# Validate filter file
-validate_filter_file() {
-    local file="$1"
-    if [[ ! -f "$file" ]]; then
-        log "ERROR: Filter file not found: $file"
-        exit 1
-    fi
-    # Basic validation - ensure file contains sed-like commands
-    if ! grep -q 's/.*//' "$file" 2>/dev/null; then
-        log "WARNING: Filter file may not contain valid sed commands"
-    fi
-}
-
 show_help() {
     cat << EOF
 NAME
     gen-platform-toml.sh - Generate platform TOML files by scraping Myrient pages
 
 SYNOPSIS
-    gen-platform-toml.sh [OPTIONS] <path_directory> <output_file>
-    gen-platform-toml.sh [OPTIONS] <site> <path_directory> <output_file>
+    gen-platform-toml.sh [OPTIONS] <path_directory> <output_directory>
+    gen-platform-toml.sh [OPTIONS] <site> <path_directory> <output_directory>
 
 DESCRIPTION
     This script generates TOML configuration files for the myrient-dl.sh ROM downloader
@@ -36,21 +23,24 @@ DESCRIPTION
 
 ARGUMENTS
     site (optional)
-        The site for Myrient. Defaults to "https://myrient.erista.me".
+        The site for Myrient. Defaults to site in config or "https://myrient.erista.me".
         Only specify this if you need to use a different Myrient instance.
 
     path_directory
         The specific directory path under the site. This should include the files,
         collection, and platform directories (e.g., "/files/No-Intro/Nintendo - Game Boy/")
 
-    output_file
-        The path of the TOML file to generate (e.g., gb.toml or n64/n64.toml).
-        Any directories in the path will be created automatically.
+    output_directory
+        The directory where the TOML configuration file will be created.
+        The filename will be derived from the directory name.
+        Any missing directories in the path will be created automatically.
+        Example: "gb/" creates "gb/gb.toml"
 
 OPTIONS
     -f, --filter-file FILE
-        Load filter commands from a sed script file containing sed commands.
-        Example: -f "filters/1g1r.sed"
+        Load filter commands from a sed or awk script file.
+        Supports .sed files (sed commands) or .awk files (awk commands).
+        Examples: -f "filter.sed" or -f "filter.awk"
 
     -g, --gen-readme
         Automatically generate a README.md file for the created TOML configuration.
@@ -63,14 +53,17 @@ OPTIONS
         Display this help message and exit.
 
 EXAMPLES
-    Generate a Game Boy TOML file (using default base URL):
-        gen-platform-toml.sh "/files/No-Intro/Nintendo - Game Boy/" "gb.toml"
+    Generate a Game Boy TOML file:
+        gen-platform-toml.sh "/files/No-Intro/Nintendo - Game Boy/" "gb/"
+        # Creates: gb/gb.toml
 
-    Generate a filtered TOML file using a sed filter:
-        gen-platform-toml.sh -f "filters/1g1r.sed" "/files/No-Intro/Nintendo - Game Boy Advance/" "gba.toml"
+    Generate a filtered TOML file using a filter:
+        gen-platform-toml.sh -f "filter.awk" "/files/No-Intro/Nintendo - Game Boy Advance/" "gb/"
+        # Creates: gb/gb.toml
 
-    Generate TOML file in subdirectory (creates directory automatically):
-        gen-platform-toml.sh "/files/No-Intro/Nintendo - Nintendo 64 (BigEndian)/" "1g1r/n64/n64.toml"
+    Generate a Game Boy TOML file and README:
+        gen-platform-toml.sh -g "/files/No-Intro/Nintendo - Game Boy/" "gb/"
+        # Creates: gb/gb.toml & gb/README.md
 
 OUTPUT FORMAT
     The generated TOML file contains the following fields:
@@ -96,16 +89,11 @@ EOF
 
 # Parse options using getopt
 TEMP=$(getopt -o 'hf:gs' --long 'help,filter-file:,gen-readme,slim-output' -n 'gen-platform-toml' -- "$@")
-if [[ $? -ne 0 ]]; then
-    log "Use -h or --help for usage"
-    exit 1
-fi
+if [[ $? -ne 0 ]]; then info "Use -h or --help for usage"; exit 1; fi
 
 eval set -- "$TEMP"
 
-FILTER_FILE=""
-GEN_README=false
-SLIM_OUTPUT=false
+FILTER_FILE=""; GEN_README=false; SLIM_OUTPUT=false
 
 while true; do
     case "$1" in
@@ -137,88 +125,69 @@ while true; do
     esac
 done
 
-# Validate filter file if specified
-if [[ -n "$FILTER_FILE" ]]; then
-    if [[ ! -f "$FILTER_FILE" ]]; then
-        log "ERROR: Filter file not found: $FILTER_FILE"
-        exit 1
-    fi
-    log "Using filter file: $FILTER_FILE"
-fi
-
-# Check remaining arguments - support both 2 and 3 argument formats
-if [[ $# -eq 2 ]]; then
-    # 2 args: path_directory output_file (Use default site)
+# Check arguments - support both 2 and 3 argument formats
+if [[ $# -eq 3 ]]; then
+    SITE="$1"; shift
+elif [[ $# -eq 2 ]]; then
     CONFIG_JSON=$(parse_toml "./config.toml")
-    SITE=$(printf "%s" "$CONFIG_JSON" | jq -r '.site')
-    PATH_DIRECTORY_DEC=$(url_decode "$1")
-    PATH_DIRECTORY_ENC=$(url_encode "$1")
-    OUTPUT_FILE="$2"
-elif [[ $# -eq 3 ]]; then
-    # 3 args: site path_directory output_file
-    SITE=$1
-    PATH_DIRECTORY_DEC=$(url_decode "$2")
-    PATH_DIRECTORY_ENC=$(url_encode "$2")
-    OUTPUT_FILE="$3"
+    SITE=$(printf "%s" "$CONFIG_JSON" | jq -r '.site // "https://myrient.erista.me"')
 else
-    log "Usage: gen-platform-toml.sh [OPTIONS] <path_directory> <output_file>"
-    log "   or: gen-platform-toml.sh [OPTIONS] <site> <path_directory> <output_file>"
-    log "Use -h or --help for detailed help"
+    info "Usage: gen-platform-toml.sh [OPTIONS] <path_directory> <output_directory>"
+    info "   or: gen-platform-toml.sh [OPTIONS] <site> <path_directory> <output_directory>"
+    info "Use -h or --help for detailed help"
     exit 1
 fi
 
-if ! validate_directory_path "$PATH_DIRECTORY_DEC"; then
-    exit 1
-fi
+# Parse remaining arguments
+PATH_DIRECTORY_DEC=$(url_decode "$1")
+PATH_DIRECTORY_ENC=$(url_encode "$1")
+OUTPUT_DIR="$2"
 
-# Parse output file path - extract directory and filename
-OUTPUT_DIR=$(dirname "$OUTPUT_FILE")
-OUTPUT_FILENAME=$(basename "$OUTPUT_FILE")
-BASENAME="${OUTPUT_FILENAME%.toml}"
+if ! validate_directory_path "$PATH_DIRECTORY_DEC"; then exit 1; fi
 
-# If no directory was specified, create one with the same name as the file
-if [[ "$OUTPUT_DIR" == "." ]]; then
-    OUTPUT_DIR="$BASENAME"
-fi
-
-# Construct full output path
-OUTPUT_PATH="${OUTPUT_DIR}/${OUTPUT_FILENAME}"
+# Validate and normalize output directory path
+OUTPUT_DIR=$(echo "$OUTPUT_DIR" | sed '/\/$/!s|$|/|')
+if [[ ! "$OUTPUT_DIR" =~ ^[a-zA-Z0-9/_-]+$ ]]; then error "Invalid output directory path: $OUTPUT_DIR"; exit 1; fi
 
 # Create output directory
-mkdir -p "$OUTPUT_DIR"
+if ! mkdir -p "$OUTPUT_DIR"; then error "Failed to create directory: $OUTPUT_DIR"; exit 1; fi
 
 # Directory for downloads
-DIRECTORY="${BASENAME}/"
+DIRECTORY="$(basename "${OUTPUT_DIR}")/"
+
+# Output TOML file path
+OUTPUT_PATH="${OUTPUT_DIR}${DIRECTORY%/}.toml"
 
 # Construct URL for the directory
 SOURCE_URL_ENC="${SITE}${PATH_DIRECTORY_ENC}"
 SOURCE_URL_DEC="${SITE}${PATH_DIRECTORY_DEC}"
 
 # Scrape the page
-log "Scraping: $SOURCE_URL_DEC"
-HTML=$(curl -s "$SOURCE_URL_ENC")
+HTML=$(curl -s "$SOURCE_URL_ENC"); info "Scraping: $SOURCE_URL_DEC"
 
-# Extract file links - capture link text only
+# Extract file links
 FILES=$(echo "$HTML" | grep -o '<a href="[^"]*\.zip"[^>]*>[^<]*</a>' | sed 's|<a href="[^"]*"[^>]*>\([^<]*\)</a>|\1|g' | sort)
 
-if [[ -z "$FILES" ]]; then
-    log "ERROR: No .zip files found on the page"
-    exit 1
-fi
+if [[ -z "$FILES" ]]; then error "No .zip files found on the page"; exit 1; fi
 
-# Apply sed filtering if filter file was provided
+# Apply filtering
 if [[ -n "$FILTER_FILE" ]]; then
-    total_files=$(echo "$FILES" | wc -l)
+    # Determine filter command and validate
+    if [[ -z "$FILTER_FILE" ]]; then error "Filter File not found"; exit 1
+    elif [[ "$FILTER_FILE" == *.sed ]]; then filter_cmd="sed -E -f"
+    elif [[ "$FILTER_FILE" == *.awk ]]; then filter_cmd="awk -f"
+    else error "Filter file must be .sed or .awk: $FILTER_FILE"; exit 1; fi
 
-    log "Filtering $total_files files"
-    FILES=$(echo "$FILES" | sed -E -f "$FILTER_FILE" 2>/dev/null || echo "$FILES")
+    # Count total files
+    total_files=$(echo "$FILES" | wc -l); info "Filter file: $FILTER_FILE - Files: $total_files"
 
-    filtered_count=$(echo "$FILES" | grep -c '^[^#]')  # Count uncommented lines
+    # Apply filter
+    FILES=$(echo "$FILES" | $filter_cmd "$FILTER_FILE" 2>/dev/null || echo "$FILES")
+
+    # Count results
+    filtered_count=$(echo "$FILES" | grep -c '^[^#]')
     excluded_count=$((total_files - filtered_count))
-    
-    if [[ $excluded_count -gt 0 ]]; then
-        log "Files Included | Files Excluded - $filtered_count | $excluded_count"
-    fi
+    info "Files Included | Excluded - $filtered_count | $excluded_count"
 fi
 
 # Write TOML
@@ -226,30 +195,20 @@ fi
     echo "# Site that is hosting these files"
     echo "site = \"$SITE\""
     echo ""
-
     echo "# The path to the directory these files are located in"
     echo "path_directory = \"$PATH_DIRECTORY_DEC\""
     echo ""
-
     echo "# Directory where files will be downloaded:"
     echo "directory = \"$DIRECTORY\""
     echo ""
-
     echo "# List of files to download:"
     echo "files = ["
     echo "$FILES" | while IFS= read -r file; do
-        if [[ -n "$file" && "$file" != \#* ]]; then
-            echo "  \"$file\","
-        elif [[ -n "$file" && "$SLIM_OUTPUT" == false ]]; then
-            echo "  # \"${file#"#"}\","
-        fi
+        if [[ -n "$file" && "$file" != \#* ]]; then echo "  \"$file\","
+        elif [[ -n "$file" && "$SLIM_OUTPUT" == false ]]; then echo "  # \"${file#"#"}\","; fi
     done
     echo "]"
-} > "$OUTPUT_PATH"
-
-log "Generated $OUTPUT_PATH"
+} > "$OUTPUT_PATH"; info "Generated $OUTPUT_PATH"
 
 # Generate README if requested
-if [[ "$GEN_README" == true ]]; then
-    ./gen-readme.sh "$OUTPUT_PATH"
-fi
+if [[ "$GEN_README" == true ]]; then ./gen-readme.sh "$OUTPUT_PATH"; fi

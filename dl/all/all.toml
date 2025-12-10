@@ -2,5 +2,6 @@
 platform_tomls = [
   "gb/gb.toml",
   "gbc/gbc.toml",
-  "gba/gba.toml"
+  "gba/gba.toml",
+  "n64/n64.toml"
 ]

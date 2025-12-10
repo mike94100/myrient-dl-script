@@ -1,14 +1,15 @@
 #!/bin/bash
-# URL encoding/decoding utility functions
 
-# URL decode using Python
+# Source utility functions
+. ./scripts/log.sh
+
 url_decode() {
-    python3 -c "import sys, urllib.parse; print(urllib.parse.unquote(sys.argv[1]))" "$1"
+    jq -nr --arg url "$1" '$url | @urid'
 }
 
-# URL encode using Python
 url_encode() {
-    python3 -c "import sys, urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$1"
+    # Encode with jq but preserve forward slashes (path separators)
+    jq -nr --arg url "$1" '$url | @uri' | sed 's/%2F/\//g'
 }
 
 # Validate and format directory path
@@ -18,31 +19,25 @@ validate_directory_path() {
 
     # Check if empty
     if [[ -z "$path" ]]; then
-        echo "ERROR: directory path missing" >&2
+        error "Directory path missing"
         return 1
     fi
 
     # Check if it looks like a URL or hostname
     if [[ "$path" =~ :// ]] || [[ "$path" =~ ^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,} ]]; then
-        echo "ERROR: directory path cannot be a host or URL: $path" >&2
+        error "Directory path cannot be a host or URL: $path"
         return 1
     fi
 
-    # Check if it looks like a file (has an extension)
+    # Check if file (has an extension)
     if [[ "$path" =~ \.[a-zA-Z0-9]+$ ]]; then
-        echo "ERROR: directory path cannot be a file: $path" >&2
+        error "Directory path cannot be a file: $path"
         return 1
     fi
 
-    # Ensure it starts with slash
-    if [[ "$path" != /* ]]; then
-        path="/$path"
-    fi
-
-    # Ensure it ends with slash
-    if [[ "$path" != */ ]]; then
-        path="$path/"
-    fi
+    # Ensure path starts and ends with slash "/path/"
+    if [[ "$path" != /* ]]; then path="/$path"; fi
+    if [[ "$path" != */ ]]; then path="$path/"; fi
 
     echo "$path"
 }

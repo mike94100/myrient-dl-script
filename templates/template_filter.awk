@@ -1,15 +1,17 @@
 #!/usr/bin/awk -f
 # ============================================================================
-# ROM Filter Template - Customize this for your filtering needs
+# 1G1R Awk Filter - Simple ROM filtering with deduplication
 # ============================================================================
 #
-# Usage: awk -f template_filter.awk file_list.txt
-#        gen-platform-toml-awktest.sh -f template_filter.awk [options] ...
+# Usage: awk -f filters/1g1r.awk file_list.txt
+#        gen-platform-toml-awktest.sh -f filters/1g1r.awk [options] ...
 #
-# Copy this file and modify the sections below to create custom filters.
+# This filter excludes unwanted ROMs and includes only USA/World releases.
+# It also performs intelligent deduplication, keeping the best version of each game.
 #
-# Notes:
-#   
+# CONFIGURATION:
+#   Set KEEP_ALL_REVISIONS = 1 to keep all game revisions instead of deduplicating
+#   Set KEEP_ALL_REVISIONS = 0 to deduplicate (keep only best version)
 #
 # ============================================================================
 
@@ -17,8 +19,11 @@ BEGIN {
     # Configuration flags
     KEEP_ALL_REVISIONS = 0  # Set to 1 to keep all revisions, 0 to deduplicate
 
-    # Games tracking for deduplication (only used if KEEP_ALL_REVISIONS = 0)
-    if (KEEP_ALL_REVISIONS == 0) { delete games }
+    # Arrays for maintaining ordered output
+    count = 0
+    delete all_games
+    delete base_to_index
+    delete seen
 }
 
 {
@@ -27,45 +32,31 @@ BEGIN {
     # Skip already excluded files (start with #)
     if (filename ~ /^#/) { print filename; next }
 
+    # Exact deduplication - skip duplicate filenames
+    if (filename in seen) { next }
+    seen[filename] = 1
+
     # ============================================================================
     # EXCLUDE
     # ============================================================================
 
-    # Exclude game if any of the following apply
-    if (filename ~ /EXCLUDE1/ { print "#" filename; next }
-    if (filename ~ /EXCLUDE2/ { print "#" filename; next }
-    if (filename ~ /EXCLUDE3/ { print "#" filename; next }
+    # Exclude if any pattern matches
+    if (filename ~ /EXCLUDE1/) { all_games[++count] = "#" filename; next }
+    if (filename ~ /EXCLUDE2/) { all_games[++count] = "#" filename; next }
+    if (filename ~ /EXCLUDE3/) { all_games[++count] = "#" filename; next }
 
-    # Exclude game if any of the following apply (Same as above but on one line)
-    if (filename ~ /EXCLUDE1/ || filename ~ /EXCLUDE2/ { print "#" filename; next }
+    # Exclude if any pattern matches (same as above, but on one line)
+    if (filename ~ /EXCLUDE1/ || filename ~ /EXCLUDE2/ || filename ~ /EXCLUDE3/) { all_games[++count] = "#" filename; next }
 
-    # Exclude game if all of the following apply
-    if (filename ~ /EXCLUDE1/ && filename ~ /EXCLUDE2/ { print "#" filename; next }
+    # Exclude if all patterns match
+    if (filename ~ /EXCLUDE1/ && filename ~ /EXCLUDE2/ && filename ~ /EXCLUDE3/) { all_games[++count] = "#" filename; next }
 
-    # EXAMPLES
-    # Exclude Unreleased ROMs - Matches (Beta & (Proto
-    if (filename ~ /\(Beta/ || filename ~ /\(Proto/) { print "#" filename; next }
+    # Exclude if no patterns match
+    if (filename !~ /EXCLUDE1/ && filename !~ /EXCLUDE2/ && filename !~ /EXCLUDE3/) { all_games[++count] = "#" filename; next }
 
-    # ============================================================================
-    # INCLUDE
-    # ============================================================================
-
-    # Include game if any of the following apply
-    if (filename !~ /EXCLUDE1/ { print "#" filename; next }
-    if (filename !~ /EXCLUDE2/ { print "#" filename; next }
-    if (filename !~ /EXCLUDE3/ { print "#" filename; next }
-
-    # Include game if any of the following apply (Same as above but on one line)
-    if (filename !~ /EXCLUDE1/ || filename !~ /EXCLUDE2/ { print "#" filename; next }
-
-    # Include game if all of the following apply
-    if (filename !~ /EXCLUDE1/ && filename !~ /EXCLUDE2/ { print "#" filename; next }
-
-    EXAMPLES
-    # Include specific regions - Matches (USA & (World)
-    if (filename !~ /\(USA/ || filename !~ /\(World\)/) { print "#" filename; next }
-    # Include specific game names - Matches Pokemon & Mario
-    if (filename !~ /Pokemon/ || filename !~ /Mario/) { print "#" filename; next }
+    # Complex exclusion
+    # Exclude if neither EXCLUDE1 or EXCLUDE2 match, or if EXCLUDE3 matches
+    if ((filename !~ /EXCLUDE1/ && filename !~ /EXCLUDE2/) || filename !~ /EXCLUDE3/) { all_games[++count] = "#" filename; next }
 
     # ============================================================================
     # DEDUPLICATION - Keep only the best version of each game
@@ -73,7 +64,7 @@ BEGIN {
 
     if (KEEP_ALL_REVISIONS == 1) {
         # Skip deduplication - include all files that pass other filters
-        print filename
+        all_games[++count] = filename
     } else {
         # Extract base game name (everything before first parenthesis)
         base_name = extract_base_name(filename)
@@ -86,19 +77,21 @@ BEGIN {
 
             if (is_better_version(current_version, existing_version)) {
                 # This version is better - exclude the old one and keep this
-                print "#" games[base_name]["filename"]
+                all_games[base_to_index[base_name]] = "#" all_games[base_to_index[base_name]]
                 games[base_name]["filename"] = filename
                 games[base_name]["version"] = current_version
-                print filename
+                base_to_index[base_name] = ++count
+                all_games[count] = filename
             } else {
                 # This version is worse or equal - exclude it
-                print "#" filename
+                all_games[++count] = "#" filename
             }
         } else {
             # First occurrence of this game
             games[base_name]["filename"] = filename
             games[base_name]["version"] = extract_version(filename)
-            print filename
+            base_to_index[base_name] = ++count
+            all_games[count] = filename
         }
     }
 }
@@ -161,14 +154,32 @@ function is_better_version(new_ver, old_ver) {
     return 0
 }
 
+END {
+    for (i = 1; i <= count; i++) {
+        print all_games[i]
+    }
+}
+
 # ============================================================================
-# HOW TO MODIFY THIS TEMPLATE
+# HOW TO MODIFY THIS FILTER
 # ============================================================================
 #
-# 1. Copy this file: cp templates/template_filter.awk filters/my_filter.awk
-# 2. Modify the configuration flags at the top
-# 3. Uncomment/modify the filtering patterns in each section
-# 4. Test with: awk -f filters/my_filter.awk sample_files.txt
-# 5. Use with: gen-platform-toml-awktest.sh -f filters/my_filter.awk [options]
+# To exclude more content:
+#   Add new lines: if (filename ~ /\(pattern/) { print "#" filename; next }
+#
+# To change regions:
+#   Modify has_usa/has_world checks, or add has_europe = (filename ~ /\(Europe\)/)
+#
+# To exclude specific games or franchises:
+#   Uncomment and modify lines in the GAME NAME FILTERING section
+#
+# The deduplication automatically keeps the best version of each game based on:
+#   - Rev versions (Rev 1 > Rev 0)
+#   - V versions (v1.1 > v1.0)
+#   - Any version > no version
+#
+# Examples:
+#   if (filename ~ /\(japan/) { print "#" filename; next }  # Exclude Japan
+#   if (filename ~ /Mario/) { print "#" filename; next }    # Exclude Mario games
 #
 # ============================================================================
