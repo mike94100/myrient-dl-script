@@ -89,7 +89,9 @@ EOF
 
 # Parse options using getopt
 TEMP=$(getopt -o 'hf:gs' --long 'help,filter-file:,gen-readme,slim-output' -n 'gen-platform-toml' -- "$@")
-if [[ $? -ne 0 ]]; then info "Use -h or --help for usage"; exit 1; fi
+if [[ $? -ne 0 ]]; then
+    info "Use -h or --help for usage"; exit 1
+fi
 
 eval set -- "$TEMP"
 
@@ -143,14 +145,20 @@ PATH_DIRECTORY_DEC=$(url_decode "$1")
 PATH_DIRECTORY_ENC=$(url_encode "$1")
 OUTPUT_DIR="$2"
 
-if ! validate_directory_path "$PATH_DIRECTORY_DEC"; then exit 1; fi
+if ! validate_directory_path "$PATH_DIRECTORY_DEC"; then
+    exit 1
+fi
 
 # Validate and normalize output directory path
 OUTPUT_DIR=$(echo "$OUTPUT_DIR" | sed '/\/$/!s|$|/|')
-if [[ ! "$OUTPUT_DIR" =~ ^[a-zA-Z0-9/_-]+$ ]]; then error "Invalid output directory path: $OUTPUT_DIR"; exit 1; fi
+if [[ ! "$OUTPUT_DIR" =~ ^[a-zA-Z0-9/_-]+$ ]]; then
+    error "Invalid output directory path: $OUTPUT_DIR"; exit 1
+fi
 
 # Create output directory
-if ! mkdir -p "$OUTPUT_DIR"; then error "Failed to create directory: $OUTPUT_DIR"; exit 1; fi
+if ! mkdir -p "$OUTPUT_DIR"; then
+    error "Failed to create directory: $OUTPUT_DIR"; exit 1
+fi
 
 # Directory for downloads
 DIRECTORY="$(basename "${OUTPUT_DIR}")/"
@@ -168,15 +176,22 @@ HTML=$(curl -s "$SOURCE_URL_ENC"); info "Scraping: $SOURCE_URL_DEC"
 # Extract file links
 FILES=$(echo "$HTML" | grep -o '<a href="[^"]*\.zip"[^>]*>[^<]*</a>' | sed 's|<a href="[^"]*"[^>]*>\([^<]*\)</a>|\1|g' | sort)
 
-if [[ -z "$FILES" ]]; then error "No .zip files found on the page"; exit 1; fi
+if [[ -z "$FILES" ]]; then
+    error "No .zip files found on the page"; exit 1
+fi
 
 # Apply filtering
 if [[ -n "$FILTER_FILE" ]]; then
     # Determine filter command and validate
-    if [[ -z "$FILTER_FILE" ]]; then error "Filter File not found"; exit 1
-    elif [[ "$FILTER_FILE" == *.sed ]]; then filter_cmd="sed -E -f"
-    elif [[ "$FILTER_FILE" == *.awk ]]; then filter_cmd="awk -f"
-    else error "Filter file must be .sed or .awk: $FILTER_FILE"; exit 1; fi
+    if [[ -z "$FILTER_FILE" ]]; then
+        error "Filter File not found"; exit 1
+    elif [[ "$FILTER_FILE" == *.sed ]]; then
+        filter_cmd="sed -E -f"
+    elif [[ "$FILTER_FILE" == *.awk ]]; then
+        filter_cmd="awk -f"
+    else
+        error "Filter file must be .sed or .awk: $FILTER_FILE"; exit 1
+    fi
 
     # Count total files
     total_files=$(echo "$FILES" | wc -l); info "Filter file: $FILTER_FILE - Files: $total_files"

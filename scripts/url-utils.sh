@@ -36,8 +36,12 @@ validate_directory_path() {
     fi
 
     # Ensure path starts and ends with slash "/path/"
-    if [[ "$path" != /* ]]; then path="/$path"; fi
-    if [[ "$path" != */ ]]; then path="$path/"; fi
+    if [[ "$path" != /* ]]; then
+        path="/$path"
+    fi
+    if [[ "$path" != */ ]]; then
+        path="$path/"
+    fi
 
     echo "$path"
 }

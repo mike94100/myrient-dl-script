@@ -75,7 +75,9 @@ fi
 
 # Check .toml file
 TOML_FILE="$1"
-if [[ ! -f "$TOML_FILE" ]]; then error "File not found: $TOML_FILE"; exit 1; fi
+if [[ ! -f "$TOML_FILE" ]]; then
+    error "File not found: $TOML_FILE"; exit 1
+fi
 
 info "Generating README for $TOML_FILE"
 
@@ -202,8 +204,11 @@ else
 
     for file in "${FILES[@]}"; do
         # Progress Bar
-        if [[ -t 1 ]]; then show_progress -c $FILE_INDEX -t $FILES_TOTAL -m "Parsing files"
-        else; info "Parsing $file"; fi
+        if [[ -t 1 ]]; then
+            show_progress -c $FILE_INDEX -t $FILES_TOTAL -m "Parsing files"
+        else
+            info "Parsing $file"
+        fi
 
         # Extract file size from Myrient & strip the " " and "B"
         file_size=$(echo "$HTML" | grep -F -A2 "$file" | grep '<td class="size">' | sed 's/.*<td class="size">//;s/B<\/td>.*//;s/ //' | head -1)

@@ -7,7 +7,10 @@ LOG_FILE="${LOG_FILE:-$LOG_DIR/myrient-dl_$(date -u +'%Y%m%dT%H%M%SZ').log}"
 LOG_LEVEL="${LOG_LEVEL:-INFO}"  # INFO | WARN | ERROR
 
 # Colors
-RED='\e[0;31m'; YELLOW='\e[0;33m'; GREEN='\e[0;32m'; NC='\e[0m'
+RED='\e[0;31m'
+YELLOW='\e[0;33m'
+GREEN='\e[0;32m'
+NC='\e[0m'
 
 # Rotate last # logs
 rotate_logs() { ls -1t "$LOG_DIR"/myrient-dl_*.log 2>/dev/null | tail -n +11 | xargs -r rm -f; }
@@ -27,9 +30,13 @@ log() {
   local level="$1"; shift; should_log "$level" || return 0
   local message="$*"; local ts; ts="$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
   local color="$NC"
-  if [[ "$level" == INFO ]]; then color="$GREEN"
-  elif [[ "$level" == WARN ]]; then color="$YELLOW"
-  elif [[ "$level" == ERROR ]]; then color="$RED"; fi
+  if [[ "$level" == INFO ]]; then
+    color="$GREEN"
+  elif [[ "$level" == WARN ]]; then
+    color="$YELLOW"
+  elif [[ "$level" == ERROR ]]; then
+    color="$RED"
+  fi
   printf "%b[%s] [%s] %s%b\n" "$color" "$ts" "$level" "$message" "$NC"
   printf "[%s] [%s] %s\n" "$ts" "$level" "$message" >> "$LOG_FILE"
 }
