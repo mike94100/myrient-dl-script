@@ -17,6 +17,7 @@ Scripts allowing users to generate ROM configuration files and download ROMs.
 `myrient-dl.sh` downloads the ROMs as defined in the platform configuration files using [WGET](https://www.man7.org/linux/man-pages/man1/wget.1.html).
 
 ## To-Do
+- Windows support. My only computer runs Bazzite and couldn't test or work on Windows compatibility. I believe most dependencies can be installed on Windows, but it would likely be best to write Windows support using only default Windows functionality.
 - Support a single line 'curl' command for downloading ROMs
 - Batch generate Platform Configuration TOML files using pre-defined values for URL Path and file path
 - Batch generate multiple READMEs (already supports a single Meta-Configuration TOML that links to Platform TOML)
