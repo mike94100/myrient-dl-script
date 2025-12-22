@@ -37,10 +37,10 @@ For the easiest experience, use the bootstrap scripts that download everything a
 ### Linux/Mac
 ```bash
 # Download sample ROMs to default location (~/Downloads/roms)
-curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s
 
 # Download with custom TOML and output directory
-curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/sample/sample.toml" --output "$HOME/Downloads/roms"
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/sample/sample.toml" --output "$HOME/Downloads/roms"
 ```
 
 ### Windows
@@ -61,8 +61,7 @@ The bootstrap scripts:
 ## Requirements
 
 - **Python 3.11+** (for built-in TOML support)
-- **Wget** (installed automatically by bootstrap scripts)
-- **curl** (for single command downloads)
+- **Wget** (commonly installed on Linux/Mac, script installs for Windows)
 
 ## AI
 
