@@ -69,12 +69,20 @@ Download directly without installing anything:
 
 **Linux/Mac:**
 ```bash
+# Download to default location (~/Downloads/roms)
 wget -q -O - {bootstrap_sh_url} | bash -s -- --toml "{toml_url}"
+
+# Download to custom directory
+wget -q -O - {bootstrap_sh_url} | bash -s -- --toml "{toml_url}" --output "~/custom/path"
 ```
 
 **Windows:**
 ```batch
+# Download to default location (%USERPROFILE%\Downloads\roms)
 powershell -c "& {{ $s=iwr '{bootstrap_bat_url}'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml '{toml_url}'; del $t }}"
+
+# Download to custom directory
+powershell -c "& {{ $s=iwr '{bootstrap_bat_url}'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml '{toml_url}' --output '%USERPROFILE%\Downloads\roms'; del $t }}"
 ```
 """
 
