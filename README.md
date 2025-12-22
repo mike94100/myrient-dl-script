@@ -36,20 +36,20 @@ For the easiest experience, use the bootstrap scripts that download everything a
 
 ### Linux/Mac
 ```bash
-# Download sample ROMs
-curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash
+# Download sample ROMs to default location (~/Downloads/roms)
+curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s
 
-# Download specific collection
-curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/1g1r/1g1r.toml
+# Download with custom TOML and output directory
+curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/sample/sample.toml" --output "$HOME/Downloads/roms"
 ```
 
 ### Windows
 ```batch
-# Download sample ROMs
-curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat -o download_roms.bat && download_roms.bat
+# Download sample ROMs to default location (%USERPROFILE%\Downloads\roms)
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t; del $t }"
 
-# Download specific platform
-download_roms.bat https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/1g1r/1g1r.toml
+# Download with custom TOML and output directory
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/sample/sample.toml'  --output '%USERPROFILE%\Downloads\roms'; del $t }"
 ```
 
 The bootstrap scripts:

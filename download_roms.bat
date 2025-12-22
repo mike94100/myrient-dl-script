@@ -4,18 +4,58 @@ REM Downloads Python code from main repo and handles TOML resolution
 
 setlocal enabledelayedexpansion
 
-REM Default to sample meta TOML
+REM Default values
 set "DEFAULT_TOML=https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/sample/sample.toml"
-if "%~1"=="" (
-    set "TOML_SOURCE=%DEFAULT_TOML%"
-) else (
-    set "TOML_SOURCE=%~1"
+set "TOML_SOURCE=%DEFAULT_TOML%"
+set "OUTPUT_DIR=%USERPROFILE%\Downloads\roms"
+
+REM Parse command line flags
+:parse_args
+if "%~1"=="" goto :end_parse
+if "%~1"=="-t" (
+    set "TOML_SOURCE=%~2"
+    shift & shift
+    goto :parse_args
 )
-if "%~2"=="" (
-    set "OUTPUT_DIR=.\roms"
-) else (
+if "%~1"=="--toml" (
+    set "TOML_SOURCE=%~2"
+    shift & shift
+    goto :parse_args
+)
+if "%~1"=="-o" (
     set "OUTPUT_DIR=%~2"
+    shift & shift
+    goto :parse_args
 )
+if "%~1"=="--output" (
+    set "OUTPUT_DIR=%~2"
+    shift & shift
+    goto :parse_args
+)
+if "%~1"=="-h" goto :show_help
+if "%~1"=="--help" goto :show_help
+echo Unknown option: %~1
+echo Use --help for usage information
+exit /b 1
+
+:show_help
+echo Usage: %0 [-t^|--toml TOML_URL] [-o^|--output OUTPUT_DIR]
+echo.
+echo Download ROMs using Myrient ROM Downloader
+echo.
+echo Options:
+echo   -t, --toml TOML_URL      URL or path to TOML file (default: sample ROMs)
+echo   -o, --output OUTPUT_DIR  Output directory (default: %%USERPROFILE%%\Downloads\roms)
+echo   -h, --help              Show this help message
+echo.
+echo Examples:
+echo   %0  # Download sample ROMs to default location
+echo   %0 --toml https://example.com/custom.toml
+echo   %0 --output "C:\My ROMs"
+echo   %0 -t https://example.com/custom.toml -o "C:\My ROMs"
+exit /b 0
+
+:end_parse
 
 echo Myrient ROM Downloader
 echo TOML Source: %TOML_SOURCE%

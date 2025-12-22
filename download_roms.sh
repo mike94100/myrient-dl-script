@@ -4,10 +4,46 @@
 
 set -e
 
-# Default to sample meta TOML
+# Default values
 DEFAULT_TOML="https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/sample/sample.toml"
-TOML_SOURCE=${1:-$DEFAULT_TOML}
-OUTPUT_DIR=${2:-"./roms"}
+TOML_SOURCE="$DEFAULT_TOML"
+OUTPUT_DIR="$HOME/Downloads/roms"
+
+# Parse command line flags
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -t|--toml)
+            TOML_SOURCE="$2"
+            shift 2
+            ;;
+        -o|--output)
+            OUTPUT_DIR="$2"
+            shift 2
+            ;;
+        -h|--help)
+            echo "Usage: $0 [-t|--toml TOML_URL] [-o|--output OUTPUT_DIR]"
+            echo ""
+            echo "Download ROMs using Myrient ROM Downloader"
+            echo ""
+            echo "Options:"
+            echo "  -t, --toml TOML_URL      URL or path to TOML file (default: sample ROMs)"
+            echo "  -o, --output OUTPUT_DIR  Output directory (default: ~/Downloads/roms)"
+            echo "  -h, --help              Show this help message"
+            echo ""
+            echo "Examples:"
+            echo "  $0  # Download sample ROMs to default location"
+            echo "  $0 --toml https://example.com/custom.toml"
+            echo "  $0 --output /custom/path"
+            echo "  $0 -t https://example.com/custom.toml -o /custom/path"
+            exit 0
+            ;;
+        *)
+            echo "Unknown option: $1"
+            echo "Use --help for usage information"
+            exit 1
+            ;;
+    esac
+done
 
 # Colors for output
 RED='\033[0;31m'
