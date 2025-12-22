@@ -87,7 +87,7 @@ download_file "$TOML_SOURCE" "$TOML_FILE"
 if is_meta_toml "$TOML_FILE"; then
     echo "Detected meta TOML - downloading platform TOMLs..."
 
-    # Platform TOMLs will be downloaded directly to temp dir
+    # Platform TOMLs will be downloaded to temp dir with same structure
     PLATFORM_DIR="$TEMP_DIR"
 
     # Extract platform_tomls array and download each
@@ -104,8 +104,9 @@ if is_meta_toml "$TOML_FILE"; then
             # Resolve URL
             resolved_url=$(resolve_url "$TOML_SOURCE" "$platform_ref")
 
-            # Download to local file
-            local_file="$PLATFORM_DIR/$(basename "$platform_ref")"
+            # Download to local file (preserve directory structure)
+            local_file="$PLATFORM_DIR/$platform_ref"
+            mkdir -p "$(dirname "$local_file")"
             echo "Downloading $resolved_url -> $local_file"
             download_file "$resolved_url" "$local_file"
 
@@ -115,10 +116,17 @@ if is_meta_toml "$TOML_FILE"; then
     done <<< "$PLATFORM_TOMLS"
 
     # Update meta TOML with local paths
-    # Simple replacement - replace the platform_tomls array
-    local_paths_str=$(printf '"%s", ' "${local_paths[@]}")
-    local_paths_str="[${local_paths_str%, }]"
-    sed -i.bak "s|platform_tomls = \[.*\]|platform_tomls = $local_paths_str|" "$NEW_META"
+    # Replace the multiline platform_tomls array
+    local_paths_str=$(printf '"%s",\n  ' "${local_paths[@]}")
+    local_paths_str="[${local_paths_str%,*}]"
+    # Use awk to replace the platform_tomls section
+    awk -v new_array="$local_paths_str" '
+    BEGIN { in_array = 0 }
+    /^platform_tomls = \[$/ { print new_array; in_array = 1; next }
+    in_array && /^\]$/ { in_array = 0; next }
+    in_array { next }
+    { print }
+    ' "$NEW_META" > "${NEW_META}.tmp" && mv "${NEW_META}.tmp" "$NEW_META"
 
     FINAL_TOML="$NEW_META"
 else
