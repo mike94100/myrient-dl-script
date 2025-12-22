@@ -78,11 +78,11 @@ wget -q -O - {bootstrap_sh_url} | bash -s -- --toml "{toml_url}" --output "~/cus
 
 **Windows:**
 ```batch
-# Download to default location (%USERPROFILE%\Downloads\roms)
+REM Download to default location (%USERPROFILE%\\Downloads\\roms)
 powershell -c "& {{ $s=iwr '{bootstrap_bat_url}'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml '{toml_url}'; del $t }}"
 
-# Download to custom directory
-powershell -c "& {{ $s=iwr '{bootstrap_bat_url}'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml '{toml_url}' --output '%USERPROFILE%\Downloads\roms'; del $t }}"
+REM Download to custom directory
+powershell -c "& {{ $s=iwr '{bootstrap_bat_url}'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml '{toml_url}' --output '%USERPROFILE%\\Downloads\\roms'; del $t }}"
 ```
 """
 
