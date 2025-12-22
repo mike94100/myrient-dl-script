@@ -224,7 +224,10 @@ def generate_platform_readme(toml_file: Path, config: Dict[str, Any]) -> bool:
         file_table += f"| {game_name} | {tags} | {size} |\n"
 
     # Generate README content
-    toml_url = f"{TOML_BASE_URL}/dl/{toml_file.parent.name}/{toml_file.name}"
+    repo_root = Path.cwd()
+    toml_relative_path = toml_file.relative_to(repo_root)
+    toml_url = f"{TOML_BASE_URL}/{toml_relative_path}"
+
     bootstrap_sh_url = f"{TOML_BASE_URL}/download_roms.sh"
     bootstrap_bat_url = f"{TOML_BASE_URL}/download_roms.bat"
 
@@ -378,7 +381,9 @@ def generate_meta_readme(toml_file: Path, config: Dict[str, Any]) -> bool:
     total_size_formatted = format_file_size_dual(total_collection_bytes)
 
     # Generate meta README
-    toml_url = f"{TOML_BASE_URL}/dl/{toml_file.parent.name}/{toml_file.name}"
+    repo_root = Path.cwd()
+    toml_relative_path = toml_file.relative_to(repo_root)
+    toml_url = f"{TOML_BASE_URL}/{toml_relative_path}"
     bootstrap_sh_url = f"{TOML_BASE_URL}/download_roms.sh"
     bootstrap_bat_url = f"{TOML_BASE_URL}/download_roms.bat"
 
