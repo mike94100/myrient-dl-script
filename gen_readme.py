@@ -224,7 +224,10 @@ def generate_platform_readme(toml_file: Path, config: Dict[str, Any]) -> bool:
         file_table += f"| {game_name} | {tags} | {size} |\n"
 
     # Generate README content
-    toml_url = f"https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/{toml_file.parent.name}/{toml_file.name}"
+    toml_url = f"{TOML_BASE_URL}/dl/{toml_file.parent.name}/{toml_file.name}"
+    bootstrap_sh_url = f"{TOML_BASE_URL}/download_roms.sh"
+    bootstrap_bat_url = f"{TOML_BASE_URL}/download_roms.bat"
+
     readme_content = f"""# {platform_name} ROM Collection
 
 This collection contains ROMs for the {platform_name}.
@@ -264,12 +267,12 @@ Download directly without installing anything:
 
 **Linux/Mac:**
 ```bash
-wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "{toml_url}"
+wget -q -O - {bootstrap_sh_url} | bash -s -- --toml "{toml_url}"
 ```
 
 **Windows:**
 ```batch
-powershell -c "& {{ $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml '{toml_url}'; del $t }}"
+powershell -c "& {{ $s=iwr '{bootstrap_bat_url}'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml '{toml_url}'; del $t }}"
 ```
 """
 
@@ -375,7 +378,10 @@ def generate_meta_readme(toml_file: Path, config: Dict[str, Any]) -> bool:
     total_size_formatted = format_file_size_dual(total_collection_bytes)
 
     # Generate meta README
-    toml_url = f"https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/{toml_file.parent.name}/{toml_file.name}"
+    toml_url = f"{TOML_BASE_URL}/dl/{toml_file.parent.name}/{toml_file.name}"
+    bootstrap_sh_url = f"{TOML_BASE_URL}/download_roms.sh"
+    bootstrap_bat_url = f"{TOML_BASE_URL}/download_roms.bat"
+
     readme_content = f"""# Multi-Platform ROM Collection
 
 This collection contains ROMs for multiple gaming platforms.
@@ -411,12 +417,12 @@ Download directly without installing anything:
 
 **Linux/Mac:**
 ```bash
-wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "{toml_url}"
+wget -q -O - {bootstrap_sh_url} | bash -s -- --toml "{toml_url}"
 ```
 
 **Windows:**
 ```batch
-powershell -c "& {{ $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml '{toml_url}'; del $t }}"
+powershell -c "& {{ $s=iwr '{bootstrap_bat_url}'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml '{toml_url}'; del $t }}"
 ```
 """
 
