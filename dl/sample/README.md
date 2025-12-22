@@ -4,7 +4,7 @@ This collection contains ROMs for multiple gaming platforms.
 
 ## Metadata
 
-- **Generated**: 2025-12-22 19:24:58 UTC
+- **Generated**: 2025-12-22 20:58:56 UTC
 - **Total Platforms**: 3
 - **Total Files**: 16
 - **Total Size**: 44.8 MiB (47.0 MB)
@@ -20,7 +20,8 @@ This collection contains ROMs for multiple gaming platforms.
 
 ## Download
 
-To download all platforms in this collection:
+### Local Execution
+To download all platforms in this collection locally:
 
 ```bash
 python myrient_dl.py "sample.toml"
@@ -30,4 +31,17 @@ Or download to a custom directory:
 
 ```bash
 python myrient_dl.py -o /path/to/directory "sample.toml"
+```
+
+### Remote Execution (One-Command)
+Download directly without installing anything:
+
+**Linux/Mac:**
+```bash
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/sample/sample.toml"
+```
+
+**Windows:**
+```batch
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/sample/sample.toml'; del $t }"
 ```

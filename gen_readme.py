@@ -224,6 +224,7 @@ def generate_platform_readme(toml_file: Path, config: Dict[str, Any]) -> bool:
         file_table += f"| {game_name} | {tags} | {size} |\n"
 
     # Generate README content
+    toml_url = f"https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/{toml_file.parent.name}/{toml_file.name}"
     readme_content = f"""# {platform_name} ROM Collection
 
 This collection contains ROMs for the {platform_name}.
@@ -245,7 +246,8 @@ This collection contains ROMs for the {platform_name}.
 
 ## Download
 
-To download all ROMs in this collection:
+### Local Execution
+To download all ROMs in this collection locally:
 
 ```bash
 python myrient_dl.py "{toml_file.name}"
@@ -255,6 +257,19 @@ Or download to a custom directory:
 
 ```bash
 python myrient_dl.py -o /path/to/directory "{toml_file.name}"
+```
+
+### Remote Execution (One-Command)
+Download directly without installing anything:
+
+**Linux/Mac:**
+```bash
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "{toml_url}"
+```
+
+**Windows:**
+```batch
+powershell -c "& {{ $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml '{toml_url}'; del $t }}"
 ```
 """
 
@@ -360,6 +375,7 @@ def generate_meta_readme(toml_file: Path, config: Dict[str, Any]) -> bool:
     total_size_formatted = format_file_size_dual(total_collection_bytes)
 
     # Generate meta README
+    toml_url = f"https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/{toml_file.parent.name}/{toml_file.name}"
     readme_content = f"""# Multi-Platform ROM Collection
 
 This collection contains ROMs for multiple gaming platforms.
@@ -377,7 +393,8 @@ This collection contains ROMs for multiple gaming platforms.
 
 ## Download
 
-To download all platforms in this collection:
+### Local Execution
+To download all platforms in this collection locally:
 
 ```bash
 python myrient_dl.py "{toml_file.name}"
@@ -387,6 +404,19 @@ Or download to a custom directory:
 
 ```bash
 python myrient_dl.py -o /path/to/directory "{toml_file.name}"
+```
+
+### Remote Execution (One-Command)
+Download directly without installing anything:
+
+**Linux/Mac:**
+```bash
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "{toml_url}"
+```
+
+**Windows:**
+```batch
+powershell -c "& {{ $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml '{toml_url}'; del $t }}"
 ```
 """
 
