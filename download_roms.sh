@@ -87,9 +87,8 @@ download_file "$TOML_SOURCE" "$TOML_FILE"
 if is_meta_toml "$TOML_FILE"; then
     echo "Detected meta TOML - downloading platform TOMLs..."
 
-    # Create directory for platform TOMLs
-    PLATFORM_DIR="$TEMP_DIR/platforms"
-    mkdir -p "$PLATFORM_DIR"
+    # Platform TOMLs will be downloaded directly to temp dir
+    PLATFORM_DIR="$TEMP_DIR"
 
     # Extract platform_tomls array and download each
     # This is a simple extraction - assumes TOML format with platform_tomls = [...]

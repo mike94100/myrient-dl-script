@@ -108,9 +108,8 @@ call :is_meta_toml "%TOML_FILE%"
 if %ERRORLEVEL% equ 0 (
     echo Detected meta TOML - downloading platform TOMLs...
 
-    REM Create directory for platform TOMLs
-    set "PLATFORM_DIR=%TEMP_DIR%\platforms"
-    mkdir "%PLATFORM_DIR%" 2>nul
+    REM Platform TOMLs will be downloaded directly to temp dir
+    set "PLATFORM_DIR=%TEMP_DIR%"
 
     REM Extract platform_tomls array and download each
     REM This uses PowerShell for better TOML parsing
