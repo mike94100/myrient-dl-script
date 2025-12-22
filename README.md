@@ -62,8 +62,7 @@ The bootstrap scripts:
 
 - **Python 3.11+** (for built-in TOML support)
 - **Wget** (installed automatically by bootstrap scripts)
-- **Git** (for cloning the repo)
-- **curl** (for downloading TOML files)
+- **curl** (for single command downloads)
 
 ## AI
 

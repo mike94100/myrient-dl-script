@@ -1,7 +1,26 @@
-# List of platform tomls that will be recursively downloaded from
+site = "https://myrient.erista.me"
+
 platform_tomls = [
-  "gb/gb.toml",
-  "gbc/gbc.toml",
-  "gba/gba.toml",
-  "n64/n64.toml"
+    "3ds/3ds.toml",
+    "atari2600/atari2600.toml",
+    "atari5200/atari5200.toml",
+    "atari7800/atari7800.toml",
+    "c64/c64.toml",
+    "colecovision/colecovision.toml",
+    "dreamcast/dreamcast.toml",
+    "gb/gb.toml",
+    "gba/gba.toml",
+    "gbc/gbc.toml",
+    "gc/gc.toml",
+    "genesis/genesis.toml",
+    "intellivision/intellivision.toml",
+    "n64/n64.toml",
+    "nds/nds.toml",
+    "nes/nes.toml",
+    "ps2/ps2.toml",
+    "psp/psp.toml",
+    "psx/psx.toml",
+    "snes/snes.toml",
+    "wii/wii.toml",
 ]
+
