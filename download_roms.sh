@@ -105,9 +105,8 @@ if is_meta_toml "$TOML_FILE"; then
             # Resolve URL
             resolved_url=$(resolve_url "$TOML_SOURCE" "$platform_ref")
 
-            # Download to local file (preserve directory structure)
-            local_file="$PLATFORM_DIR/$platform_ref"
-            mkdir -p "$(dirname "$local_file")"
+            # Download to local file
+            local_file="$PLATFORM_DIR/$(basename "$platform_ref")"
             echo "Downloading $resolved_url -> $local_file"
             download_file "$resolved_url" "$local_file"
 

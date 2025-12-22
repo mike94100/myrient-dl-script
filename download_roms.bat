@@ -120,9 +120,9 @@ if %ERRORLEVEL% equ 0 (
             call :resolve_url "%TOML_SOURCE%" "!platform_ref!"
             set "resolved_url=!resolved!"
 
-            REM Download to local file (preserve directory structure)
-            set "local_file=%PLATFORM_DIR%\!platform_ref!"
-            powershell -command "& { $dir = Split-Path '!local_file!'; if (!(Test-Path $dir)) { New-Item -ItemType Directory -Path $dir -Force | Out-Null } }"
+            REM Download to local file
+            for %%f in ("!platform_ref!") do set "filename=%%~nxf"
+            set "local_file=%PLATFORM_DIR%\!filename!"
             echo Downloading !resolved_url! -^> !local_file!
             call :download_file "!resolved_url!" "!local_file!"
 
