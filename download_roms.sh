@@ -116,17 +116,11 @@ if is_meta_toml "$TOML_FILE"; then
     done <<< "$PLATFORM_TOMLS"
 
     # Update meta TOML with local paths
-    # Replace the multiline platform_tomls array
-    local_paths_str=$(printf '"%s",\n  ' "${local_paths[@]}")
-    local_paths_str="[${local_paths_str%,*}]"
-    # Use awk to replace the platform_tomls section
-    awk -v new_array="$local_paths_str" '
-    BEGIN { in_array = 0 }
-    /^platform_tomls = \[$/ { print new_array; in_array = 1; next }
-    in_array && /^\]$/ { in_array = 0; next }
-    in_array { next }
-    { print }
-    ' "$NEW_META" > "${NEW_META}.tmp" && mv "${NEW_META}.tmp" "$NEW_META"
+    # Create the replacement string
+    local_paths_str=$(printf '"%s", ' "${local_paths[@]}")
+    local_paths_str="platform_tomls = [${local_paths_str%, }]"
+    # Use sed to replace the entire platform_tomls line
+    sed -i "s|platform_tomls = \[.*\]|$local_paths_str|" "$NEW_META"
 
     FINAL_TOML="$NEW_META"
 else

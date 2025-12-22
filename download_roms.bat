@@ -134,9 +134,10 @@ if %ERRORLEVEL% equ 0 (
     set "NEW_META=%TEMP_DIR%\meta_local.toml"
     copy "%TOML_FILE%" "%NEW_META%" >nul
 
-    REM Update meta TOML with local paths using PowerShell
-    set "local_paths=[!local_paths:~0,-2!]"
-    powershell -command "& { $content = Get-Content '%NEW_META%' -Raw; $content -replace 'platform_tomls\s*=\s*\[.*?\]', 'platform_tomls = !local_paths!' | Set-Content '%NEW_META%' }"
+    REM Update meta TOML with local paths
+    set "local_paths=platform_tomls = [!local_paths:~0,-2!]"
+    REM Use PowerShell for the replacement since batch sed is limited
+    powershell -command "& { $content = Get-Content '%NEW_META%' -Raw; $content -replace 'platform_tomls\s*=\s*\[.*?\]', '!local_paths!' | Set-Content '%NEW_META%' }"
 
     set "FINAL_TOML=%NEW_META%"
 ) else (
