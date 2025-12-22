@@ -226,10 +226,10 @@ def generate_platform_readme(toml_file: Path, config: Dict[str, Any]) -> bool:
     # Generate README content
     repo_root = Path.cwd()
     toml_relative_path = toml_file.relative_to(repo_root)
-    toml_url = f"{TOML_BASE_URL}/{toml_relative_path}"
+    toml_url = f"{REPO_BASE_URL}/{toml_relative_path}"
 
-    bootstrap_sh_url = f"{TOML_BASE_URL}/download_roms.sh"
-    bootstrap_bat_url = f"{TOML_BASE_URL}/download_roms.bat"
+    bootstrap_sh_url = f"{REPO_BASE_URL}/download_roms.sh"
+    bootstrap_bat_url = f"{REPO_BASE_URL}/download_roms.bat"
 
     readme_content = f"""# {platform_name} ROM Collection
 
@@ -383,9 +383,9 @@ def generate_meta_readme(toml_file: Path, config: Dict[str, Any]) -> bool:
     # Generate meta README
     repo_root = Path.cwd()
     toml_relative_path = toml_file.relative_to(repo_root)
-    toml_url = f"{TOML_BASE_URL}/{toml_relative_path}"
-    bootstrap_sh_url = f"{TOML_BASE_URL}/download_roms.sh"
-    bootstrap_bat_url = f"{TOML_BASE_URL}/download_roms.bat"
+    toml_url = f"{REPO_BASE_URL}/{toml_relative_path}"
+    bootstrap_sh_url = f"{REPO_BASE_URL}/download_roms.sh"
+    bootstrap_bat_url = f"{REPO_BASE_URL}/download_roms.bat"
 
     readme_content = f"""# Multi-Platform ROM Collection
 

@@ -8,8 +8,8 @@ site = "https://myrient.erista.me"
 # Default output directory for generated files
 output_dir = "dl/"
 
-# Base URL for TOML repository (used in README generation)
-toml_base_url = "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main"
+# Base URL for repository root (used in README generation for remote download links)
+repo_base_url = "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main"
 
 # Cache settings
 [cache]
