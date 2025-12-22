@@ -36,6 +36,47 @@ def write_readme_file(toml_file: Path, readme_content: str) -> None:
     logger.info(f"Generated {readme_file}")
 
 
+def generate_download_urls(toml_file: Path) -> tuple[str, str, str]:
+    """Generate common URLs for remote execution downloads"""
+    repo_root = Path.cwd()
+    toml_relative_path = toml_file.relative_to(repo_root)
+    toml_url = f"{REPO_BASE_URL}/{toml_relative_path}"
+    bootstrap_sh_url = f"{REPO_BASE_URL}/download_roms.sh"
+    bootstrap_bat_url = f"{REPO_BASE_URL}/download_roms.bat"
+    return toml_url, bootstrap_sh_url, bootstrap_bat_url
+
+
+def generate_download_section(toml_file: Path) -> str:
+    """Generate the common download section for READMEs"""
+    toml_url, bootstrap_sh_url, bootstrap_bat_url = generate_download_urls(toml_file)
+    return f"""## Download
+
+### Local Execution
+To download all ROMs in this collection locally:
+
+```bash
+python myrient_dl.py "{toml_file.name}"
+```
+
+Or download to a custom directory:
+
+```bash
+python myrient_dl.py -o /path/to/directory "{toml_file.name}"
+```
+
+### Remote Execution (One-Command)
+Download directly without installing anything:
+
+**Linux/Mac:**
+```bash
+wget -q -O - {bootstrap_sh_url} | bash -s -- --toml "{toml_url}"
+```
+
+**Windows:**
+```batch
+powershell -c "& {{ $s=iwr '{bootstrap_bat_url}'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml '{toml_url}'; del $t }}"
+```
+"""
 
 
 def extract_file_sizes(html: str, files: List[str]) -> Dict[str, str]:
@@ -224,12 +265,7 @@ def generate_platform_readme(toml_file: Path, config: Dict[str, Any]) -> bool:
         file_table += f"| {game_name} | {tags} | {size} |\n"
 
     # Generate README content
-    repo_root = Path.cwd()
-    toml_relative_path = toml_file.relative_to(repo_root)
-    toml_url = f"{REPO_BASE_URL}/{toml_relative_path}"
-
-    bootstrap_sh_url = f"{REPO_BASE_URL}/download_roms.sh"
-    bootstrap_bat_url = f"{REPO_BASE_URL}/download_roms.bat"
+    download_section = generate_download_section(toml_file)
 
     readme_content = f"""# {platform_name} ROM Collection
 
@@ -250,33 +286,7 @@ This collection contains ROMs for the {platform_name}.
 {file_table}
 </details>
 
-## Download
-
-### Local Execution
-To download all ROMs in this collection locally:
-
-```bash
-python myrient_dl.py "{toml_file.name}"
-```
-
-Or download to a custom directory:
-
-```bash
-python myrient_dl.py -o /path/to/directory "{toml_file.name}"
-```
-
-### Remote Execution (One-Command)
-Download directly without installing anything:
-
-**Linux/Mac:**
-```bash
-wget -q -O - {bootstrap_sh_url} | bash -s -- --toml "{toml_url}"
-```
-
-**Windows:**
-```batch
-powershell -c "& {{ $s=iwr '{bootstrap_bat_url}'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml '{toml_url}'; del $t }}"
-```
+{download_section}
 """
 
     # Write README
@@ -381,11 +391,7 @@ def generate_meta_readme(toml_file: Path, config: Dict[str, Any]) -> bool:
     total_size_formatted = format_file_size_dual(total_collection_bytes)
 
     # Generate meta README
-    repo_root = Path.cwd()
-    toml_relative_path = toml_file.relative_to(repo_root)
-    toml_url = f"{REPO_BASE_URL}/{toml_relative_path}"
-    bootstrap_sh_url = f"{REPO_BASE_URL}/download_roms.sh"
-    bootstrap_bat_url = f"{REPO_BASE_URL}/download_roms.bat"
+    download_section = generate_download_section(toml_file)
 
     readme_content = f"""# Multi-Platform ROM Collection
 
@@ -402,33 +408,7 @@ This collection contains ROMs for multiple gaming platforms.
 
 {table}
 
-## Download
-
-### Local Execution
-To download all platforms in this collection locally:
-
-```bash
-python myrient_dl.py "{toml_file.name}"
-```
-
-Or download to a custom directory:
-
-```bash
-python myrient_dl.py -o /path/to/directory "{toml_file.name}"
-```
-
-### Remote Execution (One-Command)
-Download directly without installing anything:
-
-**Linux/Mac:**
-```bash
-wget -q -O - {bootstrap_sh_url} | bash -s -- --toml "{toml_url}"
-```
-
-**Windows:**
-```batch
-powershell -c "& {{ $s=iwr '{bootstrap_bat_url}'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml '{toml_url}'; del $t }}"
-```
+{download_section}
 """
 
     # Write README
