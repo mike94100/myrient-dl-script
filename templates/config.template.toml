@@ -5,8 +5,7 @@
 # Default site URL
 site = "https://myrient.erista.me"
 
-# Default output directory for generated files
-output_dir = "dl/"
+
 
 # Cache settings
 [cache]

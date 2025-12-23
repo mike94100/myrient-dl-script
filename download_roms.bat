@@ -5,9 +5,27 @@ REM Downloads Python code from main repo and handles TOML resolution
 setlocal enabledelayedexpansion
 
 REM Default values
-set "DEFAULT_TOML=https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/sample/sample.toml"
-set "TOML_SOURCE=%DEFAULT_TOML%"
+set "TOML_SOURCE=https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/sample/sample.toml"
 set "OUTPUT_DIR=%USERPROFILE%\Downloads\roms"
+
+REM Function to show help
+:show_help
+echo Usage: %0 [-t^|--toml TOML_URL] [-o^|--output OUTPUT_DIR] [-h^|--help]
+echo.
+echo Download ROMs using Myrient ROM Downloader
+echo.
+echo Options:
+echo   -t, --toml TOML_URL      URL or path to TOML file (default: sample ROMs)
+echo   -o, --output OUTPUT_DIR  Output directory (default: %%USERPROFILE%%\Downloads\roms)
+echo   -h, --help              Show this help message
+echo.
+echo Examples:
+echo   %0  # Download sample ROMs to default location
+echo   %0 --toml https://example.com/custom.toml
+echo   %0 --output "C:\My ROMs"
+echo   %0 -t https://example.com/custom.toml -o "C:\My ROMs"
+exit /b 0
+goto :eof
 
 REM Parse command line flags
 :parse_args
@@ -32,28 +50,11 @@ if "%~1"=="--output" (
     shift & shift
     goto :parse_args
 )
-if "%~1"=="-h" goto :show_help
-if "%~1"=="--help" goto :show_help
+if "%~1"=="-h" call :show_help
+if "%~1"=="--help" call :show_help
 echo Unknown option: %~1
 echo Use --help for usage information
 exit /b 1
-
-:show_help
-echo Usage: %0 [-t^|--toml TOML_URL] [-o^|--output OUTPUT_DIR]
-echo.
-echo Download ROMs using Myrient ROM Downloader
-echo.
-echo Options:
-echo   -t, --toml TOML_URL      URL or path to TOML file (default: sample ROMs)
-echo   -o, --output OUTPUT_DIR  Output directory (default: %%USERPROFILE%%\Downloads\roms)
-echo   -h, --help              Show this help message
-echo.
-echo Examples:
-echo   %0  # Download sample ROMs to default location
-echo   %0 --toml https://example.com/custom.toml
-echo   %0 --output "C:\My ROMs"
-echo   %0 -t https://example.com/custom.toml -o "C:\My ROMs"
-exit /b 0
 
 :end_parse
 

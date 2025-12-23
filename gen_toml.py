@@ -228,16 +228,16 @@ def main():
         epilog="""
 Examples:
   # Generate ALL platforms from config (default: no filter)
-  python gen_platform_toml.py --all --output dl/all
+  python gen_platform_toml.py --all --output output/dir
 
   # Generate ALL platforms with 1G1R filter
-  python gen_platform_toml.py --all --filter 1g1r --output dl/1g1r
+  python gen_platform_toml.py --all --filter 1g1r --output output/dir
 
   # Generate single platform TOML with default settings
-  python gen_platform_toml.py toml "/files/No-Intro/Nintendo - Game Boy/" gb
+  python gen_platform_toml.py toml "/files/No-Intro/Nintendo - Game Boy/" output/dir
 
   # Generate with custom config
-  python gen_platform_toml.py toml "/files/No-Intro/Nintendo - Game Boy/" gb --no-filter --slim
+  python gen_platform_toml.py toml "/files/No-Intro/Nintendo - Game Boy/" output/dir --no-filter --slim
 
   # Generate README for specific TOML
   python gen_platform_toml.py --readme gb.toml
@@ -246,10 +246,10 @@ Examples:
   python gen_platform_toml.py --readme
 
   # Generate TOML+README from config mapping
-  python gen_platform_toml.py --readme dl/all/gb
+  python gen_platform_toml.py --readme output/dir
 
   # Dry run to see what would be generated
-  python gen_platform_toml.py toml "/files/No-Intro/Nintendo - Game Boy/" gb --dry-run
+  python gen_platform_toml.py toml "/files/No-Intro/Nintendo - Game Boy/" output/dir --dry-run
         """
     )
 
@@ -268,7 +268,7 @@ Examples:
     )
     parser.add_argument(
         '--output', '-o', metavar='DIR',
-        help='Output directory for generated files (default: dl/)'
+        help='Output directory for generated files'
     )
     parser.add_argument(
         '--dry-run', action='store_true',
@@ -360,7 +360,7 @@ Examples:
         filter_type, apply_filter = determine_filter_settings(args)
 
         # Get output directory
-        output_base = Path(getattr(args, 'output', None) or get_config_value('general', 'output_dir', default='dl/'))
+        output_base = Path(getattr(args, 'output', None) or 'dl/')
 
         logger.info(f"Generating TOML+README for {len(platform_mappings)} platforms with {filter_type} filter...")
         logger.info(f"Output directory: {output_base}")
@@ -596,7 +596,7 @@ Examples:
     if args.command == 'toml':
         # Get config values
         default_site = get_config_value('general', 'site', default='https://myrient.erista.me')
-        default_output = get_config_value('general', 'output_dir', default='dl/')
+        default_output = 'dl/'
         apply_filter_default = get_config_value('generation', 'apply_filter', default=True)
         slim_default = get_config_value('generation', 'slim_output', default=False)
 

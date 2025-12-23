@@ -1,42 +1,41 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Myrient ROM Downloader Bootstrap Script
 # Downloads Python code from main repo and handles TOML resolution
 
 set -e
 
 # Default values
-DEFAULT_TOML="https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/sample/sample.toml"
-TOML_SOURCE="$DEFAULT_TOML"
+TOML_SOURCE="https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/sample/sample.toml"
 OUTPUT_DIR="$HOME/Downloads/roms"
 
-# Parse command line flags
-while [[ $# -gt 0 ]]; do
+# Function to show help
+show_help() {
+    echo "Usage: $0 [-t|--toml TOML_URL] [-o|--output OUTPUT_DIR] [-h|--help]"
+    echo ""
+    echo "Download ROMs using Myrient ROM Downloader"
+    echo ""
+    echo "Options:"
+    echo "  -t, --toml TOML_URL      URL or path to TOML file (default: sample ROMs)"
+    echo "  -o, --output OUTPUT_DIR  Output directory (default: ~/Downloads/roms)"
+    echo "  -h, --help              Show this help message"
+    echo ""
+    echo "Examples:"
+    echo "  $0  # Download sample ROMs to default location"
+    echo "  $0 --toml https://example.com/custom.toml"
+    echo "  $0 --output /custom/path"
+    echo "  $0 -t https://example.com/custom.toml -o /custom/path"
+    exit 0
+}
+
+# Parse arguments and flags
+while (($#)); do
     case $1 in
         -t|--toml)
-            TOML_SOURCE="$2"
-            shift 2
-            ;;
+            TOML_SOURCE="$2" ; shift 2 ;;
         -o|--output)
-            OUTPUT_DIR="$2"
-            shift 2
-            ;;
+            OUTPUT_DIR="$2" ; shift 2 ;;
         -h|--help)
-            echo "Usage: $0 [-t|--toml TOML_URL] [-o|--output OUTPUT_DIR]"
-            echo ""
-            echo "Download ROMs using Myrient ROM Downloader"
-            echo ""
-            echo "Options:"
-            echo "  -t, --toml TOML_URL      URL or path to TOML file (default: sample ROMs)"
-            echo "  -o, --output OUTPUT_DIR  Output directory (default: ~/Downloads/roms)"
-            echo "  -h, --help              Show this help message"
-            echo ""
-            echo "Examples:"
-            echo "  $0  # Download sample ROMs to default location"
-            echo "  $0 --toml https://example.com/custom.toml"
-            echo "  $0 --output /custom/path"
-            echo "  $0 -t https://example.com/custom.toml -o /custom/path"
-            exit 0
-            ;;
+            show_help ;;
         *)
             echo "Unknown option: $1"
             echo "Use --help for usage information"
@@ -51,35 +50,36 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-echo -e "${GREEN}Myrient ROM Downloader${NC}"
-echo "TOML Source: $TOML_SOURCE"
-echo "Output Directory: $OUTPUT_DIR"
-echo
+# Logging functions
+log_info() { echo -e "${GREEN}[$(date '+%H:%M:%S')] INFO: $1${NC}"; }
+log_warn() { echo -e "${YELLOW}[$(date '+%H:%M:%S')] WARN: $1${NC}"; }
+log_error() { echo -e "${RED}[$(date '+%H:%M:%S')] ERROR: $1${NC}"; }
+
+log_info "Myrient ROM Downloader started"
+log_info "TOML Source: $TOML_SOURCE"
+log_info "Output Directory: $OUTPUT_DIR"
 
 # Create temp directory
 TEMP_DIR=$(mktemp -d)
 trap "rm -rf $TEMP_DIR" EXIT
+log_info "Created temporary directory: $TEMP_DIR"
 
-echo -e "${YELLOW}Step 1: Downloading Python code from main repo...${NC}"
+log_info "Downloading Python code from main repo"
 cd "$TEMP_DIR"
 git clone --depth=1 --quiet https://github.com/mike94100/myrient-dl-script.git repo
 cd repo
+log_info "Repository cloned successfully"
 
-echo -e "${YELLOW}Step 2: Installing dependencies...${NC}"
-python3 -m pip install --quiet -r requirements.txt
-
-echo -e "${YELLOW}Step 3: Processing TOML configuration...${NC}"
+log_info "Processing TOML configuration"
 
 # Function to download file
 download_file() {
     local url=$1
     local dest=$2
-    if command -v curl &> /dev/null; then
-        curl -s -L "$url" -o "$dest"
-    elif command -v wget &> /dev/null; then
+    if command -v wget &> /dev/null; then
         wget -q "$url" -O "$dest"
     else
-        echo -e "${RED}Error: Neither curl nor wget found${NC}"
+        log_error "Requires wget"
         exit 1
     fi
 }
@@ -121,7 +121,7 @@ TOML_FILE="$TEMP_DIR/toml_source.toml"
 download_file "$TOML_SOURCE" "$TOML_FILE"
 
 if is_meta_toml "$TOML_FILE"; then
-    echo "Detected meta TOML - downloading platform TOMLs..."
+    log_info "Detected meta TOML - fetching referenced platform TOMLs"
 
     # Platform TOMLs will be downloaded to temp dir with same structure
     PLATFORM_DIR="$TEMP_DIR"
@@ -143,7 +143,7 @@ if is_meta_toml "$TOML_FILE"; then
             # Download to local file (preserve directory structure)
             local_file="$PLATFORM_DIR/$platform_ref"
             mkdir -p "$(dirname "$local_file")"
-            echo "Downloading $resolved_url -> $local_file"
+            log_info "Downloading $resolved_url"
             download_file "$resolved_url" "$local_file"
 
             # Store local path for meta TOML
@@ -159,18 +159,17 @@ if is_meta_toml "$TOML_FILE"; then
     sed -i "s|platform_tomls = \[.*\]|$local_paths_str|" "$NEW_META"
 
     FINAL_TOML="$NEW_META"
+    log_info "Meta TOML processed with ${#local_paths[@]} platform references"
 else
-    echo "Using platform TOML directly"
+    log_info "Using platform TOML directly"
     FINAL_TOML="$TOML_FILE"
 fi
 
-echo -e "${YELLOW}Step 4: Starting ROM download...${NC}"
-echo "Using TOML: $FINAL_TOML"
-echo "Output: $OUTPUT_DIR"
-echo
+log_info "Step 4/4: Starting ROM download"
+log_info "Using TOML: $FINAL_TOML"
+log_info "Output directory: $OUTPUT_DIR"
 
 # Run the download
 python3 myrient_dl.py "$FINAL_TOML" -o "$OUTPUT_DIR"
 
-echo
-echo -e "${GREEN}Download complete! ROMs saved to: $OUTPUT_DIR${NC}"
+log_info "Download completed successfully"

@@ -30,12 +30,16 @@ I made this as a proof-of-concept on configuring a ROM collection as "code". Thi
 - **TOML Configuration**: Scrape & filter Myrient to create user-readable & editable configurations
 - **README generation**: Create documentation from configuration files
 
-## Quick Start (One-Command Downloads)
+## Download ROMs
 
-For the easiest experience, use the bootstrap scripts that download everything automatically:
+The bootstrap scripts:
+- Download the Python code from this repo
+- Installs dependencies
+- Downloads referenced TOML files
+- Downloads ROMs
 
 ### Linux/Mac
-```bash
+```sh
 # Download sample ROMs to default location (~/Downloads/roms)
 wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s
 
@@ -44,7 +48,7 @@ wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/
 ```
 
 ### Windows
-```batch
+```powershell
 # Download sample ROMs to default location (%USERPROFILE%\Downloads\roms)
 powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t; del $t }"
 
@@ -52,11 +56,9 @@ powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-d
 powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/sample/sample.toml'  --output '%USERPROFILE%\Downloads\roms'; del $t }"
 ```
 
-The bootstrap scripts:
-- Download the Python code from this repo
-- Install dependencies automatically
-- Handle referenced platform .toml files
-- Support any TOML source
+## Create Configurations
+
+Clone and use the provided python scripts, or copy and modify the .toml files.
 
 ## Requirements
 

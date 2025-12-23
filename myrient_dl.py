@@ -6,6 +6,9 @@ Cross-platform ROM downloader using wget
 
 import argparse
 import sys
+import zipfile
+import tempfile
+import os
 from pathlib import Path
 from typing import Optional
 
@@ -89,6 +92,15 @@ def is_meta_toml(toml_path: Path) -> bool:
         return False
 
 
+def is_bios_toml(toml_path: Path) -> bool:
+    """Check if TOML is a BIOS config (contains bios_platforms table)"""
+    try:
+        config = parse_toml_file(str(toml_path))
+        return 'bios_platforms' in config
+    except:
+        return False
+
+
 def process_meta_toml(meta_path: Path, output_dir: Path, dry_run: bool = False) -> bool:
     """Process a meta TOML that lists other TOMLs"""
     logger = get_logger()
@@ -163,6 +175,155 @@ def process_meta_toml(meta_path: Path, output_dir: Path, dry_run: bool = False) 
         return False
 
 
+def process_bios_toml(bios_path: Path, output_dir: Path, dry_run: bool = False) -> bool:
+    """
+    Process a BIOS TOML file that defines BIOS files for multiple platforms
+
+    BIOS TOML format:
+    site = "https://myrient.erista.me"
+
+    [bios_platforms.PLATFORM]
+    path = "URL/DIRECTORY/TO/FILES"
+    directory = "bios/PLATFORM"
+    files = [
+        - "file1.zip",
+        - "file2.zip"
+    ]
+
+    Args:
+        bios_path: Path to BIOS TOML file
+        output_dir: Output directory for downloads
+        dry_run: If True, only show what would be done
+
+    Returns:
+        True if successful
+    """
+    logger = get_logger()
+
+    try:
+        # Parse TOML
+        config = parse_toml_file(str(bios_path))
+        site = config.get('site', 'https://myrient.erista.me')
+        bios_platforms = config.get('bios_platforms', {})
+
+        if not bios_platforms:
+            logger.error(f"No BIOS platforms found in {bios_path}")
+            return False
+
+        if dry_run:
+            logger.info(f"DRY RUN: Would process BIOS TOML: {bios_path}")
+            total_files = 0
+            for platform_name, platform_config in bios_platforms.items():
+                files = platform_config.get('files', [])
+                valid_files = filter_valid_files(files)
+                total_files += len(valid_files)
+                logger.info(f"DRY RUN: Platform {platform_name} - {len(valid_files)} files")
+            logger.info(f"DRY RUN: Total BIOS files that would be downloaded: {total_files}")
+            return True
+
+        logger.info(f"Processing BIOS TOML: {bios_path.name}")
+
+        # Process each platform
+        total_success = True
+        failed_platforms = []
+
+        for platform_name, platform_config in bios_platforms.items():
+            logger.info(f"Processing BIOS platform: {platform_name}")
+
+            try:
+                # Require explicit path and directory specification
+                if 'path' not in platform_config:
+                    logger.error(f"Platform '{platform_name}' missing required 'path' field")
+                    total_success = False
+                    failed_platforms.append(platform_name)
+                    continue
+
+                if 'directory' not in platform_config:
+                    logger.error(f"Platform '{platform_name}' missing required 'directory' field")
+                    total_success = False
+                    failed_platforms.append(platform_name)
+                    continue
+
+                platform_path = platform_config['path']
+                platform_dir_name = platform_config['directory']
+                files = platform_config.get('files', [])
+
+                if not files:
+                    logger.warning(f"No files specified for platform {platform_name}")
+                    continue
+
+                valid_files = filter_valid_files(files)
+
+                # Create platform subdirectory (from TOML configuration)
+                platform_dir = output_dir / platform_dir_name
+                platform_dir.mkdir(parents=True, exist_ok=True)
+                logger.info(f"Created BIOS directory: {platform_dir}")
+
+                # Download and process each file
+                for filename in valid_files:
+                    try:
+                        # Download file
+                        url = construct_url(site, platform_path, filename)
+                        logger.info(f"Downloading BIOS file: {filename}")
+
+                        # Use wget_download for single file (modify to handle single file)
+                        download_urls = [url]
+                        with tempfile.TemporaryDirectory() as temp_dir:
+                            temp_path = Path(temp_dir)
+
+                            # Download to temp directory first
+                            if not wget_download(download_urls, temp_path):
+                                logger.error(f"Failed to download {filename}")
+                                continue
+
+                            downloaded_file = temp_path / filename
+
+                            if not downloaded_file.exists():
+                                logger.error(f"Downloaded file not found: {downloaded_file}")
+                                continue
+
+                            # Check if it's a zip file and extract
+                            if filename.lower().endswith('.zip'):
+                                logger.info(f"Extracting BIOS files from {filename}")
+                                try:
+                                    with zipfile.ZipFile(downloaded_file, 'r') as zip_ref:
+                                        # Extract all files to platform directory
+                                        zip_ref.extractall(platform_dir)
+                                        logger.info(f"Extracted {len(zip_ref.namelist())} files from {filename}")
+                                except zipfile.BadZipFile as e:
+                                    logger.error(f"Failed to extract {filename}: {e}")
+                                    total_success = False
+                            else:
+                                # Copy non-zip files directly
+                                import shutil
+                                final_path = platform_dir / filename
+                                shutil.copy2(downloaded_file, final_path)
+                                logger.info(f"Copied BIOS file: {filename}")
+
+                    except Exception as e:
+                        logger.error(f"Failed to process BIOS file {filename}: {e}")
+                        total_success = False
+
+            except Exception as e:
+                logger.error(f"Failed to process BIOS platform {platform_name}: {e}")
+                failed_platforms.append(platform_name)
+                total_success = False
+
+        # Report results
+        if failed_platforms:
+            logger.error(f"BIOS download completed with failures: {len(failed_platforms)}/{len(bios_platforms)} platforms failed")
+            for failed_platform in failed_platforms:
+                logger.error(f"  - {failed_platform}")
+        else:
+            logger.info(f"All {len(bios_platforms)} BIOS platforms processed successfully")
+
+        return total_success
+
+    except Exception as e:
+        logger.error(f"Failed to process BIOS TOML {bios_path}: {e}")
+        return False
+
+
 def main():
     """Main entry point"""
     # Ensure wget is available
@@ -180,7 +341,7 @@ def main():
     )
     parser.add_argument(
         'input', nargs='?',
-        help='Input TOML file or meta TOML file'
+        help='Input TOML file (platform, meta, or BIOS config)'
     )
     parser.add_argument(
         '-o', '--output',
@@ -210,7 +371,9 @@ def main():
         output_dir = Path('./roms/')
 
     # Process the input file
-    if is_meta_toml(input_path):
+    if is_bios_toml(input_path):
+        success = process_bios_toml(input_path, output_dir, args.dry_run)
+    elif is_meta_toml(input_path):
         success = process_meta_toml(input_path, output_dir, args.dry_run)
     else:
         success = process_platform_toml(input_path, output_dir, args.dry_run)

@@ -39,6 +39,7 @@ def write_readme_file(toml_file: Path, readme_content: str) -> None:
 def generate_download_urls(toml_file: Path) -> tuple[str, str, str]:
     """Generate common URLs for remote execution downloads"""
     repo_root = Path.cwd()
+    toml_file = toml_file.resolve()
     toml_relative_path = toml_file.relative_to(repo_root)
     toml_url = f"{REPO_BASE_URL}/{toml_relative_path}"
     bootstrap_sh_url = f"{REPO_BASE_URL}/download_roms.sh"
