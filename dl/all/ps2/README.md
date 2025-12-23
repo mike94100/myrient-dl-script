@@ -4,7 +4,7 @@ This collection contains ROMs for the PS2.
 
 ## Metadata
 
-- **Generated**: 2025-12-16 04:26:45 UTC
+- **Generated**: 2025-12-23 05:52:09 UTC
 - **Source URL**: [https://myrient.erista.me/files/Redump/Sony - PlayStation 2/](https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation%202/)
 - **Total Files**: 11717
 - **Total Size**: 16.4 TiB (18.1 TB)
@@ -12,7 +12,7 @@ This collection contains ROMs for the PS2.
 
 ## ROM Files
 <details>
-<summary>The following 11717 ROM files are included in this collection:</summary>
+<summary>The following ROM files are included in this collection:</summary>
 
 | GAME | TAGS | SIZE |
 | --- | --- | --- |
@@ -199,7 +199,7 @@ This collection contains ROMs for the PS2.
 | Action Replay Max | (Europe) (Unl) | 28.3 MiB |
 | Action Replay Max | (USA) (US PS2 Memory Utility) (Unl) | 23.6 MiB |
 | Action Replay Max | (USA) (Unl) (v3.10) | 134.7 MiB |
-| Action Replay Max | (USA) (Unl) (v3.30) | 296 B |
+| Action Replay Max | (USA) (Unl) (v3.30) | 37.3 MiB |
 | Action Replay Max | (USA) (Unl) (v3.34) | 37.9 MiB |
 | Action Replay Max | (USA) (Unl) (v3.35) | 38.3 MiB |
 | Action Replay Max | (USA) (Unl) (v3.36) | 38.0 MiB |
@@ -11738,7 +11738,8 @@ This collection contains ROMs for the PS2.
 
 ## Download
 
-To download all ROMs in this collection:
+### Local Execution
+To download all ROMs in this collection locally:
 
 ```bash
 python myrient_dl.py "ps2.toml"
@@ -11749,3 +11750,25 @@ Or download to a custom directory:
 ```bash
 python myrient_dl.py -o /path/to/directory "ps2.toml"
 ```
+
+### Remote Execution (One-Command)
+Download directly without installing anything:
+
+**Linux/Mac:**
+```bash
+# Download to default location (~/Downloads/roms)
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/ps2/ps2.toml"
+
+# Download to custom directory
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/ps2/ps2.toml" --output "~/custom/path"
+```
+
+**Windows:**
+```batch
+REM Download to default location (%USERPROFILE%\Downloads\roms)
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/ps2/ps2.toml'; del $t }"
+
+REM Download to custom directory
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/ps2/ps2.toml' --output '%USERPROFILE%\Downloads\roms'; del $t }"
+```
+

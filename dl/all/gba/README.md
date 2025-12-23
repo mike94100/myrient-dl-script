@@ -4,7 +4,7 @@ This collection contains ROMs for the GBA.
 
 ## Metadata
 
-- **Generated**: 2025-12-16 04:25:56 UTC
+- **Generated**: 2025-12-23 05:51:28 UTC
 - **Source URL**: [https://myrient.erista.me/files/No-Intro/Nintendo - Game Boy Advance/](https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/)
 - **Total Files**: 3478
 - **Total Size**: 13.3 GiB (14.3 GB)
@@ -12,7 +12,7 @@ This collection contains ROMs for the GBA.
 
 ## ROM Files
 <details>
-<summary>The following 3478 ROM files are included in this collection:</summary>
+<summary>The following ROM files are included in this collection:</summary>
 
 | GAME | TAGS | SIZE |
 | --- | --- | --- |
@@ -3499,7 +3499,8 @@ This collection contains ROMs for the GBA.
 
 ## Download
 
-To download all ROMs in this collection:
+### Local Execution
+To download all ROMs in this collection locally:
 
 ```bash
 python myrient_dl.py "gba.toml"
@@ -3510,3 +3511,25 @@ Or download to a custom directory:
 ```bash
 python myrient_dl.py -o /path/to/directory "gba.toml"
 ```
+
+### Remote Execution (One-Command)
+Download directly without installing anything:
+
+**Linux/Mac:**
+```bash
+# Download to default location (~/Downloads/roms)
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/gba/gba.toml"
+
+# Download to custom directory
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/gba/gba.toml" --output "~/custom/path"
+```
+
+**Windows:**
+```batch
+REM Download to default location (%USERPROFILE%\Downloads\roms)
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/gba/gba.toml'; del $t }"
+
+REM Download to custom directory
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/gba/gba.toml' --output '%USERPROFILE%\Downloads\roms'; del $t }"
+```
+

@@ -4,7 +4,7 @@ This collection contains ROMs for the DREAMCAST.
 
 ## Metadata
 
-- **Generated**: 2025-12-16 04:26:11 UTC
+- **Generated**: 2025-12-23 05:51:21 UTC
 - **Source URL**: [https://myrient.erista.me/files/Redump/Sega - Dreamcast/](https://myrient.erista.me/files/Redump/Sega%20-%20Dreamcast/)
 - **Total Files**: 1506
 - **Total Size**: 772 GiB (829 GB)
@@ -12,7 +12,7 @@ This collection contains ROMs for the DREAMCAST.
 
 ## ROM Files
 <details>
-<summary>The following 1506 ROM files are included in this collection:</summary>
+<summary>The following ROM files are included in this collection:</summary>
 
 | GAME | TAGS | SIZE |
 | --- | --- | --- |
@@ -1527,7 +1527,8 @@ This collection contains ROMs for the DREAMCAST.
 
 ## Download
 
-To download all ROMs in this collection:
+### Local Execution
+To download all ROMs in this collection locally:
 
 ```bash
 python myrient_dl.py "dreamcast.toml"
@@ -1538,3 +1539,25 @@ Or download to a custom directory:
 ```bash
 python myrient_dl.py -o /path/to/directory "dreamcast.toml"
 ```
+
+### Remote Execution (One-Command)
+Download directly without installing anything:
+
+**Linux/Mac:**
+```bash
+# Download to default location (~/Downloads/roms)
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/dreamcast/dreamcast.toml"
+
+# Download to custom directory
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/dreamcast/dreamcast.toml" --output "~/custom/path"
+```
+
+**Windows:**
+```batch
+REM Download to default location (%USERPROFILE%\Downloads\roms)
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/dreamcast/dreamcast.toml'; del $t }"
+
+REM Download to custom directory
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/dreamcast/dreamcast.toml' --output '%USERPROFILE%\Downloads\roms'; del $t }"
+```
+

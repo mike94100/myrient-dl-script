@@ -4,7 +4,7 @@ This collection contains ROMs for multiple gaming platforms.
 
 ## Metadata
 
-- **Generated**: 2025-12-16 04:25:50 UTC
+- **Generated**: 2025-12-23 05:52:36 UTC
 - **Total Platforms**: 21
 - **Total Files**: 65719
 - **Total Size**: 29.6 TiB (32.5 TB)
@@ -12,7 +12,7 @@ This collection contains ROMs for multiple gaming platforms.
 ## Included Platforms
 
 | PLATFORM | FILES | SIZE | DIRECTORY |
-| --- | --- | --- |
+| --- | --- | --- | --- |
 | [3DS](3ds/README.md) | 2149 Files | 1.1 TiB (1.2 TB) | 3ds |
 | [ATARI2600](atari2600/README.md) | 854 Files | 22.6 MiB (23.7 MB) | atari2600 |
 | [ATARI5200](atari5200/README.md) | 183 Files | 1.8 MiB (1.9 MB) | atari5200 |
@@ -38,7 +38,8 @@ This collection contains ROMs for multiple gaming platforms.
 
 ## Download
 
-To download all platforms in this collection:
+### Local Execution
+To download all ROMs in this collection locally:
 
 ```bash
 python myrient_dl.py "all.toml"
@@ -49,3 +50,25 @@ Or download to a custom directory:
 ```bash
 python myrient_dl.py -o /path/to/directory "all.toml"
 ```
+
+### Remote Execution (One-Command)
+Download directly without installing anything:
+
+**Linux/Mac:**
+```bash
+# Download to default location (~/Downloads/roms)
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/all.toml"
+
+# Download to custom directory
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/all.toml" --output "~/custom/path"
+```
+
+**Windows:**
+```batch
+REM Download to default location (%USERPROFILE%\Downloads\roms)
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/all.toml'; del $t }"
+
+REM Download to custom directory
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/all.toml' --output '%USERPROFILE%\Downloads\roms'; del $t }"
+```
+

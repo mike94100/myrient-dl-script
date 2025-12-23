@@ -4,7 +4,7 @@ This collection contains ROMs for the GENESIS.
 
 ## Metadata
 
-- **Generated**: 2025-12-16 04:26:15 UTC
+- **Generated**: 2025-12-23 05:51:36 UTC
 - **Source URL**: [https://myrient.erista.me/files/No-Intro/Sega - Mega Drive - Genesis/](https://myrient.erista.me/files/No-Intro/Sega%20-%20Mega%20Drive%20-%20Genesis/)
 - **Total Files**: 2786
 - **Total Size**: 1.9 GiB (2.1 GB)
@@ -12,7 +12,7 @@ This collection contains ROMs for the GENESIS.
 
 ## ROM Files
 <details>
-<summary>The following 2786 ROM files are included in this collection:</summary>
+<summary>The following ROM files are included in this collection:</summary>
 
 | GAME | TAGS | SIZE |
 | --- | --- | --- |
@@ -2807,7 +2807,8 @@ This collection contains ROMs for the GENESIS.
 
 ## Download
 
-To download all ROMs in this collection:
+### Local Execution
+To download all ROMs in this collection locally:
 
 ```bash
 python myrient_dl.py "genesis.toml"
@@ -2818,3 +2819,25 @@ Or download to a custom directory:
 ```bash
 python myrient_dl.py -o /path/to/directory "genesis.toml"
 ```
+
+### Remote Execution (One-Command)
+Download directly without installing anything:
+
+**Linux/Mac:**
+```bash
+# Download to default location (~/Downloads/roms)
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/genesis/genesis.toml"
+
+# Download to custom directory
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/genesis/genesis.toml" --output "~/custom/path"
+```
+
+**Windows:**
+```batch
+REM Download to default location (%USERPROFILE%\Downloads\roms)
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/genesis/genesis.toml'; del $t }"
+
+REM Download to custom directory
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/genesis/genesis.toml' --output '%USERPROFILE%\Downloads\roms'; del $t }"
+```
+

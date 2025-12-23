@@ -4,7 +4,7 @@ This collection contains ROMs for the NDS.
 
 ## Metadata
 
-- **Generated**: 2025-12-16 04:26:12 UTC
+- **Generated**: 2025-12-23 05:51:48 UTC
 - **Source URL**: [https://myrient.erista.me/files/No-Intro/Nintendo - Nintendo DS (Decrypted)/](https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%20DS%20%28Decrypted%29/)
 - **Total Files**: 7642
 - **Total Size**: 222 GiB (238 GB)
@@ -12,7 +12,7 @@ This collection contains ROMs for the NDS.
 
 ## ROM Files
 <details>
-<summary>The following 7642 ROM files are included in this collection:</summary>
+<summary>The following ROM files are included in this collection:</summary>
 
 | GAME | TAGS | SIZE |
 | --- | --- | --- |
@@ -7663,7 +7663,8 @@ This collection contains ROMs for the NDS.
 
 ## Download
 
-To download all ROMs in this collection:
+### Local Execution
+To download all ROMs in this collection locally:
 
 ```bash
 python myrient_dl.py "nds.toml"
@@ -7674,3 +7675,25 @@ Or download to a custom directory:
 ```bash
 python myrient_dl.py -o /path/to/directory "nds.toml"
 ```
+
+### Remote Execution (One-Command)
+Download directly without installing anything:
+
+**Linux/Mac:**
+```bash
+# Download to default location (~/Downloads/roms)
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/nds/nds.toml"
+
+# Download to custom directory
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/nds/nds.toml" --output "~/custom/path"
+```
+
+**Windows:**
+```batch
+REM Download to default location (%USERPROFILE%\Downloads\roms)
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/nds/nds.toml'; del $t }"
+
+REM Download to custom directory
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/nds/nds.toml' --output '%USERPROFILE%\Downloads\roms'; del $t }"
+```
+

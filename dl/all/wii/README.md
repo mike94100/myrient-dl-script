@@ -4,7 +4,7 @@ This collection contains ROMs for the WII.
 
 ## Metadata
 
-- **Generated**: 2025-12-16 04:26:06 UTC
+- **Generated**: 2025-12-23 05:52:36 UTC
 - **Source URL**: [https://myrient.erista.me/files/Redump/Nintendo - Wii - NKit RVZ [zstd-19-128k]/](https://myrient.erista.me/files/Redump/Nintendo%20-%20Wii%20-%20NKit%20RVZ%20%5Bzstd-19-128k%5D/)
 - **Total Files**: 3778
 - **Total Size**: 5.9 TiB (6.5 TB)
@@ -12,7 +12,7 @@ This collection contains ROMs for the WII.
 
 ## ROM Files
 <details>
-<summary>The following 3778 ROM files are included in this collection:</summary>
+<summary>The following ROM files are included in this collection:</summary>
 
 | GAME | TAGS | SIZE |
 | --- | --- | --- |
@@ -3799,7 +3799,8 @@ This collection contains ROMs for the WII.
 
 ## Download
 
-To download all ROMs in this collection:
+### Local Execution
+To download all ROMs in this collection locally:
 
 ```bash
 python myrient_dl.py "wii.toml"
@@ -3810,3 +3811,25 @@ Or download to a custom directory:
 ```bash
 python myrient_dl.py -o /path/to/directory "wii.toml"
 ```
+
+### Remote Execution (One-Command)
+Download directly without installing anything:
+
+**Linux/Mac:**
+```bash
+# Download to default location (~/Downloads/roms)
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/wii/wii.toml"
+
+# Download to custom directory
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/wii/wii.toml" --output "~/custom/path"
+```
+
+**Windows:**
+```batch
+REM Download to default location (%USERPROFILE%\Downloads\roms)
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/wii/wii.toml'; del $t }"
+
+REM Download to custom directory
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/wii/wii.toml' --output '%USERPROFILE%\Downloads\roms'; del $t }"
+```
+

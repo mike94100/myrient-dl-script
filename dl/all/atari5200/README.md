@@ -4,7 +4,7 @@ This collection contains ROMs for the ATARI5200.
 
 ## Metadata
 
-- **Generated**: 2025-12-16 04:25:51 UTC
+- **Generated**: 2025-12-23 05:51:15 UTC
 - **Source URL**: [https://myrient.erista.me/files/No-Intro/Atari - Atari 5200/](https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%205200/)
 - **Total Files**: 183
 - **Total Size**: 1.8 MiB (1.9 MB)
@@ -12,7 +12,7 @@ This collection contains ROMs for the ATARI5200.
 
 ## ROM Files
 <details>
-<summary>The following 183 ROM files are included in this collection:</summary>
+<summary>The following ROM files are included in this collection:</summary>
 
 | GAME | TAGS | SIZE |
 | --- | --- | --- |
@@ -204,7 +204,8 @@ This collection contains ROMs for the ATARI5200.
 
 ## Download
 
-To download all ROMs in this collection:
+### Local Execution
+To download all ROMs in this collection locally:
 
 ```bash
 python myrient_dl.py "atari5200.toml"
@@ -215,3 +216,25 @@ Or download to a custom directory:
 ```bash
 python myrient_dl.py -o /path/to/directory "atari5200.toml"
 ```
+
+### Remote Execution (One-Command)
+Download directly without installing anything:
+
+**Linux/Mac:**
+```bash
+# Download to default location (~/Downloads/roms)
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/atari5200/atari5200.toml"
+
+# Download to custom directory
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/atari5200/atari5200.toml" --output "~/custom/path"
+```
+
+**Windows:**
+```batch
+REM Download to default location (%USERPROFILE%\Downloads\roms)
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/atari5200/atari5200.toml'; del $t }"
+
+REM Download to custom directory
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/atari5200/atari5200.toml' --output '%USERPROFILE%\Downloads\roms'; del $t }"
+```
+

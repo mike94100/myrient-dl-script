@@ -4,7 +4,7 @@ This collection contains ROMs for the 3DS.
 
 ## Metadata
 
-- **Generated**: 2025-12-16 04:26:01 UTC
+- **Generated**: 2025-12-23 05:51:11 UTC
 - **Source URL**: [https://myrient.erista.me/files/No-Intro/Nintendo - Nintendo 3DS (Decrypted)/](https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%203DS%20%28Decrypted%29/)
 - **Total Files**: 2149
 - **Total Size**: 1.1 TiB (1.2 TB)
@@ -12,7 +12,7 @@ This collection contains ROMs for the 3DS.
 
 ## ROM Files
 <details>
-<summary>The following 2149 ROM files are included in this collection:</summary>
+<summary>The following ROM files are included in this collection:</summary>
 
 | GAME | TAGS | SIZE |
 | --- | --- | --- |
@@ -2170,7 +2170,8 @@ This collection contains ROMs for the 3DS.
 
 ## Download
 
-To download all ROMs in this collection:
+### Local Execution
+To download all ROMs in this collection locally:
 
 ```bash
 python myrient_dl.py "3ds.toml"
@@ -2181,3 +2182,25 @@ Or download to a custom directory:
 ```bash
 python myrient_dl.py -o /path/to/directory "3ds.toml"
 ```
+
+### Remote Execution (One-Command)
+Download directly without installing anything:
+
+**Linux/Mac:**
+```bash
+# Download to default location (~/Downloads/roms)
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/3ds/3ds.toml"
+
+# Download to custom directory
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/3ds/3ds.toml" --output "~/custom/path"
+```
+
+**Windows:**
+```batch
+REM Download to default location (%USERPROFILE%\Downloads\roms)
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/3ds/3ds.toml'; del $t }"
+
+REM Download to custom directory
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/3ds/3ds.toml' --output '%USERPROFILE%\Downloads\roms'; del $t }"
+```
+

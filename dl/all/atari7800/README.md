@@ -4,7 +4,7 @@ This collection contains ROMs for the ATARI7800.
 
 ## Metadata
 
-- **Generated**: 2025-12-16 04:25:51 UTC
+- **Generated**: 2025-12-23 05:51:16 UTC
 - **Source URL**: [https://myrient.erista.me/files/No-Intro/Atari - Atari 7800 (BIN)/](https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/)
 - **Total Files**: 126
 - **Total Size**: 3.6 MiB (3.8 MB)
@@ -12,7 +12,7 @@ This collection contains ROMs for the ATARI7800.
 
 ## ROM Files
 <details>
-<summary>The following 126 ROM files are included in this collection:</summary>
+<summary>The following ROM files are included in this collection:</summary>
 
 | GAME | TAGS | SIZE |
 | --- | --- | --- |
@@ -147,7 +147,8 @@ This collection contains ROMs for the ATARI7800.
 
 ## Download
 
-To download all ROMs in this collection:
+### Local Execution
+To download all ROMs in this collection locally:
 
 ```bash
 python myrient_dl.py "atari7800.toml"
@@ -158,3 +159,25 @@ Or download to a custom directory:
 ```bash
 python myrient_dl.py -o /path/to/directory "atari7800.toml"
 ```
+
+### Remote Execution (One-Command)
+Download directly without installing anything:
+
+**Linux/Mac:**
+```bash
+# Download to default location (~/Downloads/roms)
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/atari7800/atari7800.toml"
+
+# Download to custom directory
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/atari7800/atari7800.toml" --output "~/custom/path"
+```
+
+**Windows:**
+```batch
+REM Download to default location (%USERPROFILE%\Downloads\roms)
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/atari7800/atari7800.toml'; del $t }"
+
+REM Download to custom directory
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/atari7800/atari7800.toml' --output '%USERPROFILE%\Downloads\roms'; del $t }"
+```
+

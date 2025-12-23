@@ -4,7 +4,7 @@ This collection contains ROMs for the PSX.
 
 ## Metadata
 
-- **Generated**: 2025-12-16 04:26:42 UTC
+- **Generated**: 2025-12-23 05:52:28 UTC
 - **Source URL**: [https://myrient.erista.me/files/Redump/Sony - PlayStation/](https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation/)
 - **Total Files**: 10886
 - **Total Size**: 3.0 TiB (3.3 TB)
@@ -12,7 +12,7 @@ This collection contains ROMs for the PSX.
 
 ## ROM Files
 <details>
-<summary>The following 10886 ROM files are included in this collection:</summary>
+<summary>The following ROM files are included in this collection:</summary>
 
 | GAME | TAGS | SIZE |
 | --- | --- | --- |
@@ -10907,7 +10907,8 @@ This collection contains ROMs for the PSX.
 
 ## Download
 
-To download all ROMs in this collection:
+### Local Execution
+To download all ROMs in this collection locally:
 
 ```bash
 python myrient_dl.py "psx.toml"
@@ -10918,3 +10919,25 @@ Or download to a custom directory:
 ```bash
 python myrient_dl.py -o /path/to/directory "psx.toml"
 ```
+
+### Remote Execution (One-Command)
+Download directly without installing anything:
+
+**Linux/Mac:**
+```bash
+# Download to default location (~/Downloads/roms)
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/psx/psx.toml"
+
+# Download to custom directory
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/psx/psx.toml" --output "~/custom/path"
+```
+
+**Windows:**
+```batch
+REM Download to default location (%USERPROFILE%\Downloads\roms)
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/psx/psx.toml'; del $t }"
+
+REM Download to custom directory
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/psx/psx.toml' --output '%USERPROFILE%\Downloads\roms'; del $t }"
+```
+

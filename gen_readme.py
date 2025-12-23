@@ -22,6 +22,10 @@ from utils.toml_utils import parse_toml_file, filter_valid_files
 from utils.file_size_utils import format_file_size, calculate_total_size, parse_file_size, format_file_size_dual
 from utils.progress_utils import show_progress, clear_progress
 
+# Load config
+config = parse_toml_file('config.toml')
+REPO_BASE_URL = config.get('general', {}).get('repo_base_url', 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main')
+
 
 def get_current_timestamp() -> str:
     """Get current timestamp in consistent format for READMEs"""

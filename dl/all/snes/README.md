@@ -4,7 +4,7 @@ This collection contains ROMs for the SNES.
 
 ## Metadata
 
-- **Generated**: 2025-12-16 04:26:12 UTC
+- **Generated**: 2025-12-23 05:52:32 UTC
 - **Source URL**: [https://myrient.erista.me/files/No-Intro/Nintendo - Super Nintendo Entertainment System/](https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Super%20Nintendo%20Entertainment%20System/)
 - **Total Files**: 4087
 - **Total Size**: 3.5 GiB (3.8 GB)
@@ -12,7 +12,7 @@ This collection contains ROMs for the SNES.
 
 ## ROM Files
 <details>
-<summary>The following 4087 ROM files are included in this collection:</summary>
+<summary>The following ROM files are included in this collection:</summary>
 
 | GAME | TAGS | SIZE |
 | --- | --- | --- |
@@ -4108,7 +4108,8 @@ This collection contains ROMs for the SNES.
 
 ## Download
 
-To download all ROMs in this collection:
+### Local Execution
+To download all ROMs in this collection locally:
 
 ```bash
 python myrient_dl.py "snes.toml"
@@ -4119,3 +4120,25 @@ Or download to a custom directory:
 ```bash
 python myrient_dl.py -o /path/to/directory "snes.toml"
 ```
+
+### Remote Execution (One-Command)
+Download directly without installing anything:
+
+**Linux/Mac:**
+```bash
+# Download to default location (~/Downloads/roms)
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/snes/snes.toml"
+
+# Download to custom directory
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/snes/snes.toml" --output "~/custom/path"
+```
+
+**Windows:**
+```batch
+REM Download to default location (%USERPROFILE%\Downloads\roms)
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/snes/snes.toml'; del $t }"
+
+REM Download to custom directory
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/snes/snes.toml' --output '%USERPROFILE%\Downloads\roms'; del $t }"
+```
+

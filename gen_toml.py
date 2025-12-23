@@ -46,12 +46,12 @@ def get_platform_mappings(config: dict) -> dict:
 
 
 def update_meta_all_toml(output_base: Path, generated_platforms: list, config: dict) -> bool:
-    """Update the meta all.toml file and generate READMEs for all successfully generated platforms"""
+    """Update the meta TOML file and generate READMEs for all successfully generated platforms"""
     logger = get_logger()
 
     try:
-        # Path to the meta all.toml file
-        all_toml_path = output_base / "all.toml"
+        # Path to the meta TOML file
+        all_toml_path = output_base / f"{output_base.name}.toml"
 
         # Get all platform names that were attempted (from config)
         all_config_platforms = set(get_platform_mappings(config).keys())
@@ -66,7 +66,7 @@ def update_meta_all_toml(output_base: Path, generated_platforms: list, config: d
 
             # Only include platforms that were successfully generated
             if platform_toml.exists():
-                # Use relative path from the all.toml directory
+                # Use relative path from the meta TOML directory
                 relative_path = f"{platform_name}/{platform_name}.toml"
                 platform_tomls.append(relative_path)
 
@@ -76,7 +76,7 @@ def update_meta_all_toml(output_base: Path, generated_platforms: list, config: d
             "platform_tomls": platform_tomls
         }
 
-        # Write the updated all.toml file
+        # Write the updated meta TOML file
         write_toml_file(str(all_toml_path), all_toml_data)
 
         # Generate README using the centralized function from gen_readme.py
@@ -87,7 +87,7 @@ def update_meta_all_toml(output_base: Path, generated_platforms: list, config: d
         return True
 
     except Exception as e:
-        logger.error(f"Failed to update meta all.toml and README: {e}")
+        logger.error(f"Failed to update meta TOML and README: {e}")
         return False
 
 
@@ -459,18 +459,11 @@ Examples:
         finally:
             enable_console_logging()
 
-        # Update the meta all.toml file with all generated platforms
+        # Update the meta TOML file with all generated platforms
+        # This also regenerates all platform READMEs and creates the meta README
         if success_count > 0:
-            logger.info("Updating meta all.toml file...")
+            logger.info("Updating meta TOML file...")
             update_meta_all_toml(output_base, platform_mappings.keys(), config)
-
-        # Then generate all READMEs with parallel processing
-        if toml_files_to_generate_readmes:
-            logger.info(f"Generating READMEs for {len(toml_files_to_generate_readmes)} platforms...")
-
-            # Use parallel processing for README generation
-            readme_max_workers = get_config_value('generation', 'max_parallel_workers', default=min(4, len(toml_files_to_generate_readmes)))
-            generate_readme(toml_files_to_generate_readmes, max_workers=readme_max_workers, request_delay=request_delay)
 
         logger.info(f"Batch generation completed: {success_count} successful, {fail_count} failed")
         if fail_count > 0:
@@ -495,15 +488,11 @@ Examples:
             # Get rate limiting settings from config
             request_delay = get_config_value('scraping', 'request_delay', default=1.0)
 
-            # Use parallel processing if requested
-            if getattr(args, 'parallel', None) and args.parallel > 1:
-                logger.info(f"Generating READMEs for {len(toml_files)} TOML files using {args.parallel} workers...")
-                results = generate_readme(toml_files, args.parallel, request_delay)
-                success = all(results)
-            else:
-                logger.info(f"Generating READMEs for {len(toml_files)} TOML files...")
-                results = generate_readme(toml_files, 1, request_delay)  # Sequential
-                success = all(results)
+            # Use parallel processing
+            readme_max_workers = get_config_value('generation', 'max_parallel_workers', default=min(4, len(toml_files)))
+            logger.info(f"Generating READMEs for {len(toml_files)} TOML files using {readme_max_workers} workers...")
+            results = generate_readme(toml_files, readme_max_workers, request_delay)
+            success = all(results)
 
             if success:
                 logger.info("README generation completed successfully!")

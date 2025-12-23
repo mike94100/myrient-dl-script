@@ -4,7 +4,7 @@ This collection contains ROMs for the N64.
 
 ## Metadata
 
-- **Generated**: 2025-12-16 04:25:58 UTC
+- **Generated**: 2025-12-23 05:51:39 UTC
 - **Source URL**: [https://myrient.erista.me/files/No-Intro/Nintendo - Nintendo 64 (BigEndian)/](https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%2064%20%28BigEndian%29/)
 - **Total Files**: 1147
 - **Total Size**: 14.1 GiB (15.2 GB)
@@ -12,7 +12,7 @@ This collection contains ROMs for the N64.
 
 ## ROM Files
 <details>
-<summary>The following 1147 ROM files are included in this collection:</summary>
+<summary>The following ROM files are included in this collection:</summary>
 
 | GAME | TAGS | SIZE |
 | --- | --- | --- |
@@ -1168,7 +1168,8 @@ This collection contains ROMs for the N64.
 
 ## Download
 
-To download all ROMs in this collection:
+### Local Execution
+To download all ROMs in this collection locally:
 
 ```bash
 python myrient_dl.py "n64.toml"
@@ -1179,3 +1180,25 @@ Or download to a custom directory:
 ```bash
 python myrient_dl.py -o /path/to/directory "n64.toml"
 ```
+
+### Remote Execution (One-Command)
+Download directly without installing anything:
+
+**Linux/Mac:**
+```bash
+# Download to default location (~/Downloads/roms)
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/n64/n64.toml"
+
+# Download to custom directory
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/n64/n64.toml" --output "~/custom/path"
+```
+
+**Windows:**
+```batch
+REM Download to default location (%USERPROFILE%\Downloads\roms)
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/n64/n64.toml'; del $t }"
+
+REM Download to custom directory
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/n64/n64.toml' --output '%USERPROFILE%\Downloads\roms'; del $t }"
+```
+

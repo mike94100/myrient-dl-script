@@ -4,7 +4,7 @@ This collection contains ROMs for the PSP.
 
 ## Metadata
 
-- **Generated**: 2025-12-16 04:26:22 UTC
+- **Generated**: 2025-12-23 05:52:14 UTC
 - **Source URL**: [https://myrient.erista.me/files/No-Intro/Sony - PlayStation Portable (PSN) (Decrypted)/](https://myrient.erista.me/files/No-Intro/Sony%20-%20PlayStation%20Portable%20%28PSN%29%20%28Decrypted%29/)
 - **Total Files**: 4250
 - **Total Size**: 696 GiB (747 GB)
@@ -12,7 +12,7 @@ This collection contains ROMs for the PSP.
 
 ## ROM Files
 <details>
-<summary>The following 4250 ROM files are included in this collection:</summary>
+<summary>The following ROM files are included in this collection:</summary>
 
 | GAME | TAGS | SIZE |
 | --- | --- | --- |
@@ -4271,7 +4271,8 @@ This collection contains ROMs for the PSP.
 
 ## Download
 
-To download all ROMs in this collection:
+### Local Execution
+To download all ROMs in this collection locally:
 
 ```bash
 python myrient_dl.py "psp.toml"
@@ -4282,3 +4283,25 @@ Or download to a custom directory:
 ```bash
 python myrient_dl.py -o /path/to/directory "psp.toml"
 ```
+
+### Remote Execution (One-Command)
+Download directly without installing anything:
+
+**Linux/Mac:**
+```bash
+# Download to default location (~/Downloads/roms)
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/psp/psp.toml"
+
+# Download to custom directory
+wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/psp/psp.toml" --output "~/custom/path"
+```
+
+**Windows:**
+```batch
+REM Download to default location (%USERPROFILE%\Downloads\roms)
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/psp/psp.toml'; del $t }"
+
+REM Download to custom directory
+powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/all/psp/psp.toml' --output '%USERPROFILE%\Downloads\roms'; del $t }"
+```
+
