@@ -1,8 +1,0 @@
-#platform_tomls = [
-#  "gb.toml",
-#  "gbc.toml",
-#  "gba.toml"
-#]
-
-# List of platform tomls that will be recursively downloaded from
-platform_tomls = []

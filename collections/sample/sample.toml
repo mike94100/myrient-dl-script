@@ -1,0 +1,20 @@
+# Myrient ROM Collection Configuration
+
+# Platform configurations
+[platforms]
+
+# Nintendo platforms
+[platforms.gb]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/"
+directory = "roms/gb"
+skip_filtering = true
+
+[platforms.gbc]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/"
+directory = "roms/gbc"
+skip_filtering = true
+
+[platforms.gba]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/"
+directory = "roms/gba"
+skip_filtering = true

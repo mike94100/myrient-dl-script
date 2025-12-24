@@ -5,8 +5,6 @@
 # Default site URL
 site = "https://myrient.erista.me"
 
-
-
 # Cache settings
 [cache]
 # Enable caching of HTML responses

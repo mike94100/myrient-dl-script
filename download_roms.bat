@@ -1,29 +1,31 @@
 @echo off
-REM Myrient ROM Downloader Bootstrap Script for Windows
+REM ROM Downloader Bootstrap Script for Windows
 REM Downloads Python code from main repo and handles TOML resolution
 
 setlocal enabledelayedexpansion
 
 REM Default values
-set "TOML_SOURCE=https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/sample/sample.toml"
+set "TOML_SOURCE=https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample.toml"
 set "OUTPUT_DIR=%USERPROFILE%\Downloads\roms"
+set "PLATFORMS="
 
 REM Function to show help
 :show_help
-echo Usage: %0 [-t^|--toml TOML_URL] [-o^|--output OUTPUT_DIR] [-h^|--help]
+echo Usage: %0 [-t^|--toml TOML_URL] [-o^|--output OUTPUT_DIR] [-p^|--platforms PLATFORMS] [-h^|--help]
 echo.
-echo Download ROMs using Myrient ROM Downloader
+echo Download ROMs using ROM Downloader
 echo.
 echo Options:
-echo   -t, --toml TOML_URL      URL or path to TOML file (default: sample ROMs)
-echo   -o, --output OUTPUT_DIR  Output directory (default: %%USERPROFILE%%\Downloads\roms)
-echo   -h, --help              Show this help message
+echo   -t, --toml TOML_URL          URL or path to TOML file (default: sample collection)
+echo   -o, --output OUTPUT_DIR      Output directory (default: %%USERPROFILE%%\Downloads\roms)
+echo   -p, --platforms PLATFORMS    Download only specified platforms (e.g., "gb gba nes")
+echo   -h, --help                  Show this help message
 echo.
 echo Examples:
 echo   %0  # Download sample ROMs to default location
-echo   %0 --toml https://example.com/custom.toml
-echo   %0 --output "C:\My ROMs"
-echo   %0 -t https://example.com/custom.toml -o "C:\My ROMs"
+echo   %0 --toml https://example.com/collection.toml
+echo   %0 --platforms "gb gba" --output "C:\My ROMs"
+echo   %0 -t https://example.com/collection.toml -p "nes snes" -o "C:\My ROMs"
 exit /b 0
 goto :eof
 
@@ -50,6 +52,16 @@ if "%~1"=="--output" (
     shift & shift
     goto :parse_args
 )
+if "%~1"=="-p" (
+    set "PLATFORMS=%~2"
+    shift & shift
+    goto :parse_args
+)
+if "%~1"=="--platforms" (
+    set "PLATFORMS=%~2"
+    shift & shift
+    goto :parse_args
+)
 if "%~1"=="-h" call :show_help
 if "%~1"=="--help" call :show_help
 echo Unknown option: %~1
@@ -58,9 +70,12 @@ exit /b 1
 
 :end_parse
 
-echo Myrient ROM Downloader
+echo ROM Downloader
 echo TOML Source: %TOML_SOURCE%
 echo Output Directory: %OUTPUT_DIR%
+if defined PLATFORMS (
+    echo Platforms: %PLATFORMS%
+)
 echo.
 
 REM Create temp directory
@@ -189,10 +204,19 @@ if %ERRORLEVEL% equ 0 (
 echo Step 4: Starting ROM download...
 echo Using TOML: %FINAL_TOML%
 echo Output: %OUTPUT_DIR%
+if defined PLATFORMS (
+    echo Platforms: %PLATFORMS%
+)
 echo.
 
+REM Build command with optional platforms
+set "CMD=python rom_dl.py "%FINAL_TOML%" -o "%OUTPUT_DIR%""
+if defined PLATFORMS (
+    set "CMD=!CMD! --platforms %PLATFORMS%"
+)
+
 REM Run the download
-python myrient_dl.py "%FINAL_TOML%" -o "%OUTPUT_DIR%"
+!CMD!
 
 if %ERRORLEVEL% equ 0 (
     echo.

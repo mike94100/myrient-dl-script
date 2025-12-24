@@ -1,0 +1,104 @@
+# Myrient ROM Collection Configuration
+
+# Global default filters, can be overridden per platform
+[filters]
+include = ["(USA", "(World)", "(En"]
+exclude = ["(Beta", "(Demo", "(Proto", "(Sample", "(Pirate", "(Unl", "(Hack", "[BIOS]", "(Test Program", "(Ja"]
+deduplicate = true
+
+# Platform configurations
+[platforms]
+
+# Nintendo platforms
+[platforms.nes]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%20Entertainment%20System%20%28Headered%29/"
+directory = "roms/nes"
+
+[platforms.snes]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Super%20Nintendo%20Entertainment%20System/"
+directory = "roms/snes"
+
+[platforms.n64]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%2064%20%28BigEndian%29/"
+directory = "roms/n64"
+
+[platforms.gc]
+url = "https://myrient.erista.me/files/Redump/Nintendo%20-%20GameCube%20-%20NKit%20RVZ%20%5Bzstd-19-128k%5D/"
+directory = "roms/gc"
+
+[platforms.wii]
+url = "https://myrient.erista.me/files/Redump/Nintendo%20-%20Wii%20-%20NKit%20RVZ%20%5Bzstd-19-128k%5D/"
+directory = "roms/wii"
+
+[platforms.gb]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/"
+directory = "roms/gb"
+
+[platforms.gbc]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/"
+directory = "roms/gbc"
+
+[platforms.gba]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/"
+directory = "roms/gba"
+
+[platforms.nds]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%20DS%20%28Decrypted%29/"
+directory = "roms/nds"
+
+[platforms."3ds"]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%203DS%20%28Decrypted%29/"
+directory = "roms/3ds"
+
+# Sega platforms
+[platforms.genesis]
+url = "https://myrient.erista.me/files/No-Intro/Sega%20-%20Mega%20Drive%20-%20Genesis/"
+directory = "roms/genesis"
+
+[platforms.dreamcast]
+url = "https://myrient.erista.me/files/Redump/Sega%20-%20Dreamcast/"
+directory = "roms/dreamcast"
+
+# Sony platforms
+[platforms.psx]
+url = "https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation/"
+directory = "roms/psx"
+
+[platforms.ps2]
+url = "https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation%202/"
+directory = "roms/ps2"
+
+[platforms.psp]
+url = "https://myrient.erista.me/files/No-Intro/Sony%20-%20PlayStation%20Portable%20%28PSN%29%20%28Decrypted%29/"
+directory = "roms/psp"
+
+# Atari platforms
+[platforms.atari2600]
+url = "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%202600/"
+directory = "roms/atari2600"
+
+[platforms.atari5200]
+url = "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%205200/"
+directory = "roms/atari5200"
+
+[platforms.atari7800]
+url = "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/"
+directory = "roms/atari7800"
+
+# Other platforms
+[platforms.c64]
+url = "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/"
+directory = "roms/c64"
+
+[platforms.colecovision]
+url = "https://myrient.erista.me/files/No-Intro/Coleco%20-%20ColecoVision/"
+directory = "roms/colecovision"
+
+[platforms.intellivision]
+url = "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/"
+directory = "roms/intellivision"
+
+# Example of a custom collection
+[platforms.custom_collection]
+directory = "roms/custom"
+skip_filtering = true  # Don't generate URLs, use existing custom URL file

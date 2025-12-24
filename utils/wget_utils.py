@@ -163,8 +163,30 @@ def wget_download(urls, output_dir, progress=True):
             pass
 
 
-def wget_scrape(url, cache_manager=None, request_delay=1.0):
-    """Download HTML content using wget with optional caching"""
+# Global session for connection pooling
+_http_session = None
+
+def get_http_session():
+    """Get or create a global HTTP session for connection pooling"""
+    global _http_session
+    if _http_session is None:
+        try:
+            import requests
+            _http_session = requests.Session()
+            # Set a reasonable timeout
+            _http_session.timeout = 30
+            # Set user agent
+            _http_session.headers.update({
+                'User-Agent': 'Mozilla/5.0 (compatible; MyrientDL/1.0)'
+            })
+        except ImportError:
+            # Fallback if requests not available
+            _http_session = None
+    return _http_session
+
+
+def wget_scrape(url, cache_manager=None, request_delay=1.0, use_session=True):
+    """Download HTML content using requests.Session() for connection pooling, fallback to wget"""
     import time
 
     # Check cache first
@@ -177,6 +199,25 @@ def wget_scrape(url, cache_manager=None, request_delay=1.0):
     if request_delay > 0:
         time.sleep(request_delay)
 
+    # Try requests.Session() first for connection pooling
+    if use_session:
+        session = get_http_session()
+        if session:
+            try:
+                response = session.get(url, timeout=30)
+                response.raise_for_status()
+                content = response.text
+
+                # Cache the result
+                if cache_manager and content:
+                    cache_manager.put(url, content)
+
+                return content
+            except Exception as e:
+                # Fall back to wget if session fails
+                pass
+
+    # Fallback to wget
     import tempfile
     import os
 

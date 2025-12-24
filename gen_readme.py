@@ -40,33 +40,35 @@ def write_readme_file(toml_file: Path, readme_content: str) -> None:
     logger.info(f"Generated {readme_file}")
 
 
-def generate_download_urls(toml_file: Path) -> tuple[str, str, str]:
-    """Generate common URLs for remote execution downloads"""
-    repo_root = Path.cwd()
-    toml_file = toml_file.resolve()
-    toml_relative_path = toml_file.relative_to(repo_root)
-    toml_url = f"{REPO_BASE_URL}/{toml_relative_path}"
-    bootstrap_sh_url = f"{REPO_BASE_URL}/download_roms.sh"
-    bootstrap_bat_url = f"{REPO_BASE_URL}/download_roms.bat"
-    return toml_url, bootstrap_sh_url, bootstrap_bat_url
 
 
-def generate_download_section(toml_file: Path) -> str:
-    """Generate the common download section for READMEs"""
-    toml_url, bootstrap_sh_url, bootstrap_bat_url = generate_download_urls(toml_file)
-    return f"""## Download
 
-### Local Execution
-To download all ROMs in this collection locally:
+def generate_collection_download_section(collection_path: Path, platform_name: str = None) -> str:
+    """Generate download section for collection-based workflow"""
+    collection_name = collection_path.name
+    collection_url = f"{REPO_BASE_URL}/collections/{collection_name}/collection.toml"
+
+    if platform_name:
+        # Platform-specific download section
+        return f"""## Download
+
+### Generate URLs and Download
+First generate the URL file for this platform:
 
 ```bash
-python myrient_dl.py "{toml_file.name}"
+python gen_urls.py scrape collections/{collection_name}/collection.toml
+```
+
+Then download the ROMs:
+
+```bash
+python myrient_dl.py --urls collections/{collection_name}/urls/{platform_name}.txt
 ```
 
 Or download to a custom directory:
 
 ```bash
-python myrient_dl.py -o /path/to/directory "{toml_file.name}"
+python myrient_dl.py --urls collections/{collection_name}/urls/{platform_name}.txt --output ~/my-roms
 ```
 
 ### Remote Execution (One-Command)
@@ -74,22 +76,50 @@ Download directly without installing anything:
 
 **Linux/Mac:**
 ```bash
-# Download to default location (~/Downloads/roms)
-wget -q -O - {bootstrap_sh_url} | bash -s -- --toml "{toml_url}"
+# Generate URLs and download to default location
+python gen_urls.py scrape collections/{collection_name}/collection.toml && \\
+python myrient_dl.py --urls collections/{collection_name}/urls/{platform_name}.txt
 
 # Download to custom directory
-wget -q -O - {bootstrap_sh_url} | bash -s -- --toml "{toml_url}" --output "~/custom/path"
+python gen_urls.py scrape collections/{collection_name}/collection.toml && \\
+python myrient_dl.py --urls collections/{collection_name}/urls/{platform_name}.txt --output ~/custom/path
+```"""
+    else:
+        # Collection-level download section
+        return f"""## Download
+
+### Generate URLs and Download All Platforms
+First generate URL files for all platforms in this collection:
+
+```bash
+python gen_urls.py scrape collections/{collection_name}/collection.toml
 ```
 
-**Windows:**
-```batch
-REM Download to default location (%USERPROFILE%\\Downloads\\roms)
-powershell -c "& {{ $s=iwr '{bootstrap_bat_url}'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml '{toml_url}'; del $t }}"
+Then download all ROMs:
 
-REM Download to custom directory
-powershell -c "& {{ $s=iwr '{bootstrap_bat_url}'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml '{toml_url}' --output '%USERPROFILE%\\Downloads\\roms'; del $t }}"
+```bash
+python myrient_dl.py --urls collections/{collection_name}/urls/
 ```
-"""
+
+Or download to a custom directory:
+
+```bash
+python myrient_dl.py --urls collections/{collection_name}/urls/ --output ~/my-roms
+```
+
+### Remote Execution (One-Command)
+Download directly without installing anything:
+
+**Linux/Mac:**
+```bash
+# Generate URLs and download all platforms to default location
+python gen_urls.py scrape collections/{collection_name}/collection.toml && \\
+python myrient_dl.py --urls collections/{collection_name}/urls/
+
+# Download to custom directory
+python gen_urls.py scrape collections/{collection_name}/collection.toml && \\
+python myrient_dl.py --urls collections/{collection_name}/urls/ --output ~/custom/path
+```"""
 
 
 def extract_file_sizes(html: str, files: List[str]) -> Dict[str, str]:
@@ -127,6 +157,112 @@ def parse_game_info(filename: str) -> tuple:
     return game_name, tags
 
 
+def parse_url_file_content(url_file: Path) -> tuple[List[str], List[str]]:
+    """Parse URL file and return (included_files, excluded_files)"""
+    included_files = []
+    excluded_files = []
+
+    try:
+        with open(url_file, 'r', encoding='utf-8') as f:
+            url_lines = [line.strip() for line in f if line.strip()]
+    except Exception as e:
+        logger = get_logger()
+        logger.error(f"Failed to read URL file {url_file}: {e}")
+        return [], []
+
+    for url_line in url_lines:
+        if url_line.startswith('#'):
+            # Excluded file - extract filename from commented URL
+            if url_line.startswith('#http'):
+                url_part = url_line[1:]  # Remove # prefix
+                filename = url_part.split('/')[-1]
+                if filename:
+                    excluded_files.append(filename)
+        else:
+            # Included file - extract filename from URL
+            if url_line.startswith('http'):
+                filename = url_line.split('/')[-1]
+                if filename:
+                    included_files.append(filename)
+
+    return included_files, excluded_files
+
+
+def create_file_size_mapping(included_files: List[str], source_url: str) -> tuple[Dict[str, str], int]:
+    """Scrape file sizes and return (file_sizes, total_bytes)"""
+    file_sizes = {}
+    total_bytes = 0
+
+    if included_files and source_url:
+        logger = get_logger()
+        logger.info(f"Scraping file sizes from: {source_url}")
+        html = wget_scrape(source_url)
+        if html:
+            # URL-decode filenames before searching in HTML
+            decoded_files = [unquote(f) for f in included_files]
+            file_sizes = extract_file_sizes(html, decoded_files)
+            total_bytes = calculate_total_size(file_sizes)
+
+    return file_sizes, total_bytes
+
+
+def organize_files_by_game(decoded_files: List[str], file_sizes: Dict[str, str]) -> Dict[str, List[Dict]]:
+    """Group files by game name and return structured data"""
+    # Create a mapping from decoded filenames back to original encoded filenames
+    decoded_to_encoded = {unquote(f): f for f in decoded_files}
+
+    # Group files by game name for better organization
+    game_groups = {}
+    for decoded_filename in decoded_files:
+        encoded_filename = decoded_to_encoded.get(decoded_filename, decoded_filename)
+        game_name, tags = parse_game_info(decoded_filename)
+        size_bytes = 0
+        size_str = file_sizes.get(decoded_filename, 'Unknown')
+
+        # Try to parse size for sorting/grouping
+        try:
+            if size_str != 'Unknown' and size_str != '-':
+                size_bytes = parse_file_size(size_str)
+        except:
+            pass
+
+        if game_name not in game_groups:
+            game_groups[game_name] = []
+        game_groups[game_name].append({
+            'filename': encoded_filename,  # Use encoded for display
+            'decoded_filename': decoded_filename,  # Use decoded for lookup
+            'tags': tags,
+            'size': size_str,
+            'size_bytes': size_bytes
+        })
+
+    return game_groups
+
+
+def build_platform_data_structure(platform_name: str, included_files: List[str],
+                                excluded_files: List[str], game_groups: Dict[str, List[Dict]],
+                                total_bytes: int, source_url: str) -> Dict[str, Any]:
+    """Assemble final platform data structure"""
+    return {
+        'platform_name': platform_name,
+        'included_files': included_files,
+        'excluded_files': excluded_files,
+        'game_groups': game_groups,
+        'total_files': len(included_files),
+        'total_bytes': total_bytes,
+        'source_url': source_url
+    }
+
+
+def extract_base_directory(platform_configs: Dict[str, Any]) -> str:
+    """Extract base directory from platform configurations"""
+    for platform_config in platform_configs.values():
+        directory = platform_config.get('directory', '')
+        if directory and '/' in directory:
+            return directory.split('/')[0]
+    return "roms"
+
+
 def generate_readme(toml_files, max_workers: int = 1, request_delay: float = 1.0):
     """Generate READMEs (single file or list) with optional parallel processing"""
     from typing import Union
@@ -153,11 +289,15 @@ def generate_readme(toml_files, max_workers: int = 1, request_delay: float = 1.0
                 # Parse TOML
                 config = parse_toml_file(str(toml_file))
 
+                # Check if this is a collection TOML (has platforms section)
+                if 'platforms' in config:
+                    return generate_collection_readme(toml_file, config)
+
                 # Check if this is a meta TOML
                 if 'platform_tomls' in config:
                     return generate_meta_readme(toml_file, config)
 
-                # Generate platform README
+                # Generate platform README (legacy support)
                 return generate_platform_readme(toml_file, config)
 
             except Exception as e:
@@ -233,201 +373,187 @@ def generate_readme(toml_files, max_workers: int = 1, request_delay: float = 1.0
             enable_console_logging()
 
 
-def generate_platform_readme(toml_file: Path, config: Dict[str, Any]) -> bool:
-    """Generate README for a platform TOML"""
+def generate_collection_readme(collection_path: Path, config: Dict[str, Any]) -> bool:
+    """Generate comprehensive README for a collection TOML with all platform details"""
     logger = get_logger()
 
-    # Extract configuration
-    site = config.get('site', '')
-    path_directory = config.get('path_directory', '')
-    directory = config.get('directory', '')
-    files = config.get('files', [])
-
-    if not all([site, path_directory, directory]):
-        logger.error("Missing required fields in TOML")
+    platforms = config.get('platforms', {})
+    if not platforms:
+        logger.error(f"No platforms found in collection {collection_path}")
         return False
 
-    # Generate platform name
-    platform_name = Path(directory).name.upper() or "UNKNOWN"
+    collection_name = collection_path.name
+    logger.info(f"Generating comprehensive README for collection '{collection_name}' with {len(platforms)} platforms")
 
-    # Construct source URL
-    source_url_encoded = construct_url(site, path_directory)
-    source_url_decoded = unquote(source_url_encoded)  # Decoded for display
-
-    # Scrape file sizes
-    logger.info(f"Scraping file sizes from: {source_url_encoded}")
-    html = wget_scrape(source_url_encoded)
-    file_sizes = {}
-    total_bytes = 0
-
-    if html:
-        file_sizes = extract_file_sizes(html, files)
-        total_bytes = calculate_total_size(file_sizes)
-
-    # Format total size in both IEC (binary) and SI (decimal) formats
-    total_size_formatted = format_file_size_dual(total_bytes)
-
-    # Generate file table
-    file_table = "| GAME | TAGS | SIZE |\n| --- | --- | --- |\n"
-    for file in files:
-        if file.startswith('#'):
-            continue  # Skip commented files
-
-        game_name, tags = parse_game_info(file)
-        size = file_sizes.get(file, '-')
-        file_table += f"| {game_name} | {tags} | {size} |\n"
-
-    # Generate README content
-    download_section = generate_download_section(toml_file)
-
-    readme_content = f"""# {platform_name} ROM Collection
-
-This collection contains ROMs for the {platform_name}.
-
-## Metadata
-
-- **Generated**: {get_current_timestamp()}
-- **Source URL**: [{source_url_decoded}]({source_url_encoded})
-- **Total Files**: {len(filter_valid_files(files))}
-- **Total Size**: {total_size_formatted}
-- **Platform Directory**: {directory}
-
-## ROM Files
-<details>
-<summary>The following ROM files are included in this collection:</summary>
-
-{file_table}
-</details>
-
-{download_section}
-"""
-
-    # Write README
-    write_readme_file(toml_file, readme_content)
-
-    return True
+    # Generate comprehensive collection README with all platform details
+    return generate_comprehensive_collection_readme(collection_path, platforms)
 
 
-def generate_meta_readme(toml_file: Path, config: Dict[str, Any]) -> bool:
-    """Generate README for a meta TOML"""
+def generate_comprehensive_collection_readme(collection_path: Path, platforms: Dict[str, Any]) -> bool:
+    """Generate a README with platform details and folder structure"""
     logger = get_logger()
 
-    platform_tomls = config.get('platform_tomls', [])
-    if not platform_tomls:
-        logger.error("No platform_tomls found in meta TOML")
-        return False
+    collection_name = collection_path.name
 
-    # Collect platform TOML files that need READMEs generated
-    toml_files_to_generate = []
+    # Process all platforms and collect their data
+    platform_data = {}
+    total_files_all = 0
+    total_bytes_all = 0
 
-    # Generate READMEs for individual platforms first
-    total_files = 0
-    total_collection_bytes = 0
-    platform_summaries = []
+    for platform_name, platform_config in platforms.items():
+        platform_data[platform_name] = process_platform_for_readme(collection_path, platform_name, platform_config)
 
-    for platform_ref in platform_tomls:
-        # Resolve platform TOML path
-        if platform_ref.startswith('/'):
-            platform_path = Path(platform_ref)
-        else:
-            platform_path = toml_file.parent / platform_ref
+        if platform_data[platform_name]:
+            total_files_all += platform_data[platform_name]['total_files']
+            total_bytes_all += platform_data[platform_name]['total_bytes']
 
-        if not platform_path.exists():
+    # Generate hierarchical directory structure
+    folder_structure = "```\nroms/\n"
+
+    for i, platform_name in enumerate(sorted(platforms.keys())):
+        if platform_name not in platform_data or not platform_data[platform_name]:
             continue
 
-        # Always regenerate platform READMEs when updating meta TOML
-        toml_files_to_generate.append(platform_path)
+        platform_info = platform_data[platform_name]
+        platform_config = platforms[platform_name]
+        directory = platform_config.get('directory', f'{platform_name}')
 
-        # Parse platform TOML for summary
-        try:
-            platform_config = parse_toml_file(str(platform_path))
-            platform_name = platform_path.stem.upper()
-            directory = platform_config.get('directory', '')
-            files = platform_config.get('files', [])
+        # Extract just the platform part (after the base directory)
+        platform_part = directory.split('/')[-1] if '/' in directory else directory
 
-            file_count = len(filter_valid_files(files))
-            total_files += file_count
+        file_count = platform_info['total_files']
+        size_formatted = format_file_size(platform_info['total_bytes']) if platform_info['total_bytes'] > 0 else "Unknown"
 
-            # Size info will be populated after README generation
-            size_info = "Unknown"
-            platform_bytes = 0
+        # Use tree symbols: ├── for middle items, └── for last item
+        prefix = "├──" if i < len(platforms) - 1 else "└──"
+        folder_structure += f"{prefix} {platform_part}/ ({file_count} files, {size_formatted})\n"
 
-            platform_summaries.append({
-                'name': platform_name,
-                'files': file_count,
-                'size': size_info,
-                'directory': directory,
-                'readme_path': platform_path.parent / "README.md",
-                'bytes': platform_bytes
-            })
+    folder_structure += "```\n"
 
-        except Exception as e:
-            logger.warning(f"Failed to process platform {platform_ref}: {e}")
+    # Generate collapsible ROM files sections
+    rom_files_section = ""
 
-    # Generate READMEs for all platforms
-    if toml_files_to_generate:
-        logger.info(f"Generating READMEs for {len(toml_files_to_generate)} platforms...")
-        generate_readme(toml_files_to_generate)
+    for platform_name in sorted(platforms.keys()):
+        if platform_name not in platform_data or not platform_data[platform_name]:
+            continue
 
-    # Now collect size information from the newly generated READMEs
-    total_collection_bytes = 0
-    for summary in platform_summaries:
-        readme_path = summary['readme_path']
-        if readme_path.exists():
-            try:
-                readme_content = readme_path.read_text(encoding='utf-8')
-                size_match = re.search(r'\*\*Total Size\*\*: ([^\n]+)', readme_content)
-                if size_match:
-                    size_info = size_match.group(1).strip()
-                    summary['size'] = size_info
+        platform_info = platform_data[platform_name]
+        platform_config = platforms[platform_name]
+        directory = platform_config.get('directory', f'{platform_name}')
 
-                    # Extract byte count for summingfrom IEC format
-                    bytes_match = re.search(r'(\d+(?:\.\d+)?)\s*(B|KiB|MiB|GiB|TiB)', size_info)
-                    if bytes_match:
-                        iec_part = f"{bytes_match.group(1)} {bytes_match.group(2)}"
-                        try:
-                            platform_bytes = parse_file_size(iec_part)
-                            summary['bytes'] = platform_bytes
-                            total_collection_bytes += platform_bytes
-                        except ValueError:
-                            pass  # Keep platform_bytes as 0
-            except Exception as e:
-                logger.warning(f"Could not read size from {readme_path}: {e}")
+        file_count = platform_info['total_files']
+        size_formatted = format_file_size(platform_info['total_bytes']) if platform_info['total_bytes'] > 0 else "Unknown"
 
-    # Generate summary table
-    table = "| PLATFORM | FILES | SIZE | DIRECTORY |\n| --- | --- | --- | --- |\n"
-    for summary in platform_summaries:
-        readme_rel_path = summary['readme_path'].relative_to(toml_file.parent)
-        table += f"| [{summary['name']}]({readme_rel_path}) | {summary['files']} Files | {summary['size']} | {summary['directory']} |\n"
+        # Start collapsible section for this platform (show only platform name)
+        platform_part = directory.split('/')[-1] if '/' in directory else directory
+        rom_files_section += f"""<details>
+<summary>{platform_part}</summary>
+
+"""
+
+        # List all files for this platform
+        for game_name in sorted(platform_info['game_groups'].keys()):
+            files = platform_info['game_groups'][game_name]
+
+            for file_info in files:
+                # Use decoded filename for display
+                filename_decoded = file_info['decoded_filename']
+                size_display = file_info['size']
+                rom_files_section += f"  - {filename_decoded} ({size_display})\n"
+
+        rom_files_section += "</details>\n\n"
 
     # Format total collection size
-    total_size_formatted = format_file_size_dual(total_collection_bytes)
+    total_size_formatted = format_file_size_dual(total_bytes_all)
 
-    # Generate meta README
-    download_section = generate_download_section(toml_file)
+    # Generate download section
+    download_section = generate_collection_download_section(collection_path)
 
-    readme_content = f"""# Multi-Platform ROM Collection
+    # Combine everything into compact comprehensive README
+    readme_content = f"""# {collection_name.upper()} ROM Collection
 
-This collection contains ROMs for multiple gaming platforms.
+This collection contains ROMs for multiple gaming platforms with intelligent filtering.
 
 ## Metadata
 
 - **Generated**: {get_current_timestamp()}
-- **Total Platforms**: {len(platform_summaries)}
-- **Total Files**: {total_files}
+- **Total Platforms**: {len(platforms)}
+- **Total Files**: {total_files_all}
 - **Total Size**: {total_size_formatted}
 
-## Included Platforms
+## Directory Structure
 
-{table}
+{folder_structure}
 
-{download_section}
+## ROM Files
+
+{rom_files_section}
+
+## Download
+
+### Generate URLs and Download All Platforms
+```bash
+# Generate URL files for all platforms
+python gen_urls.py scrape collections/{collection_name}/collection.toml
+
+# Download all ROMs to default directory
+python myrient_dl.py --urls collections/{collection_name}/urls/
+```
+
+### Individual Platform Download
+```bash
+# Generate and download specific platform
+python gen_urls.py scrape collections/{collection_name}/collection.toml
+python myrient_dl.py --urls collections/{collection_name}/urls/gb.txt --output ~/roms/gb
+```
+
+### Remote One-Command Download
+**Linux/Mac:**
+```bash
+# Download all platforms to ~/Downloads/roms
+python gen_urls.py scrape collections/{collection_name}/collection.toml && \\
+python myrient_dl.py --urls collections/{collection_name}/urls/ --output ~/Downloads/roms
+```
 """
 
-    # Write README
-    write_readme_file(toml_file, readme_content)
+    # Write comprehensive README
+    readme_file = collection_path.parent / "README.md"
+    readme_file.write_text(readme_content, encoding='utf-8')
 
+    logger.info(f"Generated compact comprehensive collection README: {readme_file}")
     return True
+
+
+def process_platform_for_readme(collection_path: Path, platform_name: str, platform_config: Dict[str, Any]) -> Dict[str, Any]:
+    """Process a single platform and return data needed for README generation"""
+    # Get URL file path
+    urls_dir = collection_path.parent / "urls"
+    url_file = urls_dir / f"{platform_name}.txt"
+
+    if not url_file.exists():
+        logger = get_logger()
+        logger.warning(f"URL file not found: {url_file}")
+        return None
+
+    # Parse URL file content
+    included_files, excluded_files = parse_url_file_content(url_file)
+
+    # Create file size mapping
+    source_url = platform_config.get('url', '')
+    file_sizes, total_bytes = create_file_size_mapping(included_files, source_url)
+
+    # Organize files by game
+    decoded_files = [unquote(f) for f in included_files]
+    game_groups = organize_files_by_game(decoded_files, file_sizes)
+
+    # Build final platform data structure
+    return build_platform_data_structure(
+        platform_name, included_files, excluded_files,
+        game_groups, total_bytes, source_url
+    )
+
+
+
 
 
 def main():
