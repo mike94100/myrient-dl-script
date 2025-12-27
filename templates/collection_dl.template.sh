@@ -43,7 +43,7 @@ show_menu() {
             set_output_dir
             ;;
         3)
-            if [ ${SELECTED_PLATFORMS[@]} -eq 0 ] || [ -z "$OUTPUT_DIR" ]; then
+            if [ ${#SELECTED_PLATFORMS[@]} -eq 0 ] || [ -z "$OUTPUT_DIR" ]; then
                 echo "Error: Please select platforms and set output directory first."
                 echo ""
                 show_menu
@@ -78,7 +78,7 @@ select_platforms() {
             ;;
         *)
             for num in $input; do
-                if [[ $num =~ ^[0-9]+$ ]] && [ $num -ge 1 ] && [ $num -le ${PLATFORM_NAMES[@]} ]; then
+                if [[ $num =~ ^[0-9]+$ ]] && [ $num -ge 1 ] && [ $num -le ${#PLATFORM_NAMES[@]} ]; then
                     platform="${PLATFORM_NAMES[$((num-1))]}"
                     if [[ " ${SELECTED_PLATFORMS[*]} " =~ " $platform " ]]; then
                         # Remove from selected
