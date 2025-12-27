@@ -1,21 +1,24 @@
-# SAMPLE.TOML ROM Collection
+# SAMPLE ROM Collection
 
 This collection contains ROMs for multiple gaming platforms with intelligent filtering.
 
 ## Metadata
 
-- **Generated**: 2025-12-24 07:07:43 UTC
-- **Total Platforms**: 3
-- **Total Files**: 11
-- **Total Size**: 29.9 MiB (31.4 MB)
+- **Generated**: 2025-12-27 04:48:25 UTC
+- **ROM Platforms**: 3
+- **BIOS Platforms**: 1
+- **Total Files**: 14
+- **Total Size**: 37.7 MiB (39.5 MB)
 
 ## Directory Structure
 
 ```
-roms/
-├── gb/ (3 files, 1.2 MiB)
-├── gba/ (5 files, 26.3 MiB)
-└── gbc/ (3 files, 2.4 MiB)
+├── bios/
+│   └── ps2/ (3 files, 7.8 MiB)
+└── roms/
+    ├── gb/ (3 files, 1.2 MiB)
+    ├── gba/ (5 files, 26.3 MiB)
+    └── gbc/ (3 files, 2.4 MiB)
 ```
 
 
@@ -47,30 +50,28 @@ roms/
   - Pokemon - Silver Version (USA, Europe) (SGB Enhanced) (GB Compatible).zip (730.6 KiB)
 </details>
 
+## BIOS Files
+
+<details>
+<summary>ps2</summary>
+
+  - ps2-0230a-20080220-175343.zip (2.6 MiB)
+  - ps2-0230e-20080220-175343.zip (2.6 MiB)
+  - ps2-0230j-20080220-175343.zip (2.6 MiB)
+</details>
+
 
 
 ## Download
 
-### Generate URLs and Download All Platforms
-```bash
-# Generate URL files for all platforms
-python gen_urls.py scrape collections/sample.toml/collection.toml
+Download and run the interactive script directly from GitHub:
 
-# Download all ROMs to default directory
-python myrient_dl.py --urls collections/sample.toml/urls/
-```
-
-### Individual Platform Download
-```bash
-# Generate and download specific platform
-python gen_urls.py scrape collections/sample.toml/collection.toml
-python myrient_dl.py --urls collections/sample.toml/urls/gb.txt --output ~/roms/gb
-```
-
-### Remote One-Command Download
 **Linux/Mac:**
 ```bash
-# Download all platforms to ~/Downloads/roms
-python gen_urls.py scrape collections/sample.toml/collection.toml && \
-python myrient_dl.py --urls collections/sample.toml/urls/ --output ~/Downloads/roms
+bash <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample_dl.sh)
+```
+
+**Windows:**
+```powershell
+powershell -Command "& { Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample_dl.ps1' -OutFile 'temp_dl.ps1'; & .	emp_dl.ps1; Remove-Item 'temp_dl.ps1' }"
 ```

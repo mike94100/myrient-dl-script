@@ -1,20 +1,36 @@
-# Myrient ROM Collection Configuration
+# Myrient Collection Configuration
 
 # Platform configurations
-[platforms]
+[roms]
 
 # Nintendo platforms
-[platforms.gb]
+[roms.gb]
 url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/"
+urllist = "collections/sample/urls/gb.txt"
 directory = "roms/gb"
 skip_filtering = true
+extract = false
 
-[platforms.gbc]
+[roms.gbc]
 url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/"
+urllist = "collections/sample/urls/gbc.txt"
 directory = "roms/gbc"
 skip_filtering = true
+extract = false
 
-[platforms.gba]
+[roms.gba]
 url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/"
+urllist = "collections/sample/urls/gba.txt"
 directory = "roms/gba"
 skip_filtering = true
+extract = false
+
+# Platform configurations
+[bios]
+
+[bios.ps2]
+url = "https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation%202%20-%20BIOS%20Images%20%28DoM%20Version%29/"
+urllist = "collections/sample/urls/ps2bios.txt"
+directory = "bios/ps2"
+skip_filtering = true
+extract = true

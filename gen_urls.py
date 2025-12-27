@@ -22,26 +22,30 @@ from filters.filter_collection import CollectionFilter, get_all_platforms
 
 
 def discover_and_organize_platforms(collection_path: str) -> tuple[List[str], List[str]]:
-    """Discover platforms and separate regular from skip_filtering platforms"""
+    """Discover platforms and separate filter from nofilter platforms"""
     filter_obj = CollectionFilter(collection_path)
     all_platforms = get_all_platforms(collection_path)
 
-    skip_platforms = []
-    regular_platforms = []
+    nofilter_platforms = []
+    filter_platforms = []
 
     for platform_name in all_platforms:
         if filter_obj.should_skip_filtering(platform_name):
-            skip_platforms.append(platform_name)
+            nofilter_platforms.append(platform_name)
         else:
-            regular_platforms.append(platform_name)
+            filter_platforms.append(platform_name)
 
-    return regular_platforms, skip_platforms
+    return filter_platforms, nofilter_platforms
 
-
-def get_platform_output_directory(collection_path: str) -> Path:
-    """Get the URLs output directory for a collection"""
-    return Path(collection_path).parent / "urls"
-
+def get_url_file_path(collection_path: str, platform_name: str) -> Path:
+    """Get the URL file path for a platform from its urllist configuration"""
+    filter_obj = CollectionFilter(collection_path)
+    platform_config = filter_obj.get_platform_config(platform_name)
+    if not platform_config or 'urllist' not in platform_config:
+        logger = get_logger()
+        logger.error(f"Platform {platform_name} is missing required 'urllist' field")
+        sys.exit(1)
+    return Path(platform_config['urllist'])
 
 def setup_application_environment(args) -> tuple[Any, Any]:
     """Setup logging, cache, and validate environment"""
@@ -127,11 +131,6 @@ def scrape_zip_filenames(html: str) -> list:
     return sorted(files)
 
 
-def filter_platform_files(files: List[str], platform_name: str, filter_obj: CollectionFilter) -> List[str]:
-    """Apply filtering rules to a list of files for a platform"""
-    return filter_obj.filter_files(platform_name, files)
-
-
 def generate_urls_from_files(files: List[str], base_url: str) -> List[str]:
     """Generate full URLs from filtered files and base URL with proper encoding"""
     urls = []
@@ -172,30 +171,33 @@ async def generate_collection_urls_async(collection_path: str, cache_manager=Non
 
     try:
         # Discover and organize platforms
-        regular_platforms, skip_platforms = discover_and_organize_platforms(collection_path)
-        urls_dir = get_platform_output_directory(collection_path)
+        filter_platforms, nofilter_platforms = discover_and_organize_platforms(collection_path)
 
-        total_platforms = len(regular_platforms) + len(skip_platforms)
+        total_platforms = len(filter_platforms) + len(nofilter_platforms)
         logger.info(f"Generating URLs for {total_platforms} platforms from collection...")
 
-        # Handle skip_filtering platforms
-        for platform_name in skip_platforms:
-            url_file = urls_dir / f"{platform_name}.txt"
+        # Handle nofilter platforms
+        for platform_name in nofilter_platforms:
+            url_file = get_url_file_path(collection_path, platform_name)
             if url_file.exists():
                 logger.info(f"✓ Using existing URL file for {platform_name}")
             else:
                 logger.warning(f"✗ No existing URL file found for {platform_name}")
 
-        # Process regular platforms with async concurrency
-        if regular_platforms:
-            success_count = await process_platforms_async(collection_path, regular_platforms, cache_manager)
+        # Process filter platforms with async concurrency
+        if filter_platforms:
+            success_count = await process_platforms_async(collection_path, filter_platforms, cache_manager)
             total_processed = success_count
-            fail_count = len(regular_platforms) - success_count
+            fail_count = len(filter_platforms) - success_count
         else:
             total_processed = 0
             fail_count = 0
 
-        successful_platforms = total_processed + len([p for p in skip_platforms if (urls_dir / f"{p}.txt").exists()])
+        successful_platforms = total_processed
+        for platform_name in nofilter_platforms:
+            url_file = get_url_file_path(collection_path, platform_name)
+            if url_file.exists():
+                successful_platforms += 1
 
         logger.info(f"Collection URL generation completed: {successful_platforms}/{total_platforms} successful")
         return fail_count == 0
@@ -344,10 +346,6 @@ async def generate_platform_urls(collection_path: str, platform_name: str, cache
 
         logger.info(f"[{platform_name}] Processing platform...")
 
-        # Create urls directory next to collection.toml
-        urls_dir = Path(collection_path).parent / "urls"
-        urls_dir.mkdir(parents=True, exist_ok=True)
-
         # Scrape the URL (with caching)
         logger.info(f"[{platform_name}] Scraping: {url}")
         html = await scrape_platform_html(url, cache_manager, session)
@@ -361,7 +359,7 @@ async def generate_platform_urls(collection_path: str, platform_name: str, cache
         logger.info(f"[{platform_name}] Found {len(files)} files")
 
         # Apply filtering
-        filtered_files = filter_platform_files(files, platform_name, filter_obj)
+        filtered_files = filter_obj.filter_files(platform_name, files)
 
         # Count included files
         included_files = [f for f in filtered_files if not f.startswith('#')]
@@ -372,7 +370,7 @@ async def generate_platform_urls(collection_path: str, platform_name: str, cache
         urls = generate_urls_from_files(filtered_files, url)
 
         # Write URL file
-        url_file = urls_dir / f"{platform_name}.txt"
+        url_file = get_url_file_path(collection_path, platform_name)
         write_url_file(urls, url_file)
 
         logger.info(f"[{platform_name}] Generated {url_file} with {len(urls)} URLs")
@@ -439,6 +437,10 @@ Examples:
     scrape_parser.add_argument(
         '--force', '-f', action='store_true',
         help='Force regeneration even if cache exists'
+    )
+    scrape_parser.add_argument(
+        '--readme', action='store_true',
+        help='Generate README automatically after URL generation'
     )
 
     # Validate command
@@ -522,6 +524,20 @@ async def handle_scrape_command(args, logger, cache_manager):
 
     if success:
         logger.info("URL generation completed successfully!")
+
+        # Generate README if requested
+        if args.readme:
+            logger.info("Generating README...")
+            try:
+                # Import README generation function
+                from gen_readme import generate_readme
+                readme_result = generate_readme(args.collection_file)
+                if readme_result:
+                    logger.info("README generation completed successfully!")
+                else:
+                    logger.warning("README generation failed")
+            except Exception as e:
+                logger.warning(f"README generation failed: {e}")
     else:
         logger.error("URL generation failed")
         sys.exit(1)
@@ -535,16 +551,16 @@ def handle_validate_command(args, logger):
 
     try:
         # Try to parse the collection
-        regular_platforms, skip_platforms = discover_and_organize_platforms(args.collection_file)
+        filter_platforms, nofilter_platforms = discover_and_organize_platforms(args.collection_file)
 
         print("✅ Collection file is valid")
-        print(f"   Regular platforms: {len(regular_platforms)}")
-        print(f"   Skip-filtering platforms: {len(skip_platforms)}")
+        print(f"   Filter platforms: {len(filter_platforms)}")
+        print(f"   Nofilter platforms: {len(nofilter_platforms)}")
 
-        if regular_platforms:
-            print(f"   Platforms: {', '.join(regular_platforms[:5])}{'...' if len(regular_platforms) > 5 else ''}")
-        if skip_platforms:
-            print(f"   Skip platforms: {', '.join(skip_platforms[:5])}{'...' if len(skip_platforms) > 5 else ''}")
+        if filter_platforms:
+            print(f"   Platforms: {', '.join(filter_platforms[:5])}{'...' if len(filter_platforms) > 5 else ''}")
+        if nofilter_platforms:
+            print(f"   Nofilter platforms: {', '.join(nofilter_platforms[:5])}{'...' if len(nofilter_platforms) > 5 else ''}")
 
     except Exception as e:
         logger.error(f"❌ Collection file validation failed: {e}")
@@ -558,43 +574,47 @@ def handle_info_command(args, logger):
         sys.exit(1)
 
     try:
-        regular_platforms, skip_platforms = discover_and_organize_platforms(args.collection_file)
-        urls_dir = get_platform_output_directory(args.collection_file)
+        filter_platforms, nofilter_platforms = discover_and_organize_platforms(args.collection_file)
 
         print(f"Collection: {args.collection_file}")
-        print(f"URL directory: {urls_dir}")
         print()
 
         print("Platforms:")
-        for platform in sorted(regular_platforms):
-            url_file = urls_dir / f"{platform}.txt"
+        for platform in sorted(filter_platforms):
+            url_file = get_url_file_path(args.collection_file, platform)
             status = "✅ Generated" if url_file.exists() else "❌ Missing"
             print(f"  {platform}: {status}")
 
-        if skip_platforms:
+        if nofilter_platforms:
             print()
-            print("Skip-filtering platforms:")
-            for platform in sorted(skip_platforms):
-                url_file = urls_dir / f"{platform}.txt"
+            print("Nofilter platforms:")
+            for platform in sorted(nofilter_platforms):
+                url_file = get_url_file_path(args.collection_file, platform)
                 status = "✅ Has file" if url_file.exists() else "❌ No file"
                 print(f"  {platform}: {status}")
 
-        # Show file statistics
-        if urls_dir.exists():
-            url_files = list(urls_dir.glob("*.txt"))
-            total_files = 0
-            total_urls = 0
+        # Collect all URL files
+        all_platforms = filter_platforms + nofilter_platforms
+        url_files = []
+        for platform in all_platforms:
+            url_file = get_url_file_path(args.collection_file, platform)
+            if url_file.exists():
+                url_files.append(url_file)
 
-            for url_file in url_files:
+        total_urls = 0
+        if url_files:
+            print()
+            print("File statistics:")
+            for url_file in sorted(url_files):
                 try:
                     with open(url_file, 'r') as f:
                         urls = [line.strip() for line in f if line.strip()]
                         included = sum(1 for url in urls if not url.startswith('#'))
                         excluded = sum(1 for url in urls if url.startswith('#'))
                         total_urls += len(urls)
-                        print(f"    {url_file.name}: {included} included, {excluded} excluded")
+                        print(f"  {url_file.name}: {included} included, {excluded} excluded")
                 except Exception:
-                    print(f"    {url_file.name}: Error reading file")
+                    print(f"  {url_file.name}: Error reading file")
 
             print()
             print(f"Summary: {len(url_files)} URL files, {total_urls} total URLs")

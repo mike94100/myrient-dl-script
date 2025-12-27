@@ -30,35 +30,93 @@ I made this as a proof-of-concept on configuring a ROM collection as "code". Thi
 - **TOML Configuration**: Scrape & filter Myrient to create user-readable & editable configurations
 - **README generation**: Create documentation from configuration files
 
-## Download ROMs
+## Usage Guide
 
-The bootstrap scripts:
-- Download the Python code from this repo
-- Installs dependencies
-- Downloads referenced TOML files
-- Downloads ROMs
+### Edit TOML Configuration Files
 
-### Linux/Mac
-```sh
-# Download sample ROMs to default location (~/Downloads/roms)
-wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s
+The TOML file defines the ROM collection. Copy collection.template.toml and edit as needed.
 
-# Download with custom TOML and output directory
-wget -q -O - https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.sh | bash -s -- --toml "https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/sample/sample.toml" --output "$HOME/Downloads/roms"
+**TOML Structure:**
+- `[roms.PLATFORM]` - ROM settings for each platform
+- `[bios.PLATFORM]` - BIOS settings for each platform
+- `directory` - Where files will be saved
+- `urllist` - Path to URL list file (relative to project root)
+- `extract` - Whether to extract zip files after download
+- `skip_filtering` - Skip updating & filtering urls, for custom url lists
+
+### Generate URL Files from TOML
+
+Create URL list files from your TOML configurations:
+
+```bash
+# Generate URL files for all platforms in a collection
+python gen_urls.py scrape collections/sample/sample.toml
 ```
 
-### Windows
+### Generate README Documentation
+
+Create comprehensive README files for your collections:
+
+```bash
+# Generate README for a collection
+python gen_readme.py collections/sample/sample.toml
+
+# Generate URLs and README concurrently
+python gen_urls.py scrape collections/sample/sample.toml --readme
+```
+
+### Generate Interactive Download Scripts
+
+Create cross-platform download scripts with interactive menus:
+
+```bash
+# Generate scripts for a collection
+python gen_dl_scripts.py collections/sample/sample.toml
+
+# This creates:
+# - collections/sample/sample_dl.sh (Linux/Mac)
+# - collections/sample/sample_dl.ps1 (Windows)
+```
+
+### Download ROMs
+
+#### Using Interactive Scripts Remotely (Recommended for Users)
+
+Download and run scripts directly from GitHub:
+
+**Linux/Mac:**
+```bash
+# Run the sample collection script remotely
+bash <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample_dl.sh)
+
+# Or run any collection script remotely:
+bash <(curl -s https://example.com/pathtocollection/collection_dl.sh)
+```
+
+**Windows:**
 ```powershell
-# Download sample ROMs to default location (%USERPROFILE%\Downloads\roms)
-powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t; del $t }"
+# Run the sample collection script remotely
+powershell -Command "& { Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample_dl.ps1' -OutFile 'temp_dl.ps1'; & .\temp_dl.ps1; Remove-Item 'temp_dl.ps1' }"
 
-# Download with custom TOML and output directory
-powershell -c "& { $s=iwr 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/download_roms.bat'; $t=New-TemporaryFile; $t=$t.FullName+'.bat'; [IO.File]::WriteAllText($t,$s); & $t --toml 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/dl/sample/sample.toml'  --output '%USERPROFILE%\Downloads\roms'; del $t }"
+# Or run any collection script remotely:
+powershell -Command "& { Invoke-WebRequest -Uri 'https://example.com/pathtocollection/collection_dl.ps1' -OutFile 'temp_dl.ps1'; & .\temp_dl.ps1; Remove-Item 'temp_dl.ps1' }"
 ```
 
-## Create Configurations
+#### Using Python Downloader
 
-Clone and use the provided python scripts, or copy and modify the .toml files.
+```bash
+# Download all platforms from collection
+python rom_dl.py collections/sample/sample.toml
+
+# Download to custom directory
+python rom_dl.py collections/sample/sample.toml --output ~/my-roms
+
+# Download specific platforms only
+python rom_dl.py collections/sample/sample.toml --platforms gb gba
+
+# Dry run to see what would be downloaded
+python rom_dl.py collections/sample/sample.toml --dry-run
+```
 
 ## Requirements
 

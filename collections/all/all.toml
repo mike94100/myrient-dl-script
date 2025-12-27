@@ -1,104 +1,156 @@
-# Myrient ROM Collection Configuration
-
-# Global default filters, can be overridden per platform
-[filters]
-include = []
-exclude = []
-deduplicate = false
+# Myrient Collection Configuration
 
 # Platform configurations
-[platforms]
+[roms]
 
 # Nintendo platforms
-[platforms.nes]
+[roms.nes]
 url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%20Entertainment%20System%20%28Headered%29/"
+urllist = "collections/all/urls/nes.txt"
 directory = "roms/nes"
+skip_filtering = true
+extract = false
 
-[platforms.snes]
+[roms.snes]
 url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Super%20Nintendo%20Entertainment%20System/"
+urllist = "collections/all/urls/snes.txt"
 directory = "roms/snes"
+skip_filtering = true
+extract = false
 
-[platforms.n64]
+[roms.n64]
 url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%2064%20%28BigEndian%29/"
+urllist = "collections/all/urls/n64.txt"
 directory = "roms/n64"
+skip_filtering = true
+extract = false
 
-[platforms.gc]
+[roms.gc]
 url = "https://myrient.erista.me/files/Redump/Nintendo%20-%20GameCube%20-%20NKit%20RVZ%20%5Bzstd-19-128k%5D/"
+urllist = "collections/all/urls/gc.txt"
 directory = "roms/gc"
+skip_filtering = true
+extract = false
 
-[platforms.wii]
+[roms.wii]
 url = "https://myrient.erista.me/files/Redump/Nintendo%20-%20Wii%20-%20NKit%20RVZ%20%5Bzstd-19-128k%5D/"
+urllist = "collections/all/urls/wii.txt"
 directory = "roms/wii"
+skip_filtering = true
+extract = false
 
-[platforms.gb]
+[roms.gb]
 url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/"
+urllist = "collections/all/urls/gb.txt"
 directory = "roms/gb"
+skip_filtering = true
+extract = false
 
-[platforms.gbc]
+[roms.gbc]
 url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/"
+urllist = "collections/all/urls/gbc.txt"
 directory = "roms/gbc"
+skip_filtering = true
+extract = false
 
-[platforms.gba]
+[roms.gba]
 url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/"
+urllist = "collections/all/urls/gba.txt"
 directory = "roms/gba"
+skip_filtering = true
+extract = false
 
-[platforms.nds]
+[roms.nds]
 url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%20DS%20%28Decrypted%29/"
+urllist = "collections/all/urls/nds.txt"
 directory = "roms/nds"
+skip_filtering = true
+extract = false
 
-[platforms."3ds"]
+[roms."3ds"]
 url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%203DS%20%28Decrypted%29/"
+urllist = "collections/all/urls/3ds.txt"
 directory = "roms/3ds"
+skip_filtering = true
+extract = false
 
 # Sega platforms
-[platforms.genesis]
+[roms.genesis]
 url = "https://myrient.erista.me/files/No-Intro/Sega%20-%20Mega%20Drive%20-%20Genesis/"
+urllist = "collections/all/urls/genesis.txt"
 directory = "roms/genesis"
+skip_filtering = true
+extract = false
 
-[platforms.dreamcast]
+[roms.dreamcast]
 url = "https://myrient.erista.me/files/Redump/Sega%20-%20Dreamcast/"
+urllist = "collections/all/urls/dreamcast.txt"
 directory = "roms/dreamcast"
+skip_filtering = true
+extract = false
 
 # Sony platforms
-[platforms.psx]
+[roms.psx]
 url = "https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation/"
+urllist = "collections/all/urls/psx.txt"
 directory = "roms/psx"
+skip_filtering = true
+extract = false
 
-[platforms.ps2]
+[roms.ps2]
 url = "https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation%202/"
+urllist = "collections/all/urls/ps2.txt"
 directory = "roms/ps2"
+skip_filtering = true
+extract = false
 
-[platforms.psp]
+[roms.psp]
 url = "https://myrient.erista.me/files/No-Intro/Sony%20-%20PlayStation%20Portable%20%28PSN%29%20%28Decrypted%29/"
+urllist = "collections/all/urls/psp.txt"
 directory = "roms/psp"
+skip_filtering = true
+extract = false
 
 # Atari platforms
-[platforms.atari2600]
+[roms.atari2600]
 url = "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%202600/"
+urllist = "collections/all/urls/atari2600.txt"
 directory = "roms/atari2600"
+skip_filtering = true
+extract = false
 
-[platforms.atari5200]
+[roms.atari5200]
 url = "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%205200/"
+urllist = "collections/all/urls/atari5200.txt"
 directory = "roms/atari5200"
+skip_filtering = true
+extract = false
 
-[platforms.atari7800]
+[roms.atari7800]
 url = "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/"
+urllist = "collections/all/urls/atari7800.txt"
 directory = "roms/atari7800"
+skip_filtering = true
+extract = false
 
 # Other platforms
-[platforms.c64]
+[roms.c64]
 url = "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/"
+urllist = "collections/all/urls/c64.txt"
 directory = "roms/c64"
+skip_filtering = true
+extract = false
 
-[platforms.colecovision]
+[roms.colecovision]
 url = "https://myrient.erista.me/files/No-Intro/Coleco%20-%20ColecoVision/"
+urllist = "collections/all/urls/colecovision.txt"
 directory = "roms/colecovision"
+skip_filtering = true
+extract = false
 
-[platforms.intellivision]
+[roms.intellivision]
 url = "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/"
+urllist = "collections/all/urls/intellivision.txt"
 directory = "roms/intellivision"
-
-# Example of a custom collection
-[platforms.custom_collection]
-directory = "roms/custom"
-skip_filtering = true  # Don't generate URLs, use existing custom URL file
+skip_filtering = true
+extract = false

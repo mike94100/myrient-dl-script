@@ -4,16 +4,41 @@ Progress utilities for myrient-dl
 """
 
 import sys
+import time
+import itertools
+import threading
 from utils.log_utils import disable_console_logging, enable_console_logging
+
+# Global spinner state
+_spinner_state = {
+    'active': False,
+    'thread': None,
+    'message': '',
+    'bar': '',
+    'progress': 0,
+    'current': 0,
+    'total': 0,
+    'speed_str': '',
+    'eta_str': '',
+    'completed': False,
+    'lock': threading.Lock()
+}
+
+
+def get_spinner_char() -> str:
+    """Get next spinner character for animation"""
+    spinner_chars = "⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏"
+    if not hasattr(get_spinner_char, 'spinner_cycle'):
+        get_spinner_char.spinner_cycle = itertools.cycle(spinner_chars)
+    return next(get_spinner_char.spinner_cycle)
 
 
 def show_progress(current: int, total: int, message: str = "", width: int = 30, force: bool = False,
-                 files_processed: int = None, total_files: int = None) -> None:
-    """Display enhanced progress bar with ETA, speed metrics, and file statistics"""
+                 files_processed: int = None, total_files: int = None, show_spinner: bool = False) -> None:
+    """Display enhanced progress bar with ETA, speed metrics, and optional continuously animated spinner"""
     if (not sys.stdout.isatty() and not force) or total == 0:
         return
 
-    import time
     import os
 
     # Disable console logging while showing progress bar
@@ -59,7 +84,34 @@ def show_progress(current: int, total: int, message: str = "", width: int = 30, 
             else:
                 eta_str = f" ETA: {remaining/3600:.1f}h"
 
-    # Format progress line
+    # Handle spinner animation
+    if show_spinner:
+        # Update global spinner state
+        with _spinner_state['lock']:
+            _spinner_state['message'] = message
+            _spinner_state['bar'] = bar
+            _spinner_state['progress'] = progress
+            _spinner_state['current'] = current
+            _spinner_state['total'] = total
+            _spinner_state['speed_str'] = speed_str
+            _spinner_state['eta_str'] = eta_str
+            _spinner_state['completed'] = current >= total
+
+        # Start spinner thread if not already running
+        if not _spinner_state['active']:
+            _spinner_state['active'] = True
+            _spinner_state['thread'] = threading.Thread(target=_continuous_spinner_worker, daemon=True)
+            _spinner_state['thread'].start()
+
+        # Don't print here - the background thread handles all display updates
+        return
+    else:
+        # Stop any active spinner
+        _spinner_state['active'] = False
+        if _spinner_state['thread'] and _spinner_state['thread'].is_alive():
+            _spinner_state['thread'].join(timeout=0.1)
+
+    # Format progress line (for non-spinner mode)
     line = f"\r{message} [{bar}] {progress:3d}% ({current}/{total}){speed_str}{eta_str}"
 
     # Force immediate output regardless of terminal buffering
@@ -82,6 +134,41 @@ def show_progress(current: int, total: int, message: str = "", width: int = 30, 
         # Note: Console logging is re-enabled by the caller after batch processing completes
 
 
+def _continuous_spinner_worker():
+    """Background worker that continuously animates spinner and updates display"""
+    import os
+
+    while _spinner_state['active']:
+        try:
+            with _spinner_state['lock']:
+                if _spinner_state['completed']:
+                    # Print final line and exit
+                    line = f"\r{_spinner_state['message']} [{_spinner_state['bar']}] {_spinner_state['progress']:3d}% ({_spinner_state['current']}/{_spinner_state['total']}){_spinner_state['speed_str']}{_spinner_state['eta_str']}"
+                    print(line, flush=True)
+                    break
+
+                # Update display with new spinner character
+                spinner_char = get_spinner_char()
+                line = f"\r{_spinner_state['message']} [{_spinner_state['bar']}] {_spinner_state['progress']:3d}% ({_spinner_state['current']}/{_spinner_state['total']}){_spinner_state['speed_str']}{_spinner_state['eta_str']} {spinner_char}"
+
+                print(line, end="", flush=True)
+
+                # Additional flush for stubborn terminals
+                try:
+                    os.fsync(sys.stdout.fileno())
+                except (OSError, AttributeError):
+                    pass
+
+            time.sleep(0.1)  # Update every 100ms
+
+        except Exception:
+            break
+
+    # Clean up when done
+    _spinner_state['active'] = False
+    print()  # Move to next line
+
+
 def clear_progress() -> None:
     """Clear progress line"""
     if sys.stdout.isatty():
@@ -89,6 +176,39 @@ def clear_progress() -> None:
         # Note: Console logging is re-enabled by the caller after batch processing completes
 
 
-def show_spinner(message: str = "Working") -> None:
-    """Show simple spinner"""
-    print(f"{message} |", end="", flush=True)
+def show_spinner(message: str = "Working", duration: float = None, stop_event=None) -> None:
+    """Show animated spinner for the specified duration or indefinitely until interrupted or stop_event is set"""
+    if not sys.stdout.isatty():
+        print(f"{message}...")
+        return
+
+    import os
+
+    try:
+        start_time = time.time()
+        while True:
+            # Check if stop event is set
+            if stop_event and stop_event.is_set():
+                break
+
+            spinner_char = get_spinner_char()
+            line = f"\r{message} {spinner_char}"
+
+            print(line, end="", flush=True)
+
+            # Check duration if specified
+            if duration and (time.time() - start_time) >= duration:
+                break
+
+            # Check for keyboard interrupt
+            try:
+                time.sleep(0.1)
+            except KeyboardInterrupt:
+                print(f"\r{message} interrupted")
+                return
+
+    except KeyboardInterrupt:
+        print(f"\r{message} interrupted")
+        return
+    finally:
+        print()  # Move to next line when done

@@ -103,3 +103,50 @@ def filter_valid_files(files: list) -> list:
         List of valid (non-commented) file names
     """
     return [f for f in files if not f.startswith('#')]
+
+
+def parse_platforms_from_config(config: dict) -> dict:
+    """
+    Parse platforms from collection TOML config (roms/bios sections)
+
+    Args:
+        config: Parsed TOML configuration dictionary
+
+    Returns:
+        Dictionary mapping platform names to platform configurations
+    """
+    platforms = {}
+
+    # Process ROMs section
+    if 'roms' in config:
+        for name, platform_config in config['roms'].items():
+            platforms[name] = {
+                'type': 'roms',
+                'name': name,
+                **platform_config
+            }
+
+    # Process BIOS section
+    if 'bios' in config:
+        for name, platform_config in config['bios'].items():
+            platforms[name] = {
+                'type': 'bios',
+                'name': name,
+                **platform_config
+            }
+
+    return platforms
+
+
+def parse_platforms_from_file(file_path) -> dict:
+    """
+    Parse platforms from collection TOML file (convenience wrapper)
+
+    Args:
+        file_path: Path to TOML file (string or Path object)
+
+    Returns:
+        Dictionary mapping platform names to platform configurations
+    """
+    config = parse_toml_file(str(file_path))
+    return parse_platforms_from_config(config)

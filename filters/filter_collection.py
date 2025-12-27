@@ -24,7 +24,21 @@ class CollectionFilter:
             self.config = toml.load(f)
 
         self.global_filters = self.config.get('filters', {})
-        self.platforms = self.config.get('platforms', {})
+        self.platforms = self._collect_all_platforms()
+
+    def _collect_all_platforms(self) -> Dict[str, Any]:
+        """Collect platforms from roms and bios sections"""
+        platforms = {}
+
+        if 'roms' in self.config:
+            for name, config in self.config['roms'].items():
+                platforms[name] = config
+
+        if 'bios' in self.config:
+            for name, config in self.config['bios'].items():
+                platforms[name] = config
+
+        return platforms
 
     def get_platform_config(self, platform_name: str) -> Optional[Dict[str, Any]]:
         """Get configuration for a specific platform"""
