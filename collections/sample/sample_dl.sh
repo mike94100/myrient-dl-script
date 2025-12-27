@@ -172,10 +172,6 @@ log_info "Starting sample download to $OUTPUT_DIR"
 mkdir -p "$OUTPUT_DIR"
 cd "$OUTPUT_DIR"
 
-# Process selected platforms
-for platform_name in "${SELECTED_PLATFORMS[@]}"; do
-    log_info "Processing platform: $platform_name"
-
 # Function to process a single platform by index
 process_platform() {
     local index=$1
