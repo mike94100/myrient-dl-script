@@ -252,8 +252,6 @@ process_platform() {{
     local platform_url="${{PLATFORM_URLS[$index]}}"
     local should_extract="${{PLATFORM_EXTRACTS[$index]}}"
 
-    log_info "Processing platform: $platform_name"
-
     # Create platform directory
     mkdir -p "$platform_dir"
 
@@ -270,7 +268,7 @@ process_platform() {{
 
     # Download all files using wget with URL list file
     log_info "Downloading files for $platform_name"
-    wget -m -np -c -e robots=off -R "index.html*" --progress=bar -i "$url_list_file" -P "$platform_dir"
+    wget -np -c -e robots=off -R "index.html*" --progress=bar -i "$url_list_file" -P "$platform_dir"
 
     # Clean up URL list file
     rm -f "$url_list_file"
@@ -281,7 +279,6 @@ process_platform() {{
         cd "$platform_dir"
         for zip_file in *.zip; do
             if [ -f "$zip_file" ]; then
-                log_info "Extracting $zip_file"
                 if command -v unzip &> /dev/null; then
                     unzip -q "$zip_file"
                     rm "$zip_file"
