@@ -4,10 +4,6 @@
 
 set -e
 
-# Global variables
-OUTPUT_DIR=""
-SELECTED_PLATFORMS=()
-
 # Platform configuration arrays
 PLATFORM_NAMES=(
     "roms.gb"
@@ -36,6 +32,10 @@ PLATFORM_EXTRACTS=(
     "0"
     "1"
 )
+
+# Initialize variables
+SELECTED_PLATFORMS=("${PLATFORM_NAMES[@]}")
+OUTPUT_DIR="$HOME/Downloads"
 
 show_menu() {
     echo "=== ROM/BIOS Download Script ==="
@@ -148,10 +148,6 @@ confirm_download() {
     fi
 }
 
-# Initialize with defaults
-SELECTED_PLATFORMS=("roms.gb" "roms.gbc" "roms.gba" "bios.ps2")
-OUTPUT_DIR="$HOME/Downloads"
-
 # Show initial menu
 show_menu
 
@@ -180,8 +176,6 @@ process_platform() {
     local platform_url="${PLATFORM_URLS[$index]}"
     local should_extract="${PLATFORM_EXTRACTS[$index]}"
 
-    log_info "Processing platform: $platform_name"
-
     # Create platform directory
     mkdir -p "$platform_dir"
 
@@ -198,7 +192,7 @@ process_platform() {
 
     # Download all files using wget with URL list file
     log_info "Downloading files for $platform_name"
-    wget -np -c -e robots=off -R "index.html*" --progress=bar -i "$url_list_file" -P "$platform_dir"
+    wget -m -np -c -e robots=off -R "index.html*" --progress=bar -i "$url_list_file" -P "$platform_dir"
 
     # Clean up URL list file
     rm -f "$url_list_file"
@@ -209,7 +203,6 @@ process_platform() {
         cd "$platform_dir"
         for zip_file in *.zip; do
             if [ -f "$zip_file" ]; then
-                log_info "Extracting $zip_file"
                 if command -v unzip &> /dev/null; then
                     unzip -q "$zip_file"
                     rm "$zip_file"
@@ -221,8 +214,6 @@ process_platform() {
         done
         cd ..
     fi
-
-    log_info "Completed $platform_name"
 }
 
 # Process selected platforms
