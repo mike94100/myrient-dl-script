@@ -4,10 +4,6 @@
 
 set -e
 
-# Global variables
-OUTPUT_DIR=""
-SELECTED_PLATFORMS=()
-
 # Platform configuration arrays
 PLATFORM_NAMES=(
     "roms.nes"
@@ -105,17 +101,21 @@ PLATFORM_EXTRACTS=(
     "0"
 )
 
-show_menu() {{
+# Initialize variables
+SELECTED_PLATFORMS=("${PLATFORM_NAMES[@]}")
+OUTPUT_DIR="$HOME/Downloads"
+
+show_menu() {
     echo "=== ROM/BIOS Download Script ==="
     echo ""
     echo "Current settings:"
-    echo "  Platforms: ${{SELECTED_PLATFORMS[*]:-"None selected"}}"
-    echo "  Output directory: ${{OUTPUT_DIR:-"Not set"}}"
+    echo "  Platforms: ${SELECTED_PLATFORMS[*]:-"None selected"}"
+    echo "  Output directory: ${OUTPUT_DIR:-"Not set"}"
     echo ""
     echo "Available platforms:"
-    for i in "${{!PLATFORM_NAMES[@]}}"; do
-        platform="${{PLATFORM_NAMES[$i]}}"
-        if [[ " ${{SELECTED_PLATFORMS[*]}} " =~ " $platform " ]]; then
+    for i in "${!PLATFORM_NAMES[@]}"; do
+        platform="${PLATFORM_NAMES[$i]}"
+        if [[ " ${SELECTED_PLATFORMS[*]} " =~ " $platform " ]]; then
             echo "  [✓] $(($i+1))) $platform"
         else
             echo "  [ ] $(($i+1))) $platform"
@@ -137,7 +137,7 @@ show_menu() {{
             set_output_dir
             ;;
         3)
-            if [ ${{SELECTED_PLATFORMS[@]}} -eq 0 ] || [ -z "$OUTPUT_DIR" ]; then
+            if [ ${#SELECTED_PLATFORMS[@]} -eq 0 ] || [ -z "$OUTPUT_DIR" ]; then
                 echo "Error: Please select platforms and set output directory first."
                 echo ""
                 show_menu
@@ -157,26 +157,26 @@ show_menu() {{
             return
             ;;
     esac
-}}
+}
 
-select_platforms() {{
+select_platforms() {
     echo ""
     echo "Enter platform numbers to toggle (space-separated) or 'all'/'none':"
     read -r input
     case $input in
         all)
-            SELECTED_PLATFORMS=("${{PLATFORM_NAMES[@]}}")
+            SELECTED_PLATFORMS=("${PLATFORM_NAMES[@]}")
             ;;
         none)
             SELECTED_PLATFORMS=()
             ;;
         *)
             for num in $input; do
-                if [[ $num =~ ^[0-9]+$ ]] && [ $num -ge 1 ] && [ $num -le ${{PLATFORM_NAMES[@]}} ]; then
-                    platform="${{PLATFORM_NAMES[$((num-1))]]}}"
-                    if [[ " ${{SELECTED_PLATFORMS[*]}} " =~ " $platform " ]]; then
+                if [[ $num =~ ^[0-9]+$ ]] && [ $num -ge 1 ] && [ $num -le ${#PLATFORM_NAMES[@]} ]; then
+                    platform="${PLATFORM_NAMES[$((num-1))]}"
+                    if [[ " ${SELECTED_PLATFORMS[*]} " =~ " $platform " ]]; then
                         # Remove from selected
-                        SELECTED_PLATFORMS=("${{SELECTED_PLATFORMS[@]/$platform}}")
+                        SELECTED_PLATFORMS=("${SELECTED_PLATFORMS[@]/$platform}")
                     else
                         # Add to selected
                         SELECTED_PLATFORMS+=("$platform")
@@ -186,11 +186,11 @@ select_platforms() {{
             ;;
     esac
     show_menu
-}}
+}
 
-set_output_dir() {{
+set_output_dir() {
     echo ""
-    echo "Current output directory: ${{OUTPUT_DIR:-"Not set"}}"
+    echo "Current output directory: ${OUTPUT_DIR:-"Not set"}"
     echo "Enter new output directory (press Enter for ~/Downloads):"
     read -r new_dir
     if [ -n "$new_dir" ]; then
@@ -199,12 +199,12 @@ set_output_dir() {{
         OUTPUT_DIR="$HOME/Downloads"
     fi
     show_menu
-}}
+}
 
-confirm_download() {{
+confirm_download() {
     echo ""
     echo "Ready to download:"
-    echo "  Platforms: ${{SELECTED_PLATFORMS[*]}}"
+    echo "  Platforms: ${SELECTED_PLATFORMS[*]}"
     echo "  Output directory: $OUTPUT_DIR"
     echo ""
     read -p "Start download? (y/N): " -n 1 -r
@@ -214,11 +214,7 @@ confirm_download() {{
         show_menu
         return
     fi
-}}
-
-# Initialize with defaults
-SELECTED_PLATFORMS=("roms.nes" "roms.snes" "roms.n64" "roms.gc" "roms.wii" "roms.gb" "roms.gbc" "roms.gba" "roms.nds" "roms.3ds" "roms.genesis" "roms.dreamcast" "roms.psx" "roms.ps2" "roms.psp" "roms.atari2600" "roms.atari5200" "roms.atari7800" "roms.c64" "roms.colecovision" "roms.intellivision")
-OUTPUT_DIR="$HOME/Downloads"
+}
 
 # Show initial menu
 show_menu
@@ -230,9 +226,9 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 # Logging functions
-log_info() {{ echo -e "${{GREEN}}[$(date '+%H:%M:%S')] INFO: $1${{NC}}"; }}
-log_warn() {{ echo -e "${{YELLOW}}[$(date '+%H:%M:%S')] WARN: $1${{NC}}"; }}
-log_error() {{ echo -e "${{RED}}[$(date '+%H:%M:%S')] ERROR: $1${{NC}}"; }}
+log_info() { echo -e "${GREEN}[$(date '+%H:%M:%S')] INFO: $1${NC}"; }
+log_warn() { echo -e "${YELLOW}[$(date '+%H:%M:%S')] WARN: $1${NC}"; }
+log_error() { echo -e "${RED}[$(date '+%H:%M:%S')] ERROR: $1${NC}"; }
 
 log_info "Starting 1g1r download to $OUTPUT_DIR"
 
@@ -240,19 +236,13 @@ log_info "Starting 1g1r download to $OUTPUT_DIR"
 mkdir -p "$OUTPUT_DIR"
 cd "$OUTPUT_DIR"
 
-# Process selected platforms
-for platform_name in "${{SELECTED_PLATFORMS[@]}}"; do
-    log_info "Processing platform: $platform_name"
-
 # Function to process a single platform by index
-process_platform() {{
+process_platform() {
     local index=$1
-    local platform_name="${{PLATFORM_NAMES[$index]}}"
-    local platform_dir="${{PLATFORM_DIRS[$index]}}"
-    local platform_url="${{PLATFORM_URLS[$index]}}"
-    local should_extract="${{PLATFORM_EXTRACTS[$index]}}"
-
-    log_info "Processing platform: $platform_name"
+    local platform_name="${PLATFORM_NAMES[$index]}"
+    local platform_dir="${PLATFORM_DIRS[$index]}"
+    local platform_url="${PLATFORM_URLS[$index]}"
+    local should_extract="${PLATFORM_EXTRACTS[$index]}"
 
     # Create platform directory
     mkdir -p "$platform_dir"
@@ -270,7 +260,7 @@ process_platform() {{
 
     # Download all files using wget with URL list file
     log_info "Downloading files for $platform_name"
-    wget -m -np -c -e robots=off -R "index.html*" --progress=bar -i "$url_list_file" -P "$platform_dir"
+    wget -np -c --progress=bar -i "$url_list_file" -P "$platform_dir"
 
     # Clean up URL list file
     rm -f "$url_list_file"
@@ -281,7 +271,6 @@ process_platform() {{
         cd "$platform_dir"
         for zip_file in *.zip; do
             if [ -f "$zip_file" ]; then
-                log_info "Extracting $zip_file"
                 if command -v unzip &> /dev/null; then
                     unzip -q "$zip_file"
                     rm "$zip_file"
@@ -293,15 +282,13 @@ process_platform() {{
         done
         cd ..
     fi
-
-    log_info "Completed $platform_name"
-}}
+}
 
 # Process selected platforms
-for i in "${{!PLATFORM_NAMES[@]}}"; do
-    platform_name="${{PLATFORM_NAMES[$i]}}"
+for i in "${!PLATFORM_NAMES[@]}"; do
+    platform_name="${PLATFORM_NAMES[$i]}"
     # Check if this platform was selected
-    if [[ " ${{SELECTED_PLATFORMS[*]}} " =~ " $platform_name " ]]; then
+    if [[ " ${SELECTED_PLATFORMS[*]} " =~ " $platform_name " ]]; then
         process_platform $i
     fi
 done

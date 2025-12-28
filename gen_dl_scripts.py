@@ -10,10 +10,6 @@ from pathlib import Path
 from typing import Dict, List, Any
 from utils.toml_utils import parse_toml_file as parse_toml, parse_platforms_from_config
 
-
-
-
-
 def load_config() -> Dict[str, Any]:
     """Load base configuration from config.toml"""
     config_path = Path('config.toml')
@@ -153,6 +149,62 @@ def generate_powershell_script(platforms: Dict[str, Dict[str, Any]], output_dir:
 
     return script
 
+def generate_python_script(platforms: Dict[str, Dict[str, Any]], output_dir: Path, repo_base_url: str, base_path: Path = None, toml_stem: str = None) -> str:
+    """Generate Python download script using template"""
+
+    # Read template
+    template_path = Path(__file__).parent / 'templates' / 'collection_dl.template.py'
+    with open(template_path, 'r', encoding='utf-8') as f:
+        template = f.read()
+
+    # Create separate lists for each configuration type
+    platform_names = []
+    platform_dirs = []
+    platform_urls = []
+    platform_extracts = []
+
+    for platform_name, platform_config in platforms.items():
+        platform_type = platform_config['type']
+        urllist_path = platform_config['urllist']
+        github_url = f"{repo_base_url}/{urllist_path}"
+        directory = platform_config['directory']
+        extract = platform_config.get('extract', False)
+
+        descriptive_name = f"{platform_type}.{platform_name}"
+        platform_names.append(descriptive_name)
+        platform_dirs.append(directory)
+        platform_urls.append(github_url)
+        platform_extracts.append(extract)
+
+    # Create Python lists with each item on separate lines
+    def python_list_multiline(items, list_name):
+        lines = [f'{list_name} = [']
+        for item in items:
+            if isinstance(item, str):
+                lines.append(f'    "{item}",')
+            elif isinstance(item, bool):
+                lines.append(f'    {str(item).lower()},')
+            else:
+                lines.append(f'    {item},')
+        lines.append(']')
+        return '\n'.join(lines)
+
+    platform_arrays = '\n'.join([
+        python_list_multiline(platform_names, 'PLATFORM_NAMES'),
+        '',
+        python_list_multiline(platform_dirs, 'PLATFORM_DIRS'),
+        '',
+        python_list_multiline(platform_urls, 'PLATFORM_URLS'),
+        '',
+        python_list_multiline(platform_extracts, 'PLATFORM_EXTRACTS'),
+    ])
+
+    # Replace placeholders in template
+    script = template.replace('{PLATFORM_ARRAYS}', platform_arrays)
+    script = script.replace('{TOML_STEM}', toml_stem or 'collection')
+
+    return script
+
 def main():
     """Main entry point"""
     parser = argparse.ArgumentParser(
@@ -236,9 +288,19 @@ Examples:
     with open(ps1_path, 'w', encoding='utf-8') as f:
         f.write(powershell_script)
 
+    # Generate Python script
+    python_script = generate_python_script(platforms, output_dir, repo_base_url, base_path, toml_stem)
+    py_path = toml_dir / f'{toml_stem}_dl.py'
+    with open(py_path, 'w', encoding='utf-8') as f:
+        f.write(python_script)
+
+    # Make Python script executable
+    py_path.chmod(0o755)
+
     print(f"Generated scripts:")
     print(f"  Bash: {bash_path}")
     print(f"  PowerShell: {ps1_path}")
+    print(f"  Python: {py_path}")
     print(f"Output directory: {output_dir}")
     print(f"Platforms: {', '.join(platforms.keys())}")
 

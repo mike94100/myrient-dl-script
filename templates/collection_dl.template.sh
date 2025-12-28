@@ -166,7 +166,7 @@ process_platform() {
 
     # Download all files using wget with URL list file
     log_info "Downloading files for $platform_name"
-    wget -np -c -R "index.html*" --progress=bar -i "$url_list_file" -P "$platform_dir"
+    wget -np -c --progress=bar -i "$url_list_file" -P "$platform_dir"
 
     # Clean up URL list file
     rm -f "$url_list_file"
