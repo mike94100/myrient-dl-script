@@ -4,7 +4,7 @@ This collection contains ROMs for multiple gaming platforms with intelligent fil
 
 ## Metadata
 
-- **Generated**: 2025-12-27 05:10:52 UTC
+- **Generated**: 2025-12-29 05:36:46 UTC
 - **ROM Platforms**: 21
 
 - **Total Files**: 65721
@@ -65879,5 +65879,5 @@ bash <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/mai
 
 **Windows:**
 ```powershell
-powershell -Command "& { Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/all/all_dl.ps1' -OutFile 'temp_dl.ps1'; & .	emp_dl.ps1; Remove-Item 'temp_dl.ps1' }"
+powershell -Command "& { Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/all/all_dl.ps1' -OutFile 'temp_dl.ps1'; & .\temp_dl.ps1; Remove-Item 'temp_dl.ps1' }"
 ```

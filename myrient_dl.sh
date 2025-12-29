@@ -1,0 +1,420 @@
+#!/usr/bin/env bash
+# Universal ROM/BIOS Download Script
+# Downloads files from any TOML collection configuration
+
+set -e
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Logging functions
+log_info() { echo -e "${GREEN}[$(date '+%H:%M:%S')] INFO: $1${NC}"; }
+log_warn() { echo -e "${YELLOW}[$(date '+%H:%M:%S')] WARN: $1${NC}"; }
+log_error() { echo -e "${RED}[$(date '+%H:%M:%S')] ERROR: $1${NC}"; exit 1; }
+
+# Global variables
+OUTPUT_DIR="$HOME/Downloads"
+SELECTED_PLATFORMS=()
+TOML_URL=""
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Check if required tools are available
+check_dependencies() {
+    local missing=()
+    command -v curl >/dev/null 2>&1 || missing+=("curl")
+    command -v wget >/dev/null 2>&1 || missing+=("wget")
+    command -v jq >/dev/null 2>&1 || missing+=("jq")
+
+    if [ ${#missing[@]} -ne 0 ]; then
+        echo "Error: Missing required tools: ${missing[*]}" >&2
+        echo "Please install them and try again." >&2
+        exit 1
+    fi
+}
+
+# Fetch and parse TOML from URL or local file
+fetch_toml() {
+    local url="$1"
+
+    if [[ "$url" =~ ^https?:// ]]; then
+        # Remote URL
+        curl -s "$url"
+    else
+        # Local file - make path absolute relative to script directory
+        local abs_path="$SCRIPT_DIR/$url"
+        if [ -f "$abs_path" ]; then
+            cat "$abs_path"
+        else
+            echo "Error: Local file not found: $abs_path" >&2
+            exit 1
+        fi
+    fi
+}
+
+# Parse platforms directly from TOML
+parse_platforms_from_toml() {
+    local toml_content="$1"
+
+    # Extract platform sections and their data
+    echo "$toml_content" | grep -A 10 '^\[roms\.' | grep -E '^\[|^\s*[^#].*=' | sed 's/^\[//' | sed 's/\]$//' || true
+}
+
+# Resolve relative URL
+resolve_relative_url() {
+    local toml_url="$1"
+    local relative_path="$2"
+
+    if [[ "$toml_url" =~ ^https?:// ]]; then
+        # Remote URL: remove filename from TOML URL
+        local base_url="${toml_url%/*}"
+        echo "${base_url}/${relative_path}" | sed 's|//|/|g'
+    else
+        # Local file: resolve relative to script directory
+        local toml_path="$SCRIPT_DIR/$toml_url"
+        local toml_dir="$(dirname "$toml_path")"
+        echo "$toml_dir/$relative_path"
+    fi
+}
+
+# Show interactive menu
+show_menu() {
+    while true; do
+        echo "=== Universal ROM/BIOS Download Script ==="
+        echo "Collection: $TOML_URL"
+        echo "Output directory: $OUTPUT_DIR"
+        echo "Selected platforms: ${SELECTED_PLATFORMS[*]:-"None selected"}"
+        echo ""
+
+        echo "Available platforms:"
+        for i in "${!PLATFORM_NAMES[@]}"; do
+            local platform="${PLATFORM_NAMES[$i]}"
+            local marker=" "
+            if [[ " ${SELECTED_PLATFORMS[*]} " == *" $platform "* ]]; then
+                marker="✓"
+            fi
+            echo "  [$marker] $((i+1))) $platform"
+        done
+        echo ""
+
+        echo "Options:"
+        echo "  1) Toggle platform selection"
+        echo "  2) Set output directory"
+        echo "  3) Dry run (preview download)"
+        echo "  4) Start download"
+        echo "  5) Cancel"
+        echo ""
+
+        read -p "Choose option (1-5): " choice
+
+        case $choice in
+            1)
+                select_platforms
+                ;;
+            2)
+                set_output_dir
+                ;;
+            3)
+                if [ ${#SELECTED_PLATFORMS[@]} -eq 0 ]; then
+                    echo "Error: Please select at least one platform first."
+                    read -p "Press Enter to continue..."
+                    continue
+                fi
+                dry_run
+                ;;
+            4)
+                if [ ${#SELECTED_PLATFORMS[@]} -eq 0 ]; then
+                    echo "Error: Please select at least one platform first."
+                    read -p "Press Enter to continue..."
+                    continue
+                fi
+                return 0
+                ;;
+            5)
+                echo "Download cancelled."
+                exit 0
+                ;;
+            *)
+                echo "Invalid option. Please try again."
+                read -p "Press Enter to continue..."
+                ;;
+        esac
+    done
+}
+
+# Platform selection
+select_platforms() {
+    echo ""
+    echo "Enter platform numbers to toggle (space-separated) or 'all'/'none':"
+    read -r input
+
+    case $input in
+        all)
+            SELECTED_PLATFORMS=("${PLATFORM_NAMES[@]}")
+            ;;
+        none)
+            SELECTED_PLATFORMS=()
+            ;;
+        *)
+            for num in $input; do
+                if [[ $num =~ ^[0-9]+$ ]] && [ $num -ge 1 ] && [ $num -le ${#PLATFORM_NAMES[@]} ]; then
+                    local platform="${PLATFORM_NAMES[$((num-1))]}"
+                    if [[ " ${SELECTED_PLATFORMS[*]} " == *" $platform "* ]]; then
+                        # Remove from selected
+                        SELECTED_PLATFORMS=("${SELECTED_PLATFORMS[@]/$platform}")
+                    else
+                        # Add to selected
+                        SELECTED_PLATFORMS+=("$platform")
+                    fi
+                fi
+            done
+            ;;
+    esac
+}
+
+# Set output directory
+set_output_dir() {
+    echo ""
+    echo "Current output directory: $OUTPUT_DIR"
+    echo "Enter new output directory (press Enter for ~/Downloads):"
+    read -r new_dir
+    if [ -n "$new_dir" ]; then
+        OUTPUT_DIR="$new_dir"
+    elif [ -z "$OUTPUT_DIR" ]; then
+        OUTPUT_DIR="$HOME/Downloads"
+    fi
+}
+
+# Dry run - show what will be downloaded
+dry_run() {
+    echo ""
+    echo "=== DRY RUN - Preview Download ==="
+    echo "Output directory: $OUTPUT_DIR"
+    echo "Selected platforms: ${SELECTED_PLATFORMS[*]}"
+    echo ""
+
+    local directories_to_create=("$OUTPUT_DIR")
+
+    echo "Directories that will be created:"
+    echo "  $OUTPUT_DIR"
+
+    for platform_name in "${SELECTED_PLATFORMS[@]}"; do
+        # Find platform data
+        for i in "${!PLATFORM_NAMES[@]}"; do
+            if [ "${PLATFORM_NAMES[$i]}" = "$platform_name" ]; then
+                local platform_dir="${PLATFORM_DIRS[$i]}"
+                local full_platform_dir="$OUTPUT_DIR/$platform_dir"
+                directories_to_create+=("$full_platform_dir")
+                echo "  $full_platform_dir"
+
+                # Try to fetch URL list to show count
+                local urllist_path="${URL_LISTS[$i]}"
+                local urllist_url="$(resolve_relative_url "$TOML_URL" "$urllist_path")"
+
+                if [[ "$urllist_url" =~ ^https?:// ]]; then
+                    local url_count=$(curl -s "$urllist_url" | grep -v '^#' | grep -v '^$' | wc -l)
+                else
+                    local url_count=$(grep -v '^#' "$urllist_url" 2>/dev/null | grep -v '^$' | wc -l)
+                fi
+
+                if [ "$url_count" -gt 0 ]; then
+                    echo "    $platform_name: $url_count files"
+                else
+                    echo "    $platform_name: Could not fetch URL list"
+                fi
+                break
+            fi
+        done
+    done
+
+    echo ""
+    echo "Total directories to create: ${#directories_to_create[@]}"
+    echo ""
+    read -p "Press Enter to return to menu..."
+}
+
+# Download files for a platform
+download_platform() {
+    local platform_name="$1"
+    local platform_dir="$2"
+    local urllist_url="$3"
+    local should_extract="$4"
+
+    # Create platform directory
+    mkdir -p "$OUTPUT_DIR/$platform_dir"
+
+    # Fetch URL list
+    local urls=""
+    if [[ "$urllist_url" =~ ^https?:// ]]; then
+        urls=$(curl -s "$urllist_url" | grep -v '^#' | grep -v '^$' || true)
+    else
+        urls=$(grep -v '^#' "$urllist_url" 2>/dev/null | grep -v '^$' || true)
+    fi
+
+    if [ -z "$urls" ]; then
+        log_warn "No URLs found for $platform_name"
+        return
+    fi
+
+    # Create temporary URL list file for wget
+    local url_list_file=$(mktemp)
+    echo "$urls" > "$url_list_file"
+
+    # Download files
+    log_info "Downloading files for $platform_name"
+    if wget -np -c --progress=bar -i "$url_list_file" -P "$OUTPUT_DIR/$platform_dir"; then
+        # Clean up URL list file
+        rm -f "$url_list_file"
+
+        # Extract if needed
+        if [ "$should_extract" = "true" ]; then
+            log_info "Extracting files for $platform_name"
+            cd "$OUTPUT_DIR/$platform_dir"
+            for zip_file in *.zip; do
+                if [ -f "$zip_file" ]; then
+                    if command -v unzip >/dev/null 2>&1; then
+                        unzip -q "$zip_file" && rm "$zip_file"
+                    else
+                        log_error "unzip command not available for extraction"
+                    fi
+                fi
+            done
+            cd - >/dev/null
+        fi
+    else
+        rm -f "$url_list_file"
+        log_error "wget failed for $platform_name"
+    fi
+}
+
+# Main function
+main() {
+    # Check dependencies
+    check_dependencies
+
+    # Parse arguments
+    if [ $# -lt 1 ]; then
+        echo "Usage: $0 <collection_url> [-o output_dir] [--non-interactive]" >&2
+        exit 1
+    fi
+
+    TOML_URL="$1"
+    shift
+
+    while [ $# -gt 0 ]; do
+        case $1 in
+            -o|--output)
+                OUTPUT_DIR="$2"
+                shift 2
+                ;;
+            --non-interactive)
+                NON_INTERACTIVE=1
+                shift
+                ;;
+            *)
+                echo "Unknown option: $1" >&2
+                exit 1
+                ;;
+        esac
+    done
+
+    # Set default output directory
+    OUTPUT_DIR="${OUTPUT_DIR:-$HOME/Downloads}"
+
+    # Fetch and parse TOML
+    local toml_content=$(fetch_toml "$TOML_URL")
+
+    # Parse platforms directly from TOML
+    # Find all platform sections and process them
+    local platform_sections=$(echo "$toml_content" | grep '^\[roms\.' | sed 's/^\[//' | sed 's/\]$//' && echo "$toml_content" | grep '^\[bios\.' | sed 's/^\[//' | sed 's/\]$//')
+
+    for section in $platform_sections; do
+        if [[ "$section" =~ ^(roms|bios)\.(.+)$ ]]; then
+            local section_type="${BASH_REMATCH[1]}"
+            local platform_name="${BASH_REMATCH[2]}"
+
+            # Extract the section content (between section header and next section or end)
+            local section_content=$(echo "$toml_content" | awk -v section="[$section_type.$platform_name]" '
+            BEGIN { in_section = 0 }
+            /^\[/ { if (in_section && $0 != section) exit; if ($0 == section) in_section = 1; next }
+            in_section { print }
+            ')
+
+            # Parse the key=value pairs
+            local directory=""
+            local urllist=""
+            local extract="false"
+
+            while IFS= read -r line; do
+                # Skip comments and empty lines
+                [[ "$line" =~ ^[[:space:]]*# ]] && continue
+                [[ "$line" =~ ^[[:space:]]*$ ]] && continue
+
+                if [[ "$line" =~ ^[[:space:]]*([^=]+)[[:space:]]*=[[:space:]]*(.+)[[:space:]]*$ ]]; then
+                    local key="${BASH_REMATCH[1]}"
+                    local value="${BASH_REMATCH[2]}"
+
+                    # Trim key
+                    key="${key// /}"
+
+                    # Remove quotes
+                    value="${value#\"}"
+                    value="${value%\"}"
+
+                    case "$key" in
+                        directory) directory="$value" ;;
+                        urllist) urllist="$value" ;;
+                        extract) extract="$value" ;;
+                    esac
+                fi
+            done <<< "$section_content"
+
+            # Add platform if we have required fields
+            if [ -n "$platform_name" ] && [ -n "$directory" ] && [ -n "$urllist" ]; then
+                PLATFORM_NAMES+=("$platform_name")
+                PLATFORM_DIRS+=("$directory")
+                URL_LISTS+=("$urllist")
+                SHOULD_EXTRACT+=("$extract")
+            fi
+        fi
+    done
+
+    if [ ${#PLATFORM_NAMES[@]} -eq 0 ]; then
+        echo "Error: No platforms found in collection" >&2
+        exit 1
+    fi
+
+    # Initialize selected platforms
+    if [ "$NON_INTERACTIVE" = "1" ]; then
+        SELECTED_PLATFORMS=("${PLATFORM_NAMES[@]}")
+    else
+        SELECTED_PLATFORMS=("${PLATFORM_NAMES[@]}")
+        show_menu
+    fi
+
+    # Create output directory
+    mkdir -p "$OUTPUT_DIR"
+    cd "$OUTPUT_DIR"
+
+    # Download selected platforms
+    log_info "Starting download to $OUTPUT_DIR"
+
+    for i in "${!PLATFORM_NAMES[@]}"; do
+        local platform_name="${PLATFORM_NAMES[$i]}"
+        if [[ " ${SELECTED_PLATFORMS[*]} " == *" $platform_name "* ]]; then
+            local platform_dir="${PLATFORM_DIRS[$i]}"
+            local urllist_path="${URL_LISTS[$i]}"
+            local urllist_url=$(resolve_relative_url "$TOML_URL" "$urllist_path")
+            local should_extract="${SHOULD_EXTRACT[$i]}"
+
+            download_platform "$platform_name" "$platform_dir" "$urllist_url" "$should_extract"
+        fi
+    done
+
+    log_info "Download completed successfully"
+}
+
+# Run main function
+main "$@"

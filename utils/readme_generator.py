@@ -3,7 +3,6 @@
 Generate README - Generate README documentation from TOML configuration files
 """
 
-import argparse
 import logging
 import re
 import sys
@@ -13,27 +12,23 @@ from typing import List, Dict, Any
 from urllib.parse import unquote
 
 # Import utilities
-from utils.log_utils import init_logger, get_logger
+from utils.log_utils import get_logger
 from utils.wget_utils import wget_scrape
-from utils.toml_utils import parse_toml_file, filter_valid_files
-from utils.file_size_utils import format_file_size, calculate_total_size, parse_file_size, format_file_size_dual
-from utils.progress_utils import show_progress, clear_progress, show_spinner
+from utils.toml_utils import parse_toml_file
+from utils.file_size_utils import format_file_size, calculate_total_size, format_file_size_dual
+from utils.file_parsing_utils import parse_url_file_content, parse_game_info, write_readme_file, organize_files_by_game, build_platform_data_structure
 import threading
 
 # Load config
 config = parse_toml_file('config.toml')
 REPO_BASE_URL = config.get('general', {}).get('repo_base_url', 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main')
 
+
 def get_current_timestamp() -> str:
     """Get current timestamp in consistent format for READMEs"""
     return datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')
 
-def write_readme_file(toml_file: Path, readme_content: str) -> None:
-    """Write README content to file with consistent encoding and logging"""
-    readme_file = toml_file.parent / "README.md"
-    readme_file.write_text(readme_content, encoding='utf-8')
-    logger = get_logger()
-    logger.info(f"Generated {readme_file}")
+
 
 def extract_file_sizes(html: str, files: List[str]) -> Dict[str, str]:
     """Extract file sizes from Myrient HTML"""
@@ -50,54 +45,6 @@ def extract_file_sizes(html: str, files: List[str]) -> Dict[str, str]:
                 sizes[file] = size
 
     return sizes
-
-def parse_game_info(filename: str) -> tuple:
-    """Parse game name and tags from filename"""
-    # Remove extension
-    name = re.sub(r'\.[^.]+$', '', filename)
-
-    # Extract game name (everything before first parenthesis)
-    game_name = name
-    paren_match = re.search(r'\s*\(', name)
-    if paren_match:
-        game_name = name[:paren_match.start()].strip()
-
-    # Extract tags (everything in parentheses) - preserve individual groups
-    tags_match = re.findall(r'\([^)]+\)', name)
-    tags = ' '.join(tags_match)
-
-    return game_name, tags
-
-
-def parse_url_file_content(url_file: Path) -> tuple[List[str], List[str]]:
-    """Parse URL file and return (included_files, excluded_files)"""
-    included_files = []
-    excluded_files = []
-
-    try:
-        with open(url_file, 'r', encoding='utf-8') as f:
-            url_lines = [line.strip() for line in f if line.strip()]
-    except Exception as e:
-        logger = get_logger()
-        logger.error(f"Failed to read URL file {url_file}: {e}")
-        return [], []
-
-    for url_line in url_lines:
-        if url_line.startswith('#'):
-            # Excluded file - extract filename from commented URL
-            if url_line.startswith('#http'):
-                url_part = url_line[1:]  # Remove # prefix
-                filename = url_part.split('/')[-1]
-                if filename:
-                    excluded_files.append(filename)
-        else:
-            # Included file - extract filename from URL
-            if url_line.startswith('http'):
-                filename = url_line.split('/')[-1]
-                if filename:
-                    included_files.append(filename)
-
-    return included_files, excluded_files
 
 
 def create_file_size_mapping(included_files: List[str], source_url: str) -> tuple[Dict[str, str], int]:
@@ -116,54 +63,6 @@ def create_file_size_mapping(included_files: List[str], source_url: str) -> tupl
             total_bytes = calculate_total_size(file_sizes)
 
     return file_sizes, total_bytes
-
-
-def organize_files_by_game(decoded_files: List[str], file_sizes: Dict[str, str]) -> Dict[str, List[Dict]]:
-    """Group files by game name and return structured data"""
-    # Create a mapping from decoded filenames back to original encoded filenames
-    decoded_to_encoded = {unquote(f): f for f in decoded_files}
-
-    # Group files by game name for better organization
-    game_groups = {}
-    for decoded_filename in decoded_files:
-        encoded_filename = decoded_to_encoded.get(decoded_filename, decoded_filename)
-        game_name, tags = parse_game_info(decoded_filename)
-        size_bytes = 0
-        size_str = file_sizes.get(decoded_filename, 'Unknown')
-
-        # Try to parse size for sorting/grouping
-        try:
-            if size_str != 'Unknown' and size_str != '-':
-                size_bytes = parse_file_size(size_str)
-        except:
-            pass
-
-        if game_name not in game_groups:
-            game_groups[game_name] = []
-        game_groups[game_name].append({
-            'filename': encoded_filename,  # Use encoded for display
-            'decoded_filename': decoded_filename,  # Use decoded for lookup
-            'tags': tags,
-            'size': size_str,
-            'size_bytes': size_bytes
-        })
-
-    return game_groups
-
-
-def build_platform_data_structure(platform_name: str, included_files: List[str],
-                                excluded_files: List[str], game_groups: Dict[str, List[Dict]],
-                                total_bytes: int, source_url: str) -> Dict[str, Any]:
-    """Assemble final platform data structure"""
-    return {
-        'platform_name': platform_name,
-        'included_files': included_files,
-        'excluded_files': excluded_files,
-        'game_groups': game_groups,
-        'total_files': len(included_files),
-        'total_bytes': total_bytes,
-        'source_url': source_url
-    }
 
 
 def generate_readme(toml_files):
@@ -187,7 +86,7 @@ def generate_readme(toml_files):
     for i, toml_file in enumerate(toml_files, 1):
         if is_single_file:
             # Show spinner for single file
-            spinner_thread = threading.Thread(target=show_spinner, args=(f"Generating README for {toml_file.name}", None, stop_event), daemon=True)
+            spinner_thread = threading.Thread(target=show_spinner, args=(f"Generating README for {toml_file.name}", stop_event), daemon=True)
             spinner_thread.start()
         else:
             # Show progress bar for multiple files
@@ -430,13 +329,12 @@ def generate_collection_readme(collection_path: Path, config: Dict[str, Any]) ->
     # Combine everything into compact comprehensive README
     readme_content = f"""# {collection_path.name.upper().replace('.TOML', '')} ROM Collection
 
-This collection contains ROMs for multiple gaming platforms with intelligent filtering.
+This collection contains ROMs for multiple gaming platforms.
 
 ## Metadata
 
 - **Generated**: {get_current_timestamp()}
-- **ROM Platforms**: {len(rom_platforms)}
-{f"- **BIOS Platforms**: {len(bios_platforms)}" if bios_platforms else ""}
+- **ROM Platforms**: {len(rom_platforms)}{f"\n- **BIOS Platforms**: {len(bios_platforms)}" if bios_platforms else ""}
 - **Total Files**: {total_files_all}
 - **Total Size**: {total_size_formatted}
 
@@ -457,7 +355,7 @@ bash <(curl -s {sh_script_url})
 
 **Windows:**
 ```powershell
-powershell -Command "& {{ Invoke-WebRequest -Uri '{ps1_script_url}' -OutFile 'temp_dl.ps1'; & .\temp_dl.ps1; Remove-Item 'temp_dl.ps1' }}"
+powershell -Command "& {{ Invoke-WebRequest -Uri '{ps1_script_url}' -OutFile 'temp_dl.ps1'; & .\\temp_dl.ps1; Remove-Item 'temp_dl.ps1' }}"
 ```
 """
 
@@ -468,10 +366,11 @@ powershell -Command "& {{ Invoke-WebRequest -Uri '{ps1_script_url}' -OutFile 'te
     logger.info(f"Generated compact comprehensive collection README: {readme_file}")
     return True
 
+
 def process_platform_for_readme(collection_path: Path, platform_name: str, platform_config: Dict[str, Any]) -> Dict[str, Any]:
     """Process a single platform and return data needed for README generation"""
     # Get URL file path using urllist field
-    url_file = Path(platform_config['urllist'])
+    url_file = collection_path.parent / platform_config['urllist']
 
     if not url_file.exists():
         logger = get_logger()
@@ -495,82 +394,38 @@ def process_platform_for_readme(collection_path: Path, platform_name: str, platf
         game_groups, total_bytes, source_url
     )
 
-def main():
-    """Main entry point"""
-    parser = argparse.ArgumentParser(
-        description="Generate README.md files from TOML configuration files",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-Examples:
-  # Generate README for a single collection TOML file
-  python gen_readme.py collections/sample/sample.toml
 
-  # Generate READMEs for multiple specific collection TOML files
-  python gen_readme.py collections/sample/sample.toml collections/1g1r/1g1r.toml
+# Import missing functions that were in the original gen_readme.py
+def show_spinner(message, stop_event=None, interval=0.1):
+    """Show a simple spinner for single file processing"""
+    import time
+    import itertools
 
-  # Generate READMEs for all collection TOML files in a directory
-  python gen_readme.py collections/
-        """
-    )
+    spinner = itertools.cycle(['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'])
 
-    parser.add_argument(
-        'toml_files', nargs='+',
-        help='TOML file(s) or directory containing TOML files to generate READMEs for'
-    )
-    parser.add_argument(
-        '--verbose', '-v', action='store_true',
-        help='Enable verbose output'
-    )
-    parser.add_argument(
-        '--log-level', choices=['DEBUG', 'INFO', 'WARNING', 'ERROR'], default='INFO',
-        help='Set logging level (default: INFO)'
-    )
+    print(f"{message} ", end='', flush=True)
 
-    args = parser.parse_args()
+    while not stop_event.is_set():
+        print(f"\r{message} {next(spinner)}", end='', flush=True)
+        time.sleep(interval)
 
-    # Setup logging
-    log_dir = Path.cwd() / "logs"
-    log_dir.mkdir(exist_ok=True)
-    log_file = log_dir / "generate_readme.log"
-    logger = init_logger(log_file=str(log_file), verbose=args.verbose, level=getattr(logging, args.log_level.upper(), logging.INFO))
+    print(f"\r{message} ✓")
 
-    # Collect TOML files
-    toml_files = []
-    for path_str in args.toml_files:
-        path = Path(path_str)
-        if path.is_dir():
-            # Find all .toml files in directory
-            toml_files.extend(path.glob("*.toml"))
-        elif path.is_file() and path.suffix == '.toml':
-            toml_files.append(path)
-        else:
-            logger.error(f"Invalid path: {path} (must be .toml file or directory containing .toml files)")
-            sys.exit(1)
 
-    if not toml_files:
-        logger.error("No TOML files found")
-        sys.exit(1)
+def show_progress(current, total, message="", force=False, show_spinner=False):
+    """Show progress bar for multiple file processing"""
+    import sys
+    if show_spinner and not force:
+        return  # Don't show progress bar for spinner mode
 
-    # Remove duplicates while preserving order
-    seen = set()
-    toml_files = [f for f in toml_files if str(f) not in seen and not seen.add(str(f))]
+    percent = int(100 * current / total)
+    bar = '█' * (percent // 2) + '░' * (50 - percent // 2)
+    sys.stdout.write(f"\r{message} [{bar}] {current}/{total} ({percent}%)")
+    sys.stdout.flush()
 
-    logger.info(f"Generating READMEs for {len(toml_files)} TOML file(s)")
 
-    # Generate READMEs
-    results = generate_readme(toml_files)
-
-    # Report results
-    success_count = sum(results)
-    fail_count = len(results) - success_count
-
-    if success_count > 0:
-        logger.info(f"README generation completed: {success_count} successful")
-    if fail_count > 0:
-        logger.error(f"README generation failed: {fail_count} failed")
-        sys.exit(1)
-
-    logger.info("All READMEs generated successfully!")
-
-if __name__ == "__main__":
-    main()
+def clear_progress():
+    """Clear the progress bar line"""
+    import sys
+    sys.stdout.write('\r' + ' ' * 80 + '\r')
+    sys.stdout.flush()

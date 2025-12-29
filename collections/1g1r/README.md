@@ -1,12 +1,11 @@
 # 1G1R ROM Collection
 
-This collection contains ROMs for multiple gaming platforms with intelligent filtering.
+This collection contains ROMs for multiple gaming platforms.
 
 ## Metadata
 
-- **Generated**: 2025-12-27 05:14:27 UTC
+- **Generated**: 2025-12-29 06:00:48 UTC
 - **ROM Platforms**: 21
-
 - **Total Files**: 17252
 - **Total Size**: 8.0 TiB (8.9 TB)
 
@@ -17410,5 +17409,5 @@ bash <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/mai
 
 **Windows:**
 ```powershell
-powershell -Command "& { Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/1g1r/1g1r_dl.ps1' -OutFile 'temp_dl.ps1'; & .	emp_dl.ps1; Remove-Item 'temp_dl.ps1' }"
+powershell -Command "& { Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/1g1r/1g1r_dl.ps1' -OutFile 'temp_dl.ps1'; & .\temp_dl.ps1; Remove-Item 'temp_dl.ps1' }"
 ```

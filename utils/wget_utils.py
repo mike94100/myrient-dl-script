@@ -185,6 +185,9 @@ def get_http_session():
     return _http_session
 
 
+
+
+
 def wget_scrape(url, cache_manager=None, request_delay=1.0, use_session=True):
     """Download HTML content using requests.Session() for connection pooling, fallback to wget"""
     import time

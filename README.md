@@ -1,129 +1,116 @@
 # Myrient ROM Downloader
 
-A Python ROM collection & downloading script for the Myrient site.
+A modern, cross-platform ROM collection and downloading system for the Myrient site with decentralized collection hosting.
 
 ## Why
 
-I made this as a proof-of-concept on configuring a ROM collection as "code". This is meant to make it extremely easy for users to create a collection of ROMs that can be served publicly to others or toserve as a backup of their own personal ROM collection Given the small size of the .toml files, you can serve or backup your collection configuration very easily with no space consideration, with this repo storing example collecions on GitHub with scripts to remotely access & download those (or any) collections.
+This project treats ROM collections as "code" - small, versionable TOML configuration & URL list files that define collections of games. This approach enables:
 
-## Design Goals
+- **No File Hosting**: All files are downloaded from Myrient (or other source)
+- **Authenticity**: Myrient provides verified, hashed ROMs from trusted sources
+- **Space-Efficient**: Store collection definitions as text not ROM files
+- **Easy Sharing**: Share curated collections without hosting any files
+- **Customization**: Pre-define specific game lists, not just on-the-fly filtering
+- **Version Control**: Track changes to your collection over time
+- **Auto-Documentation**: Generate comprehensive collection READMEs
+- **Easy Downloads**: One-command downloads from any hosted collection via Python, Bash, or PowerShell
 
-- **Space Efficient** This tool lets users create a backup of their collection as text, which is space-efficient for storage basically anywhere, even for free with easy remote access on GitHub/GitLab/Codeberg. Backing up a large collection of ROMs via cloud providers is costly and may be subject to copyright issues or other restrictions. Locally requires some technical knowledge (which I would recommend people gain) & higher initial cost for storage, redundancy, and backups.
-- **Takedown Resiliency** I tried to create the tool to be easy to switch to a new Base URL or URL Path Directory if needed via text replacement. If a new provider did use different file names, there is not much I can do to account for it. But the text would still serve as a list of games in the worst case scenario. Since the file names are not copyrightable, the .toml files themselves would not pose any legal issue. There is nothing I can do if a full crackdown on all ROM sites occured, which is why users should look into local storage and backups. But this should be a good, free, and easy first step.
-- **Easy Downloads** The Myrient site itself is great, but only functions to download single files. There are many tools to download files bulk from Myrient, but typically require installation and some configuration for filtering. This tool is meant to run as a simple command and access the script & configurations remotely. One command to download any collection with no installs.
-- **Customization** This tool lets users filter to create a generic configuration then manually update the file list to create fully custom collections. This process is what allows users to backup a specific configuration as text. Most Myrient tools today provide on the fly filtering & downloads, but no way to pre-define specific lists of games.
+## Quick Start
 
-  Examples:
-  - Personal ROM collection
-  - A subset of your ROM collection for specific devices
-  - A 1 Game 1 Rom (1G1R) collection
-  - Top 25 for each Platform
-  - All games in a specific franchise
+### Download from Any Collection
 
-- **No File Hosting** Since all downloads are from Myrient, users can share & curate any number of collections without needing to host any files themselves. 
-- **Authenticity** Since Myrient is used as the source and provides only files with known hashes from known groups, users can be sure all files downloaded are authentic. This also ensures that ROMs from collections created by other users are authentic.
-
-## Features
-
-- **Cross-platform**: Python and custom download scripts generated for cross platform use
-- **Wget-based Downloads**: Wget is recommended by Myrient for downloads
-- **Filtering**: Scripts to filter & Deduplicate ROM files
-- **TOML Configuration**: Scrape & filter Myrient to create user-readable & editable configurations
-- **README generation**: Create documentation from configuration files
-
-## Usage Guide
-
-### Edit TOML Configuration Files
-
-The TOML file defines the ROM collection. Copy collection.template.toml and edit as needed.
-
-**TOML Structure:**
-- `[roms.PLATFORM]` - ROM settings for each platform
-- `[bios.PLATFORM]` - BIOS settings for each platform
-- `directory` - Where files will be saved
-- `urllist` - Path to URL list file (relative to project root)
-- `extract` - Whether to extract zip files after download
-- `skip_filtering` - Skip updating & filtering urls, for custom url lists
-
-### Generate URL Files from TOML
-
-Create URL list files from your TOML configurations:
-
+**Linux/macOS:**
 ```bash
-# Generate URL files for all platforms in a collection
-python gen_urls.py scrape collections/sample/sample.toml
-```
+# Download sample collection
+./myrient_dl.sh collections/sample/sample.toml
 
-### Generate README Documentation
-
-Create comprehensive README files for your collections:
-
-```bash
-# Generate README for a collection
-python gen_readme.py collections/sample/sample.toml
-
-# Generate URLs and README concurrently
-python gen_urls.py scrape collections/sample/sample.toml --readme
-```
-
-### Generate Interactive Download Scripts
-
-Create cross-platform download scripts with interactive menus:
-
-```bash
-# Generate scripts for a collection
-python gen_dl_scripts.py collections/sample/sample.toml
-
-# This creates:
-# - collections/sample/sample_dl.sh (Linux/Mac)
-# - collections/sample/sample_dl.ps1 (Windows)
-```
-
-### Download ROMs
-
-#### Using Interactive Scripts Remotely (Recommended for Users)
-
-Download and run scripts directly from GitHub:
-
-**Linux/Mac:**
-```bash
-# Run the sample collection script remotely
-bash <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample_dl.sh)
-
-# Or run any collection script remotely:
-bash <(curl -s https://example.com/pathtocollection/collection_dl.sh)
+# Download from any hosted collection
+./myrient_dl.sh https://example.com/my-collection.toml
 ```
 
 **Windows:**
 ```powershell
-# Run the sample collection script remotely
-powershell -Command "& { Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample_dl.ps1' -OutFile 'temp_dl.ps1'; & .\temp_dl.ps1; Remove-Item 'temp_dl.ps1' }"
+# Download sample collection
+.\myrient_dl.ps1 collections\sample\sample.toml
 
-# Or run any collection script remotely:
-powershell -Command "& { Invoke-WebRequest -Uri 'https://example.com/pathtocollection/collection_dl.ps1' -OutFile 'temp_dl.ps1'; & .\temp_dl.ps1; Remove-Item 'temp_dl.ps1' }"
+# Download from any hosted collection
+.\myrient_dl.ps1 https://example.com/my-collection.toml
 ```
 
-#### Using Python Downloader
-
+**Python (Cross-platform):**
 ```bash
-# Download all platforms from collection
-python rom_dl.py collections/sample/sample.toml
+# Download sample collection
+python myrient_dl.py collections/sample/sample.toml
 
 # Download to custom directory
-python rom_dl.py collections/sample/sample.toml --output ~/my-roms
+python myrient_dl.py collections/sample/sample.toml --output ~/my-roms
 
-# Download specific platforms only
-python rom_dl.py collections/sample/sample.toml --platforms gb gba
+# Download specific platforms
+python myrient_dl.py collections/sample/sample.toml --platforms gb gba
+```
 
-# Dry run to see what would be downloaded
-python rom_dl.py collections/sample/sample.toml --dry-run
+## Usage Guide
+
+### Creating Collections
+
+1. **Edit TOML Configuration**
+   ```bash
+   # Copy template to create new collection
+   cp templates/collection.template.toml collections/my-collection.toml
+   ```
+
+2. **Generate Content**
+   ```bash
+   # Generate URL files by scraping Myrient
+   python myrient_generator.py --gen-url collections/my-collection.toml
+
+   # Generate README documentation
+   python myrient_generator.py --gen-readme collections/my-collection.toml
+
+   # Generate both concurrently
+   python myrient_generator.py --gen-url --gen-readme collections/my-collection.toml
+   ```
+
+### Collection Examples
+
+- **`collections/sample/`**: Small sample with Game Boy, GBA, GBC, and PS2 BIOS
+- **`collections/1g1r/`**: 1 Game 1 ROM collection
+- **`collections/all/`**: Complete collection
+
+### Advanced Usage
+
+**Interactive Downloads:**
+```bash
+# Interactive menu to select platforms
+./myrient_dl.sh collections/sample/sample.toml
+
+# Non-interactive with all platforms
+./myrient_dl.sh collections/sample/sample.toml --non-interactive
+```
+
+**Dry Runs:**
+```bash
+# See what would be downloaded
+python myrient_dl.py collections/sample/sample.toml --dry-run
+
+# See what would be generated
+python myrient_generator.py --gen-url --gen-readme --dry-run collections/sample/sample.toml
+```
+
+**Remote Collections:**
+```bash
+# Download from any URL
+./myrient_dl.sh https://raw.githubusercontent.com/user/repo/main/my-collection.toml
+
+# Generate from remote TOML
+python myrient_generator.py --gen-url https://example.com/collection.toml
 ```
 
 ## Requirements
 
 - **Python 3.11+** (for built-in TOML support)
-- **Wget** (commonly installed on Linux/Mac, script installs for Windows)
+- **Wget** (auto-installed on Windows, commonly available on Linux/macOS)
 
-## AI
+## Development
 
-This was coded with AI given my fairly limited programming knowledge. Made this more as a proof-of-concept for functionality I haven't seen that should be further developed by those more knowledgable.
+Built with AI assistance given limited programming knowledge. This is a proof-of-concept for decentralized, code-as-configuration ROM collections that should be further developed by those with more expertise.

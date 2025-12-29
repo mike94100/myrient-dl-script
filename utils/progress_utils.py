@@ -166,7 +166,6 @@ def _continuous_spinner_worker():
 
     # Clean up when done
     _spinner_state['active'] = False
-    print()  # Move to next line
 
 
 def clear_progress() -> None:

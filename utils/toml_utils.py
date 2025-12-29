@@ -5,6 +5,7 @@ Requires Python 3.11+ for built-in TOML support
 """
 
 import sys
+from typing import List
 
 
 # Require Python 3.11+
@@ -150,3 +151,34 @@ def parse_platforms_from_file(file_path) -> dict:
     """
     config = parse_toml_file(str(file_path))
     return parse_platforms_from_config(config)
+
+
+def discover_and_organize_platforms(collection_path: str) -> tuple[List[str], List[str]]:
+    """Discover platforms and separate filter from nofilter platforms"""
+    from filters.filter_collection import CollectionFilter, get_all_platforms
+
+    filter_obj = CollectionFilter(collection_path)
+    all_platforms = get_all_platforms(collection_path)
+
+    nofilter_platforms = []
+    filter_platforms = []
+
+    for platform_name in all_platforms:
+        if filter_obj.should_skip_filtering(platform_name):
+            nofilter_platforms.append(platform_name)
+        else:
+            filter_platforms.append(platform_name)
+
+    return filter_platforms, nofilter_platforms
+
+
+def get_url_file_path(collection_path: str, platform_name: str):
+    """Get the URL file path for a platform from its urllist configuration"""
+    from filters.filter_collection import CollectionFilter
+    from pathlib import Path
+
+    filter_obj = CollectionFilter(collection_path)
+    platform_config = filter_obj.get_platform_config(platform_name)
+    if not platform_config or 'urllist' not in platform_config:
+        raise ValueError(f"Platform {platform_name} is missing required 'urllist' field")
+    return Path(platform_config['urllist'])
