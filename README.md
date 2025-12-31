@@ -49,6 +49,25 @@ python myrient_dl.py collections/sample/sample.toml --output ~/my-roms
 python myrient_dl.py collections/sample/sample.toml --platforms gb gba
 ```
 
+## Run without Downloading
+
+Run the scripts directly from the repository without downloading them first. The scripts will fetch and parse the TOML collection from the provided URL and allow interactive platform selection and output directory configuration.
+
+**Linux/macOS:**
+```bash
+bash <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/myrient_dl.sh) https://example.com/my-collection.toml
+```
+
+**Python (Cross-platform):**
+```bash
+python3 <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/myrient_dl.py) https://example.com/my-collection.toml
+```
+
+**Windows PowerShell:**
+```powershell
+powershell -Command "& { $script = Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/myrient_dl.ps1' -UseBasicParsing; $sb = [scriptblock]::Create($script.Content); & $sb -CollectionUrl 'https://example.com/my-collection.toml' }"
+```
+
 ## Usage Guide
 
 ### Creating Collections

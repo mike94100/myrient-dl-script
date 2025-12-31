@@ -1,6 +1,6 @@
-# Myrient Collection Configuration
+# Sample Collection Configuration
 
-# Platform configurations
+# ROMs
 [roms]
 
 [roms.gb]
@@ -24,7 +24,7 @@ directory = "roms/gba"
 skip_filtering = true
 extract = false
 
-# Platform configurations
+# BIOS
 [bios]
 
 [bios.ps2]

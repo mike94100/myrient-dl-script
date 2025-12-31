@@ -6,7 +6,6 @@ This collection contains ROMs for multiple gaming platforms with intelligent fil
 
 - **Generated**: 2025-12-29 05:36:46 UTC
 - **ROM Platforms**: 21
-
 - **Total Files**: 65721
 - **Total Size**: 29.1 TiB (32.0 TB)
 

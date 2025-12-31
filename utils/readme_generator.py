@@ -321,10 +321,14 @@ def generate_collection_readme(collection_path: Path, config: Dict[str, Any]) ->
     total_bytes_all = total_rom_bytes + total_bios_bytes
     total_size_formatted = format_file_size_dual(total_bytes_all)
 
-    # Generate script paths for remote execution
-    script_base = str(collection_path).replace('.toml', '').replace('\\', '/')
-    sh_script_url = f"{REPO_BASE_URL}/{script_base}_dl.sh"
-    ps1_script_url = f"{REPO_BASE_URL}/{script_base}_dl.ps1"
+    # Generate URLs for scripts and collection TOML
+    toml_url = f"{REPO_BASE_URL}/{collection_path}".replace('\\', '/')
+    sh_script_url = f"{REPO_BASE_URL}/myrient_dl.sh"
+    py_script_url = f"{REPO_BASE_URL}/myrient_dl.py"
+    ps1_script_url = f"{REPO_BASE_URL}/myrient_dl.ps1"
+
+    # Local collection path (relative)
+    local_toml_path = str(collection_path).replace('\\', '/')
 
     # Combine everything into compact comprehensive README
     readme_content = f"""# {collection_path.name.upper().replace('.TOML', '')} ROM Collection
@@ -346,16 +350,42 @@ This collection contains ROMs for multiple gaming platforms.
 
 ## Download
 
-Download and run the interactive script directly from GitHub:
+### Local Usage
 
-**Linux/Mac:**
+If you have the myrient-dl-script repository cloned locally:
+
+**Linux/macOS:**
 ```bash
-bash <(curl -s {sh_script_url})
+./myrient_dl.sh {local_toml_path}
 ```
 
 **Windows:**
 ```powershell
-powershell -Command "& {{ Invoke-WebRequest -Uri '{ps1_script_url}' -OutFile 'temp_dl.ps1'; & .\\temp_dl.ps1; Remove-Item 'temp_dl.ps1' }}"
+.\\myrient_dl.ps1 {local_toml_path}
+```
+
+**Python (Cross-platform):**
+```bash
+python myrient_dl.py {local_toml_path}
+```
+
+### Remote Usage
+
+Run the scripts directly from the repository without downloading them first. The scripts will fetch and parse the collection TOML from the URL and allow interactive platform selection.
+
+**Linux/macOS:**
+```bash
+bash <(curl -s {sh_script_url}) {toml_url}
+```
+
+**Python (Cross-platform):**
+```bash
+python3 <(curl -s {py_script_url}) {toml_url}
+```
+
+**Windows PowerShell:**
+```powershell
+powershell -Command "& {{ $script = Invoke-WebRequest -Uri '{ps1_script_url}' -UseBasicParsing; $sb = [scriptblock]::Create($script.Content); & $sb -CollectionUrl '{toml_url}' }}"
 ```
 """
 

@@ -26,7 +26,6 @@ check_dependencies() {
     local missing=()
     command -v curl >/dev/null 2>&1 || missing+=("curl")
     command -v wget >/dev/null 2>&1 || missing+=("wget")
-    command -v jq >/dev/null 2>&1 || missing+=("jq")
 
     if [ ${#missing[@]} -ne 0 ]; then
         echo "Error: Missing required tools: ${missing[*]}" >&2
@@ -41,11 +40,17 @@ fetch_toml() {
 
     if [[ "$url" =~ ^https?:// ]]; then
         # Remote URL
-        curl -s "$url"
+        log_info "Fetching TOML from: $url"
+        local content=$(curl -s -A "Mozilla/5.0 (myrient-dl-script)" "$url")
+        if [ -z "$content" ]; then
+            log_error "Failed to fetch TOML from $url - empty response"
+        fi
+        echo "$content"
     else
         # Local file - make path absolute relative to script directory
         local abs_path="$SCRIPT_DIR/$url"
         if [ -f "$abs_path" ]; then
+            log_info "Reading TOML from local file: $abs_path"
             cat "$abs_path"
         else
             echo "Error: Local file not found: $abs_path" >&2
@@ -70,12 +75,17 @@ resolve_relative_url() {
     if [[ "$toml_url" =~ ^https?:// ]]; then
         # Remote URL: remove filename from TOML URL
         local base_url="${toml_url%/*}"
-        echo "${base_url}/${relative_path}" | sed 's|//|/|g'
+        local resolved_url="${base_url}/${relative_path}"
+        resolved_url=$(echo "$resolved_url" | sed 's|//|/|g')
+        log_info "Resolved remote URL: $resolved_url (from $toml_url + $relative_path)"
+        echo "$resolved_url"
     else
         # Local file: resolve relative to script directory
         local toml_path="$SCRIPT_DIR/$toml_url"
         local toml_dir="$(dirname "$toml_path")"
-        echo "$toml_dir/$relative_path"
+        local resolved_path="$toml_dir/$relative_path"
+        log_info "Resolved local path: $resolved_path (from $toml_url + $relative_path)"
+        echo "$resolved_path"
     fi
 }
 
@@ -214,7 +224,7 @@ dry_run() {
                 local urllist_url="$(resolve_relative_url "$TOML_URL" "$urllist_path")"
 
                 if [[ "$urllist_url" =~ ^https?:// ]]; then
-                    local url_count=$(curl -s "$urllist_url" | grep -v '^#' | grep -v '^$' | wc -l)
+                    local url_count=$(curl -s -A "Mozilla/5.0 (myrient-dl-script)" "$urllist_url" | grep -v '^#' | grep -v '^$' | wc -l)
                 else
                     local url_count=$(grep -v '^#' "$urllist_url" 2>/dev/null | grep -v '^$' | wc -l)
                 fi
@@ -242,15 +252,29 @@ download_platform() {
     local urllist_url="$3"
     local should_extract="$4"
 
+    log_info "Processing platform: $platform_name"
+    log_info "URL list URL: $urllist_url"
+
     # Create platform directory
     mkdir -p "$OUTPUT_DIR/$platform_dir"
 
     # Fetch URL list
     local urls=""
     if [[ "$urllist_url" =~ ^https?:// ]]; then
-        urls=$(curl -s "$urllist_url" | grep -v '^#' | grep -v '^$' || true)
+        log_info "Fetching URL list from remote: $urllist_url"
+        local raw_urls=$(curl -s -A "Mozilla/5.0 (myrient-dl-script)" "$urllist_url")
+        if [ -z "$raw_urls" ]; then
+            log_warn "curl returned empty response for $urllist_url"
+        else
+            urls=$(echo "$raw_urls" | grep -v '^#' | grep -v '^$')
+            log_info "Found $(echo "$urls" | wc -l) URLs for $platform_name"
+        fi
     else
+        log_info "Reading URL list from local file: $urllist_url"
         urls=$(grep -v '^#' "$urllist_url" 2>/dev/null | grep -v '^$' || true)
+        if [ -z "$urls" ]; then
+            log_warn "No URLs found in local file $urllist_url"
+        fi
     fi
 
     if [ -z "$urls" ]; then
