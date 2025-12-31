@@ -85,10 +85,19 @@ resolve_relative_url() {
     local relative_path="$2"
 
     if [[ "$toml_url" =~ ^https?:// ]]; then
-        # Remote URL: remove filename from TOML URL
-        local base_url="${toml_url%/*}"
-        local resolved_url="${base_url}/${relative_path}"
-        echo "$resolved_url"
+        # Remote URL: handle GitHub URLs properly
+        if [[ "$toml_url" =~ ^https://raw\.githubusercontent\.com/[^/]+/[^/]+/[^/]+/ ]]; then
+            # GitHub raw URL: https://raw.githubusercontent.com/user/repo/branch/...
+            # Extract repo root: https://raw.githubusercontent.com/user/repo/branch/
+            local repo_root=$(echo "$toml_url" | sed -E 's|^(https://raw\.githubusercontent\.com/[^/]+/[^/]+/[^/]+)/.*|\1|')
+            local resolved_url="${repo_root}/${relative_path}"
+            echo "$resolved_url"
+        else
+            # Generic remote URL: remove filename from TOML URL
+            local base_url="${toml_url%/*}"
+            local resolved_url="${base_url}/${relative_path}"
+            echo "$resolved_url"
+        fi
     else
         # Local file: resolve relative to script directory
         # For paths like ../urls/file.txt, compute the absolute path
