@@ -1,0 +1,89 @@
+[2025-12-31 02:27:48] [INFO] Processing 1 collection file(s)
+[2025-12-31 02:27:48] [INFO] Processing collection 1/1: collections/1g1r-slim/1g1r-slim.toml
+[2025-12-31 02:27:48] [INFO] Generating URLs and README sequentially...
+[2025-12-31 02:27:48] [INFO] Starting URL generation...
+[2025-12-31 02:27:48] [INFO] Generating URLs for 13 platforms from collection...
+[2025-12-31 02:27:48] [INFO] Processing 13 platforms with 4 concurrent requests...
+[2025-12-31 02:27:49] [INFO] [nes] Processing platform...
+[2025-12-31 02:27:49] [INFO] [nes] Scraping: https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%20Entertainment%20System%20%28Headered%29/
+[2025-12-31 02:27:49] [INFO] [nes] Found 4464 files
+[2025-12-31 02:27:49] [INFO] [nes] Filter results: 728 included, 3736 excluded
+[2025-12-31 02:27:49] [INFO] [nes] Generated ../urls/1g1r/nes.txt with 4464 URLs
+[2025-12-31 02:27:49] [INFO] [snes] Processing platform...
+[2025-12-31 02:27:49] [INFO] [snes] Scraping: https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Super%20Nintendo%20Entertainment%20System/
+[2025-12-31 02:27:49] [INFO] [snes] Found 4087 files
+[2025-12-31 02:27:49] [INFO] [snes] Filter results: 803 included, 3284 excluded
+[2025-12-31 02:27:49] [INFO] [snes] Generated ../urls/1g1r/snes.txt with 4087 URLs
+[2025-12-31 02:27:49] [INFO] [n64] Processing platform...
+[2025-12-31 02:27:49] [INFO] [n64] Scraping: https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%2064%20%28BigEndian%29/
+[2025-12-31 02:27:49] [INFO] [n64] Found 1147 files
+[2025-12-31 02:27:50] [INFO] [n64] Filter results: 318 included, 829 excluded
+[2025-12-31 02:27:50] [INFO] [n64] Generated ../urls/1g1r/n64.txt with 1147 URLs
+[2025-12-31 02:27:50] [INFO] [gb] Processing platform...
+[2025-12-31 02:27:50] [INFO] [gb] Scraping: https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/
+[2025-12-31 02:27:50] [INFO] [gb] Found 1958 files
+[2025-12-31 02:27:50] [INFO] [gb] Filter results: 543 included, 1415 excluded
+[2025-12-31 02:27:50] [INFO] [gb] Generated ../urls/1g1r/gb.txt with 1958 URLs
+[2025-12-31 02:27:51] [INFO] [gbc] Processing platform...
+[2025-12-31 02:27:51] [INFO] [gbc] Scraping: https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/
+[2025-12-31 02:27:51] [INFO] [gbc] Found 1958 files
+[2025-12-31 02:27:51] [INFO] [gbc] Filter results: 554 included, 1404 excluded
+[2025-12-31 02:27:51] [INFO] [gbc] Generated ../urls/1g1r/gbc.txt with 1958 URLs
+[2025-12-31 02:27:51] [INFO] [gba] Processing platform...
+[2025-12-31 02:27:51] [INFO] [gba] Scraping: https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/
+[2025-12-31 02:27:51] [INFO] [gba] Found 3478 files
+[2025-12-31 02:27:51] [INFO] [gba] Filter results: 1149 included, 2329 excluded
+[2025-12-31 02:27:51] [INFO] [gba] Generated ../urls/1g1r/gba.txt with 3478 URLs
+[2025-12-31 02:27:51] [INFO] [genesis] Processing platform...
+[2025-12-31 02:27:51] [INFO] [genesis] Scraping: https://myrient.erista.me/files/No-Intro/Sega%20-%20Mega%20Drive%20-%20Genesis/
+[2025-12-31 02:27:51] [INFO] [genesis] Found 2786 files
+[2025-12-31 02:27:51] [INFO] [genesis] Filter results: 763 included, 2023 excluded
+[2025-12-31 02:27:51] [INFO] [genesis] Generated ../urls/1g1r/genesis.txt with 2786 URLs
+[2025-12-31 02:27:51] [INFO] [atari2600] Processing platform...
+[2025-12-31 02:27:51] [INFO] [atari2600] Scraping: https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%202600/
+[2025-12-31 02:27:51] [INFO] [atari2600] Found 854 files
+[2025-12-31 02:27:51] [INFO] [atari2600] Filter results: 457 included, 397 excluded
+[2025-12-31 02:27:51] [INFO] [atari2600] Generated ../urls/1g1r/atari2600.txt with 854 URLs
+[2025-12-31 02:27:52] [INFO] [atari5200] Processing platform...
+[2025-12-31 02:27:52] [INFO] [atari5200] Scraping: https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%205200/
+[2025-12-31 02:27:52] [INFO] [atari5200] Found 183 files
+[2025-12-31 02:27:52] [INFO] [atari5200] Filter results: 73 included, 110 excluded
+[2025-12-31 02:27:52] [INFO] [atari5200] Generated ../urls/1g1r/atari5200.txt with 183 URLs
+[2025-12-31 02:27:52] [INFO] [atari7800] Processing platform...
+[2025-12-31 02:27:52] [INFO] [atari7800] Scraping: https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/
+[2025-12-31 02:27:52] [INFO] [atari7800] Found 126 files
+[2025-12-31 02:27:52] [INFO] [atari7800] Filter results: 59 included, 67 excluded
+[2025-12-31 02:27:52] [INFO] [atari7800] Generated ../urls/1g1r/atari7800.txt with 126 URLs
+[2025-12-31 02:27:52] [INFO] [c64] Processing platform...
+[2025-12-31 02:27:52] [INFO] [c64] Scraping: https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/
+[2025-12-31 02:27:52] [INFO] [c64] Found 327 files
+[2025-12-31 02:27:52] [INFO] [c64] Filter results: 240 included, 87 excluded
+[2025-12-31 02:27:52] [INFO] [c64] Generated ../urls/1g1r/c64.txt with 327 URLs
+[2025-12-31 02:27:52] [INFO] [colecovision] Processing platform...
+[2025-12-31 02:27:52] [INFO] [colecovision] Scraping: https://myrient.erista.me/files/No-Intro/Coleco%20-%20ColecoVision/
+[2025-12-31 02:27:52] [INFO] [colecovision] Found 201 files
+[2025-12-31 02:27:52] [INFO] [colecovision] Filter results: 137 included, 64 excluded
+[2025-12-31 02:27:52] [INFO] [colecovision] Generated ../urls/1g1r/colecovision.txt with 201 URLs
+[2025-12-31 02:27:53] [INFO] [intellivision] Processing platform...
+[2025-12-31 02:27:53] [INFO] [intellivision] Scraping: https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/
+[2025-12-31 02:27:54] [INFO] [intellivision] Found 207 files
+[2025-12-31 02:27:54] [INFO] [intellivision] Filter results: 149 included, 58 excluded
+[2025-12-31 02:27:54] [INFO] [intellivision] Generated ../urls/1g1r/intellivision.txt with 207 URLs
+[2025-12-31 02:27:54] [INFO] URL generation completed: 13/13 successful
+[2025-12-31 02:27:54] [INFO] Starting README generation...
+[2025-12-31 02:27:54] [INFO] Generating comprehensive README for collection '1g1r-slim.toml' with 13 platforms
+[2025-12-31 02:27:54] [INFO] Scraping file sizes from: https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%20Entertainment%20System%20%28Headered%29/
+[2025-12-31 02:27:56] [INFO] Scraping file sizes from: https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Super%20Nintendo%20Entertainment%20System/
+[2025-12-31 02:27:58] [INFO] Scraping file sizes from: https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%2064%20%28BigEndian%29/
+[2025-12-31 02:27:59] [INFO] Scraping file sizes from: https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/
+[2025-12-31 02:28:00] [INFO] Scraping file sizes from: https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/
+[2025-12-31 02:28:02] [INFO] Scraping file sizes from: https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/
+[2025-12-31 02:28:03] [INFO] Scraping file sizes from: https://myrient.erista.me/files/No-Intro/Sega%20-%20Mega%20Drive%20-%20Genesis/
+[2025-12-31 02:28:05] [INFO] Scraping file sizes from: https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%202600/
+[2025-12-31 02:28:06] [INFO] Scraping file sizes from: https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%205200/
+[2025-12-31 02:28:07] [INFO] Scraping file sizes from: https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/
+[2025-12-31 02:28:08] [INFO] Scraping file sizes from: https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/
+[2025-12-31 02:28:09] [INFO] Scraping file sizes from: https://myrient.erista.me/files/No-Intro/Coleco%20-%20ColecoVision/
+[2025-12-31 02:28:10] [INFO] Scraping file sizes from: https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/
+[2025-12-31 02:28:11] [INFO] Generated compact comprehensive collection README: collections/1g1r-slim/README.md
+[2025-12-31 02:28:11] [INFO] Content generation completed successfully!

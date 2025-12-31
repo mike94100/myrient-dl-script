@@ -13,6 +13,7 @@ if sys.version_info < (3, 11):
     raise RuntimeError("Python 3.11+ required for built-in TOML support")
 
 import tomllib
+from pathlib import Path
 
 
 def parse_toml_file(file_path):
@@ -172,13 +173,59 @@ def discover_and_organize_platforms(collection_path: str) -> tuple[List[str], Li
     return filter_platforms, nofilter_platforms
 
 
+def find_repo_root(start_path: Path) -> Path:
+    """
+    Find the repository root by looking for characteristic files/directories
+
+    Args:
+        start_path: Path to start searching from
+
+    Returns:
+        Path to repository root, or None if not found
+    """
+    # Don't resolve symlinks - use the logical path
+    current = Path(start_path)
+
+    # Check current directory and all parents
+    for parent in [current] + list(current.parents):
+        # Look for repository indicators
+        if (parent / '.git').exists() or (parent / 'config.toml').exists():
+            return parent
+
+    return None
+
+
+def resolve_repo_path(collection_path: str, relative_path: str) -> Path:
+    """
+    Resolve a path relative to the repository root
+
+    Args:
+        collection_path: Path to the collection TOML file
+        relative_path: Path relative to repository root
+
+    Returns:
+        Absolute path resolved from repository root
+    """
+    collection_file = Path(collection_path)
+    repo_root = find_repo_root(collection_file.parent)
+
+    if repo_root is None:
+        raise ValueError(f"Could not find repository root from {collection_path}")
+
+    # Don't resolve symlinks - use logical path
+    resolved_path = repo_root / relative_path
+    resolved_path.parent.mkdir(parents=True, exist_ok=True)
+    return resolved_path
+
+
 def get_url_file_path(collection_path: str, platform_name: str):
     """Get the URL file path for a platform from its urllist configuration"""
     from filters.filter_collection import CollectionFilter
-    from pathlib import Path
 
     filter_obj = CollectionFilter(collection_path)
     platform_config = filter_obj.get_platform_config(platform_name)
     if not platform_config or 'urllist' not in platform_config:
         raise ValueError(f"Platform {platform_name} is missing required 'urllist' field")
-    return Path(platform_config['urllist'])
+
+    # Resolve path relative to repository root
+    return resolve_repo_path(collection_path, platform_config['urllist'])

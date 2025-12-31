@@ -4,7 +4,7 @@ This collection contains ROMs for multiple gaming platforms.
 
 ## Metadata
 
-- **Generated**: 2025-12-29 06:00:48 UTC
+- **Generated**: 2025-12-31 05:52:21 UTC
 - **ROM Platforms**: 21
 - **Total Files**: 17252
 - **Total Size**: 8.0 TiB (8.9 TB)
@@ -17400,14 +17400,40 @@ This collection contains ROMs for multiple gaming platforms.
 
 ## Download
 
-Download and run the interactive script directly from GitHub:
+### Local Usage
 
-**Linux/Mac:**
+If you have the myrient-dl-script repository cloned locally:
+
+**Linux/macOS:**
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/1g1r/1g1r_dl.sh)
+./myrient_dl.sh collections/1g1r/1g1r.toml
 ```
 
 **Windows:**
 ```powershell
-powershell -Command "& { Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/1g1r/1g1r_dl.ps1' -OutFile 'temp_dl.ps1'; & .\temp_dl.ps1; Remove-Item 'temp_dl.ps1' }"
+.\myrient_dl.ps1 collections/1g1r/1g1r.toml
+```
+
+**Python (Cross-platform):**
+```bash
+python myrient_dl.py collections/1g1r/1g1r.toml
+```
+
+### Remote Usage
+
+Run the scripts directly from the repository without downloading them first. The scripts will fetch and parse the collection TOML from the URL and allow interactive platform selection.
+
+**Linux/macOS:**
+```bash
+bash <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/myrient_dl.sh) https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/1g1r/1g1r.toml
+```
+
+**Python (Cross-platform):**
+```bash
+python3 <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/myrient_dl.py) https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/1g1r/1g1r.toml
+```
+
+**Windows PowerShell:**
+```powershell
+powershell -Command "& { $script = Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/myrient_dl.ps1' -UseBasicParsing; $sb = [scriptblock]::Create($script.Content); & $sb -CollectionUrl 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/1g1r/1g1r.toml' }"
 ```

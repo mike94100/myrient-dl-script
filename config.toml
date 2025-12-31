@@ -42,6 +42,7 @@ verbose = true
 [platforms]
 # Mapping of short platform names to Myrient URL paths
 # Used for automatic TOML generation when directory names are found
+arcade = "/files/MAME/ROMs (merged)/"
 atari2600 = "/files/No-Intro/Atari - Atari 2600/"
 atari5200 = "/files/No-Intro/Atari - Atari 5200/"
 atari7800 = "/files/No-Intro/Atari - Atari 7800 (BIN)/"

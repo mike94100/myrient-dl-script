@@ -3,7 +3,7 @@
 Myrient Content Generator
 Generate URL files and README documentation from collection TOML configurations
 
-Supports concurrent generation for improved performance when both are needed.
+Runs URL generation and README generation sequentially.
 """
 
 import argparse
@@ -37,28 +37,30 @@ def generate_readme_sync(collection_path: str, dry_run: bool = False) -> bool:
 
 
 async def generate_both_async(collection_path: str, cache_manager=None, dry_run: bool = False) -> tuple[bool, bool]:
-    """Generate both URLs and README concurrently for maximum speed"""
+    """Generate both URLs and README sequentially to avoid progress bar conflicts"""
     logger = get_logger()
-    logger.info("Generating URLs and README concurrently...")
+    logger.info("Generating URLs and README sequentially...")
 
     if dry_run:
         logger.info("DRY RUN: Would generate both URLs and README")
         return True, True
 
-    # Run URL generation and README generation concurrently
-    url_task = generate_urls_async(collection_path, cache_manager, dry_run)
-    readme_task = asyncio.to_thread(generate_readme_sync, collection_path, dry_run)
+    # Clear any leftover progress bars
+    clear_progress()
 
-    # Wait for both to complete
-    url_success, readme_success = await asyncio.gather(url_task, readme_task, return_exceptions=True)
+    # Run URL generation first
+    logger.info("Starting URL generation...")
+    url_success = await generate_urls_async(collection_path, cache_manager, dry_run)
 
-    # Handle exceptions
-    if isinstance(url_success, Exception):
-        logger.error(f"URL generation failed with exception: {url_success}")
-        url_success = False
+    # Clear progress bars between operations
+    clear_progress()
 
-    if isinstance(readme_success, Exception):
-        logger.error(f"README generation failed with exception: {readme_success}")
+    # Then run README generation
+    if url_success:
+        logger.info("Starting README generation...")
+        readme_success = await asyncio.to_thread(generate_readme_sync, collection_path, dry_run)
+    else:
+        logger.warning("Skipping README generation due to URL generation failure")
         readme_success = False
 
     return url_success, readme_success
@@ -77,7 +79,7 @@ Examples:
   # Generate only README
   python myrient_generator.py --gen-readme collections/sample/sample.toml
 
-  # Generate both concurrently
+  # Generate both sequentially
   python myrient_generator.py --gen-url --gen-readme collections/sample/sample.toml
 
   # Dry run to see what would be done
@@ -166,7 +168,7 @@ Examples:
 
             try:
                 if args.gen_url and args.gen_readme:
-                    # Generate both concurrently
+                    # Generate both sequentially
                     url_success, readme_success = await generate_both_async(str(toml_file), cache_manager, args.dry_run)
                     success = url_success and readme_success
                 elif args.gen_url:

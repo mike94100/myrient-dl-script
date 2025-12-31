@@ -1,0 +1,105 @@
+# Myrient ROM Collection Configuration
+
+# Global default filters, can be overridden per platform
+[filters]
+include = ["(USA", "(World)", "(En"]
+exclude = ["(Beta", "(Demo", "(Proto", "(Sample", "(Pirate", "(Unl", "(Hack", "[BIOS]", "(Test Program", "(Kiosk)", "(Ja"]
+deduplicate = true
+
+# Platform configurations
+[roms]
+
+# Nintendo platforms
+[roms.nes]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%20Entertainment%20System%20%28Headered%29/"
+urllist = "../urls/1g1r/nes.txt"
+directory = "roms/nes"
+skip_filtering = false
+extract = false
+
+[roms.snes]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Super%20Nintendo%20Entertainment%20System/"
+urllist = "../urls/1g1r/snes.txt"
+directory = "roms/snes"
+skip_filtering = false
+extract = false
+
+[roms.n64]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%2064%20%28BigEndian%29/"
+urllist = "../urls/1g1r/n64.txt"
+directory = "roms/n64"
+skip_filtering = false
+extract = false
+
+[roms.gb]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/"
+urllist = "../urls/1g1r/gb.txt"
+directory = "roms/gb"
+skip_filtering = false
+extract = false
+
+[roms.gbc]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/"
+urllist = "../urls/1g1r/gbc.txt"
+directory = "roms/gbc"
+skip_filtering = false
+extract = false
+
+[roms.gba]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/"
+urllist = "../urls/1g1r/gba.txt"
+directory = "roms/gba"
+skip_filtering = false
+extract = false
+
+# Sega platforms
+[roms.genesis]
+url = "https://myrient.erista.me/files/No-Intro/Sega%20-%20Mega%20Drive%20-%20Genesis/"
+urllist = "../urls/1g1r/genesis.txt"
+directory = "roms/genesis"
+skip_filtering = false
+extract = false
+
+# Atari platforms
+[roms.atari2600]
+url = "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%202600/"
+urllist = "../urls/1g1r/atari2600.txt"
+directory = "roms/atari2600"
+skip_filtering = false
+extract = false
+
+[roms.atari5200]
+url = "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%205200/"
+urllist = "../urls/1g1r/atari5200.txt"
+directory = "roms/atari5200"
+skip_filtering = false
+extract = false
+
+[roms.atari7800]
+url = "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/"
+urllist = "../urls/1g1r/atari7800.txt"
+directory = "roms/atari7800"
+skip_filtering = false
+extract = false
+
+# Other platforms
+[roms.c64]
+url = "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/"
+urllist = "../urls/1g1r/c64.txt"
+directory = "roms/c64"
+skip_filtering = false
+extract = false
+
+[roms.colecovision]
+url = "https://myrient.erista.me/files/No-Intro/Coleco%20-%20ColecoVision/"
+urllist = "../urls/1g1r/colecovision.txt"
+directory = "roms/colecovision"
+skip_filtering = false
+extract = false
+
+[roms.intellivision]
+url = "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/"
+urllist = "../urls/1g1r/intellivision.txt"
+directory = "roms/intellivision"
+skip_filtering = false
+extract = false

@@ -12,70 +12,70 @@ deduplicate = true
 # Nintendo platforms
 [roms.nes]
 url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%20Entertainment%20System%20%28Headered%29/"
-urllist = "collections/template/urls/nes.txt"
+urllist = "../urls/all/nes.txt"
 directory = "roms/nes"
 skip_filtering = false
 extract = false
 
 [roms.snes]
 url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Super%20Nintendo%20Entertainment%20System/"
-urllist = "collections/template/urls/snes.txt"
+urllist = "../urls/all/snes.txt"
 directory = "roms/snes"
 skip_filtering = false
 extract = false
 
 [roms.n64]
 url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%2064%20%28BigEndian%29/"
-urllist = "collections/template/urls/n64.txt"
+urllist = "../urls/all/n64.txt"
 directory = "roms/n64"
 skip_filtering = false
 extract = false
 
 [roms.gc]
 url = "https://myrient.erista.me/files/Redump/Nintendo%20-%20GameCube%20-%20NKit%20RVZ%20%5Bzstd-19-128k%5D/"
-urllist = "collections/template/urls/gc.txt"
+urllist = "../urls/all/gc.txt"
 directory = "roms/gc"
 skip_filtering = false
 extract = false
 
 [roms.wii]
 url = "https://myrient.erista.me/files/Redump/Nintendo%20-%20Wii%20-%20NKit%20RVZ%20%5Bzstd-19-128k%5D/"
-urllist = "collections/template/urls/wii.txt"
+urllist = "../urls/all/wii.txt"
 directory = "roms/wii"
 skip_filtering = false
 extract = false
 
 [roms.gb]
 url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/"
-urllist = "collections/template/urls/gb.txt"
+urllist = "../urls/all/gb.txt"
 directory = "roms/gb"
 skip_filtering = true
 extract = false
 
 [roms.gbc]
 url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/"
-urllist = "collections/template/urls/gbc.txt"
+urllist = "../urls/all/gbc.txt"
 directory = "roms/gbc"
 skip_filtering = true
 extract = false
 
 [roms.gba]
 url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/"
-urllist = "collections/template/urls/gba.txt"
+urllist = "../urls/all/gba.txt"
 directory = "roms/gba"
 skip_filtering = true
 extract = false
 
 [roms.nds]
 url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%20DS%20%28Decrypted%29/"
-urllist = "collections/template/urls/nds.txt"
+urllist = "../urls/all/nds.txt"
 directory = "roms/nds"
 skip_filtering = false
 extract = false
 
 [roms."3ds"]
 url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%203DS%20%28Decrypted%29/"
-urllist = "collections/template/urls/3ds.txt"
+urllist = "../urls/all/3ds.txt"
 directory = "roms/3ds"
 skip_filtering = false
 extract = false
@@ -83,14 +83,14 @@ extract = false
 # Sega platforms
 [roms.genesis]
 url = "https://myrient.erista.me/files/No-Intro/Sega%20-%20Mega%20Drive%20-%20Genesis/"
-urllist = "collections/template/urls/genesis.txt"
+urllist = "../urls/all/genesis.txt"
 directory = "roms/genesis"
 skip_filtering = false
 extract = false
 
 [roms.dreamcast]
 url = "https://myrient.erista.me/files/Redump/Sega%20-%20Dreamcast/"
-urllist = "collections/template/urls/dreamcast.txt"
+urllist = "../urls/all/dreamcast.txt"
 directory = "roms/dreamcast"
 skip_filtering = false
 extract = false
@@ -98,21 +98,21 @@ extract = false
 # Sony platforms
 [roms.psx]
 url = "https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation/"
-urllist = "collections/template/urls/psx.txt"
+urllist = "../urls/all/psx.txt"
 directory = "roms/psx"
 skip_filtering = false
 extract = false
 
 [roms.ps2]
 url = "https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation%202/"
-urllist = "collections/template/urls/ps2.txt"
+urllist = "../urls/all/ps2.txt"
 directory = "roms/ps2"
 skip_filtering = false
 extract = false
 
 [roms.psp]
 url = "https://myrient.erista.me/files/No-Intro/Sony%20-%20PlayStation%20Portable%20%28PSN%29%20%28Decrypted%29/"
-urllist = "collections/template/urls/psp.txt"
+urllist = "../urls/all/psp.txt"
 directory = "roms/psp"
 skip_filtering = false
 extract = false
@@ -120,50 +120,57 @@ extract = false
 # Atari platforms
 [roms.atari2600]
 url = "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%202600/"
-urllist = "collections/template/urls/atari2600.txt"
+urllist = "../urls/all/atari2600.txt"
 directory = "roms/atari2600"
 skip_filtering = false
 extract = false
 
 [roms.atari5200]
 url = "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%205200/"
-urllist = "collections/template/urls/atari5200.txt"
+urllist = "../urls/all/atari5200.txt"
 directory = "roms/atari5200"
 skip_filtering = false
 extract = false
 
 [roms.atari7800]
 url = "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/"
-urllist = "collections/template/urls/atari7800.txt"
+urllist = "../urls/all/atari7800.txt"
 directory = "roms/atari7800"
 skip_filtering = false
 extract = false
 
 # Other platforms
+[roms.arcade]
+url = "https://myrient.erista.me/files/MAME/ROMs%20%28merged%29/"
+urllist = "../urls/all/arcade.txt"
+directory = "roms/arcade"
+skip_filtering = true
+extract = false
+
 [roms.c64]
 url = "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/"
-urllist = "collections/template/urls/c64.txt"
+urllist = "../urls/all/c64.txt"
 directory = "roms/c64"
 skip_filtering = false
 extract = false
 
 [roms.colecovision]
 url = "https://myrient.erista.me/files/No-Intro/Coleco%20-%20ColecoVision/"
-urllist = "collections/template/urls/colecovision.txt"
+urllist = "../urls/all/colecovision.txt"
 directory = "roms/colecovision"
 skip_filtering = false
 extract = false
 
 [roms.intellivision]
 url = "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/"
-urllist = "collections/template/urls/intellivision.txt"
+urllist = "../urls/all/intellivision.txt"
 directory = "roms/intellivision"
 skip_filtering = false
 extract = false
 
 # Example of a custom collection (no URL needed, just urllist)
 [roms.custom_collection]
-urllist = "collections/template/urls/custom.txt"
+urllist = "../urls/all/custom.txt"
 directory = "roms/custom"
 skip_filtering = true  # Don't generate URLs, use existing custom URL file
 extract = false
@@ -173,7 +180,7 @@ extract = false
 
 [bios.ps2]
 url = "https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation%202%20-%20BIOS%20Images%20%28DoM%20Version%29/"
-urllist = "collections/template/urls/ps2bios.txt"
+urllist = "../urls/all/ps2bios.txt"
 directory = "bios/ps2"
 skip_filtering = true
 extract = true

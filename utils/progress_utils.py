@@ -34,7 +34,8 @@ def get_spinner_char() -> str:
 
 
 def show_progress(current: int, total: int, message: str = "", width: int = 30, force: bool = False,
-                 files_processed: int = None, total_files: int = None, show_spinner: bool = False) -> None:
+                 files_processed: int = None, total_files: int = None, show_spinner: bool = False,
+                 unit: str = "items", show_speed: bool = True) -> None:
     """Display enhanced progress bar with ETA, speed metrics, and optional continuously animated spinner"""
     if (not sys.stdout.isatty() and not force) or total == 0:
         return
@@ -72,7 +73,7 @@ def show_progress(current: int, total: int, message: str = "", width: int = 30, 
         if files_processed is not None and total_files is not None:
             speed_str = f" {files_processed}/{total_files} files"
         else:
-            speed_str = f" {overall_rate:.1f} plat/s"
+            speed_str = f" {overall_rate:.1f} {unit}/s"
 
         # ETA calculation
         if current < total:
@@ -112,7 +113,10 @@ def show_progress(current: int, total: int, message: str = "", width: int = 30, 
             _spinner_state['thread'].join(timeout=0.1)
 
     # Format progress line (for non-spinner mode)
-    line = f"\r{message} [{bar}] {progress:3d}% ({current}/{total}){speed_str}{eta_str}"
+    if show_speed:
+        line = f"\r{message} [{bar}] {progress:3d}% ({current}/{total}){speed_str}{eta_str}"
+    else:
+        line = f"\r{message} [{bar}] {progress:3d}% ({current}/{total})"
 
     # Force immediate output regardless of terminal buffering
     print(line, end="", flush=True)

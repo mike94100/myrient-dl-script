@@ -1,4 +1,4 @@
-# Universal ROM/BIOS Download Script
+# Myrient Download Script
 # Downloads files from any TOML collection configuration
 
 param(
@@ -128,6 +128,20 @@ function ConvertFrom-Toml {{
     return $result
 }}
 
+# Get unselected platforms
+function Get-UnselectedPlatforms {{
+    param([hashtable]$Platforms)
+
+    $platformNames = @($Platforms.Keys)
+    $unselected = @()
+    foreach ($platform in $platformNames) {{
+        if ($SelectedPlatforms -notcontains $platform) {{
+            $unselected += $platform
+        }}
+    }}
+    return ($unselected -join ", ")
+}}
+
 # Extract platforms from parsed TOML
 function Get-PlatformsFromToml {{
     param([hashtable]$TomlData)
@@ -156,7 +170,7 @@ function Resolve-RelativeUrl {{
     if ($TomlUrl -match '^https?://') {{
         # Remote URL: remove filename from TOML URL
         $baseUrl = $TomlUrl -replace '/[^/]*$', ''
-        $resolved = "$baseUrl/$RelativePath" -replace '//', '/'
+        $resolved = "$baseUrl/$RelativePath"
         return $resolved
     }} else {{
         # Local file: resolve relative to script directory
@@ -176,18 +190,11 @@ function Show-Menu {{
 
     while ($true) {{
         Clear-Host
-        Write-Host "=== Universal ROM/BIOS Download Script ===" -ForegroundColor Cyan
+        Write-Host "=== Myrient Download Script ===" -ForegroundColor Cyan
         Write-Host "Collection: $CollectionUrl"
         Write-Host "Output directory: $OutputDir"
         Write-Host "Selected platforms: $(if ($SelectedPlatforms.Count -eq 0) {{ "None selected" }} else {{ $SelectedPlatforms -join ", " }})"
-        Write-Host ""
-
-        Write-Host "Available platforms:"
-        for ($i = 0; $i -lt $platformNames.Count; $i++) {{
-            $platform = $platformNames[$i]
-            $marker = if ($SelectedPlatforms -contains $platform) {{ "[✓]" }} else {{ "[ ]" }}
-            Write-Host "  $marker $(($i+1))) $platform"
-        }}
+        Write-Host "Unselected platforms: $(if ($platformNames.Count -eq $SelectedPlatforms.Count) {{ "None" }} else {{ Get-UnselectedPlatforms $Platforms }})"
         Write-Host ""
 
         Write-Host "Options:"
@@ -240,6 +247,20 @@ function Select-Platforms {{
     param([array]$PlatformNames)
 
     Write-Host ""
+    Write-Host "Available platforms:"
+    for ($i = 0; $i -lt $PlatformNames.Count; $i += 3) {{
+        $rowPlatforms = $PlatformNames[$i..([math]::Min($i + 2, $PlatformNames.Count - 1))]
+        $rowLines = @()
+        for ($j = 0; $j -lt $rowPlatforms.Count; $j++) {{
+            $platform = $rowPlatforms[$j]
+            $marker = if ($SelectedPlatforms -contains $platform) {{ "[✓]" }} else {{ "[ ]" }}
+            $line = "  {0} {1,2}) {2}" -f $marker, ($i + $j + 1), $platform
+            $rowLines += $line
+        }}
+        Write-Host ($rowLines -join "    ")
+    }}
+    Write-Host ""
+
     $input = Read-Host "Enter platform numbers to toggle (space-separated) or 'all'/'none'"
 
     switch ($input) {{
@@ -287,17 +308,12 @@ function Invoke-DryRun {{
     Write-Host "Selected platforms: $($SelectedPlatforms -join ", ")"
     Write-Host ""
 
-    $directoriesToCreate = @($OutputDir)
-
     Write-Host "Directories that will be created:"
-    Write-Host "  $OutputDir"
 
     foreach ($platformName in $SelectedPlatforms) {{
         $platformData = $Platforms[$platformName]
         $platformDir = $platformData['directory']
         $fullPlatformDir = Join-Path $OutputDir $platformDir
-        $directoriesToCreate += $fullPlatformDir
-        Write-Host "  $fullPlatformDir"
 
         # Try to fetch URL list to show count
         try {{
@@ -316,14 +332,12 @@ function Invoke-DryRun {{
                 }}
             }}
 
-            Write-Host "    $platformName`: $($urls.Count) files"
+            Write-Host "  $fullPlatformDir ($($urls.Count) files)"
         }} catch {{
-            Write-Host "    $platformName`: Could not fetch URL list ($_.Exception.Message)"
+            Write-Host "  $fullPlatformDir (Could not fetch URL list)"
         }}
     }}
 
-    Write-Host ""
-    Write-Host "Total directories to create: $($directoriesToCreate.Count)"
     Write-Host ""
     Read-Host "Press Enter to return to menu"
 }}

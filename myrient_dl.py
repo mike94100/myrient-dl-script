@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Universal ROM/BIOS Download Script
+Myrient Download Script
 Downloads files from any TOML collection configuration
 """
 
@@ -37,7 +37,7 @@ def resolve_relative_url(toml_url: str, relative_path: str) -> str:
     if toml_url.startswith(('http://', 'https://')):
         # Remote URL: remove filename from TOML URL
         base_url = toml_url.rsplit('/', 1)[0]
-        resolved = f"{base_url}/{relative_path}".replace('//', '/')
+        resolved = f"{base_url}/{relative_path}"
         return resolved
     else:
         # Local file: resolve relative to script directory, not current working directory
@@ -60,22 +60,22 @@ def parse_platforms_from_config(config: Dict[str, Any]) -> Dict[str, Dict[str, A
 
     return platforms
 
+def get_unselected_platforms(platforms: Dict[str, Dict[str, Any]], selected_platforms: list) -> str:
+    """Get string of unselected platforms"""
+    unselected = [p for p in platforms.keys() if p not in selected_platforms]
+    return ', '.join(unselected) if unselected else 'None'
+
 def show_menu(platforms: Dict[str, Dict[str, Any]], toml_url: str):
     """Interactive menu for platform selection"""
     selected_platforms = list(platforms.keys())  # Start with all selected
     output_dir = str(Path.home() / "Downloads")
 
     while True:
-        print("=== Universal ROM/BIOS Download Script ===")
+        print("=== Myrient Download Script ===")
         print(f"Collection: {toml_url}")
         print(f"Output directory: {output_dir}")
         print(f"Selected platforms: {', '.join(selected_platforms) if selected_platforms else 'None'}")
-        print("")
-
-        print("Available platforms:")
-        for i, platform_name in enumerate(platforms.keys()):
-            marker = "✓" if platform_name in selected_platforms else " "
-            print(f"  [{marker}] {i+1}) {platform_name}")
+        print(f"Unselected platforms: {get_unselected_platforms(platforms, selected_platforms)}")
         print("")
 
         print("Options:")
@@ -93,6 +93,19 @@ def show_menu(platforms: Dict[str, Dict[str, Any]], toml_url: str):
             sys.exit(0)
 
         if choice == "1":
+            print("")
+            print("Available platforms:")
+            platform_list = list(platforms.keys())
+            for i in range(0, len(platform_list), 3):
+                row_platforms = platform_list[i:i+3]
+                row_lines = []
+                for j, platform_name in enumerate(row_platforms):
+                    marker = "✓" if platform_name in selected_platforms else " "
+                    line = f"  [{marker}] {i+j+1:2d}) {platform_name}"
+                    row_lines.append(line)
+                print("    ".join(row_lines))
+            print("")
+
             print("Enter platform numbers to toggle (space-separated) or 'all'/'none':")
             try:
                 input_str = input().strip()
@@ -160,18 +173,12 @@ def dry_run(platforms: Dict[str, Dict[str, Any]], selected_platforms: list, toml
     print(f"Selected platforms: {', '.join(selected_platforms)}")
     print("")
 
-    directories_to_create = set()
-    directories_to_create.add(output_dir)
-
     print("Directories that will be created:")
-    print(f"  {output_dir}")
 
     for platform_name in selected_platforms:
         platform_data = platforms[platform_name]
         platform_dir = platform_data['directory']
         full_platform_dir = os.path.join(output_dir, platform_dir)
-        directories_to_create.add(full_platform_dir)
-        print(f"  {full_platform_dir}")
 
         # Try to fetch URL list to show count
         try:
@@ -184,12 +191,10 @@ def dry_run(platforms: Dict[str, Dict[str, Any]], selected_platforms: list, toml
                 with open(urllist_url, 'r', encoding='utf-8') as f:
                     url_content = f.read()
             urls = [line.strip() for line in url_content.split('\n') if line.strip() and not line.startswith('#')]
-            print(f"    {platform_name}: {len(urls)} files")
+            print(f"  {full_platform_dir} ({len(urls)} files)")
         except Exception as e:
-            print(f"    {platform_name}: Could not fetch URL list ({e})")
+            print(f"  {full_platform_dir} (Could not fetch URL list)")
 
-    print("")
-    print(f"Total directories to create: {len(directories_to_create)}")
     print("")
     input("Press Enter to return to menu...")
 

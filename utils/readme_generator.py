@@ -17,6 +17,7 @@ from utils.wget_utils import wget_scrape
 from utils.toml_utils import parse_toml_file
 from utils.file_size_utils import format_file_size, calculate_total_size, format_file_size_dual
 from utils.file_parsing_utils import parse_url_file_content, parse_game_info, write_readme_file, organize_files_by_game, build_platform_data_structure
+from utils.progress_utils import show_progress, clear_progress
 import threading
 
 # Load config
@@ -47,7 +48,7 @@ def extract_file_sizes(html: str, files: List[str]) -> Dict[str, str]:
     return sizes
 
 
-def create_file_size_mapping(included_files: List[str], source_url: str) -> tuple[Dict[str, str], int]:
+def create_file_size_mapping(included_files: List[str], source_url: str, progress_callback=None) -> tuple[Dict[str, str], int]:
     """Scrape file sizes and return (file_sizes, total_bytes)"""
     file_sizes = {}
     total_bytes = 0
@@ -59,7 +60,20 @@ def create_file_size_mapping(included_files: List[str], source_url: str) -> tupl
         if html:
             # URL-decode filenames before searching in HTML
             decoded_files = [unquote(f) for f in included_files]
-            file_sizes = extract_file_sizes(html, decoded_files)
+
+            # Process files with progress tracking
+            for i, file in enumerate(decoded_files):
+                if progress_callback:
+                    progress_callback(i + 1, len(decoded_files))
+
+                # Look for file in HTML table structure
+                pattern = rf'<a[^>]*>{re.escape(file)}</a></td><td[^>]*class="size"[^>]*>([^<]+)</td>'
+                match = re.search(pattern, html, re.IGNORECASE | re.DOTALL)
+                if match:
+                    size = match.group(1).strip()
+                    if size and size != '-':
+                        file_sizes[file] = size
+
             total_bytes = calculate_total_size(file_sizes)
 
     return file_sizes, total_bytes
@@ -84,11 +98,7 @@ def generate_readme(toml_files):
     stop_event = threading.Event()
 
     for i, toml_file in enumerate(toml_files, 1):
-        if is_single_file:
-            # Show spinner for single file
-            spinner_thread = threading.Thread(target=show_spinner, args=(f"Generating README for {toml_file.name}", stop_event), daemon=True)
-            spinner_thread.start()
-        else:
+        if not is_single_file:
             # Show progress bar for multiple files
             show_progress(i, total_files, f"Generating READMEs ({i}/{total_files})", force=True, show_spinner=True)
 
@@ -98,7 +108,7 @@ def generate_readme(toml_files):
 
             # Only process collection TOMLs
             if 'roms' in config or 'bios' in config:
-                result = generate_collection_readme(toml_file, config)
+                result = generate_collection_readme(toml_file, config, is_single_file)
             else:
                 logger.error(f"TOML file {toml_file} is not a valid collection (missing 'roms' or 'bios' sections)")
                 result = False
@@ -109,17 +119,11 @@ def generate_readme(toml_files):
 
         results.append(result)
 
-        # Stop the spinner for single file processing
-        if is_single_file:
-            stop_event.set()
-            if 'spinner_thread' in locals():
-                spinner_thread.join(timeout=0.1)
-
     clear_progress()
     return results[0] if return_single else results
 
 
-def generate_collection_readme(collection_path: Path, config: Dict[str, Any]) -> bool:
+def generate_collection_readme(collection_path: Path, config: Dict[str, Any], is_single_file=False) -> bool:
     """Generate comprehensive README for a collection TOML with all platform details"""
     logger = get_logger()
 
@@ -146,25 +150,59 @@ def generate_collection_readme(collection_path: Path, config: Dict[str, Any]) ->
     if 'bios' in config:
         bios_platforms.update(config['bios'])
 
-    # Process all platforms and collect their data
+    # First pass: count total files across all platforms for progress tracking
+    total_files_all = 0
+
+    def count_files_in_platform(platform_name: str, platform_config: Dict[str, Any]) -> int:
+        """Count files in a platform without processing"""
+        nonlocal total_files_all
+        try:
+            from utils.toml_utils import get_url_file_path
+            url_file = get_url_file_path(str(collection_path), platform_name)
+            if url_file.exists():
+                included_files, _ = parse_url_file_content(url_file)
+                return len(included_files)
+        except:
+            pass
+        return 0
+
+    print("Counting total files across all platforms...")
+    for platform_name, platform_config in rom_platforms.items():
+        total_files_all += count_files_in_platform(platform_name, platform_config)
+    for platform_name, platform_config in bios_platforms.items():
+        total_files_all += count_files_in_platform(platform_name, platform_config)
+
+    print(f"Found {total_files_all} total files to process. Starting README generation...")
+
+    # Second pass: process platforms with progress tracking
     rom_data = {}
     bios_data = {}
     total_rom_files = 0
     total_bios_files = 0
     total_rom_bytes = 0
     total_bios_bytes = 0
+    processed_files = 0
+
+    def file_progress_callback(files_processed, total_in_platform):
+        """Update progress bar as files are processed"""
+        nonlocal processed_files
+        processed_files += 1
+        show_progress(processed_files, total_files_all, f"Processing files", force=True, unit="files", show_speed=False)
 
     for platform_name, platform_config in rom_platforms.items():
-        rom_data[platform_name] = process_platform_for_readme(collection_path, platform_name, platform_config)
+        rom_data[platform_name] = process_platform_for_readme(collection_path, platform_name, platform_config, file_progress_callback)
         if rom_data[platform_name]:
             total_rom_files += rom_data[platform_name]['total_files']
             total_rom_bytes += rom_data[platform_name]['total_bytes']
 
     for platform_name, platform_config in bios_platforms.items():
-        bios_data[platform_name] = process_platform_for_readme(collection_path, platform_name, platform_config)
+        bios_data[platform_name] = process_platform_for_readme(collection_path, platform_name, platform_config, file_progress_callback)
         if bios_data[platform_name]:
             total_bios_files += bios_data[platform_name]['total_files']
             total_bios_bytes += bios_data[platform_name]['total_bytes']
+
+    clear_progress()
+    print("README generation complete.")
 
     # Generate hierarchical directory structure
     folder_structure = "```\n"
@@ -397,22 +435,23 @@ powershell -Command "& {{ $script = Invoke-WebRequest -Uri '{ps1_script_url}' -U
     return True
 
 
-def process_platform_for_readme(collection_path: Path, platform_name: str, platform_config: Dict[str, Any]) -> Dict[str, Any]:
+def process_platform_for_readme(collection_path: Path, platform_name: str, platform_config: Dict[str, Any], progress_callback=None) -> Dict[str, Any]:
     """Process a single platform and return data needed for README generation"""
-    # Get URL file path using urllist field
-    url_file = collection_path.parent / platform_config['urllist']
+    # Get URL file path using urllist field - resolve relative to repo root
+    from utils.toml_utils import get_url_file_path
+    url_file = get_url_file_path(str(collection_path), platform_name)
 
     if not url_file.exists():
         logger = get_logger()
-        logger.warning(f"URL file not found: {url_file}")
+        logger.warning(f"URL file not found: {url_file} (resolved from {platform_config['urllist']})")
         return None
 
     # Parse URL file content
     included_files, excluded_files = parse_url_file_content(url_file)
 
-    # Create file size mapping
+    # Create file size mapping with progress callback
     source_url = platform_config.get('url', '')
-    file_sizes, total_bytes = create_file_size_mapping(included_files, source_url)
+    file_sizes, total_bytes = create_file_size_mapping(included_files, source_url, progress_callback)
 
     # Organize files by game
     decoded_files = [unquote(f) for f in included_files]
@@ -423,39 +462,3 @@ def process_platform_for_readme(collection_path: Path, platform_name: str, platf
         platform_name, included_files, excluded_files,
         game_groups, total_bytes, source_url
     )
-
-
-# Import missing functions that were in the original gen_readme.py
-def show_spinner(message, stop_event=None, interval=0.1):
-    """Show a simple spinner for single file processing"""
-    import time
-    import itertools
-
-    spinner = itertools.cycle(['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'])
-
-    print(f"{message} ", end='', flush=True)
-
-    while not stop_event.is_set():
-        print(f"\r{message} {next(spinner)}", end='', flush=True)
-        time.sleep(interval)
-
-    print(f"\r{message} ✓")
-
-
-def show_progress(current, total, message="", force=False, show_spinner=False):
-    """Show progress bar for multiple file processing"""
-    import sys
-    if show_spinner and not force:
-        return  # Don't show progress bar for spinner mode
-
-    percent = int(100 * current / total)
-    bar = '█' * (percent // 2) + '░' * (50 - percent // 2)
-    sys.stdout.write(f"\r{message} [{bar}] {current}/{total} ({percent}%)")
-    sys.stdout.flush()
-
-
-def clear_progress():
-    """Clear the progress bar line"""
-    import sys
-    sys.stdout.write('\r' + ' ' * 80 + '\r')
-    sys.stdout.flush()

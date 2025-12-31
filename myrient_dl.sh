@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Universal ROM/BIOS Download Script
+# Myrient Download Script
 # Downloads files from any TOML collection configuration
 
 set -e
@@ -18,6 +18,7 @@ log_error() { echo -e "${RED}[$(date '+%H:%M:%S')] ERROR: $1${NC}"; exit 1; }
 # Global variables
 OUTPUT_DIR="$HOME/Downloads"
 SELECTED_PLATFORMS=()
+RESOLVED_URLS=()
 TOML_URL=""
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -59,6 +60,17 @@ fetch_toml() {
     fi
 }
 
+# Get unselected platforms
+get_unselected_platforms() {
+    local unselected=()
+    for platform in "${PLATFORM_NAMES[@]}"; do
+        if [[ " ${SELECTED_PLATFORMS[*]} " != *" $platform "* ]]; then
+            unselected+=("$platform")
+        fi
+    done
+    echo "${unselected[*]:-"None"}"
+}
+
 # Parse platforms directly from TOML
 parse_platforms_from_toml() {
     local toml_content="$1"
@@ -79,9 +91,18 @@ resolve_relative_url() {
         echo "$resolved_url"
     else
         # Local file: resolve relative to script directory
-        local toml_path="$SCRIPT_DIR/$toml_url"
-        local toml_dir="$(dirname "$toml_path")"
-        local resolved_path="$toml_dir/$relative_path"
+        # For paths like ../urls/file.txt, compute the absolute path
+        if [[ "$relative_path" == ../* ]]; then
+            # Going up from collection directory to repo root
+            local repo_root="$SCRIPT_DIR"
+            local relative_part="${relative_path#../}"
+            local resolved_path="$repo_root/$relative_part"
+        else
+            # Regular relative path
+            local toml_path="$SCRIPT_DIR/$toml_url"
+            local toml_dir="$(dirname "$toml_path")"
+            local resolved_path="$toml_dir/$relative_path"
+        fi
         echo "$resolved_path"
     fi
 }
@@ -89,21 +110,11 @@ resolve_relative_url() {
 # Show interactive menu
 show_menu() {
     while true; do
-        echo "=== Universal ROM/BIOS Download Script ==="
+        echo "=== Myrient Download Script ==="
         echo "Collection: $TOML_URL"
         echo "Output directory: $OUTPUT_DIR"
         echo "Selected platforms: ${SELECTED_PLATFORMS[*]:-"None selected"}"
-        echo ""
-
-        echo "Available platforms:"
-        for i in "${!PLATFORM_NAMES[@]}"; do
-            local platform="${PLATFORM_NAMES[$i]}"
-            local marker=" "
-            if [[ " ${SELECTED_PLATFORMS[*]} " == *" $platform "* ]]; then
-                marker="✓"
-            fi
-            echo "  [$marker] $((i+1))) $platform"
-        done
+        echo "Unselected platforms: $(get_unselected_platforms)"
         echo ""
 
         echo "Options:"
@@ -154,6 +165,26 @@ show_menu() {
 # Platform selection
 select_platforms() {
     echo ""
+    echo "Available platforms:"
+    for i in "${!PLATFORM_NAMES[@]}"; do
+        local platform="${PLATFORM_NAMES[$i]}"
+        local marker=" "
+        if [[ " ${SELECTED_PLATFORMS[*]} " == *" $platform "* ]]; then
+            marker="✓"
+        fi
+        printf "  [%s] %2d) %s" "$marker" "$((i+1))" "$platform"
+        # Print in columns for better readability with many platforms
+        if [ $(((i+1) % 3)) -eq 0 ]; then
+            echo ""
+        else
+            echo -n "    "
+        fi
+    done
+    if [ $((${#PLATFORM_NAMES[@]} % 3)) -ne 0 ]; then
+        echo ""
+    fi
+    echo ""
+
     echo "Enter platform numbers to toggle (space-separated) or 'all'/'none':"
     read -r input
 
@@ -168,13 +199,24 @@ select_platforms() {
             for num in $input; do
                 if [[ $num =~ ^[0-9]+$ ]] && [ $num -ge 1 ] && [ $num -le ${#PLATFORM_NAMES[@]} ]; then
                     local platform="${PLATFORM_NAMES[$((num-1))]}"
-                    if [[ " ${SELECTED_PLATFORMS[*]} " == *" $platform "* ]]; then
-                        # Remove from selected
-                        SELECTED_PLATFORMS=("${SELECTED_PLATFORMS[@]/$platform}")
-                    else
+                    local found=0
+                    local new_selected=()
+
+                    # Check if platform is already selected and rebuild array
+                    for selected in "${SELECTED_PLATFORMS[@]}"; do
+                        if [ "$selected" = "$platform" ]; then
+                            found=1
+                        else
+                            new_selected+=("$selected")
+                        fi
+                    done
+
+                    if [ $found -eq 0 ]; then
                         # Add to selected
-                        SELECTED_PLATFORMS+=("$platform")
+                        new_selected+=("$platform")
                     fi
+
+                    SELECTED_PLATFORMS=("${new_selected[@]}")
                 fi
             done
             ;;
@@ -202,10 +244,7 @@ dry_run() {
     echo "Selected platforms: ${SELECTED_PLATFORMS[*]}"
     echo ""
 
-    local directories_to_create=("$OUTPUT_DIR")
-
     echo "Directories that will be created:"
-    echo "  $OUTPUT_DIR"
 
     for platform_name in "${SELECTED_PLATFORMS[@]}"; do
         # Find platform data
@@ -213,8 +252,6 @@ dry_run() {
             if [ "${PLATFORM_NAMES[$i]}" = "$platform_name" ]; then
                 local platform_dir="${PLATFORM_DIRS[$i]}"
                 local full_platform_dir="$OUTPUT_DIR/$platform_dir"
-                directories_to_create+=("$full_platform_dir")
-                echo "  $full_platform_dir"
 
                 # Try to fetch URL list to show count
                 local urllist_path="${URL_LISTS[$i]}"
@@ -227,17 +264,15 @@ dry_run() {
                 fi
 
                 if [ "$url_count" -gt 0 ]; then
-                    echo "    $platform_name: $url_count files"
+                    echo "  $full_platform_dir ($url_count files)"
                 else
-                    echo "    $platform_name: Could not fetch URL list"
+                    echo "  $full_platform_dir (Could not fetch URL list)"
                 fi
                 break
             fi
         done
     done
 
-    echo ""
-    echo "Total directories to create: ${#directories_to_create[@]}"
     echo ""
     read -p "Press Enter to return to menu..."
 }
@@ -250,7 +285,6 @@ download_platform() {
     local should_extract="$4"
 
     log_info "Processing platform: $platform_name"
-    log_info "URL list URL: $urllist_url"
 
     # Create platform directory
     mkdir -p "$OUTPUT_DIR/$platform_dir"
@@ -264,7 +298,6 @@ download_platform() {
             log_warn "curl returned empty response for $urllist_url"
         else
             urls=$(echo "$raw_urls" | grep -v '^#' | grep -v '^$')
-            log_info "Found $(echo "$urls" | wc -l) URLs for $platform_name"
         fi
     else
     log_info "Reading URL list from local file: $urllist_url"
@@ -274,7 +307,7 @@ download_platform() {
             log_warn "No URLs found in local file $urllist_url"
         fi
     else
-        log_warn "URL list file not found: $urllist_url"
+        log_warn "Could not read URL list file: $urllist_url"
         urls=""
     fi
     fi
@@ -419,6 +452,16 @@ main() {
         SELECTED_PLATFORMS=("${PLATFORM_NAMES[@]}")
         show_menu
     fi
+
+    # Resolve URL list paths before changing directories
+    for i in "${!PLATFORM_NAMES[@]}"; do
+        local platform_name="${PLATFORM_NAMES[$i]}"
+        if [[ " ${SELECTED_PLATFORMS[*]} " == *" $platform_name "* ]]; then
+            local urllist_path="${URL_LISTS[$i]}"
+            local resolved_url=$(resolve_relative_url "$TOML_URL" "$urllist_path")
+            RESOLVED_URLS[$i]="$resolved_url"
+        fi
+    done
 
     # Create output directory
     mkdir -p "$OUTPUT_DIR"
