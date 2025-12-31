@@ -41,7 +41,7 @@ fetch_toml() {
     if [[ "$url" =~ ^https?:// ]]; then
         # Remote URL
         log_info "Fetching TOML from: $url"
-        local content=$(curl -s -A "Mozilla/5.0 (myrient-dl-script)" "$url")
+        local content=$(curl -s -A "Mozilla/5.0" "$url")
         if [ -z "$content" ]; then
             log_error "Failed to fetch TOML from $url - empty response"
         fi
@@ -222,7 +222,7 @@ dry_run() {
                 local urllist_url="$(resolve_relative_url "$TOML_URL" "$urllist_path")"
 
                 if [[ "$urllist_url" =~ ^https?:// ]]; then
-                    local url_count=$(curl -s -A "Mozilla/5.0 (myrient-dl-script)" "$urllist_url" | grep -v '^#' | grep -v '^$' | wc -l)
+                    local url_count=$(curl -s -A "Mozilla/5.0" "$urllist_url" | grep -v '^#' | grep -v '^$' | wc -l)
                 else
                     local url_count=$(grep -v '^#' "$urllist_url" 2>/dev/null | grep -v '^$' | wc -l)
                 fi
@@ -260,7 +260,7 @@ download_platform() {
     local urls=""
     if [[ "$urllist_url" =~ ^https?:// ]]; then
         log_info "Fetching URL list from remote: $urllist_url"
-        local raw_urls=$(curl -s -A "Mozilla/5.0 (myrient-dl-script)" "$urllist_url")
+        local raw_urls=$(curl -s -A "Mozilla/5.0" "$urllist_url")
         if [ -z "$raw_urls" ]; then
             log_warn "curl returned empty response for $urllist_url"
         else
