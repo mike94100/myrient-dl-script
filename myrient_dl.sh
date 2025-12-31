@@ -77,14 +77,12 @@ resolve_relative_url() {
         local base_url="${toml_url%/*}"
         local resolved_url="${base_url}/${relative_path}"
         resolved_url=$(echo "$resolved_url" | sed 's|//|/|g')
-        log_info "Resolved remote URL: $resolved_url (from $toml_url + $relative_path)"
         echo "$resolved_url"
     else
         # Local file: resolve relative to script directory
         local toml_path="$SCRIPT_DIR/$toml_url"
         local toml_dir="$(dirname "$toml_path")"
         local resolved_path="$toml_dir/$relative_path"
-        log_info "Resolved local path: $resolved_path (from $toml_url + $relative_path)"
         echo "$resolved_path"
     fi
 }
@@ -270,11 +268,16 @@ download_platform() {
             log_info "Found $(echo "$urls" | wc -l) URLs for $platform_name"
         fi
     else
-        log_info "Reading URL list from local file: $urllist_url"
-        urls=$(grep -v '^#' "$urllist_url" 2>/dev/null | grep -v '^$' || true)
+    log_info "Reading URL list from local file: $urllist_url"
+    if [ -f "$urllist_url" ]; then
+        urls=$(grep -v '^#' "$urllist_url" | grep -v '^$')
         if [ -z "$urls" ]; then
             log_warn "No URLs found in local file $urllist_url"
         fi
+    else
+        log_warn "URL list file not found: $urllist_url"
+        urls=""
+    fi
     fi
 
     if [ -z "$urls" ]; then
