@@ -76,7 +76,6 @@ resolve_relative_url() {
         # Remote URL: remove filename from TOML URL
         local base_url="${toml_url%/*}"
         local resolved_url="${base_url}/${relative_path}"
-        resolved_url=$(echo "$resolved_url" | sed 's|//|/|g')
         echo "$resolved_url"
     else
         # Local file: resolve relative to script directory
