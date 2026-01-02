@@ -255,7 +255,7 @@ def download_platform(platform_name: str, platform_data: Dict[str, Any], output_
     try:
         log_info(f"Downloading files for {platform_name}")
         result = subprocess.run([
-            'wget', '-np', '-c', '--progress=bar', '-i', url_list_file, '-P', str(full_platform_dir)
+            'wget', '-q', '-np', '-c', '-i', url_list_file, '-P', str(full_platform_dir)
         ])
 
         if result.returncode != 0:

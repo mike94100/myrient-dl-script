@@ -365,7 +365,7 @@ download_platform() {
 
     # Download files
     log_info "Downloading files for $platform_name"
-    if wget -np -c --progress=bar -i "$url_list_file" -P "$OUTPUT_DIR/$platform_dir"; then
+    if wget -q -np -c -i "$url_list_file" -P "$OUTPUT_DIR/$platform_dir"; then
         # Clean up URL list file
         rm -f "$url_list_file"
 
