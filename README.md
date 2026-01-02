@@ -19,87 +19,52 @@ This project treats ROM collections as "code" - small, versionable TOML configur
 
 ### Test with Sample Collection
 
-Start by testing the included sample collection:
+Start by testing the included [sample collection](collections/sample/README.md):
 
 **Linux/macOS:**
 ```bash
-./myrient_dl.sh collections/sample/sample.toml
+bash <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/myrient_dl.sh) https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample.toml
 ```
 
 **Windows:**
 ```powershell
-.\myrient_dl.ps1 collections\sample\sample.toml
-```
-
-**Python (Cross-platform):**
-```python
-python myrient_dl.py collections/sample/sample.toml
-```
-
-### Run Scripts without Downloading
-
-Execute scripts directly from the repository without cloning. The scripts will fetch and parse TOML collections from any URL:
-
-**Linux/macOS:**
-```bash
-# Run bash script from GitHub
-bash <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/myrient_dl.sh) https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample.toml
-
-# Run Python script from GitHub
-python3 <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/myrient_dl.py) https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample.toml
-```
-
-**Windows PowerShell:**
-```powershell
-# Run PowerShell script from GitHub
 powershell -Command "& { $script = Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/myrient_dl.ps1' -UseBasicParsing; $sb = [scriptblock]::Create($script.Content); & $sb -CollectionUrl 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample.toml' }"
 ```
 
-### Download from Any Remote Collection
-
-**Local Scripts (after cloning):**
+**Python (Cross-platform):**
 ```bash
-# Download from any hosted collection
-./myrient_dl.sh https://example.com/my-collection.toml
-
-# Download with custom output directory
-python myrient_dl.py https://example.com/my-collection.toml --output ~/my-games
+python <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/myrient_dl.py) https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample.toml
 ```
 
-**Remote Scripts (run from GitHub):**
-```bash
-# Download any collection using bash script
-bash <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/myrient_dl.sh) https://example.com/my-collection.toml
+### Downloads
 
-# Download any collection using Python script
-python3 <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/myrient_dl.py) https://example.com/my-collection.toml
+**Local:**
+```bash
+python myrient_dl.py https://example.com/collection.toml
+```
+
+**Remote:**
+```bash
+python <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/myrient_dl.py) https://example.com/my-collection.toml
 ```
 
 ### Creating Collections
 
-1. **Edit TOML Configuration**
-   ```bash
-   # Copy template to create new collection
-   cp templates/collection.template.toml collections/my-collection.toml
-   ```
+1. **Copy and edit collection.template.toml**
 
 2. **Generate Content**
    ```bash
    # Generate URL files by scraping Myrient
-   python myrient_generator.py --gen-url collections/my-collection.toml
+   python myrient_generator.py --gen-url collection.toml
 
    # Generate README documentation
-   python myrient_generator.py --gen-readme collections/my-collection.toml
+   python myrient_generator.py --gen-readme collection.toml
 
    # Generate both concurrently
-   python myrient_generator.py --gen-url --gen-readme collections/my-collection.toml
+   python myrient_generator.py --gen-url --gen-readme collection.toml
    ```
 
-### Collection Examples
-
-- **`collections/sample/`**: Small sample with Game Boy, GBA, GBC, and PS2 BIOS
-- **`collections/1g1r/`**: 1 Game 1 ROM collection
-- **`collections/all/`**: Complete collection
+3. [See provided collections](collections/README.md)
 
 ### Advanced Usage
 
