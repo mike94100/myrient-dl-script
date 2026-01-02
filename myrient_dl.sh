@@ -60,15 +60,22 @@ fetch_toml() {
     fi
 }
 
-# Get unselected platforms
-get_unselected_platforms() {
-    local unselected=()
-    for platform in "${PLATFORM_NAMES[@]}"; do
-        if [[ " ${SELECTED_PLATFORMS[*]} " != *" $platform "* ]]; then
-            unselected+=("$platform")
+# Get platforms by type and selection status
+get_platforms_by_type_and_status() {
+    local type="$1"
+    local selected="$2"
+    local platforms_by_type=()
+    for i in "${!PLATFORM_NAMES[@]}"; do
+        local is_selected=false
+        if [[ " ${SELECTED_PLATFORMS[*]} " == *" ${PLATFORM_NAMES[$i]} "* ]]; then
+            is_selected=true
+        fi
+
+        if [ "${PLATFORM_TYPES[$i]}" = "$type" ] && [ "$is_selected" = "$selected" ]; then
+            platforms_by_type+=("${PLATFORM_NAMES[$i]}")
         fi
     done
-    echo "${unselected[*]:-"None"}"
+    echo "${platforms_by_type[*]:-"None"}"
 }
 
 # Parse platforms directly from TOML
@@ -99,19 +106,8 @@ resolve_relative_url() {
             echo "$resolved_url"
         fi
     else
-        # Local file: resolve relative to script directory
-        # For paths like ../urls/file.txt, compute the absolute path
-        if [[ "$relative_path" == ../* ]]; then
-            # Going up from collection directory to repo root
-            local repo_root="$SCRIPT_DIR"
-            local relative_part="${relative_path#../}"
-            local resolved_path="$repo_root/$relative_part"
-        else
-            # Regular relative path
-            local toml_path="$SCRIPT_DIR/$toml_url"
-            local toml_dir="$(dirname "$toml_path")"
-            local resolved_path="$toml_dir/$relative_path"
-        fi
+        # Local file: paths are relative to repo root
+        local resolved_path="$SCRIPT_DIR/$relative_path"
         echo "$resolved_path"
     fi
 }
@@ -122,8 +118,12 @@ show_menu() {
         echo "=== Myrient Download Script ==="
         echo "Collection: $TOML_URL"
         echo "Output directory: $OUTPUT_DIR"
-        echo "Selected platforms: ${SELECTED_PLATFORMS[*]:-"None selected"}"
-        echo "Unselected platforms: $(get_unselected_platforms)"
+
+        # Display platforms by type and status
+        echo "Selected ROM platforms: $(get_platforms_by_type_and_status "roms" "true")"
+        echo "Selected BIOS platforms: $(get_platforms_by_type_and_status "bios" "true")"
+        echo "Unselected ROM platforms: $(get_platforms_by_type_and_status "roms" "false")"
+        echo "Unselected BIOS platforms: $(get_platforms_by_type_and_status "bios" "false")"
         echo ""
 
         echo "Options:"
@@ -174,26 +174,58 @@ show_menu() {
 # Platform selection
 select_platforms() {
     echo ""
-    echo "Available platforms:"
+
+    # Display ROM platforms
+    local rom_count=0
+    echo "ROM Platforms:"
     for i in "${!PLATFORM_NAMES[@]}"; do
-        local platform="${PLATFORM_NAMES[$i]}"
-        local marker=" "
-        if [[ " ${SELECTED_PLATFORMS[*]} " == *" $platform "* ]]; then
-            marker="✓"
-        fi
-        printf "  [%s] %2d) %s" "$marker" "$((i+1))" "$platform"
-        # Print in columns for better readability with many platforms
-        if [ $(((i+1) % 3)) -eq 0 ]; then
-            echo ""
-        else
-            echo -n "    "
+        if [ "${PLATFORM_TYPES[$i]}" = "roms" ]; then
+            local platform="${PLATFORM_NAMES[$i]}"
+            local marker=" "
+            if [[ " ${SELECTED_PLATFORMS[*]} " == *" $platform "* ]]; then
+                marker="✓"
+            fi
+            printf "  [%s] %2d) %s" "$marker" "$((i+1))" "$platform"
+            # Print in columns for better readability
+            rom_count=$((rom_count + 1))
+            if [ $((rom_count % 3)) -eq 0 ]; then
+                echo ""
+            else
+                echo -n "    "
+            fi
         fi
     done
-    if [ $((${#PLATFORM_NAMES[@]} % 3)) -ne 0 ]; then
+    if [ $((rom_count % 3)) -ne 0 ]; then
         echo ""
     fi
+
     echo ""
 
+    # Display BIOS platforms
+    local bios_count=0
+    echo "BIOS Platforms:"
+    for i in "${!PLATFORM_NAMES[@]}"; do
+        if [ "${PLATFORM_TYPES[$i]}" = "bios" ]; then
+            local platform="${PLATFORM_NAMES[$i]}"
+            local marker=" "
+            if [[ " ${SELECTED_PLATFORMS[*]} " == *" $platform "* ]]; then
+                marker="✓"
+            fi
+            printf "  [%s] %2d) %s" "$marker" "$((i+1))" "$platform"
+            # Print in columns for better readability
+            bios_count=$((bios_count + 1))
+            if [ $((bios_count % 3)) -eq 0 ]; then
+                echo ""
+            else
+                echo -n "    "
+            fi
+        fi
+    done
+    if [ $((bios_count % 3)) -ne 0 ]; then
+        echo ""
+    fi
+
+    echo ""
     echo "Enter platform numbers to toggle (space-separated) or 'all'/'none':"
     read -r input
 
@@ -250,7 +282,8 @@ dry_run() {
     echo ""
     echo "=== DRY RUN - Preview Download ==="
     echo "Output directory: $OUTPUT_DIR"
-    echo "Selected platforms: ${SELECTED_PLATFORMS[*]}"
+    echo "Selected ROM platforms: $(get_platforms_by_type_and_status "roms" "true")"
+    echo "Selected BIOS platforms: $(get_platforms_by_type_and_status "bios" "true")"
     echo ""
 
     echo "Directories that will be created:"
@@ -445,6 +478,7 @@ main() {
                 PLATFORM_DIRS+=("$directory")
                 URL_LISTS+=("$urllist")
                 SHOULD_EXTRACT+=("$extract")
+                PLATFORM_TYPES+=("$section_type")
             fi
         fi
     done

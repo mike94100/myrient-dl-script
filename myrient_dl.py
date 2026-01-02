@@ -40,11 +40,9 @@ def resolve_relative_url(toml_url: str, relative_path: str) -> str:
         resolved = f"{base_url}/{relative_path}"
         return resolved
     else:
-        # Local file: resolve relative to script directory, not current working directory
+        # Local file: resolve relative to script directory (repo root)
         script_dir = os.path.dirname(os.path.abspath(__file__))
-        toml_path = os.path.join(script_dir, toml_url)
-        toml_dir = os.path.dirname(os.path.abspath(toml_path))
-        resolved = os.path.join(toml_dir, relative_path)
+        resolved = os.path.join(script_dir, relative_path)
         return resolved
 
 def parse_platforms_from_config(config: Dict[str, Any]) -> Dict[str, Dict[str, Any]]:
@@ -60,12 +58,26 @@ def parse_platforms_from_config(config: Dict[str, Any]) -> Dict[str, Dict[str, A
 
     return platforms
 
-def get_unselected_platforms(platforms: Dict[str, Dict[str, Any]], selected_platforms: list) -> str:
-    """Get string of unselected platforms"""
-    unselected = [p for p in platforms.keys() if p not in selected_platforms]
-    return ', '.join(unselected) if unselected else 'None'
+def get_platforms_by_type_and_status(platforms: Dict[str, Dict[str, Any]], config: Dict[str, Any],
+                                   selected_platforms: list, platform_type: str, selected: bool) -> str:
+    """Get platforms filtered by type and selection status as comma-separated string"""
+    result = []
+    for platform_name in platforms.keys():
+        is_selected = platform_name in selected_platforms
 
-def show_menu(platforms: Dict[str, Dict[str, Any]], toml_url: str):
+        # Determine platform type
+        if 'roms' in config and platform_name in config['roms']:
+            current_type = 'roms'
+        elif 'bios' in config and platform_name in config['bios']:
+            current_type = 'bios'
+        else:
+            current_type = 'unknown'
+
+        if current_type == platform_type and is_selected == selected:
+            result.append(platform_name)
+    return ', '.join(result) if result else 'None'
+
+def show_menu(platforms: Dict[str, Dict[str, Any]], toml_url: str, config: Dict[str, Any]):
     """Interactive menu for platform selection"""
     selected_platforms = list(platforms.keys())  # Start with all selected
     output_dir = str(Path.home() / "Downloads")
@@ -74,8 +86,12 @@ def show_menu(platforms: Dict[str, Dict[str, Any]], toml_url: str):
         print("=== Myrient Download Script ===")
         print(f"Collection: {toml_url}")
         print(f"Output directory: {output_dir}")
-        print(f"Selected platforms: {', '.join(selected_platforms) if selected_platforms else 'None'}")
-        print(f"Unselected platforms: {get_unselected_platforms(platforms, selected_platforms)}")
+
+        # Display platforms by type and status
+        print(f"Selected ROM platforms: {get_platforms_by_type_and_status(platforms, config, selected_platforms, 'roms', True)}")
+        print(f"Selected BIOS platforms: {get_platforms_by_type_and_status(platforms, config, selected_platforms, 'bios', True)}")
+        print(f"Unselected ROM platforms: {get_platforms_by_type_and_status(platforms, config, selected_platforms, 'roms', False)}")
+        print(f"Unselected BIOS platforms: {get_platforms_by_type_and_status(platforms, config, selected_platforms, 'bios', False)}")
         print("")
 
         print("Options:")
@@ -146,7 +162,7 @@ def show_menu(platforms: Dict[str, Dict[str, Any]], toml_url: str):
                 print("Error: Please select at least one platform first.")
                 input("Press Enter to continue...")
                 continue
-            dry_run(platforms, selected_platforms, toml_url, output_dir)
+            dry_run(platforms, selected_platforms, toml_url, output_dir, config)
 
         elif choice == "4":
             if not selected_platforms:
@@ -166,11 +182,12 @@ def show_menu(platforms: Dict[str, Dict[str, Any]], toml_url: str):
 
     return selected_platforms, output_dir
 
-def dry_run(platforms: Dict[str, Dict[str, Any]], selected_platforms: list, toml_url: str, output_dir: str):
+def dry_run(platforms: Dict[str, Dict[str, Any]], selected_platforms: list, toml_url: str, output_dir: str, config: Dict[str, Any]):
     """Show preview of what will be downloaded"""
     print("\n=== DRY RUN - Preview Download ===")
     print(f"Output directory: {output_dir}")
-    print(f"Selected platforms: {', '.join(selected_platforms)}")
+    print(f"Selected ROM platforms: {get_platforms_by_type_and_status(platforms, config, selected_platforms, 'roms', True)}")
+    print(f"Selected BIOS platforms: {get_platforms_by_type_and_status(platforms, config, selected_platforms, 'bios', True)}")
     print("")
 
     print("Directories that will be created:")
@@ -185,7 +202,7 @@ def dry_run(platforms: Dict[str, Dict[str, Any]], selected_platforms: list, toml
             urllist_path = platform_data['urllist']
             urllist_url = resolve_relative_url(toml_url, urllist_path)
             if urllist_url.startswith(('http://', 'https://')):
-                with urllib.request.urlopen(urllist_url) as response:
+                with urllib.request.urlopen(urllist_url, timeout=10) as response:
                     url_content = response.read().decode('utf-8')
             else:
                 with open(urllist_url, 'r', encoding='utf-8') as f:
@@ -282,7 +299,7 @@ def main():
     if args.non_interactive:
         selected_platforms = list(platforms.keys())
     else:
-        selected_platforms, output_dir = show_menu(platforms, args.collection_url)
+        selected_platforms, output_dir = show_menu(platforms, args.collection_url, config)
 
     # Create output directory
     Path(output_dir).mkdir(parents=True, exist_ok=True)

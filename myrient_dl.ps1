@@ -128,18 +128,32 @@ function ConvertFrom-Toml {{
     return $result
 }}
 
-# Get unselected platforms
-function Get-UnselectedPlatforms {{
-    param([hashtable]$Platforms)
+# Get platforms by type and status
+function Get-PlatformsByTypeAndStatus {{
+    param(
+        [hashtable]$Platforms,
+        [hashtable]$TomlData,
+        [string]$PlatformType,
+        [bool]$Selected
+    )
 
-    $platformNames = @($Platforms.Keys)
-    $unselected = @()
-    foreach ($platform in $platformNames) {{
-        if ($SelectedPlatforms -notcontains $platform) {{
-            $unselected += $platform
+    $result = @()
+    foreach ($platformName in $Platforms.Keys) {{
+        $isSelected = $SelectedPlatforms -contains $platformName
+
+        # Determine platform type
+        $currentType = 'unknown'
+        if ($TomlData.ContainsKey('roms') -and $TomlData['roms'].ContainsKey($PlatformName)) {{
+            $currentType = 'roms'
+        }} elseif ($TomlData.ContainsKey('bios') -and $TomlData['bios'].ContainsKey($PlatformName)) {{
+            $currentType = 'bios'
+        }}
+
+        if ($currentType -eq $PlatformType -and $isSelected -eq $Selected) {{
+            $result += $platformName
         }}
     }}
-    return ($unselected -join ", ")
+    return ($result -join ", ") -replace '^$', 'None'
 }}
 
 # Extract platforms from parsed TOML
@@ -184,7 +198,7 @@ function Resolve-RelativeUrl {{
 
 # Show interactive menu
 function Show-Menu {{
-    param([hashtable]$Platforms)
+    param([hashtable]$Platforms, [hashtable]$TomlData)
 
     $platformNames = @($Platforms.Keys)
 
@@ -193,8 +207,12 @@ function Show-Menu {{
         Write-Host "=== Myrient Download Script ===" -ForegroundColor Cyan
         Write-Host "Collection: $CollectionUrl"
         Write-Host "Output directory: $OutputDir"
-        Write-Host "Selected platforms: $(if ($SelectedPlatforms.Count -eq 0) {{ "None selected" }} else {{ $SelectedPlatforms -join ", " }})"
-        Write-Host "Unselected platforms: $(if ($platformNames.Count -eq $SelectedPlatforms.Count) {{ "None" }} else {{ Get-UnselectedPlatforms $Platforms }})"
+
+        # Display platforms by type and status
+        Write-Host "Selected ROM platforms: $(Get-PlatformsByTypeAndStatus $Platforms $TomlData 'roms' $true)"
+        Write-Host "Selected BIOS platforms: $(Get-PlatformsByTypeAndStatus $Platforms $TomlData 'bios' $true)"
+        Write-Host "Unselected ROM platforms: $(Get-PlatformsByTypeAndStatus $Platforms $TomlData 'roms' $false)"
+        Write-Host "Unselected BIOS platforms: $(Get-PlatformsByTypeAndStatus $Platforms $TomlData 'bios' $false)"
         Write-Host ""
 
         Write-Host "Options:"
@@ -220,7 +238,7 @@ function Show-Menu {{
                     Read-Host "Press Enter to continue"
                     continue
                 }}
-                Invoke-DryRun $Platforms
+                Invoke-DryRun $Platforms $TomlData
             }}
             "4" {{
                 if ($SelectedPlatforms.Count -eq 0) {{
@@ -300,12 +318,13 @@ function Set-OutputDir {{
 
 # Dry run - show what will be downloaded
 function Invoke-DryRun {{
-    param([hashtable]$Platforms)
+    param([hashtable]$Platforms, [hashtable]$TomlData)
 
     Write-Host ""
     Write-Host "=== DRY RUN - Preview Download ===" -ForegroundColor Cyan
     Write-Host "Output directory: $OutputDir"
-    Write-Host "Selected platforms: $($SelectedPlatforms -join ", ")"
+    Write-Host "Selected ROM platforms: $(Get-PlatformsByTypeAndStatus $Platforms $TomlData 'roms' $true)"
+    Write-Host "Selected BIOS platforms: $(Get-PlatformsByTypeAndStatus $Platforms $TomlData 'bios' $true)"
     Write-Host ""
 
     Write-Host "Directories that will be created:"
@@ -428,7 +447,7 @@ try {{
         $SelectedPlatforms = @($platforms.Keys)
     }} else {{
         $SelectedPlatforms = @($platforms.Keys)
-        Show-Menu $platforms
+        Show-Menu $platforms $tomlData
     }}
 
     # Create output directory
