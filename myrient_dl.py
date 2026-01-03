@@ -21,7 +21,8 @@ def fetch_toml(url: str) -> Dict[str, Any]:
     try:
         if url.startswith(('http://', 'https://')):
             # Remote URL
-            with urllib.request.urlopen(url) as response:
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req, timeout=30) as response:
                 toml_content = response.read()
                 return tomllib.loads(toml_content.decode('utf-8'))
         else:
@@ -35,7 +36,16 @@ def fetch_toml(url: str) -> Dict[str, Any]:
 def resolve_relative_url(toml_url: str, relative_path: str) -> str:
     """Resolve relative path against TOML URL or local path"""
     if toml_url.startswith(('http://', 'https://')):
-        # Remote URL: remove filename from TOML URL
+        # Remote URL
+        if toml_url.startswith('https://raw.githubusercontent.com/'):
+            # GitHub raw URL: https://raw.githubusercontent.com/user/repo/branch/...
+            # Extract repo root: https://raw.githubusercontent.com/user/repo/branch/
+            parts = toml_url.split('/')
+            if len(parts) >= 6:
+                repo_root = '/'.join(parts[:6])  # https://raw.githubusercontent.com/user/repo/branch
+                resolved = f"{repo_root}/{relative_path}"
+                return resolved
+        # Generic remote URL: remove filename from TOML URL
         base_url = toml_url.rsplit('/', 1)[0]
         resolved = f"{base_url}/{relative_path}"
         return resolved
@@ -202,7 +212,8 @@ def dry_run(platforms: Dict[str, Dict[str, Any]], selected_platforms: list, toml
             urllist_path = platform_data['urllist']
             urllist_url = resolve_relative_url(toml_url, urllist_path)
             if urllist_url.startswith(('http://', 'https://')):
-                with urllib.request.urlopen(urllist_url, timeout=10) as response:
+                req = urllib.request.Request(urllist_url, headers={'User-Agent': 'Mozilla/5.0'})
+                with urllib.request.urlopen(req, timeout=30) as response:
                     url_content = response.read().decode('utf-8')
             else:
                 with open(urllist_url, 'r', encoding='utf-8') as f:
@@ -229,7 +240,8 @@ def download_platform(platform_name: str, platform_data: Dict[str, Any], output_
     try:
         if urllist_url.startswith(('http://', 'https://')):
             # Remote URL
-            with urllib.request.urlopen(urllist_url) as response:
+            req = urllib.request.Request(urllist_url, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req, timeout=30) as response:
                 url_content = response.read().decode('utf-8')
         else:
             # Local file
