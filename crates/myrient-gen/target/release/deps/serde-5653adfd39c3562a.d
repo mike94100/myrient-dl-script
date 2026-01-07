@@ -1,0 +1,14 @@
+/var/home/michael/Work/roms-as-code/tools/myrient-gen/target/release/deps/serde-5653adfd39c3562a.d: /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /var/home/michael/Work/roms-as-code/tools/myrient-gen/target/release/build/serde-9d08b465ff0b51b1/out/private.rs
+
+/var/home/michael/Work/roms-as-code/tools/myrient-gen/target/release/deps/libserde-5653adfd39c3562a.rlib: /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /var/home/michael/Work/roms-as-code/tools/myrient-gen/target/release/build/serde-9d08b465ff0b51b1/out/private.rs
+
+/var/home/michael/Work/roms-as-code/tools/myrient-gen/target/release/deps/libserde-5653adfd39c3562a.rmeta: /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /var/home/michael/Work/roms-as-code/tools/myrient-gen/target/release/build/serde-9d08b465ff0b51b1/out/private.rs
+
+/home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs:
+/home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs:
+/home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs:
+/home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs:
+/home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs:
+/var/home/michael/Work/roms-as-code/tools/myrient-gen/target/release/build/serde-9d08b465ff0b51b1/out/private.rs:
+
+# env-dep:OUT_DIR=/var/home/michael/Work/roms-as-code/tools/myrient-gen/target/release/build/serde-9d08b465ff0b51b1/out

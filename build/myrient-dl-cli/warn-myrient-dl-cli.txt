@@ -1,0 +1,57 @@
+
+This file lists modules PyInstaller was not able to find. This does not
+necessarily mean this module is required for running your program. Python and
+Python 3rd-party packages include a lot of conditional or optional modules. For
+example the module 'ntpath' only exists on Windows, whereas the module
+'posixpath' only exists on Posix systems.
+
+Types if import:
+* top-level: imported at the top-level - look at these first
+* conditional: imported within an if-statement
+* delayed: imported within a function
+* optional: imported within a try-except-statement
+
+IMPORTANT: Do NOT post this list to the issue-tracker. Use it as a basis for
+            tracking down the missing module yourself. Thanks!
+
+missing module named 'collections.abc' - imported by traceback (top-level), typing (top-level), inspect (top-level), logging (top-level), importlib.resources.readers (top-level), selectors (top-level), tracemalloc (top-level), tomllib._parser (top-level), http.client (top-level), asyncio.base_events (top-level), asyncio.coroutines (top-level)
+missing module named _winapi - imported by ntpath (optional), encodings (delayed, conditional, optional), shutil (conditional), subprocess (conditional), mimetypes (optional), sysconfig (delayed), multiprocessing.connection (optional), multiprocessing.spawn (delayed, conditional), multiprocessing.reduction (conditional), multiprocessing.shared_memory (conditional), multiprocessing.heap (conditional), multiprocessing.popen_spawn_win32 (top-level), asyncio.windows_events (top-level), asyncio.windows_utils (top-level)
+missing module named msvcrt - imported by subprocess (optional), getpass (optional), multiprocessing.spawn (delayed, conditional), multiprocessing.popen_spawn_win32 (top-level), asyncio.windows_events (top-level), asyncio.windows_utils (top-level)
+missing module named winreg - imported by importlib._bootstrap_external (conditional), mimetypes (optional), urllib.request (delayed, conditional, optional), platform (delayed, optional)
+missing module named _scproxy - imported by urllib.request (conditional)
+missing module named multiprocessing.BufferTooShort - imported by multiprocessing (top-level), multiprocessing.connection (top-level)
+missing module named multiprocessing.AuthenticationError - imported by multiprocessing (top-level), multiprocessing.connection (top-level)
+missing module named _frozen_importlib_external - imported by importlib._bootstrap (delayed), importlib (optional), importlib.abc (optional), zipimport (top-level)
+excluded module named _frozen_importlib - imported by importlib (optional), importlib.abc (optional), zipimport (top-level)
+missing module named nt - imported by os (delayed, conditional, optional), ntpath (optional), shutil (conditional), importlib._bootstrap_external (conditional), _colorize (delayed, conditional, optional), ctypes (delayed, conditional)
+missing module named multiprocessing.get_context - imported by multiprocessing (top-level), multiprocessing.pool (top-level), multiprocessing.managers (top-level), multiprocessing.sharedctypes (top-level)
+missing module named multiprocessing.TimeoutError - imported by multiprocessing (top-level), multiprocessing.pool (top-level)
+missing module named multiprocessing.set_start_method - imported by multiprocessing (top-level), multiprocessing.spawn (top-level)
+missing module named multiprocessing.get_start_method - imported by multiprocessing (top-level), multiprocessing.spawn (top-level)
+missing module named pyimod02_importers - imported by /home/michael/.local/lib/python3.13/site-packages/PyInstaller/hooks/rthooks/pyi_rth_pkgutil.py (delayed)
+missing module named _overlapped - imported by asyncio.windows_events (top-level)
+missing module named asyncio.DefaultEventLoopPolicy - imported by asyncio (delayed, conditional), asyncio.events (delayed, conditional)
+missing module named 'myrient_dl.utils.logger' - imported by myrient_dl.core (optional), myrient_dl.generator (top-level), /home/michael/Work/myrient-dl-script/src/myrient_dl/cli.py (optional)
+missing module named 'utils.progress_utils' - imported by myrient_dl.utils.url_generator (optional), myrient_dl.utils.readme_generator (top-level)
+missing module named 'utils.file_parsing_utils' - imported by myrient_dl.utils.readme_generator (top-level)
+missing module named 'utils.file_size_utils' - imported by myrient_dl.utils.file_parsing_utils (delayed, optional), myrient_dl.utils.readme_generator (top-level)
+missing module named 'utils.toml_utils' - imported by myrient_dl.utils.url_generator (optional), myrient_dl.utils.readme_generator (top-level)
+missing module named 'utils.wget_utils' - imported by myrient_dl.utils.url_generator (optional), myrient_dl.utils.readme_generator (top-level)
+missing module named 'utils.log_utils' - imported by myrient_dl.utils.file_parsing_utils (delayed, optional), myrient_dl.utils.url_generator (optional), myrient_dl.utils.readme_generator (top-level)
+missing module named bs4 - imported by myrient_dl.utils.url_generator (delayed)
+missing module named aiohttp - imported by myrient_dl.utils.url_generator (delayed)
+missing module named 'filters.filter_collection' - imported by myrient_dl.utils.toml_utils (delayed), myrient_dl.utils.url_generator (optional)
+missing module named 'utils.cache_utils' - imported by myrient_dl.utils.url_generator (delayed, optional)
+missing module named utils - imported by myrient_dl.utils.wget_utils (delayed), myrient_dl.utils.url_generator (optional)
+missing module named myrient_dl.filters - imported by myrient_dl.utils.url_generator (optional)
+missing module named filters - imported by myrient_dl.utils.toml_utils (delayed)
+missing module named log_utils - imported by myrient_dl.utils.progress_utils (optional)
+missing module named requests - imported by myrient_dl.utils.wget_utils (delayed, conditional, optional)
+missing module named vms_lib - imported by platform (delayed, optional)
+missing module named 'java.lang' - imported by platform (delayed, optional)
+missing module named java - imported by platform (delayed)
+missing module named _wmi - imported by platform (optional)
+missing module named 'myrient_dl.utils.filter_collection' - imported by myrient_dl.generator (top-level)
+missing module named toml - imported by myrient_dl.utils.cache_utils (delayed, optional)
+missing module named 'myrient_dl.utils.progress' - imported by myrient_dl.generator (top-level)
+missing module named 'myrient_dl.utils.downloader' - imported by myrient_dl.generator (top-level)
