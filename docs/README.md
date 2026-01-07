@@ -6,51 +6,43 @@ Myrient Downloader is a tool for downloading ROM and BIOS files from Myrient col
 
 ## Requirements
 
-- **Python 3.8+** (3.11+ recommended for built-in TOML support)
-- **Wget** (install on Windows, commonly available on Linux/macOS)
+- **Rust toolchain** (stable) — required to build the GUI and crates
+- **Wget** (optional) — required by some downloader scripts
+- **Python 3.8+** only if you plan to run the optional `bin/myrient_dl.py` downloader script
 
-## Installation
+## Build
 
-### Option 1: Install as Python Package (Recommended)
+### From Source
 
 ```bash
-# Clone the repository
+# Clone and build the workspace
 git clone https://github.com/mike94100/myrient-dl-script.git
 cd myrient-dl-script
-
-# Install in development mode
-pip install -e .
+cargo build --workspace
 ```
 
-Then use:
-```bash
-myrient-dl collections/sample/sample.toml
-```
+Run the GUI or individual crates with `cargo run -p <crate-name>` or see the packaging instructions below.
 
-### Option 2: Use Legacy Scripts
+### Option 2: Use Standalone Scripts
 
-The standalone scripts are available in the `scripts/` directory:
+The standalone scripts are available in the `bin/` directory:
 
 **Python:**
-```bash
-python scripts/myrient_dl.py download collections/sample/sample.toml
+```python
+python bin/myrient_dl.py download collections/sample/sample.toml
 ```
 
 **Bash:**
 ```bash
-bash scripts/myrient_dl.sh collections/sample/sample.toml
+bash bin/myrient_dl.sh collections/sample/sample.toml
 ```
 
 **PowerShell:**
 ```powershell
-.\scripts\myrient_dl.ps1 -CollectionUrl collections/sample/sample.toml
+.\bin\myrient_dl.ps1 -CollectionUrl collections/sample/sample.toml
 ```
 
-### Using pip (once published)
-
-```bash
-pip install myrient-dl
-```
+## Run
 
 ## Usage
 
@@ -70,16 +62,16 @@ myrient-dl collections/all/all.toml --non-interactive
 myrient-dl collections/1g1r/1g1r.toml --verbose
 ```
 
-### Legacy Scripts
+### Standalone Scripts
 
-The legacy bash and Python scripts are still available in the `scripts/` directory:
+The standalone scripts are available in the `bin/` directory:
 
 ```bash
 # Bash script
-./scripts/myrient_dl.sh collections/sample/sample.toml
+./bin/myrient_dl.sh collections/sample/sample.toml
 
 # Python script
-python scripts/myrient_dl.py collections/sample/sample.toml
+python bin/myrient_dl.py collections/sample/sample.toml
 ```
 
 ### Advanced Usage
@@ -99,17 +91,12 @@ myrient-dl generate-all collections/sample/sample.toml --dry-run
 
 2. **Generate Content**
    ```bash
-   # Install the package first
-   pip install -e .
-
-   # Generate URL files by scraping Myrient
-   myrient-dl generate-urls collection.toml
-
-   # Generate README documentation
-   myrient-dl generate-readme collection.toml
+   # Build and run the Rust generator crate to generate URL files and README
+   cargo run -p myrient-gen -- generate-urls collection.toml
+   cargo run -p myrient-gen -- generate-readme collection.toml
 
    # Generate both URLs and README
-   myrient-dl generate-all collection.toml
+   cargo run -p myrient-gen -- generate-all collection.toml
    ```
 
 3. [See provided collections](../collections/README.md)
@@ -138,45 +125,33 @@ urllist = "urls/ps1.txt"
 
 ## Development
 
-### Setup Development Environment
+### Build & Test (Rust)
 
 ```bash
-pip install -e ".[dev]"
-```
+# Build the workspace
+cargo build --workspace
 
-### Run Tests
-
-```bash
-pytest
+# Run unit tests for workspace
+cargo test --workspace
 ```
 
 ### Code Quality
 
 ```bash
-# Format code
-black src/ scripts/
+# Format Rust code
+cargo fmt --all
 
-# Sort imports
-isort src/ scripts/
-
-# Type checking
-mypy src/
-
-# Linting
-flake8 src/
+# Lint with clippy
+cargo clippy --workspace --all-targets -- -D warnings
 ```
 
 ## Architecture
 
-- `src/myrient_dl/` - Main package
-  - `cli.py` - Command-line interface
-  - `core.py` - Core download functionality
-  - `config.py` - Configuration handling
-  - `utils/` - Utility modules
+- `src-tauri/` - Tauri GUI (Rust)
+- `crates/` - Rust helper crates and CLI tools
 - `collections/` - TOML configuration files
 - `urls/` - URL lists for downloads
-- `scripts/` - Legacy executable scripts
-- `tests/` - Unit tests
+- `bin/` - Legacy executable scripts (Python/Bash/PowerShell)
 - `docs/` - Documentation
 
 ## Contributing
@@ -190,4 +165,4 @@ flake8 src/
 
 ## License
 
-MIT License - see LICENSE file for details.
+GNU General Public License v3.0 - see LICENSE file for details.

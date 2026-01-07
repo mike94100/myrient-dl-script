@@ -15,28 +15,30 @@ This project treats ROM collections as "code" - small, versionable TOML configur
 - **Auto-Documentation**: Generate comprehensive collection READMEs
 - **Easy Downloads**: One-command downloads from any hosted collection via Python, Bash, or PowerShell
 
-## Quick Start
+## Run
+
+### Quick Start
 
 Test with the included [sample collection](collections/sample/README.md):
 
 **Linux/macOS:**
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/scripts/myrient_dl.sh) https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample.toml
+bash <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/bin/myrient_dl.sh) https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample.toml
 ```
 
 **Windows:**
 ```powershell
-powershell -Command "& { $script = Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/scripts/myrient_dl.ps1' -UseBasicParsing; $sb = [scriptblock]::Create($script.Content); & $sb -CollectionUrl 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample.toml' }"
+powershell -Command "& { $script = Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/bin/myrient_dl.ps1' -UseBasicParsing; $sb = [scriptblock]::Create($script.Content); & $sb -CollectionUrl 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample.toml' }"
 ```
 
 **Python (Cross-platform):**
 ```bash
-python <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/scripts/myrient_dl.py) https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample.toml
+python <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/bin/myrient_dl.py) https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample.toml
 ```
 
 ## Installation & Distribution
 
-### AppImage (Recommended for Linux)
+### AppImage (Linux)
 Download the latest AppImage from [Releases](https://github.com/mike94100/myrient-dl-script/releases):
 
 ```bash
@@ -46,32 +48,25 @@ chmod +x MyrientDL.AppImage
 ./MyrientDL.AppImage download collections/sample/sample.toml  # CLI usage
 ```
 
-### From Source
+## Build
+
+### From Source (Rust workspace)
 ```bash
-# Clone and install
+# Clone and build (builds GUI and crates)
 git clone https://github.com/mike94100/myrient-dl-script.git
 cd myrient-dl-script
-pip install -e .
-
-# Use commands
-myrient-dl gui                    # Launch GUI
-myrient-dl download collections/sample/sample.toml
-myrient-dl generate-all collections/sample/sample.toml
+cargo build --workspace
 ```
 
-### Building AppImage
-```bash
-# Dependencies are included (appimagetool downloaded automatically)
-# Build AppImage
-python build_appimage.py
-```
+For AppImage or packaged releases, see the Releases page or follow the packaging instructions in `docs/README.md`.
 
-See [full documentation](docs/README.md) for detailed installation instructions, configuration, and advanced usage examples.
+See [full documentation](docs/README.md) for detailed build and packaging instructions.
 
 ## Requirements
 
-- **Python 3.8+** (3.11+ recommended for built-in TOML support)
-- **Wget** (install on Windows, commonly available on Linux/macOS)
+- **Rust** — required to build the GUI and crates
+- **Wget** — required by some downloader scripts
+- **Python 3.8+** (optional) — required only to run `bin/myrient_dl.py`
 
 ## AI Developed
 
