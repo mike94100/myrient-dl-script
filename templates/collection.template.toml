@@ -1,5 +1,17 @@
 # Myrient ROM Collection Configuration
 
+#[filters]
+#include = [""]
+#exclude = [""]
+#deduplicate = true
+
+#[roms.platform] or [bios.platform]
+#url = ""
+#urllist = ""
+#directory = ""
+#skip_filtering = false
+#extract = false
+
 # Global default filters, can be overridden per platform
 [filters]
 include = ["(USA", "(World)", "(En"]
@@ -166,13 +178,6 @@ url = "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/"
 urllist = "../urls/all/intellivision.txt"
 directory = "roms/intellivision"
 skip_filtering = false
-extract = false
-
-# Example of a custom collection (no URL needed, just urllist)
-[roms.custom_collection]
-urllist = "../urls/all/custom.txt"
-directory = "roms/custom"
-skip_filtering = true  # Don't generate URLs, use existing custom URL file
 extract = false
 
 # BIOS platform configurations

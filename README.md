@@ -15,71 +15,62 @@ This project treats ROM collections as "code" - small, versionable TOML configur
 - **Auto-Documentation**: Generate comprehensive collection READMEs
 - **Easy Downloads**: One-command downloads from any hosted collection via Python, Bash, or PowerShell
 
-## Usage Guide
+## Quick Start
 
-### Test with Sample Collection
-
-Start by testing the included [sample collection](collections/sample/README.md):
+Test with the included [sample collection](collections/sample/README.md):
 
 **Linux/macOS:**
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/myrient_dl.sh) https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample.toml
+bash <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/scripts/myrient_dl.sh) https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample.toml
 ```
 
 **Windows:**
 ```powershell
-powershell -Command "& { $script = Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/myrient_dl.ps1' -UseBasicParsing; $sb = [scriptblock]::Create($script.Content); & $sb -CollectionUrl 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample.toml' }"
+powershell -Command "& { $script = Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/scripts/myrient_dl.ps1' -UseBasicParsing; $sb = [scriptblock]::Create($script.Content); & $sb -CollectionUrl 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample.toml' }"
 ```
 
 **Python (Cross-platform):**
 ```bash
-python <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/myrient_dl.py) https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample.toml
+python <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/scripts/myrient_dl.py) https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample.toml
 ```
 
-### Downloads
+## Installation & Distribution
 
-**Local:**
+### AppImage (Recommended for Linux)
+Download the latest AppImage from [Releases](https://github.com/mike94100/myrient-dl-script/releases):
+
 ```bash
-python myrient_dl.py https://example.com/collection.toml
+# Make executable and run
+chmod +x MyrientDL.AppImage
+./MyrientDL.AppImage gui  # Launch GUI
+./MyrientDL.AppImage download collections/sample/sample.toml  # CLI usage
 ```
 
-**Remote:**
+### From Source
 ```bash
-python <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/myrient_dl.py) https://example.com/my-collection.toml
+# Clone and install
+git clone https://github.com/mike94100/myrient-dl-script.git
+cd myrient-dl-script
+pip install -e .
+
+# Use commands
+myrient-dl gui                    # Launch GUI
+myrient-dl download collections/sample/sample.toml
+myrient-dl generate-all collections/sample/sample.toml
 ```
 
-### Creating Collections
-
-1. **Copy and edit collection.template.toml**
-
-2. **Generate Content**
-   ```bash
-   # Generate URL files by scraping Myrient
-   python myrient_generator.py --gen-url collection.toml
-
-   # Generate README documentation
-   python myrient_generator.py --gen-readme collection.toml
-
-   # Generate both concurrently
-   python myrient_generator.py --gen-url --gen-readme collection.toml
-   ```
-
-3. [See provided collections](collections/README.md)
-
-### Advanced Usage
-
-**Dry Runs:**
+### Building AppImage
 ```bash
-# Preview what would be downloaded
-python myrient_dl.py collections/sample/sample.toml --dry-run
-
-# Preview what would be generated
-python myrient_generator.py --gen-url --gen-readme --dry-run collections/sample/sample.toml
+# Dependencies are included (appimagetool downloaded automatically)
+# Build AppImage
+python build_appimage.py
 ```
+
+See [full documentation](docs/README.md) for detailed installation instructions, configuration, and advanced usage examples.
 
 ## Requirements
 
-- **Python 3.11+** (for built-in TOML support)
+- **Python 3.8+** (3.11+ recommended for built-in TOML support)
 - **Wget** (install on Windows, commonly available on Linux/macOS)
 
 ## AI Developed
