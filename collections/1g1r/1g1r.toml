@@ -1,4 +1,6 @@
 # Myrient ROM Collection Configuration
+title = "One Game One ROM (1G1R) Collection"
+description = "This collection contains a single ROM file for every platform contained within. It contains the highest revision of games, skips non-official or non-game releases, and allows only English language games"
 
 # Global default filters, can be overridden per platform
 [filters]

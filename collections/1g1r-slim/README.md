@@ -1,10 +1,10 @@
-# 1G1R-SLIM ROM Collection
+# 1g1r-slim.toml ROM Collection
 
 This collection contains ROMs for multiple gaming platforms.
 
 ## Metadata
 
-- **Generated**: 2025-12-31 07:28:11 UTC
+- **Generated**: 2026-01-07 04:25:23 UTC
 - **ROM Platforms**: 13
 - **Total Files**: 5973
 - **Total Size**: 9.2 GiB (9.9 GB)
@@ -13,21 +13,20 @@ This collection contains ROMs for multiple gaming platforms.
 
 ```
 └── roms/
-    ├── atari2600/ (457 files, 21.1 MiB)
-    ├── atari5200/ (73 files, 714 KiB)
-    ├── atari7800/ (59 files, 1.8 MiB)
-    ├── c64/ (240 files, 3.7 MiB)
-    ├── colecovision/ (137 files, 1.5 MiB)
-    ├── gb/ (543 files, 52.9 MiB)
-    ├── gba/ (1149 files, 4.1 GiB)
-    ├── gbc/ (554 files, 229 MiB)
-    ├── genesis/ (763 files, 515 MiB)
-    ├── intellivision/ (149 files, 1.2 MiB)
-    ├── n64/ (318 files, 3.6 GiB)
-    ├── nes/ (728 files, 69.3 MiB)
-    └── snes/ (803 files, 634 MiB)
+    ├── atari2600/ (457 files, 21.1 MiB (22.1 MB))
+    ├── atari5200/ (73 files, 714 KiB (731 KB))
+    ├── atari7800/ (59 files, 1.8 MiB (1.9 MB))
+    ├── c64/ (240 files, 3.7 MiB (3.8 MB))
+    ├── colecovision/ (137 files, 1.5 MiB (1.5 MB))
+    ├── gb/ (543 files, 52.9 MiB (55.4 MB))
+    ├── gba/ (1149 files, 4.1 GiB (4.4 GB))
+    ├── gbc/ (554 files, 229 MiB (240 MB))
+    ├── genesis/ (763 files, 515 MiB (540 MB))
+    ├── intellivision/ (149 files, 1.2 MiB (1.3 MB))
+    ├── n64/ (318 files, 3.6 GiB (3.8 GB))
+    ├── nes/ (728 files, 69.3 MiB (72.7 MB))
+    ├── snes/ (803 files, 634 MiB (665 MB))
 ```
-
 
 ## ROM Files
 
@@ -6069,44 +6068,3 @@ This collection contains ROMs for multiple gaming platforms.
   - seaQuest DSV (USA).zip (1.4 MiB)
 </details>
 
-
-
-## Download
-
-### Local Usage
-
-If you have the myrient-dl-script repository cloned locally:
-
-**Linux/macOS:**
-```bash
-./myrient_dl.sh collections/1g1r-slim/1g1r-slim.toml
-```
-
-**Windows:**
-```powershell
-.\myrient_dl.ps1 collections/1g1r-slim/1g1r-slim.toml
-```
-
-**Python (Cross-platform):**
-```bash
-python myrient_dl.py collections/1g1r-slim/1g1r-slim.toml
-```
-
-### Remote Usage
-
-Run the scripts directly from the repository without downloading them first. The scripts will fetch and parse the collection TOML from the URL and allow interactive platform selection.
-
-**Linux/macOS:**
-```bash
-bash <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/myrient_dl.sh) https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/1g1r-slim/1g1r-slim.toml
-```
-
-**Python (Cross-platform):**
-```bash
-python3 <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/myrient_dl.py) https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/1g1r-slim/1g1r-slim.toml
-```
-
-**Windows PowerShell:**
-```powershell
-powershell -Command "& { $script = Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/myrient_dl.ps1' -UseBasicParsing; $sb = [scriptblock]::Create($script.Content); & $sb -CollectionUrl 'https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/1g1r-slim/1g1r-slim.toml' }"
-```

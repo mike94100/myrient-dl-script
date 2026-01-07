@@ -23,28 +23,7 @@ cargo build --workspace
 
 Run the GUI or individual crates with `cargo run -p <crate-name>` or see the packaging instructions below.
 
-### Option 2: Use Standalone Scripts
-
-The standalone scripts are available in the `bin/` directory:
-
-**Python:**
-```python
-python bin/myrient_dl.py download collections/sample/sample.toml
-```
-
-**Bash:**
-```bash
-bash bin/myrient_dl.sh collections/sample/sample.toml
-```
-
-**PowerShell:**
-```powershell
-.\bin\myrient_dl.ps1 -CollectionUrl collections/sample/sample.toml
-```
-
 ## Run
-
-## Usage
 
 ### Command Line
 
@@ -91,37 +70,19 @@ myrient-dl generate-all collections/sample/sample.toml --dry-run
 
 2. **Generate Content**
    ```bash
-   # Build and run the Rust generator crate to generate URL files and README
+   # Build and run the Rust generator crate to generate URL files
    cargo run -p myrient-gen -- generate-urls collection.toml
+
+   # Or to generate a README for existing URL files
    cargo run -p myrient-gen -- generate-readme collection.toml
 
-   # Generate both URLs and README
+   # Or generate both
    cargo run -p myrient-gen -- generate-all collection.toml
    ```
-
-3. [See provided collections](../collections/README.md)
 
 ## Configuration
 
 Collections are defined using TOML configuration files. See the `collections/` directory for examples.
-
-### Collection Structure
-
-```toml
-[roms.nes]
-directory = "nes"
-urllist = "urls/nes.txt"
-extract = false
-
-[roms.snes]
-directory = "snes"
-urllist = "urls/snes.txt"
-extract = true
-
-[bios.ps1]
-directory = "ps1"
-urllist = "urls/ps1.txt"
-```
 
 ## Development
 
@@ -153,15 +114,6 @@ cargo clippy --workspace --all-targets -- -D warnings
 - `urls/` - URL lists for downloads
 - `bin/` - Legacy executable scripts (Python/Bash/PowerShell)
 - `docs/` - Documentation
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests
-5. Run code quality checks
-6. Submit a pull request
 
 ## License
 

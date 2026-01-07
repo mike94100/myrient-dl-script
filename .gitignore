@@ -1,11 +1,19 @@
 # Environments
 .env
+.env.local
+.env.*.local
 .venv
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # OS generated files
 .DS_Store
@@ -15,6 +23,7 @@ venv.bak/
 .Trashes
 ehthumbs.db
 Thumbs.db
+desktop.ini
 
 # IDE files
 .vscode/
@@ -26,6 +35,11 @@ Thumbs.db
 # Downloaded files (ROMs, BIOS, etc.)
 roms/
 bios/
+
+# Build outputs
+build/
+dist/
+.svelte-kit/
 
 # Log files
 logs/
@@ -39,3 +53,25 @@ tmp/
 
 # Cache directories
 .cache/
+
+# Rust build artifacts
+target/
+Cargo.lock
+
+# Rust documentation
+doc/
+
+# Backup files
+*.bak
+*.backup
+*.orig
+*.rej
+
+# Rust-specific
+*.pdb
+*.rlib
+*.rmeta
+*.d
+
+# TypeScript
+*.tsbuildinfo

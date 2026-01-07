@@ -15,9 +15,7 @@ This project treats ROM collections as "code" - small, versionable TOML configur
 - **Auto-Documentation**: Generate comprehensive collection READMEs
 - **Easy Downloads**: One-command downloads from any hosted collection via Python, Bash, or PowerShell
 
-## Run
-
-### Quick Start
+## Quick Start
 
 Test with the included [sample collection](collections/sample/README.md):
 
@@ -36,7 +34,7 @@ powershell -Command "& { $script = Invoke-WebRequest -Uri 'https://raw.githubuse
 python <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/bin/myrient_dl.py) https://raw.githubusercontent.com/mike94100/myrient-dl-script/main/collections/sample/sample.toml
 ```
 
-## Installation & Distribution
+## Installation
 
 ### AppImage (Linux)
 Download the latest AppImage from [Releases](https://github.com/mike94100/myrient-dl-script/releases):
@@ -57,8 +55,6 @@ git clone https://github.com/mike94100/myrient-dl-script.git
 cd myrient-dl-script
 cargo build --workspace
 ```
-
-For AppImage or packaged releases, see the Releases page or follow the packaging instructions in `docs/README.md`.
 
 See [full documentation](docs/README.md) for detailed build and packaging instructions.
 

@@ -1,9 +1,0 @@
-/var/home/michael/Work/roms-as-code/tools/myrient-gen/target/release/deps/proc_macro_hack-d5b589a7775dc3b4.d: /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro-hack-0.5.20+deprecated/src/lib.rs /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro-hack-0.5.20+deprecated/src/quote.rs /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro-hack-0.5.20+deprecated/src/error.rs /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro-hack-0.5.20+deprecated/src/iter.rs /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro-hack-0.5.20+deprecated/src/parse.rs
-
-/var/home/michael/Work/roms-as-code/tools/myrient-gen/target/release/deps/libproc_macro_hack-d5b589a7775dc3b4.so: /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro-hack-0.5.20+deprecated/src/lib.rs /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro-hack-0.5.20+deprecated/src/quote.rs /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro-hack-0.5.20+deprecated/src/error.rs /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro-hack-0.5.20+deprecated/src/iter.rs /home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro-hack-0.5.20+deprecated/src/parse.rs
-
-/home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro-hack-0.5.20+deprecated/src/lib.rs:
-/home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro-hack-0.5.20+deprecated/src/quote.rs:
-/home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro-hack-0.5.20+deprecated/src/error.rs:
-/home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro-hack-0.5.20+deprecated/src/iter.rs:
-/home/michael/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro-hack-0.5.20+deprecated/src/parse.rs:

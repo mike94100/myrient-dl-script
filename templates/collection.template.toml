@@ -1,4 +1,6 @@
 # Myrient ROM Collection Configuration
+#title = ""
+#description = ""
 
 #[filters]
 #include = [""]
@@ -13,6 +15,9 @@
 #extract = false
 
 # Global default filters, can be overridden per platform
+title = "TEMPLATE Collection"
+description = "TEMPLATE Description"
+
 [filters]
 include = ["(USA", "(World)", "(En"]
 exclude = ["(Beta", "(Demo", "(Proto", "(Sample", "(Pirate", "(Unl", "(Hack", "[BIOS]", "(Test Program", "(Ja"]

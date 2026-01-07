@@ -1,4 +1,6 @@
 # Sample Collection Configuration
+title = "ROMs as Code Sample Collection"
+description = "This is a small sample collection used for testing the download function while maintaing a small file footprint."
 
 # ROMs
 [roms]

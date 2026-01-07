@@ -1,4 +1,6 @@
 # Myrient Collection Configuration
+title = "All ROMs Collection"
+description = "This collection contains all listed ROMs. Due to the large size and many unnecessary files it is not intended to be downloaded directly, but to serve as a repository for URLs and a base from which curated collections may be edited from."
 
 # Platform configurations
 [roms]

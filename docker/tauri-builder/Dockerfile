@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential pkg-config git curl ca-certificates \
     libglib2.0-dev libgtk-3-dev libgdk-pixbuf2.0-dev libcairo2-dev \
     libpango1.0-dev libgirepository1.0-dev libwebkit2gtk-4.1-dev \
-    libsoup2.4-dev libssl-dev cmake python3 sudo \
+    libsoup2.4-dev libssl-dev cmake sudo \
   && rm -rf /var/lib/apt/lists/*
 
 # Install rustup and cargo

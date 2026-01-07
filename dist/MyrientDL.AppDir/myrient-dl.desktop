@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=Myrient ROM Downloader
-Exec=myrient-dl-gui
-Icon=myrient-dl
-Type=Application
-Categories=Utility;
-Comment=Download ROM and BIOS files from Myrient collections
