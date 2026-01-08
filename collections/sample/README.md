@@ -4,19 +4,22 @@ This is a small sample collection used for testing the download function while m
 
 ## Metadata
 
-- **Generated**: 2026-01-07 06:43:56 UTC
+- **Generated**: 2026-01-08 05:59:46 UTC
 - **ROM Platforms**: 3
-- **BIOS Platforms**: 0
-- **Total Files**: 11
-- **Total Size**: 29.917095184326172 MiB (31.370348 MB)
+- **BIOS Platforms**: 1
+- **Total Files**: 19
+- **Total Size**: 52.7 MiB (55.2 MB)
 
 ## Directory Structure
 
 ```
+└── bios/
+    ├── ps2/ (3 files, 7.8 MiB (8.2 MB))
+
 └── roms/
-    ├── gb/ (3 files, 1.2078132629394531 MiB (1.266484 MB))
-    ├── gba/ (5 files, 26.300003051757813 MiB (27.577552 MB))
-    ├── gbc/ (3 files, 2.4092788696289063 MiB (2.526312 MB))
+    ├── gb/ (3 files, 1.2 MiB (1.3 MB))
+    ├── gba/ (7 files, 39.7 MiB (41.6 MB))
+    ├── gbc/ (6 files, 3.9 MiB (4.1 MB))
 ```
 
 ## ROM Files
@@ -37,6 +40,8 @@ This is a small sample collection used for testing the download function while m
   - Pokemon - LeafGreen Version (USA, Europe) (Rev 1).zip (5.1 MiB)
   - Pokemon - Ruby Version (USA, Europe) (Rev 2).zip (4.7 MiB)
   - Pokemon - Sapphire Version (USA, Europe) (Rev 2).zip (4.7 MiB)
+  - Pokemon Mystery Dungeon - Red Rescue Team (USA, Australia).zip (10.9 MiB)
+  - Pokemon Pinball - Ruby & Sapphire (USA).zip (2.5 MiB)
 </details>
 
 <details>
@@ -45,11 +50,22 @@ This is a small sample collection used for testing the download function while m
   - Pokemon - Crystal Version (USA, Europe) (Rev 1).zip (1005.8 KiB)
   - Pokemon - Gold Version (USA, Europe) (SGB Enhanced) (GB Compatible).zip (730.7 KiB)
   - Pokemon - Silver Version (USA, Europe) (SGB Enhanced) (GB Compatible).zip (730.6 KiB)
+  - Pokemon Pinball (USA, Australia) (Rumble Version) (SGB Enhanced) (GB Compatible).zip (307.8 KiB)
+  - Pokemon Puzzle Challenge (USA, Australia).zip (662.8 KiB)
+  - Pokemon Trading Card Game (Europe) (En,Es,It) (Rev 1) (SGB Enhanced) (GB Compatible).zip (603.8 KiB)
 </details>
 
 
 
 ## BIOS Files
+
+<details>
+<summary>ps2</summary>
+
+  - ps2-0230a-20080220-175343.zip (2.6 MiB)
+  - ps2-0230e-20080220-175343.zip (2.6 MiB)
+  - ps2-0230j-20080220-175343.zip (2.6 MiB)
+</details>
 
 
 

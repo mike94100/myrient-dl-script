@@ -56,3 +56,24 @@ pub fn get_url_file_path(collection_path: &str, platform: &str) -> std::path::Pa
     let base = p.file_name().and_then(|s| s.to_str()).unwrap_or("collection");
     parent.join(format!("{}.{}.txt", base, platform))
 }
+
+pub fn get_toml_value<T>(toml_path: &str, value_path: &str) -> Result<T>
+where
+    T: serde::de::DeserializeOwned,
+{
+    let config_content = fs::read_to_string(toml_path)?;
+    let config: toml::Value = toml::from_str(&config_content)?;
+
+    // Navigate the path (e.g., "general.repo_base_url")
+    let mut current = config;
+    for key in value_path.split('.') {
+        current = current.get(key).ok_or_else(|| {
+            anyhow::anyhow!("Key '{}' not found in path '{}' of TOML file '{}'", key, value_path, toml_path)
+        })?.clone();
+    }
+
+    serde::Deserialize::deserialize(current).map_err(|e| {
+        anyhow::anyhow!("Failed to deserialize value at path '{}' in TOML file '{}': {}", value_path, toml_path, e)
+    })
+}
+

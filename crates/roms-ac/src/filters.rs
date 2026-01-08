@@ -85,19 +85,44 @@ impl CollectionFilter {
     }
 
     fn should_include(&self, filename: &str, filters: &toml::value::Table) -> bool {
-        let include_patterns = filters.get("include").and_then(|v| v.as_array()).cloned();
+        // Exclude if any match
         let exclude_patterns = filters.get("exclude").and_then(|v| v.as_array()).cloned();
-
         if let Some(ex) = exclude_patterns {
             for p in ex.iter().filter_map(|x| x.as_str()) { if filename.contains(p) { return false; } }
         }
 
-        if let Some(inc) = include_patterns {
-            for p in inc.iter().filter_map(|x| x.as_str()) { if filename.contains(p) { return true; } }
-            return false;
+        // Handle includes (grouped AND logic)
+        let include_groups = Self::parse_filter_groups(filters.get("include"));
+        if !include_groups.is_empty() {
+            return include_groups.iter().all(|group| {
+                group.iter().any(|pattern| filename.contains(pattern))
+            });
         }
 
         true
+    }
+
+    fn parse_filter_groups(filter_value: Option<&toml::Value>) -> Vec<Vec<String>> {
+        let mut groups = Vec::new();
+
+        if let Some(arr) = filter_value.and_then(|v| v.as_array()) {
+            for item in arr {
+                if let Some(nested_arr) = item.as_array() {
+                    // Grouped format: [[patterns]]
+                    let group: Vec<String> = nested_arr.iter()
+                        .filter_map(|v| v.as_str().map(|s| s.to_string()))
+                        .collect();
+                    if !group.is_empty() {
+                        groups.push(group);
+                    }
+                } else if let Some(pattern) = item.as_str() {
+                    // Simple format: ["pattern"] - treat as single-item group
+                    groups.push(vec![pattern.to_string()]);
+                }
+            }
+        }
+
+        groups
     }
 
     fn deduplicate(&self, filename: &str, filtered: &mut Vec<String>, games: &mut HashMap<String, (String, String)>, base_to_index: &mut HashMap<String, usize>) {

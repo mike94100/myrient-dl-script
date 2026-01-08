@@ -1,257 +1,179 @@
-use std::path::{Path, PathBuf};
-use std::sync::Arc;
-use std::collections::BTreeMap;
-
-use clap::Parser;
+use std::path::Path;
 use anyhow::Result;
-use tokio::fs::File;
-use tokio::io::AsyncWriteExt;
-use tokio::sync::Semaphore;
 use reqwest::Client;
+use percent_encoding::percent_decode_str;
 use indicatif::{ProgressBar, ProgressStyle, MultiProgress};
 use futures::stream::{self, StreamExt};
-use percent_encoding::percent_decode_str;
 
-#[derive(Parser)]
-#[command(name = "myrient-dl")]
-#[command(about = "Download ROM collections from Myrient")]
-#[command(version = "1.0")]
-struct Args {
-    /// Collection TOML URL or local path
-    #[arg(required = true)]
-    collection: String,
-
-    /// Output directory
-    #[arg(short, long, default_value = "downloads")]
-    output: PathBuf,
-
-    /// Platforms to download (if not specified, downloads all)
-    #[arg(short = 'p', long)]
-    platforms: Vec<String>,
-
-    /// Dry run - show what would be downloaded
-    #[arg(long)]
-    dry_run: bool,
-
-    /// Force overwrite existing files
-    #[arg(long)]
-    force: bool,
-
-    /// Maximum concurrent downloads
-    #[arg(long, default_value = "5")]
-    max_concurrent: usize,
-
-    /// Show individual file progress
-    #[arg(long)]
-    progress: bool,
+#[derive(Clone)]
+struct DownloadTask {
+    url: String,
+    filename: String,
+    output_path: std::path::PathBuf,
 }
 
-#[tokio::main]
-async fn main() -> Result<()> {
-    let args = Args::parse();
+pub async fn download_collection_async(collection_path: &str, platforms: Vec<String>, output_dir: &str) -> Result<bool> {
+    let client = Client::builder().user_agent("MyrientGen/1.0").build().unwrap();
 
-    println!("Myrient ROM Downloader");
-    println!("Collection: {}", args.collection);
-    println!("Output: {}", args.output.display());
-    println!("Concurrent downloads: {}", args.max_concurrent);
-    println!();
+    // Collect all download tasks from all platforms
+    let mut download_tasks = Vec::new();
 
-    // Create output directory
-    if !args.dry_run {
-        tokio::fs::create_dir_all(&args.output).await?;
-    }
+    for platform in platforms.iter() {
+        let url_file = crate::toml_utils::get_url_file_path(collection_path, platform);
+        if !url_file.exists() {
+            eprintln!("URL file not found for {}: {}", platform, url_file.display());
+            return Ok(false);
+        }
+        let content = match std::fs::read_to_string(&url_file) {
+            Ok(s) => s,
+            Err(e) => {
+                eprintln!("Failed to read {}: {}", url_file.display(), e);
+                return Ok(false);
+            }
+        };
 
-    // Load collection TOML
-    let collection_content = if args.collection.starts_with("http") {
-        println!("Downloading collection configuration...");
-        let client = Client::new();
-        let response = client.get(&args.collection).send().await?;
-        response.text().await?
-    } else {
-        tokio::fs::read_to_string(&args.collection).await?
-    };
+        // Get the directory from the collection config
+        let directory = if let Ok(dir) = crate::toml_utils::get_toml_value::<String>(collection_path, &format!("roms.{}.directory", platform)) {
+            dir
+        } else if let Ok(dir) = crate::toml_utils::get_toml_value::<String>(collection_path, &format!("bios.{}.directory", platform)) {
+            dir
+        } else {
+            platform.to_string() // fallback to platform name
+        };
 
-    let parsed: toml::Value = toml::from_str(&collection_content)?;
+        let out_dir = Path::new(output_dir).join(directory);
+        let _ = std::fs::create_dir_all(&out_dir);
 
-    // Extract platforms
-    let mut roms = BTreeMap::new();
-    if let Some(t) = parsed.get("roms").and_then(|v| v.as_table()) {
-        for (k, v) in t {
-            roms.insert(k.clone(), v.clone());
+        for line in content.lines() {
+            let url = line.trim();
+            if url.is_empty() || url.starts_with('#') {
+                continue;
+            }
+
+            // Determine filename from URL
+            let filename = if let Some(seg) = url.rsplit('/').next() {
+                percent_decode_str(seg).decode_utf8_lossy().to_string()
+            } else {
+                continue;
+            };
+
+            let output_path = out_dir.join(&filename);
+
+            download_tasks.push(DownloadTask {
+                url: url.to_string(),
+                filename,
+                output_path,
+            });
         }
     }
 
-    // Filter platforms if specified
-    let platforms_to_download: Vec<String> = if args.platforms.is_empty() {
-        roms.keys().cloned().collect()
-    } else {
-        args.platforms.clone()
-    };
+    // Create a shared progress bar area
+    let multi_progress = std::sync::Arc::new(MultiProgress::new());
 
-    println!("Platforms to download: {}", platforms_to_download.join(", "));
-    println!();
+    // Create a vector to hold active progress bars (up to 5)
+    let active_bars = std::sync::Arc::new(std::sync::Mutex::new(Vec::<ProgressBar>::new()));
+    let bars_clone = active_bars.clone();
 
-    let multi_progress = Arc::new(MultiProgress::new());
-    let semaphore = Arc::new(Semaphore::new(args.max_concurrent));
-    let client = Arc::new(Client::new());
+    // Clone client for use in async tasks
+    let client_clone = client.clone();
 
-    let mut total_files = 0;
-    let mut download_tasks = Vec::new();
+    // Process downloads concurrently with limit of 5
+    let results = stream::iter(download_tasks)
+        .map(|task| {
+            let client = client_clone.clone();
+            let multi_progress = multi_progress.clone();
+            let bars_clone = bars_clone.clone();
 
-    for platform in platforms_to_download {
-        if let Some(platform_config) = roms.get(&platform) {
-            println!("Processing platform: {}", platform);
-
-            // Get URL file path - check if it's specified in the platform config
-            let url_file_path = platform_config.get("urllist")
-                .and_then(|v| v.as_str())
-                .unwrap_or(&format!("urls/{}/{}.txt", platform, platform));
-
-            // Construct full URL for URL file
-            let url_file_url = if args.collection.starts_with("http") && url_file_path.starts_with("urls/") {
-                // If collection is remote and URL file path is relative, construct full URL
-                let base_url = args.collection.trim_end_matches("/").rsplitn(2, '/').nth(1)
-                    .map(|s| format!("https://raw.githubusercontent.com/mike94100/roms-as-code/main/{}", s))
-                    .unwrap_or_else(|| "https://raw.githubusercontent.com/mike94100/roms-as-code/main".to_string());
-                format!("{}/{}", base_url, url_file_path)
-            } else if url_file_path.starts_with("http") {
-                // URL file is already a full URL
-                url_file_path.to_string()
-            } else {
-                // Local file
-                url_file_path.to_string()
-            };
-
-            // Load URL file
-            let url_content = if url_file_url.starts_with("http") {
-                let response = client.get(&url_file_url).send().await?;
-                response.text().await?
-            } else {
-                tokio::fs::read_to_string(&url_file_path).await?
-            };
-
-            let urls: Vec<String> = url_content
-                .lines()
-                .map(|line| line.trim())
-                .filter(|line| !line.is_empty() && !line.starts_with('#'))
-                .map(|line| line.to_string())
-                .collect();
-
-            println!("  Found {} URLs", urls.len());
-
-            let platform_output = args.output.join("roms").join(&platform);
-            if !args.dry_run {
-                tokio::fs::create_dir_all(&platform_output).await?;
-            }
-
-            for url in urls {
-                if let Some(filename) = url.rsplit('/').next() {
-                    let decoded_filename = percent_decode_str(filename).decode_utf8_lossy();
-                    let output_path = platform_output.join(decoded_filename.as_ref());
-
-                    total_files += 1;
-
-                    if args.dry_run {
-                        println!("  Would download: {}", decoded_filename);
-                    } else {
-                        let task = download_file(
-                            client.clone(),
-                            semaphore.clone(),
-                            multi_progress.clone(),
-                            url,
-                            output_path,
-                            args.force,
-                            args.progress,
+            async move {
+                // Get or create a progress bar
+                let pb = {
+                    let mut bars = bars_clone.lock().unwrap();
+                    if bars.len() < 5 {
+                        // Create new progress bar
+                        let pb = multi_progress.add(ProgressBar::new(0));
+                        pb.set_style(
+                            ProgressStyle::default_bar()
+                                .template("{msg} [{bar:30.cyan/blue}] {bytes}/{total_bytes} ({eta})")
+                                .unwrap()
+                                .progress_chars("#>-")
                         );
-                        download_tasks.push(task);
+                        bars.push(pb.clone());
+                        pb
+                    } else {
+                        // Reuse the first (oldest) progress bar
+                        bars[0].clone()
+                    }
+                };
+
+                // Truncate long filename or pad short filename for consistent positioning
+                let display_name = if task.filename.len() > 30 {
+                    format!("{:.27}...", task.filename)  // 27 chars + "..." = 30 chars
+                } else {
+                    format!("{:30}", task.filename)       // pad to 30 chars
+                };
+                pb.reset();
+                pb.set_message(format!("{}", display_name));
+
+                // Download file
+                match client.get(&task.url).send().await {
+                    Ok(mut resp) => {
+                        if resp.status().is_success() {
+                            let total_size = resp.content_length().unwrap_or(0);
+                            pb.set_length(total_size);
+
+                            match std::fs::File::create(&task.output_path) {
+                                Ok(mut file) => {
+                                    use std::io::Write;
+
+                                    // Stream download in chunks
+                                    let mut success = true;
+                                    while let Ok(Some(chunk)) = resp.chunk().await {
+                                        if let Err(e) = file.write_all(&chunk) {
+                                            eprintln!("Failed to write to {}: {}", task.output_path.display(), e);
+                                            pb.finish_with_message(format!("✗ {}", display_name));
+                                            success = false;
+                                            break;
+                                        }
+                                        pb.inc(chunk.len() as u64);
+                                    }
+
+                                    if success {
+                                        pb.finish_with_message(format!("✓ {}", display_name));
+                                        Ok(())
+                                    } else {
+                                        Err(anyhow::anyhow!("Write error for {}", task.filename))
+                                    }
+                                }
+                                Err(e) => {
+                                    eprintln!("Failed to create file: {}", task.output_path.display());
+                                    pb.finish_with_message(format!("✗ {}", display_name));
+                                    Err(anyhow::anyhow!("Create error: {}", e))
+                                }
+                            }
+                        } else {
+                            eprintln!("Failed to download {}: HTTP {}", task.url, resp.status());
+                            pb.finish_with_message(format!("✗ {}", display_name));
+                            Err(anyhow::anyhow!("HTTP error {} for {}", resp.status(), task.filename))
+                        }
+                    }
+                    Err(e) => {
+                        eprintln!("Request error for {}: {}", task.url, e);
+                        pb.finish_with_message(format!("✗ {}", display_name));
+                        Err(anyhow::anyhow!("Network error for {}: {}", task.filename, e))
                     }
                 }
             }
+        })
+        .buffer_unordered(5)
+        .collect::<Vec<_>>()
+        .await;
 
-            println!("  Queued platform: {}", platform);
-            println!();
-        } else {
-            eprintln!("Warning: Platform '{}' not found in collection", platform);
-        }
-    }
-
-    if !args.dry_run {
-        println!("Starting downloads...");
-        let results = stream::iter(download_tasks)
-            .buffer_unordered(args.max_concurrent)
-            .collect::<Vec<_>>()
-            .await;
-
-        let successful = results.iter().filter(|r| r.is_ok()).count();
-        println!("\nDownload complete!");
-        println!("Total files processed: {}", total_files);
-        println!("Files downloaded successfully: {}", successful);
-        println!("Failed downloads: {}", total_files - successful);
+    // Check if all downloads succeeded
+    let failed_count = results.iter().filter(|r| r.is_err()).count();
+    if failed_count > 0 {
+        eprintln!("{} downloads failed", failed_count);
+        Ok(false)
     } else {
-        println!("Dry run complete!");
-        println!("Total files that would be processed: {}", total_files);
+        Ok(true)
     }
-
-    Ok(())
-}
-
-async fn download_file(
-    client: Arc<Client>,
-    semaphore: Arc<Semaphore>,
-    multi_progress: Arc<MultiProgress>,
-    url: String,
-    output_path: PathBuf,
-    force: bool,
-    show_progress: bool,
-) -> Result<()> {
-    let _permit = semaphore.acquire().await?;
-
-    // Check if file exists
-    if output_path.exists() && !force {
-        return Ok(());
-    }
-
-    let filename = output_path.file_name()
-        .and_then(|n| n.to_str())
-        .unwrap_or("unknown");
-
-    // Create progress bar
-    let pb = if show_progress {
-        let pb = multi_progress.add(ProgressBar::new(0));
-        pb.set_style(
-            ProgressStyle::default_bar()
-                .template("{msg} [{bar:40.cyan/blue}] {bytes}/{total_bytes} ({eta})")?
-                .progress_chars("#>-")
-        );
-        pb.set_message(filename.to_string());
-        Some(pb)
-    } else {
-        None
-    };
-
-    // Download file
-    let response = client.get(&url).send().await?;
-    let total_size = response.content_length().unwrap_or(0);
-
-    if let Some(pb) = &pb {
-        pb.set_length(total_size);
-    }
-
-    let mut file = File::create(&output_path).await?;
-    let mut stream = response.bytes_stream();
-
-    while let Some(chunk) = stream.next().await {
-        let chunk = chunk?;
-        file.write_all(&chunk).await?;
-
-        if let Some(pb) = &pb {
-            pb.inc(chunk.len() as u64);
-        }
-    }
-
-    if let Some(pb) = pb {
-        pb.finish_with_message(format!("✓ {}", filename));
-    }
-
-    Ok(())
 }

@@ -9,6 +9,9 @@ use crate::cache::CacheManager;
 use crate::toml_utils::{discover_and_organize_platforms, get_url_file_path};
 use crate::filters;
 
+use html_escape::decode_html_entities;
+use urlencoding::encode;
+
 async fn scrape_html(client: &Client, cache: Option<&CacheManager>, url: &str) -> Result<String> {
     if let Some(c) = cache { if let Some(s) = c.get(url) { return Ok(s); } }
     let resp = client.get(url).send().await?;
@@ -17,36 +20,26 @@ async fn scrape_html(client: &Client, cache: Option<&CacheManager>, url: &str) -
     Ok(text)
 }
 
-fn scrape_zip_filenames(html: &str) -> Vec<String> {
+fn scrape_zip_links(html: &str) -> Vec<(String, String)> {
+    // Returns (href, title) pairs
     let doc = Html::parse_document(html);
     let sel = Selector::parse("a").unwrap();
-    let mut files = Vec::new();
+    let mut links = Vec::new();
     for el in doc.select(&sel) {
         if let Some(href) = el.value().attr("href") {
             if href.ends_with(".zip") {
-                let text = el.text().collect::<Vec<_>>().join("").trim().to_string();
-                if !text.is_empty() { files.push(text); }
+                let raw_title = el.value().attr("title").unwrap_or(href);
+                let decoded_title = decode_html_entities(raw_title).to_string();
+                links.push((href.to_string(), decoded_title));
             }
         }
     }
-    files.sort();
-    files
+    // Sort by title (human-readable name)
+    links.sort_by(|a, b| a.1.cmp(&b.1));
+    links
 }
 
-fn generate_urls_from_files(files: &[String], base_url: &str) -> Vec<String> {
-    use percent_encoding::{utf8_percent_encode, NON_ALPHANUMERIC};
-    let mut urls = Vec::new();
-    for f in files {
-        let clean = f.trim_start_matches('#');
-        let enc = utf8_percent_encode(clean, NON_ALPHANUMERIC).to_string();
-        let mut full = format!("{}/{}", base_url.trim_end_matches('/'), enc);
-        if f.starts_with('#') { full = format!("#{}", full); }
-        urls.push(full);
-    }
-    urls
-}
-
-async fn generate_platform_urls(collection_path: &str, platform: &str, cache: Option<&CacheManager>, client: &Client) -> bool {
+async fn generate_platform_urls(collection_path: &str, platform: &str, cache: Option<&CacheManager>, client: &Client, skip_excluded: bool) -> bool {
     let content = std::fs::read_to_string(collection_path).unwrap_or_default();
     let parsed: toml::Value = match toml::from_str(&content) { Ok(v) => v, Err(_) => return false };
     let platform_cfg = parsed.get("roms").and_then(|t| t.get(platform)).or_else(|| parsed.get("bios").and_then(|t| t.get(platform)));
@@ -56,14 +49,15 @@ async fn generate_platform_urls(collection_path: &str, platform: &str, cache: Op
     if url.is_empty() { return false; }
 
     let html = match scrape_html(client, cache, url).await { Ok(h) => h, Err(_) => return false };
-    let files = scrape_zip_filenames(&html);
-    // Apply collection filters (dedupe/include/exclude) if present
-    let filtered_files = match filters::filter_collection_apply(collection_path, platform, &files) {
+    let links = scrape_zip_links(&html);
+    // Apply collection filters (dedupe/include/exclude) using human-readable name
+    let titles: Vec<String> = links.iter().map(|(_, title)| title.clone()).collect();
+    let filtered_titles = match filters::filter_collection_apply(collection_path, platform, &titles) {
         Ok(v) => v,
-        Err(_) => files.clone(),
+        Err(_) => titles.clone(),
     };
-    if files.is_empty() { return false; }
-    let urls = generate_urls_from_files(&filtered_files, url);
+    // Generate URLs, prepending excluded ones with #
+    let urls = generate_urls(&links, &filtered_titles, url, skip_excluded);
     let path = get_url_file_path(collection_path, platform);
     if let Ok(mut f) = std::fs::File::create(&path) {
         use std::io::Write;
@@ -73,36 +67,83 @@ async fn generate_platform_urls(collection_path: &str, platform: &str, cache: Op
     true
 }
 
-pub async fn process_platforms_async(collection_path: &str, platforms: Vec<String>, cache: Option<CacheManager>) -> usize {
+pub async fn process_platforms(collection_path: &str, platforms: Vec<String>, cache: Option<CacheManager>, progress_callback: Option<Arc<dyn Fn(&str) + Send + Sync>>, skip_excluded: bool) -> usize {
     let client = Client::builder().user_agent("MyrientGen/1.0").build().unwrap();
-    let max = std::cmp::min(4, platforms.len());
+    let max = std::cmp::min(8, platforms.len());
     let sem = Arc::new(Semaphore::new(max));
     let cache_ref = cache.as_ref();
     let mut handles = Vec::new();
-    for p in platforms {
+
+    for p in platforms.clone() {
         let c = client.clone();
         let sem = sem.clone();
         let coll = collection_path.to_string();
         let cache_clone = cache_ref.cloned();
+        let progress_callback = progress_callback.clone();
+
         let handle = tokio::spawn(async move {
             let _permit = sem.acquire_owned().await.unwrap();
-            generate_platform_urls(&coll, &p, cache_clone.as_ref(), &c).await
+
+            // Report progress: starting platform
+            if let Some(ref cb) = progress_callback {
+                cb(&format!("Processing platform: {}", p));
+            }
+
+            let result = generate_platform_urls(&coll, &p, cache_clone.as_ref(), &c, skip_excluded).await;
+
+            // Report progress: completed platform
+            if let Some(ref cb) = progress_callback {
+                if result {
+                    cb(&format!("✓ Generated URLs for {}", p));
+                } else {
+                    cb(&format!("✗ Failed to generate URLs for {}", p));
+                }
+            }
+
+            result
         });
         handles.push(handle);
     }
+
     let mut success = 0usize;
     for h in handles { if let Ok(r) = h.await { if r { success += 1 } } }
     success
 }
 
-pub async fn generate_collection_urls_async(collection_path: &str, cache_manager: Option<CacheManager>, dry_run: bool) -> bool {
-    let (filter, nofilter) = match discover_and_organize_platforms(collection_path) { Ok(v) => v, Err(_) => { eprintln!("Failed to discover platforms for {}", collection_path); return false } };
-    println!("Discovered filter platforms: {:?}", filter);
-    println!("Discovered nofilter platforms: {:?}", nofilter);
+pub async fn generate_collection_urls(collection_path: &str, cache_manager: Option<CacheManager>, dry_run: bool, progress_callback: Option<Arc<dyn Fn(&str) + Send + Sync>>, skip_excluded: bool) -> bool {
+    if let Some(ref cb) = progress_callback {
+        cb("Discovering platforms...");
+    }
+
+    let (filter, nofilter) = match discover_and_organize_platforms(collection_path) { Ok(v) => v, Err(_) => {
+        if let Some(ref cb) = progress_callback {
+            cb("Failed to discover platforms");
+        }
+        eprintln!("Failed to discover platforms for {}", collection_path);
+        return false
+    } };
+
     let total = filter.len() + nofilter.len();
-    if dry_run { println!("DRY RUN: would generate for {} platforms", total); return true }
-    if filter.is_empty() && nofilter.is_empty() { return true }
-    let success_count = process_platforms_async(collection_path, filter, cache_manager).await;
+    if dry_run {
+        if let Some(ref cb) = progress_callback {
+            cb(&format!("DRY RUN: would generate for {} platforms", total));
+        }
+        println!("DRY RUN: would generate for {} platforms", total);
+        return true
+    }
+
+    if filter.is_empty() && nofilter.is_empty() {
+        if let Some(ref cb) = progress_callback {
+            cb("No platforms to process - all URL files exist");
+        }
+        return true
+    }
+
+    if let Some(ref cb) = progress_callback {
+        cb(&format!("Processing {} platforms...", filter.len()));
+    }
+
+    let success_count = process_platforms(collection_path, filter, cache_manager, progress_callback, skip_excluded).await;
 
     // Count existing URL files for nofilter platforms as successful
     let mut successful_platforms = success_count;
@@ -118,74 +159,24 @@ pub async fn generate_collection_urls_async(collection_path: &str, cache_manager
     successful_platforms == total
 }
 
-pub async fn download_collection_async(collection_path: &str, platforms: Vec<String>, output_dir: &str) -> bool {
-    let client = Client::builder().user_agent("MyrientGen/1.0").build().unwrap();
 
-    for platform in platforms.iter() {
-        let url_file = get_url_file_path(collection_path, platform);
-        if !url_file.exists() {
-            eprintln!("URL file not found for {}: {}", platform, url_file.display());
-            return false;
-        }
-        let content = match std::fs::read_to_string(&url_file) { Ok(s) => s, Err(e) => { eprintln!("Failed to read {}: {}", url_file.display(), e); return false; } };
 
-        let out_dir = Path::new(output_dir).join(platform);
-        let _ = std::fs::create_dir_all(&out_dir);
-
-        for line in content.lines() {
-            let url = line.trim();
-            if url.is_empty() || url.starts_with('#') { continue; }
-            // Download file
-            match client.get(url).send().await {
-                Ok(resp) => {
-                    if resp.status().is_success() {
-                        if let Ok(bytes) = resp.bytes().await {
-                            // Determine filename from URL
-                            if let Some(seg) = url.rsplit('/').next() {
-                                let filename = percent_encoding::percent_decode_str(seg).decode_utf8_lossy();
-                                let path = out_dir.join(filename.to_string());
-                                if let Ok(mut f) = std::fs::File::create(&path) {
-                                    use std::io::Write;
-                                    let _ = f.write_all(&bytes);
-                                }
-                            }
-                        }
-                    } else {
-                        eprintln!("Failed to download {}: HTTP {}", url, resp.status());
-                    }
-                }
-                Err(e) => {
-                    eprintln!("Request error for {}: {}", url, e);
-                }
-            }
-        }
-    }
-
-    true
-}
-
-pub fn generate_readme_sync(collection_path: &str, _dry_run: bool) -> bool {
-    // Simple README: list platforms and counts from url files
-    let content = std::fs::read_to_string(collection_path).unwrap_or_default();
-    let parsed: toml::Value = match toml::from_str(&content) { Ok(v) => v, Err(_) => return false };
-    let mut platforms = Vec::new();
-    if let Some(roms) = parsed.get("roms").and_then(|v| v.as_table()) { platforms.extend(roms.keys().cloned()); }
-    if let Some(bios) = parsed.get("bios").and_then(|v| v.as_table()) { platforms.extend(bios.keys().cloned()); }
-
-    let mut out = String::new();
-    out.push_str(&format!("# {}\n\n", Path::new(collection_path).file_name().unwrap().to_string_lossy()));
-    for p in platforms {
-        let path = get_url_file_path(collection_path, &p);
-        if path.exists() {
-            if let Ok(s) = std::fs::read_to_string(&path) {
-                let count = s.lines().filter(|l| !l.trim().is_empty()).count();
-                out.push_str(&format!("- {}: {} files\n", p, count));
-            }
+fn generate_urls(links: &[(String, String)], filtered_titles: &[String], base_url: &str, skip_excluded: bool) -> Vec<String> {
+    links.iter().filter_map(|(_href, title)| {
+        // Encode title
+        let encoded_filename = encode(title);
+        let full = format!("{}/{}", base_url.trim_end_matches('/'), encoded_filename);
+        // Write URL if allowed title
+        if filtered_titles.contains(title) {
+            Some(full)
         } else {
-            out.push_str(&format!("- {}: (no url file)\n", p));
+            // Skip excluded URLs if set
+            if skip_excluded {
+                None
+            // Comment out excluded URLs by default
+            } else {
+                Some(format!("#{}", full))
+            }
         }
-    }
-    let readme_path = Path::new(collection_path).with_extension("README.md");
-    let _ = std::fs::write(readme_path, out);
-    true
+    }).collect()
 }

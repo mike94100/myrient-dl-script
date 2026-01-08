@@ -49,15 +49,15 @@ This is recommended for developers to modify and test the collection prior to pu
 
 **Linux/macOS:**
 ```bash
-./myrient_dl.sh {{COLLECTION_TOML_LOCAL}}
+bin/myrient_dl.sh {{COLLECTION_TOML_LOCAL}}
 ```
 
 **Windows:**
 ```powershell
-.\myrient_dl.ps1 {{COLLECTION_TOML_LOCAL}}
+bin\myrient_dl.ps1 {{COLLECTION_TOML_LOCAL}}
 ```
 
 **Python:**
 ```bash
-python myrient_dl.py {{COLLECTION_TOML_LOCAL}}
+python bin/myrient_dl.py {{COLLECTION_TOML_LOCAL}}
 ```
