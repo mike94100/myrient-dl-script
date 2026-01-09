@@ -11,6 +11,7 @@ mod generator;
 mod filters;
 mod readme;
 mod downloader;
+mod tui;
 
 use crate::cache::CacheManager;
 use crate::generator::{generate_collection_urls};
@@ -49,14 +50,25 @@ struct Args {
     #[arg(long)]
     skip_excluded: bool,
 
+    /// Launch interactive TUI mode
+    #[arg(long)]
+    tui: bool,
+
     /// Collection TOML files
-    #[arg(required = true)]
+    #[arg(required_unless_present = "tui")]
     files: Vec<PathBuf>,
 }
 
 #[tokio::main]
 async fn main() -> Result<()> {
     let args = Args::parse();
+
+    // Launch TUI mode if requested
+    if args.tui {
+        let mut app = tui::App::new()?;
+        app.run()?;
+        return Ok(());
+    }
 
     if !args.gen_url && !args.gen_readme && !args.download {
         eprintln!("Must specify at least one of --gen-url, --gen-readme, or --download");

@@ -7,6 +7,10 @@ site = "https://myrient.erista.me"
 # Base URL for repository root (used in README generation for remote download links)
 repo_base_url = "https://raw.githubusercontent.com/mike94100/roms-as-code/main"
 
+# Relative root directory for collections
+collection_directory = "collections"
+
+
 # Cache settings
 [cache]
 # Enable caching of HTML responses
