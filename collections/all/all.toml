@@ -1,5 +1,11 @@
 # Myrient Collection Configuration
 
+# Global default filters, can be overridden per platform
+[filters]
+include = []
+exclude = []
+deduplicate = false
+
 # Platform configurations
 [roms]
 
