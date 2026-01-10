@@ -2,28 +2,42 @@ use std::io;
 use std::path::PathBuf;
 use ratatui::{
     backend::CrosstermBackend,
-    layout::{Constraint, Direction, Layout, Rect},
+    layout::{Constraint, Direction, Layout, Position, Rect},
     style::{Color, Modifier, Style},
     text::{Line, Span},
     widgets::{Borders, List, ListItem, ListState, Paragraph, Wrap, Block},
     Frame, Terminal,
 };
 use crossterm::{
-    event::{self, DisableMouseCapture, EnableMouseCapture, Event, KeyCode, KeyEvent, KeyModifiers},
+    event::{self, DisableBracketedPaste, DisableMouseCapture, EnableBracketedPaste, EnableMouseCapture, Event, KeyCode, KeyEvent, KeyModifiers, MouseButton, MouseEvent, MouseEventKind},
     execute,
-    terminal::{disable_raw_mode, enable_raw_mode, EnterAlternateScreen, LeaveAlternateScreen},
+    terminal::{disable_raw_mode, enable_raw_mode, EnterAlternateScreen, LeaveAlternateScreen, size},
 };
 use tui_textarea::{TextArea, Input};
 use anyhow::Result;
 use urlencoding;
+use std::collections::HashMap;
 
-#[derive(Clone)]
+#[derive(Clone, PartialEq)]
 pub enum AppState {
     FileSelect,
     Editor,
 }
 
-#[derive(Clone)]
+#[derive(Clone, PartialEq)]
+pub enum ViewMode {
+    EditorOnly,
+    PlatformsOnly,
+    Both,
+}
+
+#[derive(Clone, PartialEq)]
+enum HelpType {
+    Editor,
+    FileBrowser,
+}
+
+#[derive(Clone, PartialEq)]
 pub enum Focus {
     Platforms,
     Editor,
@@ -59,6 +73,10 @@ pub struct App {
     pub focus: Focus,
     pub save_message: Option<String>,
     pub file_status: FileStatus,
+    pub platform_url_displays: HashMap<String, Vec<String>>,
+    pub filtered_preview_mode: bool,
+    pub mouse_mode: bool,
+    pub view_mode: ViewMode,
 }
 
 impl App {
@@ -118,6 +136,10 @@ impl App {
             focus: Focus::Editor,
             save_message: None,
             file_status: FileStatus::Unchanged,
+            platform_url_displays: HashMap::new(),
+            filtered_preview_mode: false,
+            mouse_mode: false,
+            view_mode: ViewMode::Both,
         })
     }
 
@@ -174,7 +196,7 @@ impl App {
         // Setup terminal
         enable_raw_mode()?;
         let mut stdout = io::stdout();
-        execute!(stdout, EnterAlternateScreen, EnableMouseCapture)?;
+        execute!(stdout, EnterAlternateScreen, EnableBracketedPaste)?;
         let backend = CrosstermBackend::new(stdout);
         let mut terminal = Terminal::new(backend)?;
 
@@ -182,11 +204,29 @@ impl App {
         loop {
             terminal.draw(|f| self.ui(f))?;
 
-            if let Event::Key(key) = event::read()? {
-                match self.state {
-                    AppState::FileSelect => self.handle_file_select_input(key),
-                    AppState::Editor => self.handle_editor_input(key),
+            match event::read()? {
+                Event::Key(key) => {
+                    match self.state {
+                        AppState::FileSelect => self.handle_file_select_input(key),
+                        AppState::Editor => self.handle_editor_input(key),
+                    }
                 }
+                Event::Mouse(mouse_event) => {
+                    if self.mouse_mode {
+                        self.handle_mouse_input(mouse_event);
+                    }
+                }
+                Event::Paste(content) => {
+                    if self.state == AppState::Editor && self.focus == Focus::Editor {
+                        self.textarea.insert_str(&content);
+                        let new_content = self.textarea.lines().join("\n");
+                        if new_content != self.original_content {
+                            self.save_message = None;
+                            self.file_status = FileStatus::PendingEdits;
+                        }
+                    }
+                }
+                _ => {}
             }
 
             if self.should_quit {
@@ -199,7 +239,8 @@ impl App {
         execute!(
             terminal.backend_mut(),
             LeaveAlternateScreen,
-            DisableMouseCapture
+            DisableMouseCapture,
+            DisableBracketedPaste
         )?;
         terminal.show_cursor()?;
 
@@ -218,7 +259,7 @@ impl App {
 
         let chunks = Layout::default()
             .direction(Direction::Vertical)
-            .constraints([Constraint::Min(3), Constraint::Min(5), Constraint::Length(1)])
+            .constraints([Constraint::Min(3), Constraint::Max(94), Constraint::Min(3)])
             .split(area);
 
         // Current directory path
@@ -243,47 +284,70 @@ impl App {
 
         let list = List::new(items)
             .block(Block::default().borders(Borders::ALL).title("Files & Directories"))
-            .highlight_style(Style::default().bg(Color::Blue).fg(Color::White))
+            .highlight_style(Style::default().fg(Color::Blue))
             .highlight_symbol("▶ ");
 
         f.render_stateful_widget(list, chunks[1], &mut self.file_list_state.clone());
 
         // Help bar
-        self.draw_file_browser_help(f, chunks[2]);
+        self.draw_help(f, chunks[2], HelpType::FileBrowser);
     }
 
     fn draw_editor(&self, f: &mut Frame) {
         let area = f.area();
 
-        // Create main layout with three sections: editor, platform/url viewer, help
-        let chunks = Layout::default()
-            .direction(Direction::Vertical)
-            .constraints([Constraint::Percentage(45), Constraint::Percentage(45), Constraint::Length(3)])
-            .split(area);
+        match self.view_mode {
+            ViewMode::EditorOnly => {
+                // Editor only: full screen editor + help
+                let chunks = Layout::default()
+                    .direction(Direction::Vertical)
+                    .constraints([Constraint::Max(97), Constraint::Min(3)])
+                    .split(area);
 
-        // Top: Collection Editor (full width)
-        self.draw_collection_editor(f, chunks[0]);
+                self.draw_collection_editor(f, chunks[0]);
+                self.draw_help(f, chunks[1], HelpType::Editor);
+            }
+            ViewMode::PlatformsOnly => {
+                // Platforms only: platforms + URL viewer + help
+                let chunks = Layout::default()
+                    .direction(Direction::Vertical)
+                    .constraints([Constraint::Max(97), Constraint::Min(3)])
+                    .split(area);
 
-        // Middle: split horizontally for platform selector and URL viewer
-        let middle_chunks = Layout::default()
-            .direction(Direction::Horizontal)
-            .constraints([Constraint::Percentage(25), Constraint::Percentage(75)])
-            .split(chunks[1]);
+                let content_chunks = Layout::default()
+                    .direction(Direction::Horizontal)
+                    .constraints([Constraint::Percentage(15), Constraint::Fill(1)])
+                    .split(chunks[0]);
 
-        // Left panel: Platform Selector
-        self.draw_platform_selector(f, middle_chunks[0]);
+                self.draw_platform_selector(f, content_chunks[0]);
+                self.draw_url_viewer(f, content_chunks[1]);
+                self.draw_help(f, chunks[1], HelpType::Editor);
+            }
+            ViewMode::Both => {
+                // Both: editor + platforms + URL viewer + help
+                let chunks = Layout::default()
+                    .direction(Direction::Vertical)
+                    .constraints([Constraint::Max(50), Constraint::Max(50), Constraint::Min(3)])
+                    .split(area);
 
-        // Right panel: URL List Viewer
-        self.draw_url_viewer(f, middle_chunks[1]);
+                self.draw_collection_editor(f, chunks[0]);
 
-        // Bottom: Help bar
-        self.draw_help_bar(f, chunks[2]);
+                let content_chunks = Layout::default()
+                    .direction(Direction::Horizontal)
+                    .constraints([Constraint::Percentage(15), Constraint::Fill(1)])
+                    .split(chunks[1]);
+
+                self.draw_platform_selector(f, content_chunks[0]);
+                self.draw_url_viewer(f, content_chunks[1]);
+                self.draw_help(f, chunks[2], HelpType::Editor);
+            }
+        }
     }
 
     fn draw_collection_editor(&self, f: &mut Frame, area: Rect) {
         let border_color = match self.focus {
-            Focus::Editor => Color::Yellow,
-            Focus::Platforms => Color::Cyan,
+            Focus::Editor => Color::Cyan,
+            Focus::Platforms => Color::White,
         };
 
         let status_str = match self.file_status {
@@ -311,81 +375,147 @@ impl App {
 
     fn draw_platform_selector(&self, f: &mut Frame, area: Rect) {
         let border_color = match self.focus {
-            Focus::Platforms => Color::Yellow,
             Focus::Editor => Color::White,
+            Focus::Platforms => Color::Cyan,
         };
-
         let items: Vec<ListItem> = self.platform_entries
             .iter()
             .map(|platform| ListItem::new(platform.clone()))
             .collect();
 
         let list = List::new(items)
-            .block(Block::default().borders(Borders::ALL).title("Platforms").border_style(Style::default().fg(border_color)))
-            .highlight_style(Style::default().bg(Color::Blue).fg(Color::White))
+            .block(Block::default()
+                .title("Platforms")
+                .borders(Borders::ALL)
+                .border_style(Style::default().fg(border_color)))
             .highlight_symbol("▶ ");
 
         f.render_stateful_widget(list, area, &mut self.platform_list_state.clone());
     }
 
     fn draw_url_viewer(&self, f: &mut Frame, area: Rect) {
+        let title = if self.filtered_preview_mode {
+            format!("URL List Viewer - Platform: {} (Filtered Preview)", self.selected_platform)
+        } else {
+            format!("URL List Viewer - Platform: {}", self.selected_platform)
+        };
+
         let block = Block::default()
-            .title(format!("URL List Viewer - Platform: {}", self.selected_platform))
+            .title(title)
             .borders(Borders::ALL)
             .style(Style::default().fg(Color::Green));
 
-        let content = self.url_content
-            .iter()
-            .map(|line| Line::from(vec![Span::raw(line)]))
-            .collect::<Vec<_>>();
+        let mut content = Vec::new();
+        let inner_width = area.width.saturating_sub(2) as usize; // Subtract borders
+
+        for line in &self.url_content {
+            let wrapped_lines = Self::wrap_text_with_indent(line, inner_width, 2);
+            for wrapped_line in wrapped_lines {
+                content.push(Line::from(vec![Span::raw(wrapped_line)]));
+            }
+        }
 
         let paragraph = Paragraph::new(content)
-            .block(block)
-            .wrap(Wrap { trim: true });
+            .block(block);
 
         f.render_widget(paragraph, area);
     }
 
-    fn draw_help_bar(&self, f: &mut Frame, area: Rect) {
-        let help_text = vec![
-            Line::from(vec![
-                Span::styled("Esc", Style::default().fg(Color::Yellow)),
-                Span::styled(" back to files, ", Style::default().fg(Color::White)),
-                Span::styled("Tab", Style::default().fg(Color::Yellow)),
-                Span::styled(" switch focus, ", Style::default().fg(Color::White)),
-                Span::styled("Ctrl+S", Style::default().fg(Color::Yellow)),
-                Span::styled(" save", Style::default().fg(Color::White)),
-            ]),
-        ];
+    fn draw_help(&self, f: &mut Frame, area: Rect, help_type: HelpType) {
+        let mouse_mode_str = if self.mouse_mode { "Mouse: ON" } else { "Mouse: OFF" };
+        let view_mode_str = match self.view_mode {
+            ViewMode::EditorOnly => "View: Editor",
+            ViewMode::PlatformsOnly => "View: Platforms",
+            ViewMode::Both => "View: Both",
+        };
+        
+        let help_text = match help_type {
+            HelpType::Editor => vec![
+                Line::from(vec![
+                    Span::styled("Esc", Style::default().fg(Color::Yellow)),
+                    Span::styled(" back, ", Style::default().fg(Color::White)),
+                    Span::styled("Tab", Style::default().fg(Color::Yellow)),
+                    Span::styled(" switch focus, ", Style::default().fg(Color::White)),
+                    Span::styled("F2", Style::default().fg(Color::Yellow)),
+                    Span::styled(" toggle mouse", Style::default().fg(Color::White)),
+                    Span::styled(" | ", Style::default().fg(Color::White)),
+                    Span::styled(mouse_mode_str, Style::default().fg(Color::Cyan)),
+                    Span::styled(", ", Style::default().fg(Color::White)),
+                    Span::styled("F3", Style::default().fg(Color::Yellow)),
+                    Span::styled(" toggle view", Style::default().fg(Color::White)),
+                    Span::styled(" | ", Style::default().fg(Color::White)),
+                    Span::styled(view_mode_str, Style::default().fg(Color::Magenta)),
+                    Span::styled(", ", Style::default().fg(Color::White)),
+                    Span::styled("Ctrl+S", Style::default().fg(Color::Yellow)),
+                    Span::styled(" save", Style::default().fg(Color::White)),
+                ]),
+            ],
+            HelpType::FileBrowser => vec![
+                Line::from(vec![
+                    Span::styled("↑↓", Style::default().fg(Color::Yellow)),
+                    Span::styled(" navigate, ", Style::default().fg(Color::White)),
+                    Span::styled("→/Enter", Style::default().fg(Color::Yellow)),
+                    Span::styled(" enter dir/select file, ", Style::default().fg(Color::White)),
+                    Span::styled("←", Style::default().fg(Color::Yellow)),
+                    Span::styled(" go up, ", Style::default().fg(Color::White)),
+                    Span::styled("Esc/q", Style::default().fg(Color::Yellow)),
+                    Span::styled(" quit", Style::default().fg(Color::White)),
+                ]),
+            ],
+        };
 
         let paragraph = Paragraph::new(help_text)
-            .style(Style::default().bg(Color::Blue).fg(Color::White));
+            .style(Style::default().fg(Color::White))
+            .block(Block::default().borders(Borders::ALL));
 
         f.render_widget(paragraph, area);
     }
 
-    fn draw_file_browser_help(&self, f: &mut Frame, area: Rect) {
-        let help_text = Line::from(vec![
-            Span::styled("↑↓", Style::default().fg(Color::Yellow)),
-            Span::styled(" navigate, ", Style::default().fg(Color::White)),
-            Span::styled("→/Enter", Style::default().fg(Color::Yellow)),
-            Span::styled(" enter dir/select file, ", Style::default().fg(Color::White)),
-            Span::styled("←", Style::default().fg(Color::Yellow)),
-            Span::styled(" go up, ", Style::default().fg(Color::White)),
-            Span::styled("Esc/q", Style::default().fg(Color::Yellow)),
-            Span::styled(" quit", Style::default().fg(Color::White)),
-        ]);
+    fn wrap_text_with_indent(text: &str, width: usize, indent: usize) -> Vec<String> {
+        let mut lines = Vec::new();
+        let mut current_text = text.to_string();
 
-        let paragraph = Paragraph::new(help_text)
-            .style(Style::default().bg(Color::Blue).fg(Color::White));
+        loop {
+            if current_text.len() <= width {
+                lines.push(current_text);
+                break;
+            }
 
-        f.render_widget(paragraph, area);
+            // Find the last space within width
+            let cut_point = if let Some(space_pos) = current_text[..width].rfind(' ') {
+                space_pos
+            } else {
+                width
+            };
+
+            lines.push(current_text[..cut_point].to_string());
+            current_text = current_text[cut_point..].trim_start().to_string();
+
+            if !current_text.is_empty() {
+                // Add indentation for continuation lines
+                let indent_str = " ".repeat(indent);
+                current_text = indent_str + &current_text;
+            } else {
+                break;
+            }
+        }
+
+        lines
     }
 
     fn handle_file_select_input(&mut self, key: KeyEvent) {
         match key.code {
             KeyCode::Char('q') | KeyCode::Esc => self.should_quit = true,
             KeyCode::Char('c') if key.modifiers.contains(KeyModifiers::CONTROL) => self.should_quit = true,
+            KeyCode::F(2) => {
+                self.mouse_mode = !self.mouse_mode;
+                if self.mouse_mode {
+                    execute!(std::io::stdout(), EnableMouseCapture).ok();
+                } else {
+                    execute!(std::io::stdout(), DisableMouseCapture).ok();
+                }
+                return;
+            }
             KeyCode::Up => {
                 let i = match self.file_list_state.selected() {
                     Some(i) => if i > 0 { i - 1 } else { 0 }, // Don't loop, stay at top
@@ -459,11 +589,50 @@ impl App {
                 return;
             }
             KeyCode::Tab => {
-                // Switch focus
-                self.focus = match self.focus {
-                    Focus::Platforms => Focus::Editor,
-                    Focus::Editor => Focus::Platforms,
+                // Switch focus based on view mode
+                match self.view_mode {
+                    ViewMode::EditorOnly => {
+                        // Focus stays on editor
+                    }
+                    ViewMode::PlatformsOnly => {
+                        // Focus stays on platforms
+                    }
+                    ViewMode::Both => {
+                        // Switch between editor and platforms
+                        self.focus = match self.focus {
+                            Focus::Platforms => Focus::Editor,
+                            Focus::Editor => Focus::Platforms,
+                        };
+                    }
+                }
+                return;
+            }
+            KeyCode::F(3) => {
+                self.view_mode = match self.view_mode {
+                    ViewMode::Both => {
+                        self.focus = Focus::Editor;
+                        ViewMode::EditorOnly
+                    }
+                    ViewMode::EditorOnly => {
+                        self.focus = Focus::Platforms;
+                        ViewMode::PlatformsOnly
+                    }
+                    ViewMode::PlatformsOnly => ViewMode::Both,
                 };
+                return;
+            }
+            KeyCode::F(2) => {
+                self.mouse_mode = !self.mouse_mode;
+                if self.mouse_mode {
+                    execute!(std::io::stdout(), EnableMouseCapture).ok();
+                } else {
+                    execute!(std::io::stdout(), DisableMouseCapture).ok();
+                }
+                return;
+            }
+            KeyCode::Char('r') if key.modifiers.contains(KeyModifiers::CONTROL) => {
+                // Refresh filtering preview for all platforms
+                self.refresh_filtering_preview();
                 return;
             }
             KeyCode::Char('s') if key.modifiers.contains(KeyModifiers::CONTROL) => {
@@ -475,6 +644,8 @@ impl App {
                     } else {
                         self.original_content = content;
                         self.file_status = FileStatus::Saved;
+                        // Save all current URL displays to files
+                        self.save_all_url_lists();
                     }
                 }
                 return;
@@ -493,7 +664,11 @@ impl App {
                     self.platform_list_state.select(Some(i));
                     if let Some(platform) = self.platform_entries.get(i) {
                         self.selected_platform = platform.clone();
-                        self.update_url_content_for_platform();
+                        if self.filtered_preview_mode {
+                            self.update_current_url_display();
+                        } else {
+                            self.update_url_content_for_platform();
+                        }
                     }
                     return;
                 }
@@ -505,7 +680,11 @@ impl App {
                     self.platform_list_state.select(Some(i));
                     if let Some(platform) = self.platform_entries.get(i) {
                         self.selected_platform = platform.clone();
-                        self.update_url_content_for_platform();
+                        if self.filtered_preview_mode {
+                            self.update_current_url_display();
+                        } else {
+                            self.update_url_content_for_platform();
+                        }
                     }
                     return;
                 }
@@ -556,28 +735,297 @@ impl App {
         }
     }
 
+    fn refresh_filtering_preview(&mut self) {
+        if let Some(selected_file) = &self.selected_file {
+            // Parse current editor content as TOML
+            let toml_content = self.textarea.lines().join("\n");
+            let filter = match crate::filters::CollectionFilter::new_from_content(&toml_content) {
+                Ok(f) => f,
+                Err(_) => {
+                    self.save_message = Some("Invalid TOML!".to_string());
+                    return;
+                }
+            };
+
+            // Clear existing displays
+            self.platform_url_displays.clear();
+
+            // Process each platform sequentially (file I/O is fast enough)
+            let selected_file_path = selected_file.to_string_lossy().to_string();
+
+            for platform in &self.platform_entries {
+                if let Ok((_, urls)) = Self::filter_platform_urls(&selected_file_path, platform.clone(), &filter) {
+                    self.platform_url_displays.insert(platform.clone(), urls);
+                }
+            }
+
+            // Update the filtered preview mode
+            self.filtered_preview_mode = true;
+
+            // Update current display for selected platform
+            self.update_current_url_display();
+        }
+    }
+
+    fn filter_platform_urls(collection_path: &str, platform: String, filter: &crate::filters::CollectionFilter) -> Result<(String, Vec<String>)> {
+        // Load existing URL file
+        let url_file_path = crate::toml_utils::get_url_file_path(&collection_path, &platform);
+        let all_urls = if url_file_path.exists() {
+            std::fs::read_to_string(&url_file_path).unwrap_or_default()
+                .lines()
+                .filter(|line| !line.trim().is_empty())
+                .map(|line| line.to_string())
+                .collect::<Vec<String>>()
+        } else {
+            Vec::new()
+        };
+
+        // Decode URLs to get titles for filtering (like the generator does)
+        let titles: Vec<String> = all_urls.iter()
+            .map(|url| Self::extract_filename_from_url(url))
+            .collect();
+
+        // Apply filters to titles
+        let filtered_titles = filter.filter_files(&platform, &titles);
+
+        // Map back to URLs with # prefixes for excluded ones
+        let url_map: std::collections::HashMap<&str, &String> = titles.iter().map(|s| s.as_str()).zip(all_urls.iter()).collect();
+        let filtered_urls: Vec<String> = filtered_titles.into_iter().map(|title| {
+            if title.starts_with('#') {
+                let clean_title = &title[1..];
+                if let Some(&url) = url_map.get(clean_title) {
+                    format!("#{}", url)
+                } else {
+                    title
+                }
+            } else {
+                if let Some(&url) = url_map.get(title.as_str()) {
+                    url.clone()
+                } else {
+                    title
+                }
+            }
+        }).collect();
+
+        // Convert to display format (filenames with status indicators)
+        let display_urls = filtered_urls.into_iter().take(10).map(|url| {
+            let filename = Self::extract_filename_from_url(&url);
+            if url.starts_with('#') {
+                format!("✗ {}", filename)
+            } else {
+                format!("✓ {}", filename)
+            }
+        }).collect();
+
+        Ok((platform, display_urls))
+    }
+
+    fn update_current_url_display(&mut self) {
+        if let Some(urls) = self.platform_url_displays.get(&self.selected_platform) {
+            self.url_content = urls.clone();
+        } else {
+            self.url_content = Vec::new();
+        }
+    }
+
+    fn save_all_url_lists(&mut self) {
+        if let Some(selected_file) = &self.selected_file {
+            for (platform, urls) in &self.platform_url_displays {
+                let url_file_path = crate::toml_utils::get_url_file_path(&selected_file.to_string_lossy(), platform);
+                // Convert display format back to URL format
+                let url_lines: Vec<String> = urls.iter().map(|display_line| {
+                    if display_line.starts_with("✗ ") {
+                        format!("#{}", display_line[4..].to_string()) // Skip "✗ " and add #
+                    } else if display_line.starts_with("✓ ") {
+                        display_line[4..].to_string() // Skip "✓ "
+                    } else {
+                        display_line.clone()
+                    }
+                }).collect();
+
+                let _ = std::fs::write(&url_file_path, url_lines.join("\n"));
+            }
+            // Reset to original mode after saving
+            self.filtered_preview_mode = false;
+        }
+    }
+
+    fn handle_mouse_input(&mut self, mouse_event: MouseEvent) {
+        if mouse_event.kind != MouseEventKind::Down(MouseButton::Left) {
+            return;
+        }
+
+        let (term_width, term_height) = size().unwrap_or((80, 24));
+        let area = Rect::new(0, 0, term_width, term_height);
+
+        match self.state {
+            AppState::FileSelect => {
+                let chunks = Layout::default()
+                    .direction(Direction::Vertical)
+                    .constraints([Constraint::Min(3), Constraint::Max(94), Constraint::Min(3)])
+                    .split(area);
+                let file_list_rect = chunks[1];
+
+                if file_list_rect.contains(Position::new(mouse_event.column, mouse_event.row)) {
+                    let item_index = (mouse_event.row as usize).saturating_sub(file_list_rect.y as usize + 1);
+                    if item_index < self.file_entries.len() {
+                        self.file_list_state.select(Some(item_index));
+                        // Perform Enter action
+                        if let Some(entry) = self.file_entries.get(item_index) {
+                            if entry.is_dir {
+                                if let Ok(new_entries) = Self::load_directory_contents(&entry.path) {
+                                    self.current_dir = entry.path.clone();
+                                    self.file_entries = new_entries;
+                                    self.file_list_state.select(Some(0));
+                                }
+                            } else {
+                                self.selected_file = Some(entry.path.clone());
+                                if let Ok(content) = std::fs::read_to_string(&entry.path) {
+                                    self.original_content = content.clone();
+                                    self.textarea = TextArea::from(content.lines());
+                                    self.file_status = FileStatus::Unchanged;
+                                    self.save_message = None;
+                                    if let Ok((filter, nofilter)) = crate::toml_utils::discover_and_organize_platforms(&entry.path.to_string_lossy()) {
+                                        self.platform_entries = [filter, nofilter].concat();
+                                        self.platform_entries.sort();
+                                        if !self.platform_entries.is_empty() {
+                                            self.platform_list_state.select(Some(0));
+                                            self.selected_platform = self.platform_entries[0].clone();
+                                        }
+                                    }
+                                    self.update_url_content_for_platform();
+                                }
+                                self.state = AppState::Editor;
+                            }
+                        }
+                    }
+                }
+            }
+            AppState::Editor => {
+                match self.view_mode {
+                    ViewMode::EditorOnly => {
+                        // No mouse handling in editor-only mode
+                    }
+                    ViewMode::PlatformsOnly => {
+                        let chunks = Layout::default()
+                            .direction(Direction::Vertical)
+                            .constraints([Constraint::Max(97), Constraint::Min(3)])
+                            .split(area);
+                        let content_chunks = Layout::default()
+                            .direction(Direction::Horizontal)
+                            .constraints([Constraint::Percentage(15), Constraint::Fill(1)])
+                            .split(chunks[0]);
+                        let platform_rect = content_chunks[0];
+
+                        if platform_rect.contains(Position::new(mouse_event.column, mouse_event.row)) {
+                            let item_index = (mouse_event.row as usize).saturating_sub(platform_rect.y as usize + 1);
+                            if item_index < self.platform_entries.len() {
+                                self.platform_list_state.select(Some(item_index));
+                                if let Some(platform) = self.platform_entries.get(item_index) {
+                                    self.selected_platform = platform.clone();
+                                    if self.filtered_preview_mode {
+                                        self.update_current_url_display();
+                                    } else {
+                                        self.update_url_content_for_platform();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    ViewMode::Both => {
+                        let chunks = Layout::default()
+                            .direction(Direction::Vertical)
+                            .constraints([Constraint::Max(50), Constraint::Max(50), Constraint::Min(3)])
+                            .split(area);
+                        let content_chunks = Layout::default()
+                            .direction(Direction::Horizontal)
+                            .constraints([Constraint::Percentage(15), Constraint::Fill(1)])
+                            .split(chunks[1]);
+                        let platform_rect = content_chunks[0];
+
+                        if platform_rect.contains(Position::new(mouse_event.column, mouse_event.row)) {
+                            let item_index = (mouse_event.row as usize).saturating_sub(platform_rect.y as usize + 1);
+                            if item_index < self.platform_entries.len() {
+                                self.platform_list_state.select(Some(item_index));
+                                if let Some(platform) = self.platform_entries.get(item_index) {
+                                    self.selected_platform = platform.clone();
+                                    if self.filtered_preview_mode {
+                                        self.update_current_url_display();
+                                    } else {
+                                        self.update_url_content_for_platform();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     fn update_url_content_for_platform(&mut self) {
         // Try to load actual URL content for the selected platform from TOML
         if let Some(selected_file) = &self.selected_file {
             let url_file_path = crate::toml_utils::get_url_file_path(&selected_file.to_string_lossy(), &self.selected_platform);
             if url_file_path.exists() {
                 if let Ok(content) = std::fs::read_to_string(&url_file_path) {
-                    // Parse and filter URLs based on collection filters
-                    let urls: Vec<String> = content.lines()
-                        .filter(|line| !line.trim().is_empty() && !line.starts_with('#'))
-                        .map(|line| line.to_string())
-                        .collect();
+                    // Parse current TOML to get actual filters
+                    let toml_content = self.textarea.lines().join("\n");
+                    if let Ok(filter) = crate::filters::CollectionFilter::new_from_content(&toml_content) {
+                        // Get all URLs from file (including commented ones)
+                        let all_urls: Vec<String> = content.lines()
+                            .filter(|line| !line.trim().is_empty())
+                            .map(|line| line.to_string())
+                            .collect();
 
-                    // For now, just show first 10 URLs with some sample filtering
-                    self.url_content = urls.into_iter().take(10).map(|url| {
-                        let filename = Self::extract_filename_from_url(&url);
-                        // Simple demo filtering - in a real implementation this would use the actual filters
-                        if url.contains("Japan") {
-                            format!("✗ {}", filename)
-                        } else {
+                        // Decode URLs to get titles for filtering (like the generator does)
+                        let titles: Vec<String> = all_urls.iter()
+                            .map(|url| Self::extract_filename_from_url(url))
+                            .collect();
+
+                        // Apply filters to titles
+                        let filtered_titles = filter.filter_files(&self.selected_platform, &titles);
+
+                        // Map back to URLs with # prefixes for excluded ones
+                        let url_map: std::collections::HashMap<&str, &String> = titles.iter().map(|s| s.as_str()).zip(all_urls.iter()).collect();
+                        let filtered_urls: Vec<String> = filtered_titles.into_iter().map(|title| {
+                            if title.starts_with('#') {
+                                let clean_title = &title[1..];
+                                if let Some(&url) = url_map.get(clean_title) {
+                                    format!("#{}", url)
+                                } else {
+                                    title
+                                }
+                            } else {
+                                if let Some(&url) = url_map.get(title.as_str()) {
+                                    url.clone()
+                                } else {
+                                    title
+                                }
+                            }
+                        }).collect();
+
+                        // Convert to display format
+                        self.url_content = filtered_urls.into_iter().take(10).map(|url| {
+                            let filename = Self::extract_filename_from_url(&url);
+                            if url.starts_with('#') {
+                                format!("✗ {}", filename)
+                            } else {
+                                format!("✓ {}", filename)
+                            }
+                        }).collect();
+                    } else {
+                        // Fallback if TOML parsing fails - show all as included
+                        let urls: Vec<String> = content.lines()
+                            .filter(|line| !line.trim().is_empty())
+                            .map(|line| line.to_string())
+                            .collect();
+
+                        self.url_content = urls.into_iter().take(10).map(|url| {
+                            let filename = Self::extract_filename_from_url(&url);
                             format!("✓ {}", filename)
-                        }
-                    }).collect();
+                        }).collect();
+                    }
                 }
             }
         }

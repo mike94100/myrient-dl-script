@@ -3,6 +3,7 @@ use regex::Regex;
 use std::collections::HashMap;
 use std::fs;
 
+#[derive(Clone)]
 pub struct CollectionFilter {
     config: toml::Value,
 }
@@ -11,6 +12,11 @@ impl CollectionFilter {
     pub fn new(collection_path: &str) -> Result<Self> {
         let content = fs::read_to_string(collection_path)?;
         let parsed: toml::Value = toml::from_str(&content)?;
+        Ok(Self { config: parsed })
+    }
+
+    pub fn new_from_content(toml_content: &str) -> Result<Self> {
+        let parsed: toml::Value = toml::from_str(toml_content)?;
         Ok(Self { config: parsed })
     }
 

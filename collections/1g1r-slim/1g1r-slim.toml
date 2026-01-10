@@ -1,19 +1,19 @@
 # Myrient ROM Collection Configuration
 title = "One Game One ROM (1G1R) Slim Collection"
 description = """
-1G1R-Slim is based on 1G1R only including platforms with smaller file sizes. The following considerations were made:
-- One file for each game
-- The most recent revision for each game
+1G1R-Slim is provided with the following considerations:
+- Only platforms with smaller file sizes
+- Only the most updated ROM (one file) for each game
 - Only official releases
-- No BIOS or Test ROMs
+- No BIOS or non-game files
 - English language only
 """
 
 # Global default filters, can be overridden per platform
 [filters]
-include = [
+include = [[
     "(USA", "(World)",
-    "(En"]
+    "(En"]]
 exclude = [
     "(Beta", "(Demo", "(Proto", "(Sample", "(Pirate", "(Unl", "(Hack",
     "[BIOS]", "(Kiosk)", "(Test Program",

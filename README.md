@@ -36,16 +36,6 @@ python <(curl -s https://raw.githubusercontent.com/mike94100/myrient-dl-script/m
 
 ## Installation
 
-### AppImage (Linux)
-Download the latest AppImage from [Releases](https://github.com/mike94100/myrient-dl-script/releases):
-
-```bash
-# Make executable and run
-chmod +x MyrientDL.AppImage
-./MyrientDL.AppImage gui  # Launch GUI
-./MyrientDL.AppImage download collections/sample/sample.toml  # CLI usage
-```
-
 ## Build
 
 ### From Source (Rust workspace)
