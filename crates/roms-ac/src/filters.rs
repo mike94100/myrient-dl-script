@@ -20,16 +20,7 @@ impl CollectionFilter {
         Ok(Self { config: parsed })
     }
 
-    fn collect_platforms(&self) -> HashMap<String, toml::Value> {
-        let mut platforms = HashMap::new();
-        if let Some(table) = self.config.get("roms").and_then(|v| v.as_table()) {
-            for (k, v) in table.iter() { platforms.insert(k.clone(), v.clone()); }
-        }
-        if let Some(table) = self.config.get("bios").and_then(|v| v.as_table()) {
-            for (k, v) in table.iter() { platforms.insert(k.clone(), v.clone()); }
-        }
-        platforms
-    }
+
 
     fn get_platform_config(&self, platform: &str) -> Option<&toml::Value> {
         if let Some(t) = self.config.get("roms").and_then(|v| v.get(platform)) { return Some(t); }
@@ -133,7 +124,7 @@ impl CollectionFilter {
 
     fn deduplicate(&self, filename: &str, filtered: &mut Vec<String>, games: &mut HashMap<String, (String, String)>, base_to_index: &mut HashMap<String, usize>) {
         let base = Self::extract_base_name(filename);
-        if let Some((existing_filename, existing_version)) = games.get(&base).cloned() {
+        if let Some((_existing_filename, existing_version)) = games.get(&base).cloned() {
             let current_version = Self::extract_version(filename);
             if Self::is_better_version(&current_version, &existing_version) {
                 if let Some(&idx) = base_to_index.get(&base) { filtered[idx] = format!("#{}", filtered[idx]); }
@@ -186,7 +177,14 @@ pub fn filter_collection_apply(collection_path: &str, platform_name: &str, files
     Ok(f.filter_files(platform_name, files))
 }
 
-pub fn get_all_platforms(collection_path: &str) -> Result<Vec<String>> {
+pub fn _get_all_platforms(collection_path: &str) -> Result<Vec<String>> {
     let f = CollectionFilter::new(collection_path)?;
-    Ok(f.collect_platforms().keys().cloned().collect())
+    let mut platforms = Vec::new();
+    if let Some(table) = f.config.get("roms").and_then(|v| v.as_table()) {
+        for k in table.keys() { platforms.push(k.clone()); }
+    }
+    if let Some(table) = f.config.get("bios").and_then(|v| v.as_table()) {
+        for k in table.keys() { platforms.push(k.clone()); }
+    }
+    Ok(platforms)
 }

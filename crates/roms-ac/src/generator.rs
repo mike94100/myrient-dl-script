@@ -4,7 +4,7 @@ use scraper::{Html, Selector};
 use tokio::sync::Semaphore;
 use std::sync::Arc;
 
-use crate::cache::CacheManager;
+use crate::tui::cache::CacheManager;
 use crate::toml_utils::{discover_and_organize_platforms, get_url_file_path};
 use crate::filters;
 

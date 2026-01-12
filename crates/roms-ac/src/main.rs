@@ -4,8 +4,8 @@ use std::sync::Arc;
 use clap::Parser;
 use anyhow::Result;
 use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
+use log::LevelFilter;
 
-mod cache;
 mod toml_utils;
 mod generator;
 mod filters;
@@ -13,7 +13,7 @@ mod readme;
 mod downloader;
 mod tui;
 
-use crate::cache::CacheManager;
+use crate::tui::cache::CacheManager;
 use crate::generator::{generate_collection_urls};
 
 use dirs;
@@ -61,6 +61,13 @@ struct Args {
 
 #[tokio::main]
 async fn main() -> Result<()> {
+    // Initialize logging
+    env_logger::Builder::from_default_env()
+        .filter_level(LevelFilter::Info)
+        .init();
+
+    log::info!("Starting ROMs as Code application");
+
     let args = Args::parse();
 
     // Launch TUI mode if requested
@@ -93,6 +100,7 @@ async fn main() -> Result<()> {
     for f in files {
         let filename = f.file_name().unwrap_or_default().to_string_lossy();
         let filename_str = filename.to_string(); // Clone for use in multiple places
+        log::info!("Processing collection file: {}", filename_str);
         println!("Processing {}", filename_str);
 
         if args.gen_url {
