@@ -157,7 +157,7 @@ skip_filtering = false
 extract = false
 
 [roms.colecovision]
-url = "https://myrient.erista.me/files/No-Intro/Coleco%20-%20ColecoVision/"
+url = "https://myrvvvvvvvvvvvvvvvvvvvvvvvvvvvvvient.erista.me/files/No-Intro/Coleco%20-%20ColecoVision/"
 urllist = "urls/all/colecovision.txt"
 directory = "roms/colecovision"
 skip_filtering = false

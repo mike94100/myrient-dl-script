@@ -299,7 +299,7 @@ fn build_files_section(platform_data: &BTreeMap<String, serde_json::Value>, empt
 
 fn generate_collection_urls(collection_path: &str) -> Result<(String, String)> {
     let collection_toml_local = collection_path;
-    let repo_base_url: String = crate::toml_utils::get_toml_value("config.toml", "general.repo_base_url")?;
+    let repo_base_url = crate::toml_utils::get_repo_base_url()?;
     let collection_toml_remote = format!("{}/{}", repo_base_url, collection_toml_local);
     Ok((collection_toml_local.to_string(), collection_toml_remote))
 }

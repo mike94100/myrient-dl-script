@@ -57,6 +57,35 @@ pub fn get_url_file_path(collection_path: &str, platform: &str) -> std::path::Pa
     parent.join(format!("{}.{}.txt", base, platform))
 }
 
+/// Get the repository base URL from config.toml
+/// Used when generating remote download links in README files.
+pub fn get_repo_base_url() -> Result<String> {
+    get_toml_value("config.toml", "repo_base_url")
+}
+
+/// Get the collection directory path from config.toml
+/// Searches for the repo root and reads the collection_directory setting from the config file.
+pub fn get_collection_directory() -> Result<String> {
+    // Find repository root by searching up the directory tree
+    let current_dir = std::env::current_dir()?;
+    let mut repo_root = current_dir.clone();
+
+    // Search up to 10 levels up
+    for _ in 0..10 {
+        if repo_root.join("config.toml").exists() {
+            // Found repo root with config file
+            let config_path = repo_root.join("config.toml");
+            return get_toml_value(&config_path.to_string_lossy(), "collection_directory");
+        }
+        if !repo_root.pop() {
+            break;
+        }
+    }
+
+    // No config.toml found in repository
+    Err(anyhow::anyhow!("Could not find config.toml in repository root or parent directories"))
+}
+
 pub fn get_toml_value<T>(toml_path: &str, value_path: &str) -> Result<T>
 where
     T: serde::de::DeserializeOwned,
@@ -64,7 +93,7 @@ where
     let config_content = fs::read_to_string(toml_path)?;
     let config: toml::Value = toml::from_str(&config_content)?;
 
-    // Navigate the path (e.g., "general.repo_base_url")
+    // Navigate the path
     let mut current = config;
     for key in value_path.split('.') {
         current = current.get(key).ok_or_else(|| {
@@ -76,4 +105,3 @@ where
         anyhow::anyhow!("Failed to deserialize value at path '{}' in TOML file '{}': {}", value_path, toml_path, e)
     })
 }
-

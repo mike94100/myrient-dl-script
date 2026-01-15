@@ -1,68 +1,121 @@
-# Myrient ROM Downloader Configuration
-
-[general]
-# Default site URL
-site = "https://myrient.erista.me"
+# ROMS as Code Configuration
 
 # Base URL for repository root (used in README generation for remote download links)
+# Use "https://raw.githubusercontent.com/{USERNAME}/{REPO}/{BRANCH}"
 repo_base_url = "https://raw.githubusercontent.com/mike94100/roms-as-code/main"
 
-# Relative root directory for collections
+# Relative root directory for collections, used for TUI navigation
 collection_directory = "collections"
 
-
-# Cache settings
-[cache]
-# Enable caching of HTML responses
-enabled = true
-# Cache directory (relative to project root)
-directory = ".cache"
-# Cache expiry in hours
-expiry_hours = 24
-
-[scraping]
-# Delay between requests (seconds)
-request_delay = 1.0
-# Maximum retries for failed requests
-max_retries = 3
-# Timeout for HTTP requests (seconds)
-timeout = 30
-
-[generation]
-# Default to no filtering (use --filter to enable)
-apply_filter = false
 # Default to slim output (exclude commented files)
 slim_output = false
-# Maximum parallel workers for generation tasks
-max_parallel_workers = 4
 
-[logging]
-# Log level: DEBUG, INFO, WARNING, ERROR
-level = "INFO"
-# Enable verbose output by default
-verbose = true
+[platforms.arcade]
+url = "https://myrient.erista.me/files/MAME/ROMs%20%28merged%29/"
+dir_short= "arcade"
+dir_long = "Arcade"
 
-[platforms]
-# Mapping of short platform names to Myrient URL paths
-arcade = "/files/MAME/ROMs (merged)/"
-atari2600 = "/files/No-Intro/Atari - Atari 2600/"
-atari5200 = "/files/No-Intro/Atari - Atari 5200/"
-atari7800 = "/files/No-Intro/Atari - Atari 7800 (BIN)/"
-c64 = "/files/No-Intro/Commodore - Commodore 64/"
-colecovision = "/files/No-Intro/Coleco - ColecoVision/"
-intellivision = "/files/No-Intro/Mattel - Intellivision/"
-gb = "/files/No-Intro/Nintendo - Game Boy/"
-gba = "/files/No-Intro/Nintendo - Game Boy Advance/"
-gbc = "/files/No-Intro/Nintendo - Game Boy Color/"
-nds = "/files/No-Intro/Nintendo - Nintendo DS (Decrypted)/"
-3ds = "/files/No-Intro/Nintendo - Nintendo 3DS (Decrypted)/"
-n64 = "/files/No-Intro/Nintendo - Nintendo 64 (BigEndian)/"
-gc = "/files/Redump/Nintendo - GameCube - NKit RVZ [zstd-19-128k]/"
-wii = "/files/Redump/Nintendo - Wii - NKit RVZ [zstd-19-128k]/"
-nes = "/files/No-Intro/Nintendo - Nintendo Entertainment System (Headered)/"
-snes = "/files/No-Intro/Nintendo - Super Nintendo Entertainment System/"
-dreamcast = "/files/Redump/Sega - Dreamcast/"
-genesis = "/files/No-Intro/Sega - Mega Drive - Genesis/"
-psx = "/files/Redump/Sony - PlayStation/"
-ps2 = "/files/Redump/Sony - PlayStation 2/"
-psp = "/files/No-Intro/Sony - PlayStation Portable (PSN) (Decrypted)/"
+[platforms.atari2600]
+url = "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%202600/"
+dir_short= "atari2600"
+dir_long = "Atari 2600"
+
+[platforms.atari5200]
+url = "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%205200/"
+dir_short= "atari5200"
+dir_long = "Atari 5200"
+
+[platforms.atari7800]
+url = "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/"
+dir_short= "atari7800"
+dir_long = "Atari 7800"
+
+[platforms.c64]
+url = "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/"
+dir_short= "c64"
+dir_long = "Commodore 64"
+
+[platforms.colecovision]
+url = "https://myrient.erista.me/files/No-Intro/Coleco%20-%20ColecoVision/"
+dir_short= "colecovision"
+dir_long = "ColecoVision"
+
+[platforms.intellivision]
+url = "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/"
+dir_short= "intellivision"
+dir_long = "Intellivision"
+
+[platforms.gb]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy/"
+dir_short= "gb"
+dir_long = "Nintendo Game Boy"
+
+[platforms.gbc]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Color/"
+dir_short= "gbc"
+dir_long = "Nintendo Game Boy Color"
+
+[platforms.gba]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Game%20Boy%20Advance/"
+dir_short= "gba"
+dir_long = "Nintendo Game Boy Advance"
+
+[platforms.nds]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%20DS%20%28Decrypted%29/"
+dir_short= "nds"
+dir_long = "Nintendo DS"
+
+[platforms.3ds]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%203DS%20%28Decrypted%29/"
+dir_short= "3ds"
+dir_long = "Nintendo 3DS"
+
+[platforms.nes]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%20Entertainment%20System%20%28Headered%29/"
+dir_short= "nes"
+dir_long = "Nintendo Entertainment System"
+
+[platforms.snes]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Super%20Nintendo%20Entertainment%20System/"
+dir_short= "snes"
+dir_long = "Nintendo - Super Nintendo Entertainment System"
+
+[platforms.n64]
+url = "https://myrient.erista.me/files/No-Intro/Nintendo%20-%20Nintendo%2064%20%28BigEndian%29/"
+dir_short= "n64"
+dir_long = "Nintendo 64"
+
+[platforms.gc]
+url = "https://myrient.erista.me/files/Redump/Nintendo%20-%20GameCube%20-%20NKit%20RVZ%20%5Bzstd-19-128k%5D/"
+dir_short= "gc"
+dir_long = "Nintendo GameCube"
+
+[platforms.wii]
+url = "https://myrient.erista.me/files/Redump/Nintendo%20-%20Wii%20-%20NKit%20RVZ%20%5Bzstd-19-128k%5D/"
+dir_short= "wii"
+dir_long = "Nintendo Wii"
+
+[platforms.dreamcast]
+url = "https://myrient.erista.me/files/Redump/Sega%20-%20Dreamcast/"
+dir_short= "dreamcast"
+dir_long = "Sega Dreamcast"
+
+[platforms.genesis]
+url = "https://myrient.erista.me/files/No-Intro/Sega%20-%20Mega%20Drive%20-%20Genesis/"
+dir_short= "genesis"
+dir_long = "Sega Genesis"
+
+[platforms.psx]
+url = "https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation/"
+dir_short= "psx"
+dir_long = "Sony PlayStation"
+
+[platforms.ps2]
+url = "https://myrient.erista.me/files/Redump/Sony%20-%20PlayStation%202/"
+dir_short= "ps2"
+dir_long = "Sony PlayStation 2"
+
+[platforms.psp]
+url = "https://myrient.erista.me/files/No-Intro/Sony%20-%20PlayStation%20Portable%20%28PSN%29%20%28Decrypted%29/"
+dir_short= "psp"
+dir_long = "Sony PlayStation Portable"

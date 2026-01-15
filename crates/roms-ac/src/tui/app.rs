@@ -19,9 +19,6 @@ use std::collections::HashMap;
 /// including file management, platform selection, and user interaction handling.
 
 use super::types::*;
-use super::cache::CacheManager;
-use crate::toml_utils;
-use crate::filters;
 
 use log;
 
@@ -102,18 +99,12 @@ impl App {
         log::info!("Using repository root: {}", repo_root.display());
 
         // Read config.toml to get the collections directory
-        let config_path = repo_root.join("config.toml");
-        let collections_dir = if config_path.exists() {
-            // Try to read the collection_directory from config
-            if let Ok(collection_dir_str) = crate::toml_utils::get_toml_value::<String>(&config_path.to_string_lossy(), "general.collection_directory") {
-                repo_root.join(collection_dir_str)
-            } else {
-                // Fallback to default "collections"
+        let collections_dir = match crate::toml_utils::get_collection_directory() {
+            Ok(collection_dir_str) => repo_root.join(collection_dir_str),
+            Err(_) => {
+                // No config found or collection_directory not set, use default
                 repo_root.join("collections")
             }
-        } else {
-            // No config file, use default
-            repo_root.join("collections")
         };
 
         log::info!("Using collections directory: {}", collections_dir.display());
@@ -340,11 +331,47 @@ mod tests {
     use std::env;
     use tempfile::TempDir;
 
+    fn create_minimal_app() -> App {
+        App {
+            should_quit: false,
+            state: AppState::FileSelect,
+            current_dir: PathBuf::new(),
+            file_entries: vec![],
+            file_list_state: ListState::default(),
+            selected_file: None,
+            textarea: tui_textarea::TextArea::default(),
+            url_content: vec![],
+            selected_platform: "gb".to_string(),
+            original_content: String::new(),
+            platform_entries: vec![],
+            platform_list_state: ListState::default(),
+            focus: Focus::Editor,
+            save_message: None,
+            file_status: FileStatus::Unchanged,
+            platform_url_displays: HashMap::new(),
+            filtered_preview_mode: false,
+            mouse_mode: false,
+            view_mode: ViewMode::Both,
+            url_scroll_offset: 0,
+            url_cache: HashMap::new(),
+            cache_toml_hash: 0,
+            url_viewer_height: 0,
+            platform_scroll_offset: 0,
+        }
+    }
+
     fn create_test_app() -> App {
         // Create a temporary directory structure that mimics the repo
         let temp_dir = TempDir::new().unwrap();
         let collections_dir = temp_dir.path().join("collections");
         std::fs::create_dir_all(&collections_dir).unwrap();
+
+        // Create a config.toml file for the test
+        let config_file = temp_dir.path().join("config.toml");
+        std::fs::write(&config_file, r#"
+repo_base_url = "https://raw.githubusercontent.com/mike94100/roms-as-code/main"
+collection_directory = "collections"
+        "#).unwrap();
 
         // Create a sample collection file
         let collection_file = collections_dir.join("test.toml");
@@ -372,10 +399,10 @@ exclude = ["beta", "proto"]
 
     #[test]
     fn test_select_platform_updates_state() {
-        let mut app = create_test_app();
+        // Create a minimal app for testing - avoid file I/O
+        let mut app = create_minimal_app();
         app.platform_entries = vec!["gb".to_string(), "gba".to_string(), "nes".to_string()];
-        app.selected_platform = "gb".to_string();
-        app.platform_list_state.select(Some(0));
+        app.filtered_preview_mode = true; // Avoid file I/O by using filtered mode
 
         // Select platform at index 1 (gba)
         app.select_platform(1);
@@ -387,7 +414,8 @@ exclude = ["beta", "proto"]
 
     #[test]
     fn test_select_platform_with_cache_state_updates() {
-        let mut app = create_test_app();
+        // Create a minimal app for testing - avoid file I/O
+        let mut app = create_minimal_app();
         app.platform_entries = vec!["gb".to_string(), "gba".to_string()];
         app.selected_platform = "gb".to_string();
         app.filtered_preview_mode = true; // Avoid file I/O by using filtered mode
@@ -403,9 +431,11 @@ exclude = ["beta", "proto"]
 
     #[test]
     fn test_select_platform_resets_scroll_offset() {
-        let mut app = create_test_app();
+        // Create a minimal app for testing - avoid file I/O
+        let mut app = create_minimal_app();
         app.platform_entries = vec!["gb".to_string(), "gba".to_string()];
         app.url_scroll_offset = 50; // Set non-zero scroll
+        app.filtered_preview_mode = true; // Avoid file I/O by using filtered mode
 
         app.select_platform(1);
 
@@ -443,59 +473,11 @@ exclude = ["beta", "proto"]
     #[test]
     fn test_hash_toml_content_same_content_same_hash() {
         // Create minimal apps for testing - avoid file I/O
-        let mut app1 = App {
-            should_quit: false,
-            state: AppState::FileSelect,
-            current_dir: PathBuf::new(),
-            file_entries: vec![],
-            file_list_state: ListState::default(),
-            selected_file: None,
-            textarea: tui_textarea::TextArea::from(vec!["same content".to_string()]),
-            url_content: vec![],
-            selected_platform: "gb".to_string(),
-            original_content: String::new(),
-            platform_entries: vec![],
-            platform_list_state: ListState::default(),
-            focus: Focus::Editor,
-            save_message: None,
-            file_status: FileStatus::Unchanged,
-            platform_url_displays: HashMap::new(),
-            filtered_preview_mode: false,
-            mouse_mode: false,
-            view_mode: ViewMode::Both,
-            url_scroll_offset: 0,
-            url_cache: HashMap::new(),
-            cache_toml_hash: 0,
-            url_viewer_height: 0,
-            platform_scroll_offset: 0,
-        };
+        let mut app1 = create_minimal_app();
+        app1.textarea = tui_textarea::TextArea::from(vec!["same content".to_string()]);
 
-        let mut app2 = App {
-            should_quit: false,
-            state: AppState::FileSelect,
-            current_dir: PathBuf::new(),
-            file_entries: vec![],
-            file_list_state: ListState::default(),
-            selected_file: None,
-            textarea: tui_textarea::TextArea::from(vec!["same content".to_string()]),
-            url_content: vec![],
-            selected_platform: "gb".to_string(),
-            original_content: String::new(),
-            platform_entries: vec![],
-            platform_list_state: ListState::default(),
-            focus: Focus::Editor,
-            save_message: None,
-            file_status: FileStatus::Unchanged,
-            platform_url_displays: HashMap::new(),
-            filtered_preview_mode: false,
-            mouse_mode: false,
-            view_mode: ViewMode::Both,
-            url_scroll_offset: 0,
-            url_cache: HashMap::new(),
-            cache_toml_hash: 0,
-            url_viewer_height: 0,
-            platform_scroll_offset: 0,
-        };
+        let mut app2 = create_minimal_app();
+        app2.textarea = tui_textarea::TextArea::from(vec!["same content".to_string()]);
 
         let hash1 = app1.hash_toml_content();
         let hash2 = app2.hash_toml_content();
@@ -536,8 +518,10 @@ exclude = ["beta", "proto"]
 
     #[test]
     fn test_ensure_platform_cached() {
-        let mut app = create_test_app();
+        // Create a minimal app for testing - avoid file I/O
+        let mut app = create_minimal_app();
         app.platform_entries = vec!["gb".to_string(), "gba".to_string()];
+        app.filtered_preview_mode = true; // Avoid file I/O by using filtered mode
 
         // Initially no cache for "gb"
         assert!(!app.url_cache.contains_key("gb"));
