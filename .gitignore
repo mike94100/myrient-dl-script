@@ -1,54 +1,12 @@
-# Environments
-.env
-.env.local
-.env.*.local
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# node
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-desktop.ini
-
-# IDE files
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# Downloaded files (ROMs, BIOS, etc.)
+# Downloaded files
 roms/
 bios/
 downloads/
 Downloads/
 
-# Build outputs
-build/
-dist/
-.svelte-kit/
-
 # logs
 logs
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
 # Temporary files
 *.tmp
@@ -58,25 +16,3 @@ tmp/
 
 # Cache directories
 .cache/
-
-# Rust build artifacts
-target/
-Cargo.lock
-
-# Rust documentation
-doc/
-
-# Backup files
-*.bak
-*.backup
-*.orig
-*.rej
-
-# Rust-specific
-*.pdb
-*.rlib
-*.rmeta
-*.d
-
-# TypeScript
-*.tsbuildinfo

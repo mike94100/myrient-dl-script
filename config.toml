@@ -1,15 +1,5 @@
 # ROMS as Code Configuration
 
-# Base URL for repository root (used in README generation for remote download links)
-# Use "https://raw.githubusercontent.com/{USERNAME}/{REPO}/{BRANCH}"
-repo_base_url = "https://raw.githubusercontent.com/mike94100/roms-as-code/main"
-
-# Relative root directory for collections, used for TUI navigation
-collection_directory = "collections"
-
-# Default to slim output (exclude commented files)
-slim_output = false
-
 [platforms.arcade]
 url = "https://myrient.erista.me/files/MAME/ROMs%20%28merged%29/"
 dir_short= "arcade"
