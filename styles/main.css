@@ -1,0 +1,41 @@
+body { font-family: Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; }
+select, button { padding: 10px; margin: 5px; }
+.collection-info { margin: 20px 0; padding: 20px; border: 1px solid #ddd; }
+.filter-section { margin: 15px 0; }
+.file-container { display: flex; gap: 20px; margin: 10px 0; }
+.file-section { flex: 1; }
+.file-section h4 { margin: 0 0 10px 0; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+.file-list { max-height: 400px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; }
+.file-item { padding: 2px 0; font-family: monospace; }
+.included { color: green; cursor: pointer; }
+.excluded { color: red; text-decoration: line-through; cursor: pointer; }
+.manually-included { color: darkgreen; font-weight: bold; }
+.manually-excluded { color: darkred; text-decoration: line-through; font-weight: bold; }
+.stats { background: #f5f5f5; padding: 10px; margin: 10px 0; }
+.loading { color: #666; font-style: italic; }
+.filter-groups-container { display: flex; gap: 20px; }
+.filter-groups-container .filter-group { flex: 1; }
+.filter-fields-container { margin: 5px 0; }
+.filter-field-row { display: flex; align-items: center; margin-bottom: 5px; }
+.filter-field-row input { flex: 1; padding: 5px; margin-right: 5px; }
+.filter-field-row button { padding: 5px 10px; background: #ff4444; color: white; border: none; border-radius: 3px; cursor: pointer; }
+.filter-field-row button:hover { background: #cc0000; }
+.toggle-btn { padding: 2px 8px; background: #666; color: white; border: none; border-radius: 3px; cursor: pointer; font-size: 14px; margin-left: 10px; }
+.toggle-btn:hover { background: #444; }
+.filters-collapsed .filter-groups-container,
+.filters-collapsed .filter-group,
+.filters-collapsed .filter-buttons { display: none; }
+.filter-summary { background: #f9f9f9; padding: 8px; margin: 5px 0; border-left: 3px solid #666; font-size: 14px; }
+.platform-selection-section { margin: 15px 0; }
+.manufacturer-section { margin: 10px 0; }
+.manufacturer-content { margin-left: 20px; }
+.platforms-collapsed .manufacturer-content,
+.platforms-collapsed #platform-selection-content { display: none; }
+.tabs-container { margin: 20px 0; border: 1px solid #ddd; border-radius: 4px; }
+.tab-buttons { display: flex; background: #f5f5f5; border-bottom: 1px solid #ddd; }
+.tab-btn { flex: 1; padding: 12px; background: none; border: none; border-right: 1px solid #ddd; cursor: pointer; font-size: 14px; }
+.tab-btn:last-child { border-right: none; }
+.tab-btn.active { background: white; font-weight: bold; }
+.tab-btn:hover { background: #e9e9e9; }
+.tab-content { display: none; padding: 20px; }
+.tab-content.active { display: block; }

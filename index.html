@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ROM Collection Browser</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <h1>ROM Collection Browser</h1>
+    <p>Select a platform to view its ROM collection and download options.</p>
+
+    <div class="tabs-container">
+        <div class="tab-buttons">
+            <button class="tab-btn active" onclick="switchTab('platforms')">Platform Selection</button>
+            <button class="tab-btn" onclick="switchTab('filters')">Filters</button>
+            <button class="tab-btn" onclick="switchTab('results')" id="results-tab-btn" style="display: none;">Results</button>
+        </div>
+
+        <div id="platforms-tab" class="tab-content active">
+            <div id="platform-checkboxes">
+                <!-- Platform checkboxes will be dynamically added here -->
+            </div>
+        </div>
+
+        <div id="filters-tab" class="tab-content">
+            <div class="filter-section">
+                <div class="filter-groups-container">
+                    <div class="filter-group">
+                        <h4>Include Terms</h4>
+                        <div id="include-filters-container" class="filter-fields-container">
+                            <!-- Dynamic include filter fields will be added here -->
+                        </div>
+                        <small>Files must contain at least one of these terms</small>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Exclude Terms</h4>
+                        <div id="exclude-filters-container" class="filter-fields-container">
+                            <!-- Dynamic exclude filter fields will be added here -->
+                        </div>
+                        <small>Files containing any of these terms will be excluded</small>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label>
+                        <input type="checkbox" id="deduplicate" checked>
+                        Enable deduplication
+                    </label>
+                </div>
+
+                <div class="filter-buttons">
+                    <button onclick="applyFilters()">Apply Filters</button>
+                    <button onclick="resetFilters()">Reset to Defaults</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="results-tab" class="tab-content">
+            <div id="collection-info" class="collection-info">
+                <h2>Collection Results</h2>
+                <h3 id="collection-title"></h3>
+                <p id="collection-description"></p>
+
+                <div id="filter-info" class="filter-info">
+                    <!-- Filter summary will be displayed here -->
+                </div>
+
+                <div class="stats" id="total-stats">
+                    <span id="total-stats-text">Select platforms to view results...</span>
+                </div>
+
+                <div id="platform-sections">
+                    <!-- Platform sections will be dynamically added here -->
+                </div>
+
+                <div class="filter-section">
+                    <button onclick="downloadBashScript()">Download Bash Script</button>
+                    <button onclick="downloadPythonScript()">Download Python Script</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="src/app.js"></script>
+</body>
+</html>
