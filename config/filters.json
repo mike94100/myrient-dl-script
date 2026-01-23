@@ -1,0 +1,11 @@
+{
+  "presets": {
+    "No Filter": {"include": [], "exclude": [], "deduplication": false},
+    "Dedupe": {"include": [], "exclude": [], "deduplication": true},
+    "English": {
+      "include": ["(USA", "(World)", "(En"],
+      "exclude": ["(Beta", "(Demo", "(Proto", "(Sample", "(Kiosk", "[BIOS]", "(Unl", "[b]"],
+      "deduplication": true
+    }
+  }
+}

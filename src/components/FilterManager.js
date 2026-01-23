@@ -57,22 +57,59 @@ export class FilterManager {
   }
 
   /**
+   * Initialize filter presets
+   */
+  initializePresets() {
+    const filtersData = this.app.state.getFiltersData();
+    if (!filtersData || !filtersData.presets) return;
+
+    const presetSelect = document.getElementById('filter-preset');
+    if (!presetSelect) return;
+
+    // Clear existing options except first
+    presetSelect.innerHTML = '';
+
+    // Add preset options
+    Object.keys(filtersData.presets).forEach(presetName => {
+      const option = document.createElement('option');
+      option.value = presetName;
+      option.textContent = presetName;
+      presetSelect.appendChild(option);
+    });
+  }
+
+  /**
+   * Apply a filter preset
+   */
+  applyPreset(presetName) {
+    const filtersData = this.app.state.getFiltersData();
+    if (!filtersData || !filtersData.presets || !filtersData.presets[presetName]) return;
+
+    const preset = filtersData.presets[presetName];
+
+    // Update state
+    this.app.state.updateFilter('include', preset.include || []);
+    this.app.state.updateFilter('exclude', preset.exclude || []);
+    this.app.state.updateFilter('deduplication', preset.deduplication || false);
+
+    // Update UI
+    this.initializeFilterFields('include-filters-container', preset.include || []);
+    this.initializeFilterFields('exclude-filters-container', preset.exclude || []);
+
+    const dedupCheckbox = document.getElementById('deduplicate');
+    if (dedupCheckbox) {
+      dedupCheckbox.checked = preset.deduplication || false;
+    }
+
+    this.applyFilters();
+  }
+
+  /**
    * Reset filters to defaults
    */
   resetFilters() {
-    // Reset filter fields to default values
-    this.initializeFilterFields('include-filters-container', this.app.state.filters.include);
-    this.initializeFilterFields('exclude-filters-container', this.app.state.filters.exclude);
-
-    // Reset checkbox
-    const dedupCheckbox = document.getElementById('deduplicate');
-    if (dedupCheckbox) {
-      dedupCheckbox.checked = true;
-    }
-
-    this.app.state.updateFilter('deduplication', true);
-
-    this.applyFilters();
+    // Reset to "No Filter" preset
+    this.applyPreset('No Filter');
   }
 
   /**
@@ -212,6 +249,14 @@ export class FilterManager {
    * Bind filter-related event listeners
    */
   bindEvents() {
+    // Filter preset dropdown
+    const presetSelect = document.getElementById('filter-preset');
+    if (presetSelect) {
+      dom.addEvent(presetSelect, 'change', (e) => {
+        this.applyPreset(e.target.value);
+      });
+    }
+
     // Deduplication checkbox
     const dedupCheckbox = document.getElementById('deduplicate');
     if (dedupCheckbox) {

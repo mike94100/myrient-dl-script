@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 import json
 import argparse
 from pathlib import Path
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urljoin, urlparse, unquote
 import time
 import re
 
@@ -68,9 +68,13 @@ class MyrientScraper:
 
                             full_url = urljoin(url, link['href'])
                             size_bytes = parse_size(size_text)
+                            path_parts = urlparse(full_url).path.split('/')
+                            url_filename = path_parts[-1]
+                            decoded_name = unquote(url_filename).rstrip('.zip')
                             files.append({
-                                'url': full_url,
-                                'size': size_bytes
+                                'name': decoded_name,
+                                'size': size_bytes,
+                                'url': full_url
                             })
 
             time.sleep(self.delay)  # Be respectful
@@ -108,9 +112,9 @@ class MyrientScraper:
         return categorized
 
 def load_platform_config():
-    """Load platform configurations from metadata.json"""
+    """Load platform configurations from config/metadata.json"""
     try:
-        with open('metadata.json', 'r', encoding='utf-8') as f:
+        with open('config/metadata.json', 'r', encoding='utf-8') as f:
             metadata = json.load(f)
 
         platforms = []
@@ -150,7 +154,12 @@ def main():
         if files:
             output_file = output_dir / f'{platform}.json'
             with open(output_file, 'w', encoding='utf-8') as f:
-                json.dump(files, f, indent=2)
+                f.write('[')
+                for i, file_info in enumerate(files):
+                    json.dump(file_info, f)
+                    if i < len(files) - 1:
+                        f.write(',\n')
+                f.write(']')
             print(f"Generated {output_file} with {len(files)} files")
             total_files += len(files)
         else:

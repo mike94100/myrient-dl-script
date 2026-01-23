@@ -10,17 +10,14 @@ export class AppState {
     this.platforms = {};
     this.selectedPlatforms = new Set();
     this.filters = {
-      include: ['(USA', '(World)', '(En'],
-      exclude: ['(Beta', '(Demo', '(Proto', '(Sample', '(Kiosk', '[BIOS]', '(Unl', '[b]'],
+      include: [],
+      exclude: [],
       deduplication: true,
     };
     this.collections = {};
     this.currentTab = 'platforms';
-    this.templates = {
-      bash: '',
-      python: '',
-    };
     this.metadata = null;
+    this.filtersData = null;
     this.initialized = false;
   }
 
@@ -84,15 +81,6 @@ export class AppState {
     }
   }
 
-  // Template methods
-  setTemplate(type, content) {
-    this.templates[type] = content;
-  }
-
-  getTemplate(type) {
-    return this.templates[type];
-  }
-
   // Metadata methods
   setMetadata(metadata) {
     this.metadata = metadata;
@@ -101,6 +89,15 @@ export class AppState {
 
   getMetadata() {
     return this.metadata;
+  }
+
+  // Filters data methods
+  setFilters(filtersData) {
+    this.filtersData = filtersData;
+  }
+
+  getFiltersData() {
+    return this.filtersData;
   }
 
   // Utility methods

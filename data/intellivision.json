@@ -1,830 +1,207 @@
-[
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/ABPA%20Backgammon%20%28World%29.zip",
-    "size": 3993
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Advanced%20Dungeons%20%26%20Dragons%20%28USA%2C%20Europe%29.zip",
-    "size": 7270
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Advanced%20Dungeons%20%26%20Dragons%20-%20Treasure%20of%20Tarmin%20%28USA%2C%20Europe%29.zip",
-    "size": 9420
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Adventure%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip",
-    "size": 7475
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Air%20Strike%20%28USA%29%20%28Proto%29.zip",
-    "size": 2867
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/All-Star%20Major%20League%20Baseball%20%28USA%29%20%28Beta%29.zip",
-    "size": 11776
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Armor%20Battle%20%28USA%2C%20Europe%29%20%28Fast%20Tanks%29%20%28Intellivision%20Lives%21%29%20%28Gamecube%29.zip",
-    "size": 4403
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Armor%20Battle%20%28USA%2C%20Europe%29%20%28Fast%20Tanks%29.zip",
-    "size": 4403
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Armor%20Battle%20%28USA%2C%20Europe%29%20%28Slow%20Tanks%29.zip",
-    "size": 4300
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Astrosmash%20%28USA%2C%20Europe%29.zip",
-    "size": 4403
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Atlantis%20%28USA%2C%20Europe%29.zip",
-    "size": 8192
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Auto%20Racing%20%28World%29%20%28Car-Relative%20Steering%29.zip",
-    "size": 4812
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Auto%20Racing%20%28World%29%20%28Screen-Relative%20Steering%29.zip",
-    "size": 4812
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/B-17%20Bomber%20%28USA%2C%20Europe%29.zip",
-    "size": 15564
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/BattleTanks%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip",
-    "size": 4710
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Beamrider%20%28USA%2C%20Europe%29.zip",
-    "size": 9625
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Beauty%20%26%20the%20Beast%20%28USA%2C%20Europe%29.zip",
-    "size": 8294
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Biplanes%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip",
-    "size": 4710
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Blockade%20Runner%20%28USA%29.zip",
-    "size": 8192
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Body%20Slam%21%20-%20Super%20Pro%20Wrestling%20%28USA%29.zip",
-    "size": 18636
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Bomb%20Squad%20%28USA%2C%20Europe%29.zip",
-    "size": 15462
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Boxing%20%28World%29.zip",
-    "size": 4403
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Brickout%21%20%28USA%29%20%28Proto%29.zip",
-    "size": 1536
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Bump%20%27n%27%20Jump%20%28USA%2C%20Europe%29.zip",
-    "size": 10956
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/BurgerTime%20%28USA%2C%20Europe%29.zip",
-    "size": 7475
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Buzz%20Bombers%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip",
-    "size": 6656
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Buzz%20Bombers%20%28USA%2C%20Europe%29.zip",
-    "size": 6553
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Carnival%20%28USA%2C%20Europe%29.zip",
-    "size": 4915
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Centipede%20%28USA%29.zip",
-    "size": 8294
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Championship%20Tennis%20%28USA%2C%20Europe%29.zip",
-    "size": 14028
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Checkers%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip",
-    "size": 4505
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Checkers%20%28USA%2C%20Europe%29.zip",
-    "size": 4403
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Chip%20Shot%20-%20Super%20Pro%20Golf%20%28USA%29.zip",
-    "size": 16896
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Commando%20%28USA%29.zip",
-    "size": 16281
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Congo%20Bongo%20%28USA%29.zip",
-    "size": 11366
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Crazy%20Clones%20%28USA%29%20%28Proto%29.zip",
-    "size": 1331
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Crosswords%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip",
-    "size": 8908
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Deadly%20Dogs%20%28USA%2C%20Europe%29%20%28Beta%29.zip",
-    "size": 4812
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Deep%20Pockets%20-%20Super%20Pro%20Pool%20%26%20Billiards%20%28USA%29%20%28Proto%29.zip",
-    "size": 16179
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Defender%20%28USA%29.zip",
-    "size": 11468
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Demon%20Attack%20%28USA%2C%20Europe%29.zip",
-    "size": 7782
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Demonstration%20Cartridge%20-%20Blue%20%28USA%29.zip",
-    "size": 6553
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Demonstration%20Cartridge%20-%20Green%20%28USA%29.zip",
-    "size": 17920
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Demonstration%20Cartridge%20-%20Red%20%28USA%29.zip",
-    "size": 6656
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Dig%20Dug%20%28USA%29.zip",
-    "size": 15462
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Diner%20%28USA%29.zip",
-    "size": 14540
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Donkey%20Kong%20%28USA%2C%20Europe%29.zip",
-    "size": 4812
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Donkey%20Kong%20Junior%20%28USA%2C%20Europe%29.zip",
-    "size": 9011
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Dracula%20%28USA%2C%20Europe%29.zip",
-    "size": 8704
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Dragonfire%20%28USA%2C%20Europe%29.zip",
-    "size": 4710
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Dreadnaught%20Factor%2C%20The%20%28USA%29%20%28Beta%29.zip",
-    "size": 9216
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Dreadnaught%20Factor%2C%20The%20%28USA%29.zip",
-    "size": 9216
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Duncan%27s%20Thin%20Ice%20%28USA%29.zip",
-    "size": 13004
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Electric%20Company%2C%20The%20-%20Math%20Fun%20%28USA%2C%20Europe%29%20%28Forward%20Entry%29.zip",
-    "size": 4300
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Electric%20Company%2C%20The%20-%20Math%20Fun%20%28USA%2C%20Europe%29%20%28Reverse%20Entry%29.zip",
-    "size": 4403
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Electric%20Company%2C%20The%20-%20Word%20Fun%20%28USA%2C%20Europe%29.zip",
-    "size": 4710
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Factor%20Fun%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip",
-    "size": 7987
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Fathom%20%28USA%2C%20Europe%29.zip",
-    "size": 8192
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Frog%20Bog%20%28World%29.zip",
-    "size": 4403
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Frogger%20%28USA%2C%20Europe%29.zip",
-    "size": 4608
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Game%20Factory%20%28USA%29%20%28Proto%29.zip",
-    "size": 24576
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Go%20for%20the%20Gold%20%28USA%29%20%28Proto%29.zip",
-    "size": 5632
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Grid%20Shock%20%28USA%29%20%28Proto%29.zip",
-    "size": 3072
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Happy%20Holidays%20-%20Easter%20Eggcitement%20%28USA%29%20%28Proto%29.zip",
-    "size": 1638
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Happy%20Holidays%20-%20Santa%27s%20Helper%20%28USA%29%20%28Proto%29.zip",
-    "size": 1638
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Happy%20Holidays%20-%20Trick%20or%20Treat%20%28USA%29%20%28Proto%29.zip",
-    "size": 1126
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Happy%20Trails%20%28USA%2C%20Europe%29.zip",
-    "size": 5017
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Horse%20Racing%20%28World%29.zip",
-    "size": 4915
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Hover%20Force%20%28USA%29.zip",
-    "size": 19251
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Hypnotic%20Lights%20%28USA%29%20%28Proto%29.zip",
-    "size": 1843
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/IMI%20Test%20Cartridge%20%28USA%29.zip",
-    "size": 4198
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Ice%20Trek%20%28USA%2C%20Europe%29.zip",
-    "size": 9113
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Illusions%20%28USA%29%20%28Proto%29.zip",
-    "size": 7680
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/International%20Demonstration%20Cartridge%20%28USA%2C%20Europe%29.zip",
-    "size": 11059
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Jetsons%27%20Ways%20with%20Words%2C%20The%20%28USA%29.zip",
-    "size": 12492
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/King%20of%20the%20Mountain%20%28USA%29%20%28Proto%29.zip",
-    "size": 13004
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Kool-Aid%20Man%20%28USA%29.zip",
-    "size": 8089
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Lady%20Bug%20%28USA%2C%20Europe%29.zip",
-    "size": 8601
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Land%20Battle%20%28USA%29%20%28Proto%29.zip",
-    "size": 8806
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Las%20Vegas%20Poker%20%26%20Blackjack%20%28World%29%20%28Intellivision%20Lives%21%29.zip",
-    "size": 4608
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Las%20Vegas%20Poker%20%26%20Blackjack%20%28World%29.zip",
-    "size": 4505
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Las%20Vegas%20Roulette%20%28World%29.zip",
-    "size": 3584
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/League%20of%20Light%20%28USA%29%20%28Proto%29.zip",
-    "size": 8089
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Learning%20Fun%20I%20-%20Math%20Master%2C%20Factor%20Fun%20%28USA%29.zip",
-    "size": 8089
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Learning%20Fun%20II%20-%20Word%20Wizard%2C%20Memory%20Fun%20%28USA%29.zip",
-    "size": 8908
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Lock%20%27N%27%20Chase%20%28USA%2C%20Europe%29%20%28v1.1%29.zip",
-    "size": 12492
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Lock%20%27N%27%20Chase%20%28USA%2C%20Europe%29.zip",
-    "size": 5836
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Loco-Motion%20%28USA%29.zip",
-    "size": 8601
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/MTE%20201%20Test%20Cartridge%20V1.0%20%28USA%29.zip",
-    "size": 5529
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/MTE%20201%20Test%20Cartridge%20V1.0a%20%28USA%29.zip",
-    "size": 5529
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/MTE%20201%20Test%20Cartridge%20V3.0%20%28USA%29.zip",
-    "size": 8806
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/MTE%20201%20Test%20Cartridge%20V3.0b%20%28USA%29.zip",
-    "size": 5836
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/MTE%20201%20Test%20Cartridge%20V3.3%20%28USA%29.zip",
-    "size": 6553
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/MTE%20201%20Test%20Cartridge%20V4.1a%20%28USA%29.zip",
-    "size": 6348
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Magic%20Carousel%20%28USA%29%20%28Intellivision%20Lives%21%29.zip",
-    "size": 17920
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Magic%20Carousel%20%28USA%29%20%28Proto%29.zip",
-    "size": 17920
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Major%20League%20Baseball%20%28World%29.zip",
-    "size": 4608
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Masters%20of%20the%20Universe%20-%20The%20Power%20of%20He-Man%20%28USA%2C%20Europe%29.zip",
-    "size": 13516
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Math%20Master%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip",
-    "size": 7987
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Melody%20Blaster%20%28USA%2C%20Europe%29.zip",
-    "size": 8601
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Memory%20Fun%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip",
-    "size": 8908
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Meteor%20%28USA%2C%20Europe%29%20%28Beta%29.zip",
-    "size": 4403
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Microsurgeon%20%28USA%2C%20Europe%29.zip",
-    "size": 9728
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Mind%20Strike%20%28USA%2C%20Europe%29.zip",
-    "size": 12390
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Minotaur%20%28USA%29.zip",
-    "size": 9113
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Mission%20X%20%28USA%2C%20Europe%29.zip",
-    "size": 6656
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Motocross%20%28USA%2C%20Europe%29%20%28Alt%29.zip",
-    "size": 8908
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Motocross%20%28USA%2C%20Europe%29.zip",
-    "size": 8908
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Mountain%20Madness%20-%20Super%20Pro%20Skiing%20%28USA%29.zip",
-    "size": 8806
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Mouse%20Trap%20%28USA%2C%20Europe%29.zip",
-    "size": 4915
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Mr.%20BASIC%20Meets%20Bits%20%27N%20Bytes%20%28USA%2C%20Europe%29.zip",
-    "size": 10444
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/NASL%20Soccer%20%28World%29.zip",
-    "size": 4505
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/NBA%20Basketball%20%28USA%2C%20Europe%29.zip",
-    "size": 4608
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/NFL%20Football%20%28World%29.zip",
-    "size": 4812
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/NHL%20Hockey%20%28World%29.zip",
-    "size": 4915
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Night%20Stalker%20%28World%29.zip",
-    "size": 4198
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Nova%20Blast%20%28USA%2C%20Europe%29.zip",
-    "size": 8704
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Number%20Jumble%20%28USA%29%20%28Proto%29%20%28Intellivision%20Lives%21%29.zip",
-    "size": 14233
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Number%20Jumble%20%28USA%29%20%28Proto%29.zip",
-    "size": 14131
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/PBA%20Bowling%20%28World%29.zip",
-    "size": 4710
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/PGA%20Golf%20%28World%29.zip",
-    "size": 4198
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Pac-Man%20%28USA%29%20%28Atarisoft%29.zip",
-    "size": 11468
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Pac-Man%20%28USA%29%20%28INTV%20Corp.%29.zip",
-    "size": 11468
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Party%20Line%20-%20Blow%20Out%20%28USA%29%20%28Proto%29.zip",
-    "size": 6451
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Party%20Line%20-%20Hard%20Hat%20%28USA%29%20%28Proto%29.zip",
-    "size": 6348
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Party%20Line%20-%20Space%20Cadet%20%28USA%29%20%28Proto%29%20%28Intellivision%20Lives%21%29.zip",
-    "size": 5836
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Party%20Line%20-%20Space%20Cadet%20%28USA%29%20%28Proto%29.zip",
-    "size": 5836
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Pinball%20%28USA%29.zip",
-    "size": 12800
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Pitfall%21%20%28USA%2C%20Europe%29.zip",
-    "size": 4096
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Pole%20Position%20%28USA%29.zip",
-    "size": 14950
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Popeye%20%28USA%2C%20Europe%29.zip",
-    "size": 9113
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Q-bert%20%28USA%2C%20Europe%29.zip",
-    "size": 7168
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Racing%20Cars%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip",
-    "size": 4710
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Reversi%20%28USA%2C%20Europe%29.zip",
-    "size": 3686
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/River%20Raid%20%28USA%2C%20Europe%29%20%28Beta%29.zip",
-    "size": 5529
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/River%20Raid%20%28USA%2C%20Europe%29.zip",
-    "size": 7372
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Robot%20Rubble%20%28USA%29%20%28Proto%201%29.zip",
-    "size": 3891
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Robot%20Rubble%20%28USA%29%20%28Proto%202%29.zip",
-    "size": 4198
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Robot%20Rubble%20%28USA%29%20%28Proto%203%29.zip",
-    "size": 8294
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Rocky%20%26%20Bullwinkle%20%28USA%29%20%28Proto%29.zip",
-    "size": 6860
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Royal%20Dealer%20%28USA%2C%20Europe%29.zip",
-    "size": 6860
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/SNAFU%20%28World%29.zip",
-    "size": 3891
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Safecracker%20%28USA%2C%20Europe%29.zip",
-    "size": 9113
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Scarfinger%20%28USA%29%20%28Proto%29.zip",
-    "size": 15257
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Scooby%20Doo%27s%20Maze%20Chase%20%28USA%2C%20Europe%29.zip",
-    "size": 8192
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Sea%20Battle%20%28World%29.zip",
-    "size": 4710
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Sewer%20Sam%20%28USA%29.zip",
-    "size": 7987
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Shark%21%20Shark%21%20%28USA%2C%20Europe%29.zip",
-    "size": 6041
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Sharp%20Shot%20%28USA%2C%20Europe%29.zip",
-    "size": 5120
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Slam%20Dunk%20-%20Super%20Pro%20Basketball%20%28USA%29.zip",
-    "size": 16281
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Slap%20Shot%20-%20Super%20Pro%20Hockey%20%28USA%29.zip",
-    "size": 7577
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Space%20Armada%20%28World%29.zip",
-    "size": 4096
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Space%20Battle%20%28World%29%20%28v1.1%29.zip",
-    "size": 4300
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Space%20Battle%20%28World%29.zip",
-    "size": 4300
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Space%20Hawk%20%28USA%2C%20Europe%29.zip",
-    "size": 4608
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Space%20Spartans%20%28USA%2C%20Europe%29.zip",
-    "size": 10649
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Spiker%20-%20Super%20Pro%20Volleyball%20%28USA%29.zip",
-    "size": 14540
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Stadium%20Mud%20Buggies%20%28USA%29.zip",
-    "size": 15974
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Stampede%20%28USA%2C%20Europe%29.zip",
-    "size": 3788
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Star%20Strike%20%28World%29.zip",
-    "size": 4812
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Star%20Wars%20-%20The%20Empire%20Strikes%20Back%20%28USA%2C%20Europe%29.zip",
-    "size": 4710
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Sub%20Hunt%20%28USA%2C%20Europe%29.zip",
-    "size": 6656
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Super%20Cobra%20%28USA%2C%20Europe%29.zip",
-    "size": 8294
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Super%20Masters%21%20%28USA%29%20%28Proto%29.zip",
-    "size": 5836
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Super%20NFL%20Football%20%28USA%29%20%28Proto%29.zip",
-    "size": 22118
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Super%20Pro%20Decathlon%20%28USA%29.zip",
-    "size": 16281
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Super%20Pro%20Football%20%28USA%29%20%28Revision%29.zip",
-    "size": 15974
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Super%20Pro%20Football%20%28USA%29.zip",
-    "size": 15974
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Super%20Soccer%20%28USA%29%20%28Proto%29.zip",
-    "size": 15974
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Swords%20%26%20Serpents%20%28USA%2C%20Europe%29.zip",
-    "size": 8704
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/TRON%20%28USA%29%20%28Proto%29.zip",
-    "size": 12185
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/TRON%20Deadly%20Discs%20%28USA%2C%20Europe%29.zip",
-    "size": 4812
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/TRON%20Maze-A-Tron%20%28USA%2C%20Europe%29.zip",
-    "size": 8192
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/TRON%20Solar%20Sailer%20%28USA%2C%20Europe%29.zip",
-    "size": 14848
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Takeover%20%28USA%29%20%28Proto%29.zip",
-    "size": 4710
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Tennis%20%28World%29.zip",
-    "size": 4608
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Thin%20Ice%20%28USA%29%20%28Beta%29.zip",
-    "size": 8908
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Thin%20Ice%20%28USA%29.zip",
-    "size": 8908
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Thunder%20Castle%20%28USA%29.zip",
-    "size": 15974
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Tower%20of%20Doom%20%28USA%29.zip",
-    "size": 26931
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Triple%20Action%20%28World%29.zip",
-    "size": 4710
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Triple%20Challenge%20-%20Chess%2C%20Checkers%2C%20Backgammon%20%28USA%29.zip",
-    "size": 16486
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Tropical%20Trouble%20%28USA%2C%20Europe%29.zip",
-    "size": 8704
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Truckin%27%20%28USA%29.zip",
-    "size": 9523
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Turbo%20%28USA%2C%20Europe%29.zip",
-    "size": 6963
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Tutankham%20%28USA%2C%20Europe%29.zip",
-    "size": 6860
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/US%20Ski%20Team%20Skiing%20%28World%29.zip",
-    "size": 4710
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/USCF%20Chess%20%28USA%2C%20Europe%29.zip",
-    "size": 8601
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Utopia%20%28USA%2C%20Europe%29.zip",
-    "size": 4300
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Vectron%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip",
-    "size": 10240
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Vectron%20%28USA%2C%20Europe%29.zip",
-    "size": 10240
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Venture%20%28USA%2C%20Europe%29.zip",
-    "size": 8601
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/White%20Water%21%20%28USA%2C%20Europe%29.zip",
-    "size": 9318
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Word%20Hunt%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip",
-    "size": 8908
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Word%20Rockets%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip",
-    "size": 8908
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/World%20Championship%20Baseball%20%28USA%29.zip",
-    "size": 11776
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/World%20Cup%20Soccer%20%28USA%2C%20Europe%29.zip",
-    "size": 15769
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/World%20Series%20Major%20League%20Baseball%20%28USA%29.zip",
-    "size": 29286
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Worm%20Whomper%20%28USA%2C%20Europe%29.zip",
-    "size": 5324
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Yogi%27s%20Frustration%20%28USA%29%20%28Proto%29.zip",
-    "size": 13209
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Zaxxon%20%28USA%2C%20Europe%29.zip",
-    "size": 7884
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Zzzz%21%20Spina%20the%20Bee%20%28Europe%29%20%28Proto%29.zip",
-    "size": 7168
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/%5BBIOS%5D%20Entertainment%20Computer%20System%20EXEC-BASIC%20%28USA%2C%20Europe%29.zip",
-    "size": 13312
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/%5BBIOS%5D%20Intellivision%20Executive%20ROM%20%28World%29.zip",
-    "size": 5222
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/%5BBIOS%5D%20Intellivision%20Graphic%20ROM%20%28World%29.zip",
-    "size": 1331
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/%5BBIOS%5D%20Intellivoice%20%28USA%2C%20Europe%29.zip",
-    "size": 2048
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/%5BBIOS%5D%20Sears%20Super%20Video%20Arcade%20%28USA%2C%20Europe%29.zip",
-    "size": 5222
-  }
-]
+[{"name": "ABPA Backgammon (World)", "size": 3993, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/ABPA%20Backgammon%20%28World%29.zip"},
+{"name": "Advanced Dungeons & Dragons (USA, Europe)", "size": 7270, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Advanced%20Dungeons%20%26%20Dragons%20%28USA%2C%20Europe%29.zip"},
+{"name": "Advanced Dungeons & Dragons - Treasure of Tarmin (USA, Europe)", "size": 9420, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Advanced%20Dungeons%20%26%20Dragons%20-%20Treasure%20of%20Tarmin%20%28USA%2C%20Europe%29.zip"},
+{"name": "Adventure (USA, Europe) (Intellivision Lives!)", "size": 7475, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Adventure%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip"},
+{"name": "Air Strike (USA) (Proto)", "size": 2867, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Air%20Strike%20%28USA%29%20%28Proto%29.zip"},
+{"name": "All-Star Major League Baseball (USA) (Beta)", "size": 11776, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/All-Star%20Major%20League%20Baseball%20%28USA%29%20%28Beta%29.zip"},
+{"name": "Armor Battle (USA, Europe) (Fast Tanks) (Intellivision Lives!) (Gamecube)", "size": 4403, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Armor%20Battle%20%28USA%2C%20Europe%29%20%28Fast%20Tanks%29%20%28Intellivision%20Lives%21%29%20%28Gamecube%29.zip"},
+{"name": "Armor Battle (USA, Europe) (Fast Tanks)", "size": 4403, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Armor%20Battle%20%28USA%2C%20Europe%29%20%28Fast%20Tanks%29.zip"},
+{"name": "Armor Battle (USA, Europe) (Slow Tanks)", "size": 4300, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Armor%20Battle%20%28USA%2C%20Europe%29%20%28Slow%20Tanks%29.zip"},
+{"name": "Astrosmash (USA, Europe)", "size": 4403, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Astrosmash%20%28USA%2C%20Europe%29.zip"},
+{"name": "Atlantis (USA, Europe)", "size": 8192, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Atlantis%20%28USA%2C%20Europe%29.zip"},
+{"name": "Auto Racing (World) (Car-Relative Steering)", "size": 4812, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Auto%20Racing%20%28World%29%20%28Car-Relative%20Steering%29.zip"},
+{"name": "Auto Racing (World) (Screen-Relative Steering)", "size": 4812, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Auto%20Racing%20%28World%29%20%28Screen-Relative%20Steering%29.zip"},
+{"name": "B-17 Bomber (USA, Europe)", "size": 15564, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/B-17%20Bomber%20%28USA%2C%20Europe%29.zip"},
+{"name": "BattleTanks (USA, Europe) (Intellivision Lives!)", "size": 4710, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/BattleTanks%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip"},
+{"name": "Beamrider (USA, Europe)", "size": 9625, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Beamrider%20%28USA%2C%20Europe%29.zip"},
+{"name": "Beauty & the Beast (USA, Europe)", "size": 8294, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Beauty%20%26%20the%20Beast%20%28USA%2C%20Europe%29.zip"},
+{"name": "Biplanes (USA, Europe) (Intellivision Lives!)", "size": 4710, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Biplanes%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip"},
+{"name": "Blockade Runner (USA)", "size": 8192, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Blockade%20Runner%20%28USA%29.zip"},
+{"name": "Body Slam! - Super Pro Wrestling (USA)", "size": 18636, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Body%20Slam%21%20-%20Super%20Pro%20Wrestling%20%28USA%29.zip"},
+{"name": "Bomb Squad (USA, Europe)", "size": 15462, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Bomb%20Squad%20%28USA%2C%20Europe%29.zip"},
+{"name": "Boxing (World)", "size": 4403, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Boxing%20%28World%29.zip"},
+{"name": "Brickout! (USA) (Proto)", "size": 1536, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Brickout%21%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Bump 'n' Jump (USA, Europe)", "size": 10956, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Bump%20%27n%27%20Jump%20%28USA%2C%20Europe%29.zip"},
+{"name": "BurgerTime (USA, Europe)", "size": 7475, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/BurgerTime%20%28USA%2C%20Europe%29.zip"},
+{"name": "Buzz Bombers (USA, Europe) (Intellivision Lives!)", "size": 6656, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Buzz%20Bombers%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip"},
+{"name": "Buzz Bombers (USA, Europe)", "size": 6553, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Buzz%20Bombers%20%28USA%2C%20Europe%29.zip"},
+{"name": "Carnival (USA, Europe)", "size": 4915, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Carnival%20%28USA%2C%20Europe%29.zip"},
+{"name": "Centipede (USA)", "size": 8294, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Centipede%20%28USA%29.zip"},
+{"name": "Championship Tennis (USA, Europe)", "size": 14028, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Championship%20Tennis%20%28USA%2C%20Europe%29.zip"},
+{"name": "Checkers (USA, Europe) (Intellivision Lives!)", "size": 4505, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Checkers%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip"},
+{"name": "Checkers (USA, Europe)", "size": 4403, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Checkers%20%28USA%2C%20Europe%29.zip"},
+{"name": "Chip Shot - Super Pro Golf (USA)", "size": 16896, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Chip%20Shot%20-%20Super%20Pro%20Golf%20%28USA%29.zip"},
+{"name": "Commando (USA)", "size": 16281, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Commando%20%28USA%29.zip"},
+{"name": "Congo Bongo (USA)", "size": 11366, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Congo%20Bongo%20%28USA%29.zip"},
+{"name": "Crazy Clones (USA) (Proto)", "size": 1331, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Crazy%20Clones%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Crosswords (USA, Europe) (Intellivision Lives!)", "size": 8908, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Crosswords%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip"},
+{"name": "Deadly Dogs (USA, Europe) (Beta)", "size": 4812, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Deadly%20Dogs%20%28USA%2C%20Europe%29%20%28Beta%29.zip"},
+{"name": "Deep Pockets - Super Pro Pool & Billiards (USA) (Proto)", "size": 16179, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Deep%20Pockets%20-%20Super%20Pro%20Pool%20%26%20Billiards%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Defender (USA)", "size": 11468, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Defender%20%28USA%29.zip"},
+{"name": "Demon Attack (USA, Europe)", "size": 7782, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Demon%20Attack%20%28USA%2C%20Europe%29.zip"},
+{"name": "Demonstration Cartridge - Blue (USA)", "size": 6553, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Demonstration%20Cartridge%20-%20Blue%20%28USA%29.zip"},
+{"name": "Demonstration Cartridge - Green (USA)", "size": 17920, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Demonstration%20Cartridge%20-%20Green%20%28USA%29.zip"},
+{"name": "Demonstration Cartridge - Red (USA)", "size": 6656, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Demonstration%20Cartridge%20-%20Red%20%28USA%29.zip"},
+{"name": "Dig Dug (USA)", "size": 15462, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Dig%20Dug%20%28USA%29.zip"},
+{"name": "Diner (USA)", "size": 14540, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Diner%20%28USA%29.zip"},
+{"name": "Donkey Kong (USA, Europe)", "size": 4812, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Donkey%20Kong%20%28USA%2C%20Europe%29.zip"},
+{"name": "Donkey Kong Junior (USA, Europe)", "size": 9011, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Donkey%20Kong%20Junior%20%28USA%2C%20Europe%29.zip"},
+{"name": "Dracula (USA, Europe)", "size": 8704, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Dracula%20%28USA%2C%20Europe%29.zip"},
+{"name": "Dragonfire (USA, Europe)", "size": 4710, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Dragonfire%20%28USA%2C%20Europe%29.zip"},
+{"name": "Dreadnaught Factor, The (USA) (Beta)", "size": 9216, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Dreadnaught%20Factor%2C%20The%20%28USA%29%20%28Beta%29.zip"},
+{"name": "Dreadnaught Factor, The (USA)", "size": 9216, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Dreadnaught%20Factor%2C%20The%20%28USA%29.zip"},
+{"name": "Duncan's Thin Ice (USA)", "size": 13004, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Duncan%27s%20Thin%20Ice%20%28USA%29.zip"},
+{"name": "Electric Company, The - Math Fun (USA, Europe) (Forward Entry)", "size": 4300, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Electric%20Company%2C%20The%20-%20Math%20Fun%20%28USA%2C%20Europe%29%20%28Forward%20Entry%29.zip"},
+{"name": "Electric Company, The - Math Fun (USA, Europe) (Reverse Entry)", "size": 4403, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Electric%20Company%2C%20The%20-%20Math%20Fun%20%28USA%2C%20Europe%29%20%28Reverse%20Entry%29.zip"},
+{"name": "Electric Company, The - Word Fun (USA, Europe)", "size": 4710, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Electric%20Company%2C%20The%20-%20Word%20Fun%20%28USA%2C%20Europe%29.zip"},
+{"name": "Factor Fun (USA, Europe) (Intellivision Lives!)", "size": 7987, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Factor%20Fun%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip"},
+{"name": "Fathom (USA, Europe)", "size": 8192, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Fathom%20%28USA%2C%20Europe%29.zip"},
+{"name": "Frog Bog (World)", "size": 4403, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Frog%20Bog%20%28World%29.zip"},
+{"name": "Frogger (USA, Europe)", "size": 4608, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Frogger%20%28USA%2C%20Europe%29.zip"},
+{"name": "Game Factory (USA) (Proto)", "size": 24576, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Game%20Factory%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Go for the Gold (USA) (Proto)", "size": 5632, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Go%20for%20the%20Gold%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Grid Shock (USA) (Proto)", "size": 3072, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Grid%20Shock%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Happy Holidays - Easter Eggcitement (USA) (Proto)", "size": 1638, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Happy%20Holidays%20-%20Easter%20Eggcitement%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Happy Holidays - Santa's Helper (USA) (Proto)", "size": 1638, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Happy%20Holidays%20-%20Santa%27s%20Helper%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Happy Holidays - Trick or Treat (USA) (Proto)", "size": 1126, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Happy%20Holidays%20-%20Trick%20or%20Treat%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Happy Trails (USA, Europe)", "size": 5017, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Happy%20Trails%20%28USA%2C%20Europe%29.zip"},
+{"name": "Horse Racing (World)", "size": 4915, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Horse%20Racing%20%28World%29.zip"},
+{"name": "Hover Force (USA)", "size": 19251, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Hover%20Force%20%28USA%29.zip"},
+{"name": "Hypnotic Lights (USA) (Proto)", "size": 1843, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Hypnotic%20Lights%20%28USA%29%20%28Proto%29.zip"},
+{"name": "IMI Test Cartridge (USA)", "size": 4198, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/IMI%20Test%20Cartridge%20%28USA%29.zip"},
+{"name": "Ice Trek (USA, Europe)", "size": 9113, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Ice%20Trek%20%28USA%2C%20Europe%29.zip"},
+{"name": "Illusions (USA) (Proto)", "size": 7680, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Illusions%20%28USA%29%20%28Proto%29.zip"},
+{"name": "International Demonstration Cartridge (USA, Europe)", "size": 11059, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/International%20Demonstration%20Cartridge%20%28USA%2C%20Europe%29.zip"},
+{"name": "Jetsons' Ways with Words, The (USA)", "size": 12492, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Jetsons%27%20Ways%20with%20Words%2C%20The%20%28USA%29.zip"},
+{"name": "King of the Mountain (USA) (Proto)", "size": 13004, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/King%20of%20the%20Mountain%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Kool-Aid Man (USA)", "size": 8089, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Kool-Aid%20Man%20%28USA%29.zip"},
+{"name": "Lady Bug (USA, Europe)", "size": 8601, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Lady%20Bug%20%28USA%2C%20Europe%29.zip"},
+{"name": "Land Battle (USA) (Proto)", "size": 8806, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Land%20Battle%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Las Vegas Poker & Blackjack (World) (Intellivision Lives!)", "size": 4608, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Las%20Vegas%20Poker%20%26%20Blackjack%20%28World%29%20%28Intellivision%20Lives%21%29.zip"},
+{"name": "Las Vegas Poker & Blackjack (World)", "size": 4505, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Las%20Vegas%20Poker%20%26%20Blackjack%20%28World%29.zip"},
+{"name": "Las Vegas Roulette (World)", "size": 3584, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Las%20Vegas%20Roulette%20%28World%29.zip"},
+{"name": "League of Light (USA) (Proto)", "size": 8089, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/League%20of%20Light%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Learning Fun I - Math Master, Factor Fun (USA)", "size": 8089, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Learning%20Fun%20I%20-%20Math%20Master%2C%20Factor%20Fun%20%28USA%29.zip"},
+{"name": "Learning Fun II - Word Wizard, Memory Fun (USA)", "size": 8908, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Learning%20Fun%20II%20-%20Word%20Wizard%2C%20Memory%20Fun%20%28USA%29.zip"},
+{"name": "Lock 'N' Chase (USA, Europe) (v1.1)", "size": 12492, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Lock%20%27N%27%20Chase%20%28USA%2C%20Europe%29%20%28v1.1%29.zip"},
+{"name": "Lock 'N' Chase (USA, Europe)", "size": 5836, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Lock%20%27N%27%20Chase%20%28USA%2C%20Europe%29.zip"},
+{"name": "Loco-Motion (USA)", "size": 8601, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Loco-Motion%20%28USA%29.zip"},
+{"name": "MTE 201 Test Cartridge V1.0 (USA)", "size": 5529, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/MTE%20201%20Test%20Cartridge%20V1.0%20%28USA%29.zip"},
+{"name": "MTE 201 Test Cartridge V1.0a (USA)", "size": 5529, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/MTE%20201%20Test%20Cartridge%20V1.0a%20%28USA%29.zip"},
+{"name": "MTE 201 Test Cartridge V3.0 (USA)", "size": 8806, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/MTE%20201%20Test%20Cartridge%20V3.0%20%28USA%29.zip"},
+{"name": "MTE 201 Test Cartridge V3.0b (USA)", "size": 5836, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/MTE%20201%20Test%20Cartridge%20V3.0b%20%28USA%29.zip"},
+{"name": "MTE 201 Test Cartridge V3.3 (USA)", "size": 6553, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/MTE%20201%20Test%20Cartridge%20V3.3%20%28USA%29.zip"},
+{"name": "MTE 201 Test Cartridge V4.1a (USA)", "size": 6348, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/MTE%20201%20Test%20Cartridge%20V4.1a%20%28USA%29.zip"},
+{"name": "Magic Carousel (USA) (Intellivision Lives!)", "size": 17920, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Magic%20Carousel%20%28USA%29%20%28Intellivision%20Lives%21%29.zip"},
+{"name": "Magic Carousel (USA) (Proto)", "size": 17920, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Magic%20Carousel%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Major League Baseball (World)", "size": 4608, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Major%20League%20Baseball%20%28World%29.zip"},
+{"name": "Masters of the Universe - The Power of He-Man (USA, Europe)", "size": 13516, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Masters%20of%20the%20Universe%20-%20The%20Power%20of%20He-Man%20%28USA%2C%20Europe%29.zip"},
+{"name": "Math Master (USA, Europe) (Intellivision Lives!)", "size": 7987, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Math%20Master%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip"},
+{"name": "Melody Blaster (USA, Europe)", "size": 8601, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Melody%20Blaster%20%28USA%2C%20Europe%29.zip"},
+{"name": "Memory Fun (USA, Europe) (Intellivision Lives!)", "size": 8908, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Memory%20Fun%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip"},
+{"name": "Meteor (USA, Europe) (Beta)", "size": 4403, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Meteor%20%28USA%2C%20Europe%29%20%28Beta%29.zip"},
+{"name": "Microsurgeon (USA, Europe)", "size": 9728, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Microsurgeon%20%28USA%2C%20Europe%29.zip"},
+{"name": "Mind Strike (USA, Europe)", "size": 12390, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Mind%20Strike%20%28USA%2C%20Europe%29.zip"},
+{"name": "Minotaur (USA)", "size": 9113, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Minotaur%20%28USA%29.zip"},
+{"name": "Mission X (USA, Europe)", "size": 6656, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Mission%20X%20%28USA%2C%20Europe%29.zip"},
+{"name": "Motocross (USA, Europe) (Alt)", "size": 8908, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Motocross%20%28USA%2C%20Europe%29%20%28Alt%29.zip"},
+{"name": "Motocross (USA, Europe)", "size": 8908, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Motocross%20%28USA%2C%20Europe%29.zip"},
+{"name": "Mountain Madness - Super Pro Skiing (USA)", "size": 8806, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Mountain%20Madness%20-%20Super%20Pro%20Skiing%20%28USA%29.zip"},
+{"name": "Mouse Trap (USA, Europe)", "size": 4915, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Mouse%20Trap%20%28USA%2C%20Europe%29.zip"},
+{"name": "Mr. BASIC Meets Bits 'N Bytes (USA, Europe)", "size": 10444, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Mr.%20BASIC%20Meets%20Bits%20%27N%20Bytes%20%28USA%2C%20Europe%29.zip"},
+{"name": "NASL Soccer (World)", "size": 4505, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/NASL%20Soccer%20%28World%29.zip"},
+{"name": "NBA Basketball (USA, Europe)", "size": 4608, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/NBA%20Basketball%20%28USA%2C%20Europe%29.zip"},
+{"name": "NFL Football (World)", "size": 4812, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/NFL%20Football%20%28World%29.zip"},
+{"name": "NHL Hockey (World)", "size": 4915, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/NHL%20Hockey%20%28World%29.zip"},
+{"name": "Night Stalker (World)", "size": 4198, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Night%20Stalker%20%28World%29.zip"},
+{"name": "Nova Blast (USA, Europe)", "size": 8704, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Nova%20Blast%20%28USA%2C%20Europe%29.zip"},
+{"name": "Number Jumble (USA) (Proto) (Intellivision Lives!)", "size": 14233, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Number%20Jumble%20%28USA%29%20%28Proto%29%20%28Intellivision%20Lives%21%29.zip"},
+{"name": "Number Jumble (USA) (Proto)", "size": 14131, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Number%20Jumble%20%28USA%29%20%28Proto%29.zip"},
+{"name": "PBA Bowling (World)", "size": 4710, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/PBA%20Bowling%20%28World%29.zip"},
+{"name": "PGA Golf (World)", "size": 4198, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/PGA%20Golf%20%28World%29.zip"},
+{"name": "Pac-Man (USA) (Atarisoft)", "size": 11468, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Pac-Man%20%28USA%29%20%28Atarisoft%29.zip"},
+{"name": "Pac-Man (USA) (INTV Corp.)", "size": 11468, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Pac-Man%20%28USA%29%20%28INTV%20Corp.%29.zip"},
+{"name": "Party Line - Blow Out (USA) (Proto)", "size": 6451, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Party%20Line%20-%20Blow%20Out%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Party Line - Hard Hat (USA) (Proto)", "size": 6348, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Party%20Line%20-%20Hard%20Hat%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Party Line - Space Cadet (USA) (Proto) (Intellivision Lives!)", "size": 5836, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Party%20Line%20-%20Space%20Cadet%20%28USA%29%20%28Proto%29%20%28Intellivision%20Lives%21%29.zip"},
+{"name": "Party Line - Space Cadet (USA) (Proto)", "size": 5836, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Party%20Line%20-%20Space%20Cadet%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Pinball (USA)", "size": 12800, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Pinball%20%28USA%29.zip"},
+{"name": "Pitfall! (USA, Europe)", "size": 4096, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Pitfall%21%20%28USA%2C%20Europe%29.zip"},
+{"name": "Pole Position (USA)", "size": 14950, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Pole%20Position%20%28USA%29.zip"},
+{"name": "Popeye (USA, Europe)", "size": 9113, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Popeye%20%28USA%2C%20Europe%29.zip"},
+{"name": "Q-bert (USA, Europe)", "size": 7168, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Q-bert%20%28USA%2C%20Europe%29.zip"},
+{"name": "Racing Cars (USA, Europe) (Intellivision Lives!)", "size": 4710, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Racing%20Cars%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip"},
+{"name": "Reversi (USA, Europe)", "size": 3686, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Reversi%20%28USA%2C%20Europe%29.zip"},
+{"name": "River Raid (USA, Europe) (Beta)", "size": 5529, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/River%20Raid%20%28USA%2C%20Europe%29%20%28Beta%29.zip"},
+{"name": "River Raid (USA, Europe)", "size": 7372, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/River%20Raid%20%28USA%2C%20Europe%29.zip"},
+{"name": "Robot Rubble (USA) (Proto 1)", "size": 3891, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Robot%20Rubble%20%28USA%29%20%28Proto%201%29.zip"},
+{"name": "Robot Rubble (USA) (Proto 2)", "size": 4198, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Robot%20Rubble%20%28USA%29%20%28Proto%202%29.zip"},
+{"name": "Robot Rubble (USA) (Proto 3)", "size": 8294, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Robot%20Rubble%20%28USA%29%20%28Proto%203%29.zip"},
+{"name": "Rocky & Bullwinkle (USA) (Proto)", "size": 6860, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Rocky%20%26%20Bullwinkle%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Royal Dealer (USA, Europe)", "size": 6860, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Royal%20Dealer%20%28USA%2C%20Europe%29.zip"},
+{"name": "SNAFU (World)", "size": 3891, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/SNAFU%20%28World%29.zip"},
+{"name": "Safecracker (USA, Europe)", "size": 9113, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Safecracker%20%28USA%2C%20Europe%29.zip"},
+{"name": "Scarfinger (USA) (Proto)", "size": 15257, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Scarfinger%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Scooby Doo's Maze Chase (USA, Europe)", "size": 8192, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Scooby%20Doo%27s%20Maze%20Chase%20%28USA%2C%20Europe%29.zip"},
+{"name": "Sea Battle (World)", "size": 4710, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Sea%20Battle%20%28World%29.zip"},
+{"name": "Sewer Sam (USA)", "size": 7987, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Sewer%20Sam%20%28USA%29.zip"},
+{"name": "Shark! Shark! (USA, Europe)", "size": 6041, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Shark%21%20Shark%21%20%28USA%2C%20Europe%29.zip"},
+{"name": "Sharp Shot (USA, Europe)", "size": 5120, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Sharp%20Shot%20%28USA%2C%20Europe%29.zip"},
+{"name": "Slam Dunk - Super Pro Basketball (USA)", "size": 16281, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Slam%20Dunk%20-%20Super%20Pro%20Basketball%20%28USA%29.zip"},
+{"name": "Slap Shot - Super Pro Hockey (USA)", "size": 7577, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Slap%20Shot%20-%20Super%20Pro%20Hockey%20%28USA%29.zip"},
+{"name": "Space Armada (World)", "size": 4096, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Space%20Armada%20%28World%29.zip"},
+{"name": "Space Battle (World) (v1.1)", "size": 4300, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Space%20Battle%20%28World%29%20%28v1.1%29.zip"},
+{"name": "Space Battle (World)", "size": 4300, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Space%20Battle%20%28World%29.zip"},
+{"name": "Space Hawk (USA, Europe)", "size": 4608, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Space%20Hawk%20%28USA%2C%20Europe%29.zip"},
+{"name": "Space Spartans (USA, Europe)", "size": 10649, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Space%20Spartans%20%28USA%2C%20Europe%29.zip"},
+{"name": "Spiker - Super Pro Volleyball (USA)", "size": 14540, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Spiker%20-%20Super%20Pro%20Volleyball%20%28USA%29.zip"},
+{"name": "Stadium Mud Buggies (USA)", "size": 15974, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Stadium%20Mud%20Buggies%20%28USA%29.zip"},
+{"name": "Stampede (USA, Europe)", "size": 3788, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Stampede%20%28USA%2C%20Europe%29.zip"},
+{"name": "Star Strike (World)", "size": 4812, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Star%20Strike%20%28World%29.zip"},
+{"name": "Star Wars - The Empire Strikes Back (USA, Europe)", "size": 4710, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Star%20Wars%20-%20The%20Empire%20Strikes%20Back%20%28USA%2C%20Europe%29.zip"},
+{"name": "Sub Hunt (USA, Europe)", "size": 6656, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Sub%20Hunt%20%28USA%2C%20Europe%29.zip"},
+{"name": "Super Cobra (USA, Europe)", "size": 8294, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Super%20Cobra%20%28USA%2C%20Europe%29.zip"},
+{"name": "Super Masters! (USA) (Proto)", "size": 5836, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Super%20Masters%21%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Super NFL Football (USA) (Proto)", "size": 22118, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Super%20NFL%20Football%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Super Pro Decathlon (USA)", "size": 16281, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Super%20Pro%20Decathlon%20%28USA%29.zip"},
+{"name": "Super Pro Football (USA) (Revision)", "size": 15974, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Super%20Pro%20Football%20%28USA%29%20%28Revision%29.zip"},
+{"name": "Super Pro Football (USA)", "size": 15974, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Super%20Pro%20Football%20%28USA%29.zip"},
+{"name": "Super Soccer (USA) (Proto)", "size": 15974, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Super%20Soccer%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Swords & Serpents (USA, Europe)", "size": 8704, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Swords%20%26%20Serpents%20%28USA%2C%20Europe%29.zip"},
+{"name": "TRON (USA) (Proto)", "size": 12185, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/TRON%20%28USA%29%20%28Proto%29.zip"},
+{"name": "TRON Deadly Discs (USA, Europe)", "size": 4812, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/TRON%20Deadly%20Discs%20%28USA%2C%20Europe%29.zip"},
+{"name": "TRON Maze-A-Tron (USA, Europe)", "size": 8192, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/TRON%20Maze-A-Tron%20%28USA%2C%20Europe%29.zip"},
+{"name": "TRON Solar Sailer (USA, Europe)", "size": 14848, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/TRON%20Solar%20Sailer%20%28USA%2C%20Europe%29.zip"},
+{"name": "Takeover (USA) (Proto)", "size": 4710, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Takeover%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Tennis (World)", "size": 4608, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Tennis%20%28World%29.zip"},
+{"name": "Thin Ice (USA) (Beta)", "size": 8908, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Thin%20Ice%20%28USA%29%20%28Beta%29.zip"},
+{"name": "Thin Ice (USA)", "size": 8908, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Thin%20Ice%20%28USA%29.zip"},
+{"name": "Thunder Castle (USA)", "size": 15974, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Thunder%20Castle%20%28USA%29.zip"},
+{"name": "Tower of Doom (USA)", "size": 26931, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Tower%20of%20Doom%20%28USA%29.zip"},
+{"name": "Triple Action (World)", "size": 4710, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Triple%20Action%20%28World%29.zip"},
+{"name": "Triple Challenge - Chess, Checkers, Backgammon (USA)", "size": 16486, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Triple%20Challenge%20-%20Chess%2C%20Checkers%2C%20Backgammon%20%28USA%29.zip"},
+{"name": "Tropical Trouble (USA, Europe)", "size": 8704, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Tropical%20Trouble%20%28USA%2C%20Europe%29.zip"},
+{"name": "Truckin' (USA)", "size": 9523, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Truckin%27%20%28USA%29.zip"},
+{"name": "Turbo (USA, Europe)", "size": 6963, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Turbo%20%28USA%2C%20Europe%29.zip"},
+{"name": "Tutankham (USA, Europe)", "size": 6860, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Tutankham%20%28USA%2C%20Europe%29.zip"},
+{"name": "US Ski Team Skiing (World)", "size": 4710, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/US%20Ski%20Team%20Skiing%20%28World%29.zip"},
+{"name": "USCF Chess (USA, Europe)", "size": 8601, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/USCF%20Chess%20%28USA%2C%20Europe%29.zip"},
+{"name": "Utopia (USA, Europe)", "size": 4300, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Utopia%20%28USA%2C%20Europe%29.zip"},
+{"name": "Vectron (USA, Europe) (Intellivision Lives!)", "size": 10240, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Vectron%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip"},
+{"name": "Vectron (USA, Europe)", "size": 10240, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Vectron%20%28USA%2C%20Europe%29.zip"},
+{"name": "Venture (USA, Europe)", "size": 8601, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Venture%20%28USA%2C%20Europe%29.zip"},
+{"name": "White Water! (USA, Europe)", "size": 9318, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/White%20Water%21%20%28USA%2C%20Europe%29.zip"},
+{"name": "Word Hunt (USA, Europe) (Intellivision Lives!)", "size": 8908, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Word%20Hunt%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip"},
+{"name": "Word Rockets (USA, Europe) (Intellivision Lives!)", "size": 8908, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Word%20Rockets%20%28USA%2C%20Europe%29%20%28Intellivision%20Lives%21%29.zip"},
+{"name": "World Championship Baseball (USA)", "size": 11776, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/World%20Championship%20Baseball%20%28USA%29.zip"},
+{"name": "World Cup Soccer (USA, Europe)", "size": 15769, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/World%20Cup%20Soccer%20%28USA%2C%20Europe%29.zip"},
+{"name": "World Series Major League Baseball (USA)", "size": 29286, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/World%20Series%20Major%20League%20Baseball%20%28USA%29.zip"},
+{"name": "Worm Whomper (USA, Europe)", "size": 5324, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Worm%20Whomper%20%28USA%2C%20Europe%29.zip"},
+{"name": "Yogi's Frustration (USA) (Proto)", "size": 13209, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Yogi%27s%20Frustration%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Zaxxon (USA, Europe)", "size": 7884, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Zaxxon%20%28USA%2C%20Europe%29.zip"},
+{"name": "Zzzz! Spina the Bee (Europe) (Proto)", "size": 7168, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/Zzzz%21%20Spina%20the%20Bee%20%28Europe%29%20%28Proto%29.zip"},
+{"name": "[BIOS] Entertainment Computer System EXEC-BASIC (USA, Europe)", "size": 13312, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/%5BBIOS%5D%20Entertainment%20Computer%20System%20EXEC-BASIC%20%28USA%2C%20Europe%29.zip"},
+{"name": "[BIOS] Intellivision Executive ROM (World)", "size": 5222, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/%5BBIOS%5D%20Intellivision%20Executive%20ROM%20%28World%29.zip"},
+{"name": "[BIOS] Intellivision Graphic ROM (World)", "size": 1331, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/%5BBIOS%5D%20Intellivision%20Graphic%20ROM%20%28World%29.zip"},
+{"name": "[BIOS] Intellivoice (USA, Europe)", "size": 2048, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/%5BBIOS%5D%20Intellivoice%20%28USA%2C%20Europe%29.zip"},
+{"name": "[BIOS] Sears Super Video Arcade (USA, Europe)", "size": 5222, "url": "https://myrient.erista.me/files/No-Intro/Mattel%20-%20Intellivision/%5BBIOS%5D%20Sears%20Super%20Video%20Arcade%20%28USA%2C%20Europe%29.zip"}]

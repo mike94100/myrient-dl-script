@@ -33,8 +33,12 @@ export class App {
             // Initialize components
             this.tabManager.init();
             this.platformSelector.init();
+            this.filterManager.initializePresets();
             this.filterManager.bindEvents();
             this.resultsDisplay.init();
+
+            // Setup import functionality
+            this.setupImportHandler();
 
             console.log('ROM Collection Browser initialized successfully');
         } catch (error) {
@@ -43,23 +47,20 @@ export class App {
     }
 
     /**
-     * Load metadata and templates
+     * Load configuration data
      */
     async loadResources() {
-        const [metadataResp, bashResp, pythonResp] = await Promise.all([
-            fetch('metadata.json'),
-            fetch('templates/bash_template.sh'),
-            fetch('templates/python_template.py')
+        const [metadataResp, filtersResp] = await Promise.all([
+            fetch('config/metadata.json'),
+            fetch('config/filters.json')
         ]);
 
         const metadata = await metadataResp.json();
-        const bashTemplate = await bashResp.text();
-        const pythonTemplate = await pythonResp.text();
+        const filters = await filtersResp.json();
 
         // Update state
         this.state.setMetadata(metadata);
-        this.state.setTemplate('bash', bashTemplate);
-        this.state.setTemplate('python', pythonTemplate);
+        this.state.setFilters(filters);
     }
 
     /**
@@ -124,6 +125,73 @@ export class App {
     switchTab(tabName) {
         this.tabManager.switchTab(tabName);
     }
+
+    /**
+     * Import JSON collection data
+     */
+    importJson(file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const data = JSON.parse(e.target.result);
+                this.loadImportedCollection(data);
+            } catch (error) {
+                alert('Invalid JSON file: ' + error.message);
+            }
+        };
+        reader.readAsText(file);
+    }
+
+    /**
+     * Setup import file handler
+     */
+    setupImportHandler() {
+        const importInput = document.getElementById('json-import');
+        if (importInput) {
+            importInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    this.importJson(file);
+                }
+            });
+        }
+    }
+
+    /**
+     * Load imported collection data
+     */
+    loadImportedCollection(data) {
+        if (!data.platforms) {
+            alert('Invalid collection format: missing platforms');
+            return;
+        }
+
+        // Clear current state
+        this.state.clearPlatformSelection();
+        this.state.collections = {};
+
+        // Load collection data
+        Object.keys(data.platforms).forEach(platformKey => {
+            const platformData = data.platforms[platformKey];
+            const urls = platformData.urls || [];
+
+            // Create collection data
+            const collection = {
+                platform: platformKey,
+                title: platformData.title || platformKey,
+                description: data.description || '',
+                files: urls.map(url => ({ url, name: url.split('/').pop(), size: 0 })),
+                filteredUrls: urls
+            };
+
+            this.state.setCollection(platformKey, collection);
+            this.state.selectPlatform(platformKey);
+        });
+
+        // Update UI
+        this.resultsDisplay.displayCollections();
+        this.switchTab('results');
+    }
 }
 
 // Global functions for backward compatibility with HTML onclick handlers
@@ -147,15 +215,15 @@ window.resetFilters = function() {
     }
 };
 
-window.downloadBashScript = function() {
+window.exportJson = function() {
     if (appInstance) {
-        appInstance.downloadBashScript();
+        appInstance.resultsDisplay.exportJson();
     }
 };
 
-window.downloadPythonScript = function() {
+window.exportZip = function() {
     if (appInstance) {
-        appInstance.downloadPythonScript();
+        appInstance.resultsDisplay.exportZip();
     }
 };
 

@@ -16,6 +16,10 @@
         </div>
 
         <div id="platforms-tab" class="tab-content active">
+            <div class="platform-actions">
+                <input type="file" id="json-import" accept=".json" style="display: none;">
+                <button onclick="document.getElementById('json-import').click()">Import JSON</button>
+            </div>
             <div id="platform-checkboxes">
                 <!-- Platform checkboxes will be dynamically added here -->
             </div>
@@ -23,6 +27,12 @@
 
         <div id="filters-tab" class="tab-content">
             <div class="filter-section">
+                <div class="filter-preset">
+                    <label for="filter-preset">Filter Preset:</label>
+                    <select id="filter-preset">
+                        <option value="No Filter">No Filter</option>
+                    </select>
+                </div>
                 <div class="filter-groups-container">
                     <div class="filter-group">
                         <h4>Include Terms</h4>
@@ -74,8 +84,13 @@
                 </div>
 
                 <div class="filter-section">
-                    <button onclick="downloadBashScript()">Download Bash Script</button>
-                    <button onclick="downloadPythonScript()">Download Python Script</button>
+                <div class="export-section">
+                    <h4>Export Options</h4>
+                    <div class="export-buttons">
+                        <button onclick="exportJson()">Export JSON</button>
+                        <button onclick="exportZip()">Export ZIP (JSON + Scripts)</button>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>

@@ -1,506 +1,126 @@
-[
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/7800%20Monitor%20Cart%20%28USA%29%20%28Program%29%20%28Unl%29.zip",
-    "size": 1433
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Ace%20of%20Aces%20%28Europe%29.zip",
-    "size": 40960
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Ace%20of%20Aces%20%28USA%29.zip",
-    "size": 41062
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Alien%20Brigade%20%28Europe%29.zip",
-    "size": 87449
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Alien%20Brigade%20%28USA%29.zip",
-    "size": 87449
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Asteroids%20%28USA%29%20%28Beta%29.zip",
-    "size": 9830
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Asteroids%20%28USA%29.zip",
-    "size": 9830
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Atari%207800%20Development%20Card%20%28USA%29.zip",
-    "size": 5324
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Ballblazer%20%28Europe%29.zip",
-    "size": 17305
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Ballblazer%20%28USA%29.zip",
-    "size": 17408
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Barnyard%20Blaster%20%28Europe%29.zip",
-    "size": 46694
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Barnyard%20Blaster%20%28USA%29.zip",
-    "size": 46796
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Baseball%20%28Europe%29.zip",
-    "size": 16076
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Basketbrawl%20%28Europe%29.zip",
-    "size": 52531
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Basketbrawl%20%28USA%29.zip",
-    "size": 52633
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Centipede%20%28Europe%29.zip",
-    "size": 9113
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Centipede%20%28USA%29.zip",
-    "size": 10752
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Choplifter%21%20%28Europe%29.zip",
-    "size": 14438
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Choplifter%21%20%28USA%29.zip",
-    "size": 14438
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Commando%20%28Europe%29.zip",
-    "size": 70041
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Commando%20%28USA%29.zip",
-    "size": 69632
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Crack%27ed%20%28Europe%29.zip",
-    "size": 27443
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Crack%27ed%20%28USA%29.zip",
-    "size": 27545
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Crossbow%20%28Europe%29.zip",
-    "size": 50790
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Crossbow%20%28USA%29.zip",
-    "size": 50892
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Dark%20Chambers%20%28Europe%29.zip",
-    "size": 54886
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Dark%20Chambers%20%28USA%29.zip",
-    "size": 54988
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Desert%20Falcon%20%28Europe%29.zip",
-    "size": 22835
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Desert%20Falcon%20%28USA%29.zip",
-    "size": 22937
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Diagnostic%20Test%20Cartridge%20%28USA%29%20%28Beta%29.zip",
-    "size": 4915
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Diagnostic%20Test%20Cartridge%20%28USA%29.zip",
-    "size": 5939
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Dig%20Dug%20%28Europe%29.zip",
-    "size": 11980
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Dig%20Dug%20%28USA%29.zip",
-    "size": 11980
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Donkey%20Kong%20%28Europe%29.zip",
-    "size": 19763
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Donkey%20Kong%20%28USA%29.zip",
-    "size": 19763
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Donkey%20Kong%20Junior%20%28Europe%29.zip",
-    "size": 19865
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Donkey%20Kong%20Junior%20%28USA%29.zip",
-    "size": 20070
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Double%20Dragon%20%28Europe%29.zip",
-    "size": 52838
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Double%20Dragon%20%28USA%29.zip",
-    "size": 52940
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/F-18%20Hornet%20%28Europe%29.zip",
-    "size": 26009
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/F-18%20Hornet%20%28USA%29.zip",
-    "size": 26214
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Fatal%20Run%20%28Europe%29.zip",
-    "size": 73830
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Fatal%20Run%20%28USA%29.zip",
-    "size": 74035
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Fight%20Night%20%28Europe%29.zip",
-    "size": 40550
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Fight%20Night%20%28USA%29.zip",
-    "size": 40652
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Food%20Fight%20%28Europe%29.zip",
-    "size": 15872
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Food%20Fight%20%28USA%29%20%28Beta%29.zip",
-    "size": 15462
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Food%20Fight%20%28USA%29.zip",
-    "size": 15360
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/GATO%20%28USA%29%20%28Proto%29.zip",
-    "size": 7987
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Galaga%20%28Europe%29.zip",
-    "size": 16691
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Galaga%20%28USA%29.zip",
-    "size": 15257
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Hat%20Trick%20%28Europe%29.zip",
-    "size": 15257
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Hat%20Trick%20%28USA%29.zip",
-    "size": 15360
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/High%20Score%20Cartridge%20%28USA%29%20%28Proto%29.zip",
-    "size": 3379
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Ikari%20Warriors%20%28Europe%29.zip",
-    "size": 44339
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Ikari%20Warriors%20%28USA%29.zip",
-    "size": 44544
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Impossible%20Mission%20%28Europe%29.zip",
-    "size": 34201
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Impossible%20Mission%20%28USA%29.zip",
-    "size": 34304
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Jinks%20%28Europe%29.zip",
-    "size": 43827
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Jinks%20%28USA%29.zip",
-    "size": 43929
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Joust%20%28Europe%29.zip",
-    "size": 16486
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Joust%20%28USA%29.zip",
-    "size": 15974
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Karateka%20%28Europe%29.zip",
-    "size": 18124
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Karateka%20%28USA%29.zip",
-    "size": 17817
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Klax%20%28USA%29%20%28Proto%29.zip",
-    "size": 32256
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Kung-Fu%20Master%20%28Europe%29.zip",
-    "size": 16076
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Kung-Fu%20Master%20%28USA%29.zip",
-    "size": 16179
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Mario%20Bros.%20%28Europe%29.zip",
-    "size": 22425
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Mario%20Bros.%20%28USA%29.zip",
-    "size": 22528
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Mat%20Mania%20Challenge%20%28Europe%29.zip",
-    "size": 38604
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Mat%20Mania%20Challenge%20%28USA%29.zip",
-    "size": 42496
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Mean%2018%20Ultimate%20Golf%20%28Europe%29.zip",
-    "size": 49664
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Mean%2018%20Ultimate%20Golf%20%28USA%29.zip",
-    "size": 49868
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Meltdown%20%28Europe%29.zip",
-    "size": 33075
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Meltdown%20%28USA%29.zip",
-    "size": 33177
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Midnight%20Mutants%20%28Europe%29.zip",
-    "size": 62156
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Midnight%20Mutants%20%28USA%29.zip",
-    "size": 62259
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Missing%20in%20Action%20%28USA%29%20%28Proto%29.zip",
-    "size": 53043
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Motor%20Psycho%20%28Europe%29.zip",
-    "size": 47513
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Motor%20Psycho%20%28USA%29.zip",
-    "size": 47616
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Ms.%20Pac-Man%20%28Europe%29.zip",
-    "size": 10752
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Ms.%20Pac-Man%20%28USA%29.zip",
-    "size": 10752
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Ninja%20Golf%20%28Europe%29.zip",
-    "size": 41779
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Ninja%20Golf%20%28USA%29.zip",
-    "size": 41881
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/One-on-One%20Basketball%20%28Europe%29.zip",
-    "size": 23449
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/One-on-One%20Basketball%20%28USA%29.zip",
-    "size": 23552
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Pete%20Rose%20Baseball%20%28USA%29.zip",
-    "size": 16281
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Pit%20Fighter%20%28USA%29%20%28Proto%29.zip",
-    "size": 7884
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Planet%20Smashers%20%28Europe%29.zip",
-    "size": 50995
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Planet%20Smashers%20%28USA%29.zip",
-    "size": 51097
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Plutos%20%28USA%29%20%28Proto%29.zip",
-    "size": 38092
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Pole%20Position%20II%20%28Europe%29.zip",
-    "size": 19148
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Pole%20Position%20II%20%28USA%29%20%28Beta%29.zip",
-    "size": 21299
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Pole%20Position%20II%20%28USA%29.zip",
-    "size": 19251
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Rampage%20%28USA%29.zip",
-    "size": 43417
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Rampart%20%28USA%29%20%28Proto%29.zip",
-    "size": 6246
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/RealSports%20Baseball%20%28USA%29.zip",
-    "size": 18534
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Rescue%20on%20Fractalus%20%28USA%29%20%28Proto%29.zip",
-    "size": 12902
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Robotron%20-%202084%20%28USA%29.zip",
-    "size": 15155
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Scrapyard%20Dog%20%28Europe%29.zip",
-    "size": 51916
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Scrapyard%20Dog%20%28USA%29.zip",
-    "size": 52019
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Sentinel%20%28Europe%29.zip",
-    "size": 26521
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Sentinel%20%28USA%29%20%28Proto%29.zip",
-    "size": 26624
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Sirius%20%28USA%29%20%28Proto%29.zip",
-    "size": 42700
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Summer%20Games%20%28USA%29.zip",
-    "size": 48025
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Super%20Huey%20UH-IX%20%28Europe%29.zip",
-    "size": 16691
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Super%20Huey%20UH-IX%20%28USA%29.zip",
-    "size": 16793
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Super%20Skateboardin%27%20%28Europe%29.zip",
-    "size": 13004
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Super%20Skateboardin%27%20%28USA%29.zip",
-    "size": 12902
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Tank%20Command%20%28USA%29.zip",
-    "size": 20275
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Title%20Match%20Pro%20Wrestling%20%28Europe%29.zip",
-    "size": 16076
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Title%20Match%20Pro%20Wrestling%20%28USA%29.zip",
-    "size": 16179
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Tomcat%20-%20The%20F-14%20Fighter%20Simulator%20%28Europe%29.zip",
-    "size": 16384
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Tomcat%20-%20The%20F-14%20Fighter%20Simulator%20%28USA%29.zip",
-    "size": 16486
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Touchdown%20Football%20%28USA%29.zip",
-    "size": 31436
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Tower%20Toppler%20%28Europe%29.zip",
-    "size": 24883
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Tower%20Toppler%20%28USA%29.zip",
-    "size": 24985
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Water%20Ski%20%28USA%29.zip",
-    "size": 20070
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Winter%20Games%20%28USA%29.zip",
-    "size": 66662
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Xenophobe%20%28Europe%29.zip",
-    "size": 34611
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Xenophobe%20%28USA%29.zip",
-    "size": 34611
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Xevious%20%28Europe%29.zip",
-    "size": 23142
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Xevious%20%28USA%29%20%28Beta%29.zip",
-    "size": 22220
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Xevious%20%28USA%29.zip",
-    "size": 23040
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/%5BBIOS%5D%20Atari%207800%20%28Europe%29.zip",
-    "size": 9830
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/%5BBIOS%5D%20Atari%207800%20%28USA%29.zip",
-    "size": 2457
-  }
-]
+[{"name": "7800 Monitor Cart (USA) (Program) (Unl)", "size": 1433, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/7800%20Monitor%20Cart%20%28USA%29%20%28Program%29%20%28Unl%29.zip"},
+{"name": "Ace of Aces (Europe)", "size": 40960, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Ace%20of%20Aces%20%28Europe%29.zip"},
+{"name": "Ace of Aces (USA)", "size": 41062, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Ace%20of%20Aces%20%28USA%29.zip"},
+{"name": "Alien Brigade (Europe)", "size": 87449, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Alien%20Brigade%20%28Europe%29.zip"},
+{"name": "Alien Brigade (USA)", "size": 87449, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Alien%20Brigade%20%28USA%29.zip"},
+{"name": "Asteroids (USA) (Beta)", "size": 9830, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Asteroids%20%28USA%29%20%28Beta%29.zip"},
+{"name": "Asteroids (USA)", "size": 9830, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Asteroids%20%28USA%29.zip"},
+{"name": "Atari 7800 Development Card (USA)", "size": 5324, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Atari%207800%20Development%20Card%20%28USA%29.zip"},
+{"name": "Ballblazer (Europe)", "size": 17305, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Ballblazer%20%28Europe%29.zip"},
+{"name": "Ballblazer (USA)", "size": 17408, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Ballblazer%20%28USA%29.zip"},
+{"name": "Barnyard Blaster (Europe)", "size": 46694, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Barnyard%20Blaster%20%28Europe%29.zip"},
+{"name": "Barnyard Blaster (USA)", "size": 46796, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Barnyard%20Blaster%20%28USA%29.zip"},
+{"name": "Baseball (Europe)", "size": 16076, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Baseball%20%28Europe%29.zip"},
+{"name": "Basketbrawl (Europe)", "size": 52531, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Basketbrawl%20%28Europe%29.zip"},
+{"name": "Basketbrawl (USA)", "size": 52633, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Basketbrawl%20%28USA%29.zip"},
+{"name": "Centipede (Europe)", "size": 9113, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Centipede%20%28Europe%29.zip"},
+{"name": "Centipede (USA)", "size": 10752, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Centipede%20%28USA%29.zip"},
+{"name": "Choplifter! (Europe)", "size": 14438, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Choplifter%21%20%28Europe%29.zip"},
+{"name": "Choplifter! (USA)", "size": 14438, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Choplifter%21%20%28USA%29.zip"},
+{"name": "Commando (Europe)", "size": 70041, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Commando%20%28Europe%29.zip"},
+{"name": "Commando (USA)", "size": 69632, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Commando%20%28USA%29.zip"},
+{"name": "Crack'ed (Europe)", "size": 27443, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Crack%27ed%20%28Europe%29.zip"},
+{"name": "Crack'ed (USA)", "size": 27545, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Crack%27ed%20%28USA%29.zip"},
+{"name": "Crossbow (Europe)", "size": 50790, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Crossbow%20%28Europe%29.zip"},
+{"name": "Crossbow (USA)", "size": 50892, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Crossbow%20%28USA%29.zip"},
+{"name": "Dark Chambers (Europe)", "size": 54886, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Dark%20Chambers%20%28Europe%29.zip"},
+{"name": "Dark Chambers (USA)", "size": 54988, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Dark%20Chambers%20%28USA%29.zip"},
+{"name": "Desert Falcon (Europe)", "size": 22835, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Desert%20Falcon%20%28Europe%29.zip"},
+{"name": "Desert Falcon (USA)", "size": 22937, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Desert%20Falcon%20%28USA%29.zip"},
+{"name": "Diagnostic Test Cartridge (USA) (Beta)", "size": 4915, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Diagnostic%20Test%20Cartridge%20%28USA%29%20%28Beta%29.zip"},
+{"name": "Diagnostic Test Cartridge (USA)", "size": 5939, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Diagnostic%20Test%20Cartridge%20%28USA%29.zip"},
+{"name": "Dig Dug (Europe)", "size": 11980, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Dig%20Dug%20%28Europe%29.zip"},
+{"name": "Dig Dug (USA)", "size": 11980, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Dig%20Dug%20%28USA%29.zip"},
+{"name": "Donkey Kong (Europe)", "size": 19763, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Donkey%20Kong%20%28Europe%29.zip"},
+{"name": "Donkey Kong (USA)", "size": 19763, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Donkey%20Kong%20%28USA%29.zip"},
+{"name": "Donkey Kong Junior (Europe)", "size": 19865, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Donkey%20Kong%20Junior%20%28Europe%29.zip"},
+{"name": "Donkey Kong Junior (USA)", "size": 20070, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Donkey%20Kong%20Junior%20%28USA%29.zip"},
+{"name": "Double Dragon (Europe)", "size": 52838, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Double%20Dragon%20%28Europe%29.zip"},
+{"name": "Double Dragon (USA)", "size": 52940, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Double%20Dragon%20%28USA%29.zip"},
+{"name": "F-18 Hornet (Europe)", "size": 26009, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/F-18%20Hornet%20%28Europe%29.zip"},
+{"name": "F-18 Hornet (USA)", "size": 26214, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/F-18%20Hornet%20%28USA%29.zip"},
+{"name": "Fatal Run (Europe)", "size": 73830, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Fatal%20Run%20%28Europe%29.zip"},
+{"name": "Fatal Run (USA)", "size": 74035, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Fatal%20Run%20%28USA%29.zip"},
+{"name": "Fight Night (Europe)", "size": 40550, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Fight%20Night%20%28Europe%29.zip"},
+{"name": "Fight Night (USA)", "size": 40652, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Fight%20Night%20%28USA%29.zip"},
+{"name": "Food Fight (Europe)", "size": 15872, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Food%20Fight%20%28Europe%29.zip"},
+{"name": "Food Fight (USA) (Beta)", "size": 15462, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Food%20Fight%20%28USA%29%20%28Beta%29.zip"},
+{"name": "Food Fight (USA)", "size": 15360, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Food%20Fight%20%28USA%29.zip"},
+{"name": "GATO (USA) (Proto)", "size": 7987, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/GATO%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Galaga (Europe)", "size": 16691, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Galaga%20%28Europe%29.zip"},
+{"name": "Galaga (USA)", "size": 15257, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Galaga%20%28USA%29.zip"},
+{"name": "Hat Trick (Europe)", "size": 15257, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Hat%20Trick%20%28Europe%29.zip"},
+{"name": "Hat Trick (USA)", "size": 15360, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Hat%20Trick%20%28USA%29.zip"},
+{"name": "High Score Cartridge (USA) (Proto)", "size": 3379, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/High%20Score%20Cartridge%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Ikari Warriors (Europe)", "size": 44339, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Ikari%20Warriors%20%28Europe%29.zip"},
+{"name": "Ikari Warriors (USA)", "size": 44544, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Ikari%20Warriors%20%28USA%29.zip"},
+{"name": "Impossible Mission (Europe)", "size": 34201, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Impossible%20Mission%20%28Europe%29.zip"},
+{"name": "Impossible Mission (USA)", "size": 34304, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Impossible%20Mission%20%28USA%29.zip"},
+{"name": "Jinks (Europe)", "size": 43827, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Jinks%20%28Europe%29.zip"},
+{"name": "Jinks (USA)", "size": 43929, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Jinks%20%28USA%29.zip"},
+{"name": "Joust (Europe)", "size": 16486, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Joust%20%28Europe%29.zip"},
+{"name": "Joust (USA)", "size": 15974, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Joust%20%28USA%29.zip"},
+{"name": "Karateka (Europe)", "size": 18124, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Karateka%20%28Europe%29.zip"},
+{"name": "Karateka (USA)", "size": 17817, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Karateka%20%28USA%29.zip"},
+{"name": "Klax (USA) (Proto)", "size": 32256, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Klax%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Kung-Fu Master (Europe)", "size": 16076, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Kung-Fu%20Master%20%28Europe%29.zip"},
+{"name": "Kung-Fu Master (USA)", "size": 16179, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Kung-Fu%20Master%20%28USA%29.zip"},
+{"name": "Mario Bros. (Europe)", "size": 22425, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Mario%20Bros.%20%28Europe%29.zip"},
+{"name": "Mario Bros. (USA)", "size": 22528, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Mario%20Bros.%20%28USA%29.zip"},
+{"name": "Mat Mania Challenge (Europe)", "size": 38604, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Mat%20Mania%20Challenge%20%28Europe%29.zip"},
+{"name": "Mat Mania Challenge (USA)", "size": 42496, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Mat%20Mania%20Challenge%20%28USA%29.zip"},
+{"name": "Mean 18 Ultimate Golf (Europe)", "size": 49664, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Mean%2018%20Ultimate%20Golf%20%28Europe%29.zip"},
+{"name": "Mean 18 Ultimate Golf (USA)", "size": 49868, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Mean%2018%20Ultimate%20Golf%20%28USA%29.zip"},
+{"name": "Meltdown (Europe)", "size": 33075, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Meltdown%20%28Europe%29.zip"},
+{"name": "Meltdown (USA)", "size": 33177, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Meltdown%20%28USA%29.zip"},
+{"name": "Midnight Mutants (Europe)", "size": 62156, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Midnight%20Mutants%20%28Europe%29.zip"},
+{"name": "Midnight Mutants (USA)", "size": 62259, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Midnight%20Mutants%20%28USA%29.zip"},
+{"name": "Missing in Action (USA) (Proto)", "size": 53043, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Missing%20in%20Action%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Motor Psycho (Europe)", "size": 47513, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Motor%20Psycho%20%28Europe%29.zip"},
+{"name": "Motor Psycho (USA)", "size": 47616, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Motor%20Psycho%20%28USA%29.zip"},
+{"name": "Ms. Pac-Man (Europe)", "size": 10752, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Ms.%20Pac-Man%20%28Europe%29.zip"},
+{"name": "Ms. Pac-Man (USA)", "size": 10752, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Ms.%20Pac-Man%20%28USA%29.zip"},
+{"name": "Ninja Golf (Europe)", "size": 41779, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Ninja%20Golf%20%28Europe%29.zip"},
+{"name": "Ninja Golf (USA)", "size": 41881, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Ninja%20Golf%20%28USA%29.zip"},
+{"name": "One-on-One Basketball (Europe)", "size": 23449, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/One-on-One%20Basketball%20%28Europe%29.zip"},
+{"name": "One-on-One Basketball (USA)", "size": 23552, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/One-on-One%20Basketball%20%28USA%29.zip"},
+{"name": "Pete Rose Baseball (USA)", "size": 16281, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Pete%20Rose%20Baseball%20%28USA%29.zip"},
+{"name": "Pit Fighter (USA) (Proto)", "size": 7884, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Pit%20Fighter%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Planet Smashers (Europe)", "size": 50995, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Planet%20Smashers%20%28Europe%29.zip"},
+{"name": "Planet Smashers (USA)", "size": 51097, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Planet%20Smashers%20%28USA%29.zip"},
+{"name": "Plutos (USA) (Proto)", "size": 38092, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Plutos%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Pole Position II (Europe)", "size": 19148, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Pole%20Position%20II%20%28Europe%29.zip"},
+{"name": "Pole Position II (USA) (Beta)", "size": 21299, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Pole%20Position%20II%20%28USA%29%20%28Beta%29.zip"},
+{"name": "Pole Position II (USA)", "size": 19251, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Pole%20Position%20II%20%28USA%29.zip"},
+{"name": "Rampage (USA)", "size": 43417, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Rampage%20%28USA%29.zip"},
+{"name": "Rampart (USA) (Proto)", "size": 6246, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Rampart%20%28USA%29%20%28Proto%29.zip"},
+{"name": "RealSports Baseball (USA)", "size": 18534, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/RealSports%20Baseball%20%28USA%29.zip"},
+{"name": "Rescue on Fractalus (USA) (Proto)", "size": 12902, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Rescue%20on%20Fractalus%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Robotron - 2084 (USA)", "size": 15155, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Robotron%20-%202084%20%28USA%29.zip"},
+{"name": "Scrapyard Dog (Europe)", "size": 51916, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Scrapyard%20Dog%20%28Europe%29.zip"},
+{"name": "Scrapyard Dog (USA)", "size": 52019, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Scrapyard%20Dog%20%28USA%29.zip"},
+{"name": "Sentinel (Europe)", "size": 26521, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Sentinel%20%28Europe%29.zip"},
+{"name": "Sentinel (USA) (Proto)", "size": 26624, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Sentinel%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Sirius (USA) (Proto)", "size": 42700, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Sirius%20%28USA%29%20%28Proto%29.zip"},
+{"name": "Summer Games (USA)", "size": 48025, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Summer%20Games%20%28USA%29.zip"},
+{"name": "Super Huey UH-IX (Europe)", "size": 16691, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Super%20Huey%20UH-IX%20%28Europe%29.zip"},
+{"name": "Super Huey UH-IX (USA)", "size": 16793, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Super%20Huey%20UH-IX%20%28USA%29.zip"},
+{"name": "Super Skateboardin' (Europe)", "size": 13004, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Super%20Skateboardin%27%20%28Europe%29.zip"},
+{"name": "Super Skateboardin' (USA)", "size": 12902, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Super%20Skateboardin%27%20%28USA%29.zip"},
+{"name": "Tank Command (USA)", "size": 20275, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Tank%20Command%20%28USA%29.zip"},
+{"name": "Title Match Pro Wrestling (Europe)", "size": 16076, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Title%20Match%20Pro%20Wrestling%20%28Europe%29.zip"},
+{"name": "Title Match Pro Wrestling (USA)", "size": 16179, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Title%20Match%20Pro%20Wrestling%20%28USA%29.zip"},
+{"name": "Tomcat - The F-14 Fighter Simulator (Europe)", "size": 16384, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Tomcat%20-%20The%20F-14%20Fighter%20Simulator%20%28Europe%29.zip"},
+{"name": "Tomcat - The F-14 Fighter Simulator (USA)", "size": 16486, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Tomcat%20-%20The%20F-14%20Fighter%20Simulator%20%28USA%29.zip"},
+{"name": "Touchdown Football (USA)", "size": 31436, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Touchdown%20Football%20%28USA%29.zip"},
+{"name": "Tower Toppler (Europe)", "size": 24883, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Tower%20Toppler%20%28Europe%29.zip"},
+{"name": "Tower Toppler (USA)", "size": 24985, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Tower%20Toppler%20%28USA%29.zip"},
+{"name": "Water Ski (USA)", "size": 20070, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Water%20Ski%20%28USA%29.zip"},
+{"name": "Winter Games (USA)", "size": 66662, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Winter%20Games%20%28USA%29.zip"},
+{"name": "Xenophobe (Europe)", "size": 34611, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Xenophobe%20%28Europe%29.zip"},
+{"name": "Xenophobe (USA)", "size": 34611, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Xenophobe%20%28USA%29.zip"},
+{"name": "Xevious (Europe)", "size": 23142, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Xevious%20%28Europe%29.zip"},
+{"name": "Xevious (USA) (Beta)", "size": 22220, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Xevious%20%28USA%29%20%28Beta%29.zip"},
+{"name": "Xevious (USA)", "size": 23040, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/Xevious%20%28USA%29.zip"},
+{"name": "[BIOS] Atari 7800 (Europe)", "size": 9830, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/%5BBIOS%5D%20Atari%207800%20%28Europe%29.zip"},
+{"name": "[BIOS] Atari 7800 (USA)", "size": 2457, "url": "https://myrient.erista.me/files/No-Intro/Atari%20-%20Atari%207800%20%28BIN%29/%5BBIOS%5D%20Atari%207800%20%28USA%29.zip"}]

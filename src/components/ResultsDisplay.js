@@ -1,4 +1,5 @@
 import { dom, formatBytes } from '../utils/index.js';
+import JSZip from 'jszip';
 
 /**
  * Handles results display UI and logic
@@ -172,6 +173,69 @@ export class ResultsDisplay {
     });
   }
 
+
+
+  /**
+   * Generate export data for selected platforms
+   */
+  generateExportData() {
+    const platforms = this.app.state.getSelectedPlatforms();
+    if (platforms.length === 0) {
+      alert('No platforms selected');
+      return null;
+    }
+
+    // Build export data
+    const exportData = {
+      title: '',
+      description: '',
+      platforms: {}
+    };
+
+    // Set title and description
+    if (platforms.length === 1) {
+      const platform = platforms[0];
+      const collection = this.app.state.getCollection(platform);
+      if (collection) {
+        exportData.title = collection.title;
+        exportData.description = collection.description;
+      } else {
+        exportData.title = `${platform} ROM Collection`;
+      }
+    } else {
+      exportData.title = `Multi-Platform ROM Collection (${platforms.length} platforms)`;
+      exportData.description = platforms
+        .map((p) => {
+          const metadata = this.app.state.metadata?.platforms[p];
+          return metadata ? `${metadata.manufacturer} - ${metadata.console}` : p;
+        })
+        .join(', ');
+    }
+
+    // Add platform data
+    let totalUrls = 0;
+    platforms.forEach((platformKey) => {
+      const collection = this.app.state.getCollection(platformKey);
+      const metadata = this.app.state.metadata?.platforms[platformKey];
+
+      if (collection && collection.filteredUrls && collection.filteredUrls.length > 0) {
+        exportData.platforms[platformKey] = {
+          title: collection.title,
+          directory: metadata?.download_directory || platformKey,
+          urls: collection.filteredUrls
+        };
+        totalUrls += collection.filteredUrls.length;
+      }
+    });
+
+    if (totalUrls === 0) {
+      alert('No files to export');
+      return null;
+    }
+
+    return exportData;
+  }
+
   /**
    * Toggle platform section visibility
    */
@@ -216,87 +280,66 @@ export class ResultsDisplay {
   }
 
   /**
-   * Download scripts for selected platforms
+   * Export collection as JSON
    */
-  downloadBashScript() {
-    const platforms = this.app.state.getSelectedPlatforms();
-    if (platforms.length === 0 || !this.app.state.templates.bash) {
-      alert('No data loaded or template not loaded');
-      return;
-    }
+  exportJson() {
+    const exportData = this.generateExportData();
+    if (!exportData) return;
 
-    // Collect all URLs from all platforms
-    let allUrls = [];
-    platforms.forEach((platform) => {
-      const collection = this.app.state.getCollection(platform);
-      if (collection) {
-        allUrls = allUrls.concat(collection.filteredUrls || []);
-      }
-    });
+    const jsonContent = JSON.stringify(exportData, null, 2);
+    const filename = exportData.title.toLowerCase().replace(/[^a-z0-9]+/g, '_') + '.json';
 
-    if (allUrls.length === 0) {
-      alert('No files to download');
-      return;
-    }
-
-    const platformsList = platforms
-      .map((p) => {
-        const metadata = this.app.state.metadata?.platforms[p];
-        return metadata ? `${metadata.manufacturer} - ${metadata.console}` : p;
-      })
-      .join(', ');
-
-    // Generate download script
-    this.generateDownloadScript('bash', allUrls, platforms, platformsList);
-  }
-
-  downloadPythonScript() {
-    const platforms = this.app.state.getSelectedPlatforms();
-    if (platforms.length === 0 || !this.app.state.templates.python) {
-      alert('No data loaded or template not loaded');
-      return;
-    }
-
-    // Collect all URLs from all platforms
-    let allUrls = [];
-    platforms.forEach((platform) => {
-      const collection = this.app.state.getCollection(platform);
-      if (collection) {
-        allUrls = allUrls.concat(collection.filteredUrls || []);
-      }
-    });
-
-    if (allUrls.length === 0) {
-      alert('No files to download');
-      return;
-    }
-
-    const platformsList = platforms
-      .map((p) => {
-        const metadata = this.app.state.metadata?.platforms[p];
-        return metadata ? `${metadata.manufacturer} - ${metadata.console}` : p;
-      })
-      .join(', ');
-
-    // Generate download script
-    this.generateDownloadScript('python', allUrls, platforms, platformsList);
+    const { downloadFile } = this.app.utils;
+    downloadFile(jsonContent, filename);
   }
 
   /**
-   * Generate and download script
+   * Export ZIP containing JSON and scripts
    */
-  generateDownloadScript(type, allUrls, platforms, platformsList) {
-    // This would use the template system - for now just show a placeholder
-    const scriptContent = `# Auto-generated ${type} download script for ${platformsList}\n# ${allUrls.length} files total\n\nprint("Download script generated!")`;
+  exportZip() {
+    const exportData = this.generateExportData();
+    if (!exportData) return;
 
-    const filename =
-      platforms.length === 1
-        ? `${platforms[0]}_download.${type === 'bash' ? 'sh' : 'py'}`
-        : `multi_platform_download.${type === 'bash' ? 'sh' : 'py'}`;
+    // Create ZIP with JSON and scripts
+    this.createScriptsZip(exportData, true);
+  }
 
-    // Download the file
-    const { downloadFile } = this.app.utils;
-    downloadFile(scriptContent, filename);
+  /**
+   * Create ZIP file with scripts and optionally JSON
+   */
+  async createScriptsZip(exportData, includeJson) {
+    const baseName = exportData.title.toLowerCase().replace(/[^a-z0-9]+/g, '_');
+
+    try {
+      const zip = new JSZip();
+
+      // Fetch and add scripts
+      const [bashResponse, pythonResponse] = await Promise.all([
+        fetch('bin/download.sh'),
+        fetch('bin/download.py')
+      ]);
+
+      const bashScript = await bashResponse.text();
+      const pythonScript = await pythonResponse.text();
+
+      zip.file(`${baseName}_download.sh`, bashScript);
+      zip.file(`${baseName}_download.py`, pythonScript);
+
+      if (includeJson) {
+        const jsonContent = JSON.stringify(exportData, null, 2);
+        zip.file(`${baseName}.json`, jsonContent);
+      }
+
+      // Generate ZIP file
+      const zipBlob = await zip.generateAsync({ type: 'blob' });
+
+      // Download the ZIP file
+      const { downloadFile } = this.app.utils;
+      downloadFile(zipBlob, `${baseName}_package.zip`, 'application/zip');
+    } catch (error) {
+      console.error('Failed to create ZIP:', error);
+      alert('Failed to create ZIP file');
+    }
   }
 
   /**

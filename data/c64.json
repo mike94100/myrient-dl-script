@@ -1,1310 +1,327 @@
-[
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/128er%20Quickload%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 2048
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/256K-EPROM-System%20%28Germany%29%20%28v5%29%20%28Program%29.zip",
-    "size": 4812
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/64%20Doctor%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 4915
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/64MON%20%28USA%2C%20Europe%29%20%28v1.03%29%20%28Program%29.zip",
-    "size": 6041
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Action%20Cartridge%20Plus%20%28Germany%29%20%28v6.0%29%20%28Program%29.zip",
-    "size": 25497
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Action%20Replay%20Professional%20%28Europe%29%20%28v3%29%20%28Program%29%20%28Unl%29.zip",
-    "size": 11878
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Action%20Replay%20Professional%20%28Europe%29%20%28v4.2%29%20%28Program%29%20%28Unl%29.zip",
-    "size": 24166
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Action%20Replay%20Professional%20%28Europe%29%20%28v6.0%29%20%28Program%29%20%28Unl%29.zip",
-    "size": 25190
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Action%20Replay%20Professional%20%28USA%29%20%28v5.0%29%20%28Program%29%20%28Unl%29.zip",
-    "size": 24985
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Activision%20Decathlon%2C%20The%20%28USA%2C%20Europe%29.zip",
-    "size": 12083
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Adventure%201%20-%20The%20Mutant%20Spiders%20%28USA%2C%20Europe%29.zip",
-    "size": 11571
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Adventure%203%20-%20The%20Fourth%20Sarcophagus%20%28USA%2C%20Europe%29.zip",
-    "size": 11571
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Adventure%20Creator%20%28USA%2C%20Europe%29.zip",
-    "size": 12288
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Aegean%20Voyage%20%28USA%2C%20Europe%29.zip",
-    "size": 12800
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/After%20the%20War%20%28USA%2C%20Europe%29.zip",
-    "size": 66457
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Alf%20in%20the%20Color%20Caves%20%28USA%2C%20Europe%29.zip",
-    "size": 9318
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Alien%20Sidestep%20%28USA%2C%20Europe%29.zip",
-    "size": 3072
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Alpha%20Build%20%28USA%2C%20Europe%29.zip",
-    "size": 5427
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Alphabet%20Zoo%20%28USA%2C%20Europe%29.zip",
-    "size": 14336
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Arnie%20Armchair%27s%20Howzat%20Cricket%20Game%20%28USA%2C%20Europe%29.zip",
-    "size": 9318
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Astroblitz%20%28USA%2C%20Europe%29.zip",
-    "size": 5734
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Attack%20of%20the%20Mutant%20Camels%20%28USA%29.zip",
-    "size": 5734
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Avenger%20%28Japan%29%20%28v02%29%20%28MAX%29.zip",
-    "size": 5632
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Avenger%20%28USA%2C%20Europe%29%20%28v03%29%20%28MAX%29.zip",
-    "size": 5632
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/BC%27s%20Quest%20for%20Tires%20%28USA%2C%20Europe%29.zip",
-    "size": 10854
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/BadLands%20%28USA%2C%20Europe%29.zip",
-    "size": 51712
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Batman%20-%20The%20Movie%20%28Europe%29.zip",
-    "size": 82124
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Battle%20Command%20%28Europe%29.zip",
-    "size": 81715
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Battlezone%20%28USA%2C%20Europe%29.zip",
-    "size": 10752
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Beamrider%20%28USA%2C%20Europe%29.zip",
-    "size": 10956
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Big%20Bird%27s%20Funhouse%20%28USA%2C%20Europe%29.zip",
-    "size": 14950
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Big%20Bird%27s%20Special%20Delivery%20%28USA%2C%20Europe%29.zip",
-    "size": 10444
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Black%20Box%20%28USA%2C%20Europe%29%20%28v2.0%29%20%28Program%29.zip",
-    "size": 10854
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Blueprint%20%28USA%2C%20Europe%29.zip",
-    "size": 11980
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Bowling%20%28Japan%29%20%28MAX%29.zip",
-    "size": 9318
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Bridge%2064%20%28USA%2C%20Europe%29.zip",
-    "size": 6758
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Bubble%20Burst%20%28USA%2C%20Europe%29.zip",
-    "size": 9625
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Buck%20Rogers%20-%20Planet%20of%20Zoom%20%28USA%2C%20Europe%29.zip",
-    "size": 11161
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Bug%20Crusher%20%28USA%2C%20Europe%29.zip",
-    "size": 3174
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/C-64%20Diagnostic%20%28USA%2C%20Europe%29%20%28Rev%20586220%29%20%28Program%29.zip",
-    "size": 4300
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/C-64%20Import%20Test%20Diag%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 4710
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/C64-FORTH%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 8601
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/COMAL%2080%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 127488
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Calc%20Result%20-%20The%20Spread%20Sheet%20-%20Advanced%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 38604
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Calc%20Result%20-%20The%20Spread%20Sheet%20-%20Easy%20%28USA%2C%20Europe%29%20%28Program%29%20%28Alt%29.zip",
-    "size": 17100
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Calc%20Result%20-%20The%20Spread%20Sheet%20-%20Easy%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 17510
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Capture%202%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 6656
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Castle%20Hassle%20%28USA%2C%20Europe%29.zip",
-    "size": 12697
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Centipede%20%28USA%2C%20Europe%29.zip",
-    "size": 11878
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Chase%20H.Q.%20II%20-%20Special%20Criminal%20Investigation%20%28Europe%29.zip",
-    "size": 133939
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Checkers%20%28USA%2C%20Europe%29.zip",
-    "size": 11878
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Choplifter%21%20%28USA%2C%20Europe%29.zip",
-    "size": 11366
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Close%20Encounters%20of%20the%20Worst%20Kind%20%28USA%2C%20Europe%29.zip",
-    "size": 2969
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Clowns%20%28Japan%29%20%28v01%29%20%28MAX%29.zip",
-    "size": 5632
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Clowns%20%28World%29%20%28En%2CJa%29%20%28v02%29%20%28MAX%29.zip",
-    "size": 11161
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Coccinelle%20cherche%20dessinateur%20%28France%29.zip",
-    "size": 5836
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Coco%20Notes%20%28USA%2C%20Europe%29.zip",
-    "size": 10649
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Colossus%20Chess%20%2B%20Silicon%20Syborgs%20%2B%20International%20Football%20%28USA%2C%20Europe%29%20%28Super%20Games%29.zip",
-    "size": 43417
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Commodore%2064%20Diagnostic%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 2252
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Congo%20Bongo%20%28USA%2C%20Europe%29.zip",
-    "size": 11571
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Conrad%20Disk%20Booster%20%28Germany%29%20%28Program%29.zip",
-    "size": 4198
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Cosmic%20Life%20%28USA%2C%20Europe%29.zip",
-    "size": 5017
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Crisis%20Mountain%20%28USA%2C%20Europe%29.zip",
-    "size": 9830
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Crystal%20Castles%20%28USA%2C%20Europe%29%20%28Proto%29.zip",
-    "size": 12902
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Cyberball%20%28USA%2C%20Europe%29.zip",
-    "size": 65126
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Dance%20Fantasy%20%28USA%2C%20Europe%29.zip",
-    "size": 7065
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Dancing%20Feats%20%28USA%2C%20Europe%29.zip",
-    "size": 5222
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Defender%20%28USA%2C%20Europe%29.zip",
-    "size": 11161
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Dela%20S-4-Modul%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 2969
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Delta%20Drawing%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 10137
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Designer%27s%20Pencil%2C%20The%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 12083
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Diamond%20Mine%20%28USA%2C%20Europe%29.zip",
-    "size": 12185
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Diary%2064%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 5222
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Dig%20Dug%20%28USA%2C%20Europe%29.zip",
-    "size": 12492
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Doc%2764%20%28USA%2C%20Europe%29%20%28v2.2%29%20%28Program%29.zip",
-    "size": 2764
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Donkey%20Kong%20%28USA%2C%20Europe%29.zip",
-    "size": 11468
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Dot%20Gobbler%20%28USA%2C%20Europe%29%20%28Alt%29.zip",
-    "size": 3072
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Dot%20Gobbler%20%28USA%2C%20Europe%29.zip",
-    "size": 3276
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Double%20Dragon%20%28USA%2C%20Europe%29%20%28HES%29.zip",
-    "size": 115507
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Double%20Dragon%20%28USA%2C%20Europe%29%20%28Ocean%29.zip",
-    "size": 89907
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Dragonsden%20%28USA%2C%20Europe%29.zip",
-    "size": 11571
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Ducks%20Ahoy%21%20%28USA%2C%20Europe%29.zip",
-    "size": 11264
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Electronic%20Mailbox-64%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 5427
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Epyx%20Fast%20Load%20Cartridge%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 6348
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Ernie%27s%20Magic%20Shapes%20%28USA%2C%20Europe%29.zip",
-    "size": 9932
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Espial%20%28USA%2C%20Europe%29.zip",
-    "size": 8704
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/ExBASIC%20Level%20II%20%28USA%2C%20Europe%29%20%28v64.1%29%20%28Program%29.zip",
-    "size": 6963
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Expert%2C%20The%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 489164
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Express%20Cartridge%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 25292
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Facemaker%20%28USA%2C%20Europe%29.zip",
-    "size": 4812
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Falconian%20Invaders%20%28USA%2C%20Europe%29.zip",
-    "size": 2662
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Fiendish%20Freddy%27s%20Big%20Top%20o%27%20Fun%20%2B%20International%20Soccer%20%2B%20Flimbo%27s%20Quest%20%2B%20Klax%20%28Europe%29%20%28C%2064%20Games%20System%29.zip",
-    "size": 398131
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Final%20Cartridge%20III%2C%20The%20%28USA%2C%20Europe%29%20%28Dec%2088%29%20%28Program%29.zip",
-    "size": 44236
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Final%20Cartridge%20III%2C%20The%20%28USA%2C%20Europe%29%20%28May%2088%29%20%28Program%29.zip",
-    "size": 44134
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Final%20Cartridge%20III%2C%20The%20%28USA%2C%20Europe%29%20%28Nov%2087%29%20%28Program%29.zip",
-    "size": 44134
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Final%20Cartridge%20III%2C%20The%20%28USA%2C%20Europe%29%20%28Sep%2087%29%20%28Program%29.zip",
-    "size": 43724
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Final%20Cartridge%2C%20The%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 12185
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Financial%20Advisor%2C%20The%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 5939
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Format-%20und%20Hardcopymodul%20%28Germany%29%20%28Program%29.zip",
-    "size": 5120
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Fraction%20Fever%20%28USA%2C%20Europe%29.zip",
-    "size": 4198
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Frog%20Master%20%28USA%2C%20Europe%29.zip",
-    "size": 6758
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Frogger%20%28USA%2C%20Europe%29.zip",
-    "size": 6758
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Frogger%20%2B%20River%20Raid%20%2B%20Activision%20Decathlon%2C%20The%20%2B%20Beamrider%20%28USA%2C%20Europe%29%20%28Arcade%20Classic%20Pak%29.zip",
-    "size": 37990
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Frogger%20II%20-%20Threeedeep%21%20%28USA%2C%20Europe%29.zip",
-    "size": 11468
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Galaxian%20%28USA%2C%20Europe%29.zip",
-    "size": 6348
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Galaxions%20%2B%20Munchman%20%28USA%2C%20Europe%29.zip",
-    "size": 13414
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Gateway%20to%20Apshai%20%28USA%2C%20Europe%29.zip",
-    "size": 12083
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Ghostbusters%20%28USA%2C%20Europe%29.zip",
-    "size": 30617
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Gorf%20%28USA%2C%20Europe%29.zip",
-    "size": 13414
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Graf%2064%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 5324
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Gridrunner%20%28USA%2C%20Europe%29.zip",
-    "size": 3072
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Gridrunner%20II%20-%20Attack%20of%20the%20Mutant%20Camels%20%28USA%29.zip",
-    "size": 5734
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Gyruss%20%28USA%2C%20Europe%29.zip",
-    "size": 13312
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/H.E.R.O.%20-%20Helicopter%20Emergency%20Rescue%20Operation%20%28USA%2C%20Europe%29.zip",
-    "size": 10240
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/HES%20Mon%2064%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 3584
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/HES%20Mon%2064%20%28USA%2C%20Europe%29%20%28Proto%29%20%28Program%29.zip",
-    "size": 3481
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/HES%20Writer%2064%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 5427
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Halftime%20Battlin%27%20Bands%20%28USA%2C%20Europe%29.zip",
-    "size": 11980
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Happy-Packer%20%28Germany%29%20%28Program%29.zip",
-    "size": 5529
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Hop%20Along%20Counting%20%28USA%2C%20Europe%29.zip",
-    "size": 6246
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Human%20Skeleton%20Tutorial%20%28USA%29.zip",
-    "size": 6246
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Hypra-Disk-Modul%20II%20%28Germany%29%20%28Program%29.zip",
-    "size": 2252
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/IEEE-488%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 3584
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/International%20Football%20%28USA%2C%20Europe%29.zip",
-    "size": 11059
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Jack%20Attack%20%28USA%2C%20Europe%29.zip",
-    "size": 9216
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/James%20Bond%20007%20%28USA%2C%20Europe%29.zip",
-    "size": 10137
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Jawbreaker%20%28USA%2C%20Europe%29.zip",
-    "size": 5427
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Juice%21%20%28USA%2C%20Europe%29.zip",
-    "size": 9318
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Jukebox%20%28USA%2C%20Europe%29.zip",
-    "size": 6246
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Jumpman%20Junior%20%28USA%2C%20Europe%29.zip",
-    "size": 11571
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Jungle%20Hunt%20%28USA%2C%20Europe%29.zip",
-    "size": 12595
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Jupiter%20Lander%20%28World%29%20%28v02%29%20%28MAX%29.zip",
-    "size": 4915
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Kickman%20%28World%29%20%28v03%29%20%28MAX%29.zip",
-    "size": 5427
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Kids%20on%20Keys%20%28USA%2C%20Europe%29.zip",
-    "size": 5529
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Kindercomp%20%28USA%2C%20Europe%29.zip",
-    "size": 5120
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Kung-Fu%20Master%20%28USA%2C%20Europe%29.zip",
-    "size": 31129
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Laser%20Cycles%20%28USA%2C%20Europe%29.zip",
-    "size": 1945
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Lazarian%20%28USA%2C%20Europe%29.zip",
-    "size": 8908
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Lazer%20Zone%20%28USA%2C%20Europe%29.zip",
-    "size": 5324
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/LeMans%20%28USA%2C%20Europe%29%20%28MAX%29.zip",
-    "size": 5836
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Leader%20Board%20-%20Pro%20Golf%20Simulator%20%28USA%2C%20Europe%29.zip",
-    "size": 30105
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Learning%20with%20Leeper%20%28USA%2C%20Europe%29.zip",
-    "size": 9728
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Linking%20Logic%20%28USA%2C%20Europe%29.zip",
-    "size": 9728
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Lode%20Runner%20%28USA%2C%20Europe%29.zip",
-    "size": 10649
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Logic%20Levels%20%28USA%2C%20Europe%29.zip",
-    "size": 9830
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Lunar%20Leeper%20%28USA%2C%20Europe%29.zip",
-    "size": 9420
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/MAX%20BASIC%20%28Japan%29%20%28MAX%29.zip",
-    "size": 13209
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/MINI%20BASIC%20I%20%28Japan%29%20%28MAX%29.zip",
-    "size": 6963
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Magic%20Desk%20I%20-%20Type%20and%20File%20%28USA%2C%20Europe%29%20%28CCS%29%20%28Program%29.zip",
-    "size": 13312
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Magic%20Desk%20I%20-%20Type%20and%20File%20%28USA%2C%20Europe%29%20%28VICE%29%20%28Program%29.zip",
-    "size": 13312
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Magic%20Formel%20%28USA%2C%20Europe%29%20%28v1.2%29%20%28Program%29.zip",
-    "size": 41472
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Magic%20Voice%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 16076
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Mario%27s%20Brewery%20%28USA%2C%20Europe%29.zip",
-    "size": 2560
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/MasterType%20%28USA%2C%20Europe%29.zip",
-    "size": 11776
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Math%20Mileage%20%28USA%2C%20Europe%29.zip",
-    "size": 6963
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Maze%20Man%20%28USA%2C%20Europe%29.zip",
-    "size": 3276
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Maze%20Master%20%28USA%2C%20Europe%29.zip",
-    "size": 10444
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Memory%20Manor%20%28USA%2C%20Europe%29.zip",
-    "size": 5324
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/MicroProse%20Soccer%20%2B%20Rick%20Dangerous%20%2B%20Stunt%20Car%20Racer%20%28Europe%29%20%28Power%20Play%29.zip",
-    "size": 114483
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Miner%202049er%20Starring%20Bounty%20Bob%20%28USA%2C%20Europe%29.zip",
-    "size": 11161
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Minnesota%20Fat%27s%20Pool%20Challenger%20%28USA%29.zip",
-    "size": 5529
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Mole%20Attack%20%28Japan%29%20%28v01%29%20%28MAX%29.zip",
-    "size": 3481
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Money%20Wars%20%28Japan%29%20%28v01%29%20%28MAX%29.zip",
-    "size": 5222
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Moon%20Patrol%20%28USA%2C%20Europe%29.zip",
-    "size": 12083
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Moondust%20%28USA%2C%20Europe%29.zip",
-    "size": 6348
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Motor%20Mania%20%28USA%2C%20Europe%29.zip",
-    "size": 10342
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Mountain%20King%20%28USA%2C%20Europe%29.zip",
-    "size": 9113
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Movie%20Musical%20Madness%20Starring%20the%20Jazz%20Scats%20%28USA%2C%20Europe%29.zip",
-    "size": 10240
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Mr.%20Cool%20%28USA%2C%20Europe%29.zip",
-    "size": 5324
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Mr.%20TNT%20%28USA%2C%20Europe%29.zip",
-    "size": 5836
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Ms.%20Pac-Man%20%28USA%2C%20Europe%29.zip",
-    "size": 23244
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Muistio%2064%20%28Finland%29%20%28Program%29.zip",
-    "size": 5222
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Music%20Composer%20%28World%29%20%28MAX%29.zip",
-    "size": 6553
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Music%20Machine%20%28USA%2C%20Europe%29%20%28MAX%29.zip",
-    "size": 2969
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Myth%20%28Europe%29.zip",
-    "size": 204083
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Narco%20Police%20%28USA%2C%20Europe%29.zip",
-    "size": 74956
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Navy%20SEALs%20%28Europe%29.zip",
-    "size": 83251
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Ninja%20Remix%20%28USA%2C%20Europe%29.zip",
-    "size": 323276
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Nordic%20Power%20Action%20Cartridge%20%28USA%2C%20Europe%29%20%28v7.2%29%20%28Program%29.zip",
-    "size": 25804
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Nova%20Blast%20%28USA%2C%20Europe%29.zip",
-    "size": 14028
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Number%20Nabber%2C%20Shape%20Grabber%20%28USA%2C%20Europe%29.zip",
-    "size": 5529
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Number%20Tumblers%20%28USA%2C%20Europe%29.zip",
-    "size": 6758
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Oil%27s%20Well%20%28USA%2C%20Europe%29.zip",
-    "size": 7680
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Omega%20Race%20%28Japan%29%20%28v02%29%20%28MAX%29.zip",
-    "size": 5324
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Omega%20Race%20%28USA%2C%20Europe%29.zip",
-    "size": 5632
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/PS-64%20%28Finland%29%20%28v2.00%29%20%28Program%29.zip",
-    "size": 3993
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Pac-Man%20%28USA%2C%20Europe%29.zip",
-    "size": 6656
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Pagefox%20%28Finland%29%20%28Program%29.zip",
-    "size": 31027
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Paint%20Brush%20%28USA%2C%20Europe%29.zip",
-    "size": 6656
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Pancho%20%28France%29.zip",
-    "size": 7987
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Pang%20%28Europe%29.zip",
-    "size": 104755
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Park%20Patrol%20%28USA%2C%20Europe%29.zip",
-    "size": 18944
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Pastfinder%20%28USA%2C%20Europe%29.zip",
-    "size": 15564
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Peanut%20Butter%20Panic%20%28USA%2C%20Europe%29.zip",
-    "size": 6656
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Pinball%20Spectacular%20%28World%29%20%28MAX%29.zip",
-    "size": 7475
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Pipes%20%28USA%2C%20Europe%29.zip",
-    "size": 5734
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Pit%2C%20The%20%28USA%2C%20Europe%29.zip",
-    "size": 5529
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Pitfall%20II%20-%20Lost%20Caverns%20%28USA%2C%20Europe%29.zip",
-    "size": 9728
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Pitfall%21%20%28USA%2C%20Europe%29.zip",
-    "size": 6144
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Pitstop%20%28USA%2C%20Europe%29.zip",
-    "size": 12390
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Pole%20Position%20%28USA%2C%20Europe%29.zip",
-    "size": 11161
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Popeye%20%28USA%2C%20Europe%29.zip",
-    "size": 13516
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Power%20Cartridge%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 13004
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Princess%20and%20the%20Frog%20%28USA%2C%20Europe%29.zip",
-    "size": 12595
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Professional%20Skateboard%20Simulator%20%2B%20Fast%20Food%20%2B%20Pro%20Tennis%20Simulator%20%28USA%2C%20Europe%29%20%28Fun%20Play%29.zip",
-    "size": 110284
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Q-bert%20%28USA%2C%20Europe%29.zip",
-    "size": 10547
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/REX-Ramfloppy%20%28USA%2C%20Europe%29%20%28v4.0%29%20%28Program%29.zip",
-    "size": 3891
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Rack%20%27em%20Up%21%20%28USA%2C%20Europe%29.zip",
-    "size": 10444
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Radar%20Rat%20Race%20%28Japan%29%20%28v02%29%20%28MAX%29%20%28Alt%29.zip",
-    "size": 5836
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Radar%20Rat%20Race%20%28Japan%29%20%28v02%29%20%28MAX%29.zip",
-    "size": 5427
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Ranch%20%28USA%2C%20Europe%29.zip",
-    "size": 11161
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Rechenlowe%2C%20Der%20-%20Fit%20in%20Addition%20und%20Subtraktion%20-%202.-3.%20Schuljahr%20%28Germany%29.zip",
-    "size": 11571
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Rechenlowe%2C%20Der%20-%20Fit%20in%20Addition%20und%20Subtraktion%20-%203.-4.%20Schuljahr%20%28Germany%29.zip",
-    "size": 10240
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Rechenlowe%2C%20Der%20-%20Fit%20in%20Geometrie%20-%203.-4.%20Schuljahr%20%28Germany%29.zip",
-    "size": 11059
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Rechenlowe%2C%20Der%20-%20Fit%20in%20Mathematik%20-%201.%20Schuljahr%20%28Germany%29.zip",
-    "size": 11776
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Rechenlowe%2C%20Der%20-%20Fit%20in%20Multiplikation%20und%20Division%20-%202.-3.%20Schuljahr%20%28Germany%29.zip",
-    "size": 11571
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Rechenlowe%2C%20Der%20-%20Fit%20in%20Multiplikation%20und%20Division%20-%203.-4.%20Schuljahr%20%28Germany%29.zip",
-    "size": 10752
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Rechtschreiblowe%2C%20Der%20-%20Fit%20in%20Rechtschreibung%20-%203.-4.%20Schuljahr%20%28Germany%29.zip",
-    "size": 36556
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Retro%20Ball%20%28USA%2C%20Europe%29.zip",
-    "size": 3379
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/River%20Raid%20%28USA%2C%20Europe%29.zip",
-    "size": 8601
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Road%20Race%20%28Japan%29%20%28v02%29%20%28MAX%29.zip",
-    "size": 3788
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/RoboCop%202%20%28Europe%29.zip",
-    "size": 102195
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/RoboCop%203%20%28Europe%29.zip",
-    "size": 71782
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Robotron%20-%202084%20%28USA%2C%20Europe%29.zip",
-    "size": 8908
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Rootin%27%20Tootin%27%20%28USA%2C%20Europe%29.zip",
-    "size": 8601
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Sales%20Cartridge%20%28USA%2C%20Europe%29.zip",
-    "size": 9932
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Sammy%20Lightfoot%20%28USA%2C%20Europe%29.zip",
-    "size": 10752
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Satan%20%28USA%2C%20Europe%29.zip",
-    "size": 63180
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Save%20New%20York%20%28USA%2C%20Europe%29.zip",
-    "size": 6656
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Sea%20Speller%20%28USA%2C%20Europe%29.zip",
-    "size": 6144
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Sea%20Wolf%20%28USA%2C%20Europe%29%20%28MAX%29.zip",
-    "size": 3993
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Seafox%20%28USA%2C%20Europe%29.zip",
-    "size": 9728
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Seahorse%20Hide%27n%20Seek%20%28USA%2C%20Europe%29.zip",
-    "size": 10956
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Serpentine%20%28USA%2C%20Europe%29.zip",
-    "size": 8806
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Sesame%20Street%20-%20Letter-Go-Round%20%28USA%2C%20Europe%29.zip",
-    "size": 13004
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Shadow%20of%20the%20Beast%20%28Europe%29.zip",
-    "size": 141926
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Simons%27%20BASIC%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 11264
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Solar%20Fox%20%28USA%2C%20Europe%29.zip",
-    "size": 12185
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Song%20Maker%20%28USA%2C%20Europe%29.zip",
-    "size": 6041
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Space%20Action%20%28USA%2C%20Europe%29.zip",
-    "size": 3072
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Space%20Gun%20%28Europe%29.zip",
-    "size": 90726
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Space%20Ric-O-Shay%20%28USA%2C%20Europe%29.zip",
-    "size": 3379
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Space%20Shuttle%20-%20A%20Journey%20into%20Space%20%28USA%2C%20Europe%29.zip",
-    "size": 10956
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Speed%20Math%20%26%20Bingo%20Math%20%28USA%2C%20Europe%29%20%28v01%29%20%28MAX%29.zip",
-    "size": 5017
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Speedsaver%20%24C000%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 3584
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Speedsaver%20Combi%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 6656
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Spitball%20%28USA%2C%20Europe%29.zip",
-    "size": 6246
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Spy%20Hunter%20%28USA%2C%20Europe%29.zip",
-    "size": 12697
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Star%20Post%20%28USA%2C%20Europe%29.zip",
-    "size": 5836
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Star%20Ranger%20%28USA%2C%20Europe%29.zip",
-    "size": 12390
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Star%20Trek%20-%20Strategic%20Operations%20Simulator%20%28USA%2C%20Europe%29.zip",
-    "size": 10240
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Star%20Wars%20-%20The%20Arcade%20Game%20%28USA%2C%20Europe%29.zip",
-    "size": 9932
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Stat%2064%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 5017
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/States%20and%20Capitals%20Tutorial%20%28USA%29.zip",
-    "size": 6041
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Stix%20%28USA%2C%20Europe%29.zip",
-    "size": 4710
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Story%20Machine%20%28USA%2C%20Europe%29.zip",
-    "size": 9113
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Super%20Alien%20%28Japan%29%20%28v01%29%20%28MAX%29.zip",
-    "size": 4915
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Super%20Expander%2064%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 6758
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Super%20Explode%205%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 11468
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Super%20Sketch%20%28USA%2C%20Europe%29.zip",
-    "size": 6758
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Super%20Smash%20%28USA%2C%20Europe%29.zip",
-    "size": 4198
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Super%20Snapshot%205%20%28Europe%29%20%28Program%29.zip",
-    "size": 44441
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Super%20Snapshot%205%20%28USA%29%20%28Program%29.zip",
-    "size": 43212
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Super%20Zaxxon%20%28USA%2C%20Europe%29.zip",
-    "size": 14643
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Tank%20Wars%20%28USA%2C%20Europe%29.zip",
-    "size": 3072
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Tapper%20%28USA%2C%20Europe%29.zip",
-    "size": 12390
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Teledata%20%28Sweden%29%20%28Program%29.zip",
-    "size": 5120
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Tennis%20%28USA%29%20%28CCS%29.zip",
-    "size": 15360
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Tennis%20%28USA%29%20%28VICE%29.zip",
-    "size": 15360
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Tenpins%20%28USA%2C%20Europe%29.zip",
-    "size": 2048
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Tenpins%20%2B%20Meteor%20Runner%20%2B%20Vortex%20%28USA%2C%20Europe%29%20%28Megafun%29.zip",
-    "size": 5427
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Terminator%202%20-%20Judgment%20Day%20%2B%20Modern%20Music%20Maker%20%2B%20Image%20System%2C%20The%20%28Europe%29.zip",
-    "size": 371916
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Threshold%20%28USA%2C%20Europe%29.zip",
-    "size": 5939
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Timebound%20%28USA%2C%20Europe%29.zip",
-    "size": 9728
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Toki%20%28Europe%29.zip",
-    "size": 91545
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Tool-64%2C%20The%20%28USA%2C%20Europe%29.zip",
-    "size": 6348
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Tooth%20Invaders%20%28USA%2C%20Europe%29.zip",
-    "size": 7680
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Toy%20Bizarre%20%28USA%2C%20Europe%29.zip",
-    "size": 16179
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Trashman%20%28USA%2C%20Europe%29.zip",
-    "size": 5836
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Turbo%20Maze%20Man%20%28USA%2C%20Europe%29.zip",
-    "size": 3174
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Tyler%27s%20Dungeons%20%28USA%2C%20Europe%29.zip",
-    "size": 5120
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Ultrex%20Quadro%20Maze%20%28USA%2C%20Europe%29.zip",
-    "size": 4198
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Up%20%26%20Add%27Em%20%28USA%2C%20Europe%29.zip",
-    "size": 11161
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Up%20for%20Grabs%20%28USA%2C%20Europe%29.zip",
-    "size": 6144
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Up%27n%20Down%20%28USA%2C%20Europe%29.zip",
-    "size": 11161
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Utah%20Counties%20Tutorial%20%28USA%29.zip",
-    "size": 5324
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/VIC-Text%2064%20%28Sweden%29%20%28Program%29.zip",
-    "size": 11059
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Videomate%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 7475
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Viduzzles%20-%20Computerized%20Jigsaw%20Puzzles%20%28USA%2C%20Europe%29.zip",
-    "size": 11161
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Viking%20Raider%20%28USA%2C%20Europe%29.zip",
-    "size": 76492
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Vindicators%20%28USA%2C%20Europe%29.zip",
-    "size": 37478
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Visible%20Solar%20System%2C%20The%20%28USA%2C%20Europe%29%20%28MAX%29.zip",
-    "size": 6553
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Warp%20Speed%20%28USA%2C%20Europe%29%20%28v1%29%20%28Program%29.zip",
-    "size": 12697
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Warp%20Speed%20%28USA%2C%20Europe%29%20%28v2.0%29%20%28Program%29.zip",
-    "size": 13004
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Webster%20-%20The%20Word%20Game%20%28USA%2C%20Europe%29.zip",
-    "size": 7475
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Wizard%20of%20Id%27s%20Wiztype%2C%20The%20%28USA%2C%20Europe%29.zip",
-    "size": 12185
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Wizard%20of%20Wor%20%28Japan%29%20%28MAX%29.zip",
-    "size": 4608
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Wizard%20of%20Wor%20%28Japan%29%20%28v02%29%20%28MAX%29.zip",
-    "size": 4300
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Wizard%20of%20Wor%20%28USA%2C%20Europe%29.zip",
-    "size": 13414
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Wonder%20Boy%20%28USA%2C%20Europe%29.zip",
-    "size": 35020
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Write%20Now%21%2064%20%28USA%2C%20Europe%29%20%28Program%29.zip",
-    "size": 10854
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Zaxxon%20%28USA%2C%20Europe%29.zip",
-    "size": 14438
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Zenji%20%28USA%2C%20Europe%29.zip",
-    "size": 8294
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Zone%20Ranger%20%28USA%2C%20Europe%29.zip",
-    "size": 15667
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201541%20%28Japan%2C%20USA%29%20%28En%29.zip",
-    "size": 12288
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201541%20%28World%29%20%28R1%29.zip",
-    "size": 12288
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201541%20%28World%29%20%28R2%29.zip",
-    "size": 12288
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201541%20%28World%29.zip",
-    "size": 12288
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201541-II%20%28World%29.zip",
-    "size": 12083
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201541C%20%28World%29%20%28R1%29.zip",
-    "size": 12083
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201541C%20%28World%29.zip",
-    "size": 11878
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201570%20%28World%29.zip",
-    "size": 17920
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201571%20%28World%29%20%28R1%29.zip",
-    "size": 18227
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201571%20%28World%29.zip",
-    "size": 17817
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201571CR%20%28World%29.zip",
-    "size": 18432
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201581%20%28World%29%20%28R1%29.zip",
-    "size": 14745
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201581%20%28World%29.zip",
-    "size": 14745
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%2064%20%28Sweden%29%20%28R2%29.zip",
-    "size": 15155
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%2064%20%28Sweden%29%20%28R3%29.zip",
-    "size": 15155
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%2064%20%28USA%2C%20Europe%29%20%28R1%29.zip",
-    "size": 15155
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%2064%20%28USA%2C%20Europe%29%20%28R2%29.zip",
-    "size": 15155
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%2064%20%28USA%2C%20Europe%29%20%28R3%29.zip",
-    "size": 15257
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%2064C%20%28USA%2C%20Europe%29.zip",
-    "size": 14950
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%2064GS%20%28Europe%29.zip",
-    "size": 14643
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%20Educator%2064%20-%20CBM%204064%20-%20PET%2064%20%28USA%2C%20Europe%29.zip",
-    "size": 15360
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%20SX-64%20%28USA%2C%20Europe%29.zip",
-    "size": 15257
-  },
-  {
-    "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%20VIP%2064%20%28Sweden%29.zip",
-    "size": 15155
-  }
-]
+[{"name": "128er Quickload (USA, Europe) (Program)", "size": 2048, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/128er%20Quickload%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "256K-EPROM-System (Germany) (v5) (Program)", "size": 4812, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/256K-EPROM-System%20%28Germany%29%20%28v5%29%20%28Program%29.zip"},
+{"name": "64 Doctor (USA, Europe) (Program)", "size": 4915, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/64%20Doctor%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "64MON (USA, Europe) (v1.03) (Program)", "size": 6041, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/64MON%20%28USA%2C%20Europe%29%20%28v1.03%29%20%28Program%29.zip"},
+{"name": "Action Cartridge Plus (Germany) (v6.0) (Program)", "size": 25497, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Action%20Cartridge%20Plus%20%28Germany%29%20%28v6.0%29%20%28Program%29.zip"},
+{"name": "Action Replay Professional (Europe) (v3) (Program) (Unl)", "size": 11878, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Action%20Replay%20Professional%20%28Europe%29%20%28v3%29%20%28Program%29%20%28Unl%29.zip"},
+{"name": "Action Replay Professional (Europe) (v4.2) (Program) (Unl)", "size": 24166, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Action%20Replay%20Professional%20%28Europe%29%20%28v4.2%29%20%28Program%29%20%28Unl%29.zip"},
+{"name": "Action Replay Professional (Europe) (v6.0) (Program) (Unl)", "size": 25190, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Action%20Replay%20Professional%20%28Europe%29%20%28v6.0%29%20%28Program%29%20%28Unl%29.zip"},
+{"name": "Action Replay Professional (USA) (v5.0) (Program) (Unl)", "size": 24985, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Action%20Replay%20Professional%20%28USA%29%20%28v5.0%29%20%28Program%29%20%28Unl%29.zip"},
+{"name": "Activision Decathlon, The (USA, Europe)", "size": 12083, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Activision%20Decathlon%2C%20The%20%28USA%2C%20Europe%29.zip"},
+{"name": "Adventure 1 - The Mutant Spiders (USA, Europe)", "size": 11571, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Adventure%201%20-%20The%20Mutant%20Spiders%20%28USA%2C%20Europe%29.zip"},
+{"name": "Adventure 3 - The Fourth Sarcophagus (USA, Europe)", "size": 11571, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Adventure%203%20-%20The%20Fourth%20Sarcophagus%20%28USA%2C%20Europe%29.zip"},
+{"name": "Adventure Creator (USA, Europe)", "size": 12288, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Adventure%20Creator%20%28USA%2C%20Europe%29.zip"},
+{"name": "Aegean Voyage (USA, Europe)", "size": 12800, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Aegean%20Voyage%20%28USA%2C%20Europe%29.zip"},
+{"name": "After the War (USA, Europe)", "size": 66457, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/After%20the%20War%20%28USA%2C%20Europe%29.zip"},
+{"name": "Alf in the Color Caves (USA, Europe)", "size": 9318, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Alf%20in%20the%20Color%20Caves%20%28USA%2C%20Europe%29.zip"},
+{"name": "Alien Sidestep (USA, Europe)", "size": 3072, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Alien%20Sidestep%20%28USA%2C%20Europe%29.zip"},
+{"name": "Alpha Build (USA, Europe)", "size": 5427, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Alpha%20Build%20%28USA%2C%20Europe%29.zip"},
+{"name": "Alphabet Zoo (USA, Europe)", "size": 14336, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Alphabet%20Zoo%20%28USA%2C%20Europe%29.zip"},
+{"name": "Arnie Armchair's Howzat Cricket Game (USA, Europe)", "size": 9318, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Arnie%20Armchair%27s%20Howzat%20Cricket%20Game%20%28USA%2C%20Europe%29.zip"},
+{"name": "Astroblitz (USA, Europe)", "size": 5734, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Astroblitz%20%28USA%2C%20Europe%29.zip"},
+{"name": "Attack of the Mutant Camels (USA)", "size": 5734, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Attack%20of%20the%20Mutant%20Camels%20%28USA%29.zip"},
+{"name": "Avenger (Japan) (v02) (MAX)", "size": 5632, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Avenger%20%28Japan%29%20%28v02%29%20%28MAX%29.zip"},
+{"name": "Avenger (USA, Europe) (v03) (MAX)", "size": 5632, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Avenger%20%28USA%2C%20Europe%29%20%28v03%29%20%28MAX%29.zip"},
+{"name": "BC's Quest for Tires (USA, Europe)", "size": 10854, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/BC%27s%20Quest%20for%20Tires%20%28USA%2C%20Europe%29.zip"},
+{"name": "BadLands (USA, Europe)", "size": 51712, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/BadLands%20%28USA%2C%20Europe%29.zip"},
+{"name": "Batman - The Movie (Europe)", "size": 82124, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Batman%20-%20The%20Movie%20%28Europe%29.zip"},
+{"name": "Battle Command (Europe)", "size": 81715, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Battle%20Command%20%28Europe%29.zip"},
+{"name": "Battlezone (USA, Europe)", "size": 10752, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Battlezone%20%28USA%2C%20Europe%29.zip"},
+{"name": "Beamrider (USA, Europe)", "size": 10956, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Beamrider%20%28USA%2C%20Europe%29.zip"},
+{"name": "Big Bird's Funhouse (USA, Europe)", "size": 14950, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Big%20Bird%27s%20Funhouse%20%28USA%2C%20Europe%29.zip"},
+{"name": "Big Bird's Special Delivery (USA, Europe)", "size": 10444, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Big%20Bird%27s%20Special%20Delivery%20%28USA%2C%20Europe%29.zip"},
+{"name": "Black Box (USA, Europe) (v2.0) (Program)", "size": 10854, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Black%20Box%20%28USA%2C%20Europe%29%20%28v2.0%29%20%28Program%29.zip"},
+{"name": "Blueprint (USA, Europe)", "size": 11980, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Blueprint%20%28USA%2C%20Europe%29.zip"},
+{"name": "Bowling (Japan) (MAX)", "size": 9318, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Bowling%20%28Japan%29%20%28MAX%29.zip"},
+{"name": "Bridge 64 (USA, Europe)", "size": 6758, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Bridge%2064%20%28USA%2C%20Europe%29.zip"},
+{"name": "Bubble Burst (USA, Europe)", "size": 9625, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Bubble%20Burst%20%28USA%2C%20Europe%29.zip"},
+{"name": "Buck Rogers - Planet of Zoom (USA, Europe)", "size": 11161, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Buck%20Rogers%20-%20Planet%20of%20Zoom%20%28USA%2C%20Europe%29.zip"},
+{"name": "Bug Crusher (USA, Europe)", "size": 3174, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Bug%20Crusher%20%28USA%2C%20Europe%29.zip"},
+{"name": "C-64 Diagnostic (USA, Europe) (Rev 586220) (Program)", "size": 4300, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/C-64%20Diagnostic%20%28USA%2C%20Europe%29%20%28Rev%20586220%29%20%28Program%29.zip"},
+{"name": "C-64 Import Test Diag (USA, Europe) (Program)", "size": 4710, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/C-64%20Import%20Test%20Diag%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "C64-FORTH (USA, Europe) (Program)", "size": 8601, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/C64-FORTH%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "COMAL 80 (USA, Europe) (Program)", "size": 127488, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/COMAL%2080%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Calc Result - The Spread Sheet - Advanced (USA, Europe) (Program)", "size": 38604, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Calc%20Result%20-%20The%20Spread%20Sheet%20-%20Advanced%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Calc Result - The Spread Sheet - Easy (USA, Europe) (Program) (Alt)", "size": 17100, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Calc%20Result%20-%20The%20Spread%20Sheet%20-%20Easy%20%28USA%2C%20Europe%29%20%28Program%29%20%28Alt%29.zip"},
+{"name": "Calc Result - The Spread Sheet - Easy (USA, Europe) (Program)", "size": 17510, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Calc%20Result%20-%20The%20Spread%20Sheet%20-%20Easy%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Capture 2 (USA, Europe) (Program)", "size": 6656, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Capture%202%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Castle Hassle (USA, Europe)", "size": 12697, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Castle%20Hassle%20%28USA%2C%20Europe%29.zip"},
+{"name": "Centipede (USA, Europe)", "size": 11878, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Centipede%20%28USA%2C%20Europe%29.zip"},
+{"name": "Chase H.Q. II - Special Criminal Investigation (Europe)", "size": 133939, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Chase%20H.Q.%20II%20-%20Special%20Criminal%20Investigation%20%28Europe%29.zip"},
+{"name": "Checkers (USA, Europe)", "size": 11878, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Checkers%20%28USA%2C%20Europe%29.zip"},
+{"name": "Choplifter! (USA, Europe)", "size": 11366, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Choplifter%21%20%28USA%2C%20Europe%29.zip"},
+{"name": "Close Encounters of the Worst Kind (USA, Europe)", "size": 2969, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Close%20Encounters%20of%20the%20Worst%20Kind%20%28USA%2C%20Europe%29.zip"},
+{"name": "Clowns (Japan) (v01) (MAX)", "size": 5632, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Clowns%20%28Japan%29%20%28v01%29%20%28MAX%29.zip"},
+{"name": "Clowns (World) (En,Ja) (v02) (MAX)", "size": 11161, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Clowns%20%28World%29%20%28En%2CJa%29%20%28v02%29%20%28MAX%29.zip"},
+{"name": "Coccinelle cherche dessinateur (France)", "size": 5836, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Coccinelle%20cherche%20dessinateur%20%28France%29.zip"},
+{"name": "Coco Notes (USA, Europe)", "size": 10649, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Coco%20Notes%20%28USA%2C%20Europe%29.zip"},
+{"name": "Colossus Chess + Silicon Syborgs + International Football (USA, Europe) (Super Games)", "size": 43417, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Colossus%20Chess%20%2B%20Silicon%20Syborgs%20%2B%20International%20Football%20%28USA%2C%20Europe%29%20%28Super%20Games%29.zip"},
+{"name": "Commodore 64 Diagnostic (USA, Europe) (Program)", "size": 2252, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Commodore%2064%20Diagnostic%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Congo Bongo (USA, Europe)", "size": 11571, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Congo%20Bongo%20%28USA%2C%20Europe%29.zip"},
+{"name": "Conrad Disk Booster (Germany) (Program)", "size": 4198, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Conrad%20Disk%20Booster%20%28Germany%29%20%28Program%29.zip"},
+{"name": "Cosmic Life (USA, Europe)", "size": 5017, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Cosmic%20Life%20%28USA%2C%20Europe%29.zip"},
+{"name": "Crisis Mountain (USA, Europe)", "size": 9830, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Crisis%20Mountain%20%28USA%2C%20Europe%29.zip"},
+{"name": "Crystal Castles (USA, Europe) (Proto)", "size": 12902, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Crystal%20Castles%20%28USA%2C%20Europe%29%20%28Proto%29.zip"},
+{"name": "Cyberball (USA, Europe)", "size": 65126, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Cyberball%20%28USA%2C%20Europe%29.zip"},
+{"name": "Dance Fantasy (USA, Europe)", "size": 7065, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Dance%20Fantasy%20%28USA%2C%20Europe%29.zip"},
+{"name": "Dancing Feats (USA, Europe)", "size": 5222, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Dancing%20Feats%20%28USA%2C%20Europe%29.zip"},
+{"name": "Defender (USA, Europe)", "size": 11161, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Defender%20%28USA%2C%20Europe%29.zip"},
+{"name": "Dela S-4-Modul (USA, Europe) (Program)", "size": 2969, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Dela%20S-4-Modul%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Delta Drawing (USA, Europe) (Program)", "size": 10137, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Delta%20Drawing%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Designer's Pencil, The (USA, Europe) (Program)", "size": 12083, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Designer%27s%20Pencil%2C%20The%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Diamond Mine (USA, Europe)", "size": 12185, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Diamond%20Mine%20%28USA%2C%20Europe%29.zip"},
+{"name": "Diary 64 (USA, Europe) (Program)", "size": 5222, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Diary%2064%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Dig Dug (USA, Europe)", "size": 12492, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Dig%20Dug%20%28USA%2C%20Europe%29.zip"},
+{"name": "Doc'64 (USA, Europe) (v2.2) (Program)", "size": 2764, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Doc%2764%20%28USA%2C%20Europe%29%20%28v2.2%29%20%28Program%29.zip"},
+{"name": "Donkey Kong (USA, Europe)", "size": 11468, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Donkey%20Kong%20%28USA%2C%20Europe%29.zip"},
+{"name": "Dot Gobbler (USA, Europe) (Alt)", "size": 3072, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Dot%20Gobbler%20%28USA%2C%20Europe%29%20%28Alt%29.zip"},
+{"name": "Dot Gobbler (USA, Europe)", "size": 3276, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Dot%20Gobbler%20%28USA%2C%20Europe%29.zip"},
+{"name": "Double Dragon (USA, Europe) (HES)", "size": 115507, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Double%20Dragon%20%28USA%2C%20Europe%29%20%28HES%29.zip"},
+{"name": "Double Dragon (USA, Europe) (Ocean)", "size": 89907, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Double%20Dragon%20%28USA%2C%20Europe%29%20%28Ocean%29.zip"},
+{"name": "Dragonsden (USA, Europe)", "size": 11571, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Dragonsden%20%28USA%2C%20Europe%29.zip"},
+{"name": "Ducks Ahoy! (USA, Europe)", "size": 11264, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Ducks%20Ahoy%21%20%28USA%2C%20Europe%29.zip"},
+{"name": "Electronic Mailbox-64 (USA, Europe) (Program)", "size": 5427, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Electronic%20Mailbox-64%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Epyx Fast Load Cartridge (USA, Europe) (Program)", "size": 6348, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Epyx%20Fast%20Load%20Cartridge%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Ernie's Magic Shapes (USA, Europe)", "size": 9932, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Ernie%27s%20Magic%20Shapes%20%28USA%2C%20Europe%29.zip"},
+{"name": "Espial (USA, Europe)", "size": 8704, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Espial%20%28USA%2C%20Europe%29.zip"},
+{"name": "ExBASIC Level II (USA, Europe) (v64.1) (Program)", "size": 6963, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/ExBASIC%20Level%20II%20%28USA%2C%20Europe%29%20%28v64.1%29%20%28Program%29.zip"},
+{"name": "Expert, The (USA, Europe) (Program)", "size": 489164, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Expert%2C%20The%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Express Cartridge (USA, Europe) (Program)", "size": 25292, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Express%20Cartridge%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Facemaker (USA, Europe)", "size": 4812, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Facemaker%20%28USA%2C%20Europe%29.zip"},
+{"name": "Falconian Invaders (USA, Europe)", "size": 2662, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Falconian%20Invaders%20%28USA%2C%20Europe%29.zip"},
+{"name": "Fiendish Freddy's Big Top o' Fun + International Soccer + Flimbo's Quest + Klax (Europe) (C 64 Games System)", "size": 398131, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Fiendish%20Freddy%27s%20Big%20Top%20o%27%20Fun%20%2B%20International%20Soccer%20%2B%20Flimbo%27s%20Quest%20%2B%20Klax%20%28Europe%29%20%28C%2064%20Games%20System%29.zip"},
+{"name": "Final Cartridge III, The (USA, Europe) (Dec 88) (Program)", "size": 44236, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Final%20Cartridge%20III%2C%20The%20%28USA%2C%20Europe%29%20%28Dec%2088%29%20%28Program%29.zip"},
+{"name": "Final Cartridge III, The (USA, Europe) (May 88) (Program)", "size": 44134, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Final%20Cartridge%20III%2C%20The%20%28USA%2C%20Europe%29%20%28May%2088%29%20%28Program%29.zip"},
+{"name": "Final Cartridge III, The (USA, Europe) (Nov 87) (Program)", "size": 44134, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Final%20Cartridge%20III%2C%20The%20%28USA%2C%20Europe%29%20%28Nov%2087%29%20%28Program%29.zip"},
+{"name": "Final Cartridge III, The (USA, Europe) (Sep 87) (Program)", "size": 43724, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Final%20Cartridge%20III%2C%20The%20%28USA%2C%20Europe%29%20%28Sep%2087%29%20%28Program%29.zip"},
+{"name": "Final Cartridge, The (USA, Europe) (Program)", "size": 12185, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Final%20Cartridge%2C%20The%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Financial Advisor, The (USA, Europe) (Program)", "size": 5939, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Financial%20Advisor%2C%20The%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Format- und Hardcopymodul (Germany) (Program)", "size": 5120, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Format-%20und%20Hardcopymodul%20%28Germany%29%20%28Program%29.zip"},
+{"name": "Fraction Fever (USA, Europe)", "size": 4198, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Fraction%20Fever%20%28USA%2C%20Europe%29.zip"},
+{"name": "Frog Master (USA, Europe)", "size": 6758, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Frog%20Master%20%28USA%2C%20Europe%29.zip"},
+{"name": "Frogger (USA, Europe)", "size": 6758, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Frogger%20%28USA%2C%20Europe%29.zip"},
+{"name": "Frogger + River Raid + Activision Decathlon, The + Beamrider (USA, Europe) (Arcade Classic Pak)", "size": 37990, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Frogger%20%2B%20River%20Raid%20%2B%20Activision%20Decathlon%2C%20The%20%2B%20Beamrider%20%28USA%2C%20Europe%29%20%28Arcade%20Classic%20Pak%29.zip"},
+{"name": "Frogger II - Threeedeep! (USA, Europe)", "size": 11468, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Frogger%20II%20-%20Threeedeep%21%20%28USA%2C%20Europe%29.zip"},
+{"name": "Galaxian (USA, Europe)", "size": 6348, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Galaxian%20%28USA%2C%20Europe%29.zip"},
+{"name": "Galaxions + Munchman (USA, Europe)", "size": 13414, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Galaxions%20%2B%20Munchman%20%28USA%2C%20Europe%29.zip"},
+{"name": "Gateway to Apshai (USA, Europe)", "size": 12083, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Gateway%20to%20Apshai%20%28USA%2C%20Europe%29.zip"},
+{"name": "Ghostbusters (USA, Europe)", "size": 30617, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Ghostbusters%20%28USA%2C%20Europe%29.zip"},
+{"name": "Gorf (USA, Europe)", "size": 13414, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Gorf%20%28USA%2C%20Europe%29.zip"},
+{"name": "Graf 64 (USA, Europe) (Program)", "size": 5324, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Graf%2064%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Gridrunner (USA, Europe)", "size": 3072, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Gridrunner%20%28USA%2C%20Europe%29.zip"},
+{"name": "Gridrunner II - Attack of the Mutant Camels (USA)", "size": 5734, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Gridrunner%20II%20-%20Attack%20of%20the%20Mutant%20Camels%20%28USA%29.zip"},
+{"name": "Gyruss (USA, Europe)", "size": 13312, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Gyruss%20%28USA%2C%20Europe%29.zip"},
+{"name": "H.E.R.O. - Helicopter Emergency Rescue Operation (USA, Europe)", "size": 10240, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/H.E.R.O.%20-%20Helicopter%20Emergency%20Rescue%20Operation%20%28USA%2C%20Europe%29.zip"},
+{"name": "HES Mon 64 (USA, Europe) (Program)", "size": 3584, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/HES%20Mon%2064%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "HES Mon 64 (USA, Europe) (Proto) (Program)", "size": 3481, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/HES%20Mon%2064%20%28USA%2C%20Europe%29%20%28Proto%29%20%28Program%29.zip"},
+{"name": "HES Writer 64 (USA, Europe) (Program)", "size": 5427, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/HES%20Writer%2064%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Halftime Battlin' Bands (USA, Europe)", "size": 11980, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Halftime%20Battlin%27%20Bands%20%28USA%2C%20Europe%29.zip"},
+{"name": "Happy-Packer (Germany) (Program)", "size": 5529, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Happy-Packer%20%28Germany%29%20%28Program%29.zip"},
+{"name": "Hop Along Counting (USA, Europe)", "size": 6246, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Hop%20Along%20Counting%20%28USA%2C%20Europe%29.zip"},
+{"name": "Human Skeleton Tutorial (USA)", "size": 6246, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Human%20Skeleton%20Tutorial%20%28USA%29.zip"},
+{"name": "Hypra-Disk-Modul II (Germany) (Program)", "size": 2252, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Hypra-Disk-Modul%20II%20%28Germany%29%20%28Program%29.zip"},
+{"name": "IEEE-488 (USA, Europe) (Program)", "size": 3584, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/IEEE-488%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "International Football (USA, Europe)", "size": 11059, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/International%20Football%20%28USA%2C%20Europe%29.zip"},
+{"name": "Jack Attack (USA, Europe)", "size": 9216, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Jack%20Attack%20%28USA%2C%20Europe%29.zip"},
+{"name": "James Bond 007 (USA, Europe)", "size": 10137, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/James%20Bond%20007%20%28USA%2C%20Europe%29.zip"},
+{"name": "Jawbreaker (USA, Europe)", "size": 5427, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Jawbreaker%20%28USA%2C%20Europe%29.zip"},
+{"name": "Juice! (USA, Europe)", "size": 9318, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Juice%21%20%28USA%2C%20Europe%29.zip"},
+{"name": "Jukebox (USA, Europe)", "size": 6246, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Jukebox%20%28USA%2C%20Europe%29.zip"},
+{"name": "Jumpman Junior (USA, Europe)", "size": 11571, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Jumpman%20Junior%20%28USA%2C%20Europe%29.zip"},
+{"name": "Jungle Hunt (USA, Europe)", "size": 12595, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Jungle%20Hunt%20%28USA%2C%20Europe%29.zip"},
+{"name": "Jupiter Lander (World) (v02) (MAX)", "size": 4915, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Jupiter%20Lander%20%28World%29%20%28v02%29%20%28MAX%29.zip"},
+{"name": "Kickman (World) (v03) (MAX)", "size": 5427, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Kickman%20%28World%29%20%28v03%29%20%28MAX%29.zip"},
+{"name": "Kids on Keys (USA, Europe)", "size": 5529, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Kids%20on%20Keys%20%28USA%2C%20Europe%29.zip"},
+{"name": "Kindercomp (USA, Europe)", "size": 5120, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Kindercomp%20%28USA%2C%20Europe%29.zip"},
+{"name": "Kung-Fu Master (USA, Europe)", "size": 31129, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Kung-Fu%20Master%20%28USA%2C%20Europe%29.zip"},
+{"name": "Laser Cycles (USA, Europe)", "size": 1945, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Laser%20Cycles%20%28USA%2C%20Europe%29.zip"},
+{"name": "Lazarian (USA, Europe)", "size": 8908, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Lazarian%20%28USA%2C%20Europe%29.zip"},
+{"name": "Lazer Zone (USA, Europe)", "size": 5324, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Lazer%20Zone%20%28USA%2C%20Europe%29.zip"},
+{"name": "LeMans (USA, Europe) (MAX)", "size": 5836, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/LeMans%20%28USA%2C%20Europe%29%20%28MAX%29.zip"},
+{"name": "Leader Board - Pro Golf Simulator (USA, Europe)", "size": 30105, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Leader%20Board%20-%20Pro%20Golf%20Simulator%20%28USA%2C%20Europe%29.zip"},
+{"name": "Learning with Leeper (USA, Europe)", "size": 9728, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Learning%20with%20Leeper%20%28USA%2C%20Europe%29.zip"},
+{"name": "Linking Logic (USA, Europe)", "size": 9728, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Linking%20Logic%20%28USA%2C%20Europe%29.zip"},
+{"name": "Lode Runner (USA, Europe)", "size": 10649, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Lode%20Runner%20%28USA%2C%20Europe%29.zip"},
+{"name": "Logic Levels (USA, Europe)", "size": 9830, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Logic%20Levels%20%28USA%2C%20Europe%29.zip"},
+{"name": "Lunar Leeper (USA, Europe)", "size": 9420, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Lunar%20Leeper%20%28USA%2C%20Europe%29.zip"},
+{"name": "MAX BASIC (Japan) (MAX)", "size": 13209, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/MAX%20BASIC%20%28Japan%29%20%28MAX%29.zip"},
+{"name": "MINI BASIC I (Japan) (MAX)", "size": 6963, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/MINI%20BASIC%20I%20%28Japan%29%20%28MAX%29.zip"},
+{"name": "Magic Desk I - Type and File (USA, Europe) (CCS) (Program)", "size": 13312, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Magic%20Desk%20I%20-%20Type%20and%20File%20%28USA%2C%20Europe%29%20%28CCS%29%20%28Program%29.zip"},
+{"name": "Magic Desk I - Type and File (USA, Europe) (VICE) (Program)", "size": 13312, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Magic%20Desk%20I%20-%20Type%20and%20File%20%28USA%2C%20Europe%29%20%28VICE%29%20%28Program%29.zip"},
+{"name": "Magic Formel (USA, Europe) (v1.2) (Program)", "size": 41472, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Magic%20Formel%20%28USA%2C%20Europe%29%20%28v1.2%29%20%28Program%29.zip"},
+{"name": "Magic Voice (USA, Europe) (Program)", "size": 16076, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Magic%20Voice%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Mario's Brewery (USA, Europe)", "size": 2560, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Mario%27s%20Brewery%20%28USA%2C%20Europe%29.zip"},
+{"name": "MasterType (USA, Europe)", "size": 11776, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/MasterType%20%28USA%2C%20Europe%29.zip"},
+{"name": "Math Mileage (USA, Europe)", "size": 6963, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Math%20Mileage%20%28USA%2C%20Europe%29.zip"},
+{"name": "Maze Man (USA, Europe)", "size": 3276, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Maze%20Man%20%28USA%2C%20Europe%29.zip"},
+{"name": "Maze Master (USA, Europe)", "size": 10444, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Maze%20Master%20%28USA%2C%20Europe%29.zip"},
+{"name": "Memory Manor (USA, Europe)", "size": 5324, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Memory%20Manor%20%28USA%2C%20Europe%29.zip"},
+{"name": "MicroProse Soccer + Rick Dangerous + Stunt Car Racer (Europe) (Power Play)", "size": 114483, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/MicroProse%20Soccer%20%2B%20Rick%20Dangerous%20%2B%20Stunt%20Car%20Racer%20%28Europe%29%20%28Power%20Play%29.zip"},
+{"name": "Miner 2049er Starring Bounty Bob (USA, Europe)", "size": 11161, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Miner%202049er%20Starring%20Bounty%20Bob%20%28USA%2C%20Europe%29.zip"},
+{"name": "Minnesota Fat's Pool Challenger (USA)", "size": 5529, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Minnesota%20Fat%27s%20Pool%20Challenger%20%28USA%29.zip"},
+{"name": "Mole Attack (Japan) (v01) (MAX)", "size": 3481, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Mole%20Attack%20%28Japan%29%20%28v01%29%20%28MAX%29.zip"},
+{"name": "Money Wars (Japan) (v01) (MAX)", "size": 5222, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Money%20Wars%20%28Japan%29%20%28v01%29%20%28MAX%29.zip"},
+{"name": "Moon Patrol (USA, Europe)", "size": 12083, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Moon%20Patrol%20%28USA%2C%20Europe%29.zip"},
+{"name": "Moondust (USA, Europe)", "size": 6348, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Moondust%20%28USA%2C%20Europe%29.zip"},
+{"name": "Motor Mania (USA, Europe)", "size": 10342, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Motor%20Mania%20%28USA%2C%20Europe%29.zip"},
+{"name": "Mountain King (USA, Europe)", "size": 9113, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Mountain%20King%20%28USA%2C%20Europe%29.zip"},
+{"name": "Movie Musical Madness Starring the Jazz Scats (USA, Europe)", "size": 10240, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Movie%20Musical%20Madness%20Starring%20the%20Jazz%20Scats%20%28USA%2C%20Europe%29.zip"},
+{"name": "Mr. Cool (USA, Europe)", "size": 5324, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Mr.%20Cool%20%28USA%2C%20Europe%29.zip"},
+{"name": "Mr. TNT (USA, Europe)", "size": 5836, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Mr.%20TNT%20%28USA%2C%20Europe%29.zip"},
+{"name": "Ms. Pac-Man (USA, Europe)", "size": 23244, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Ms.%20Pac-Man%20%28USA%2C%20Europe%29.zip"},
+{"name": "Muistio 64 (Finland) (Program)", "size": 5222, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Muistio%2064%20%28Finland%29%20%28Program%29.zip"},
+{"name": "Music Composer (World) (MAX)", "size": 6553, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Music%20Composer%20%28World%29%20%28MAX%29.zip"},
+{"name": "Music Machine (USA, Europe) (MAX)", "size": 2969, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Music%20Machine%20%28USA%2C%20Europe%29%20%28MAX%29.zip"},
+{"name": "Myth (Europe)", "size": 204083, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Myth%20%28Europe%29.zip"},
+{"name": "Narco Police (USA, Europe)", "size": 74956, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Narco%20Police%20%28USA%2C%20Europe%29.zip"},
+{"name": "Navy SEALs (Europe)", "size": 83251, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Navy%20SEALs%20%28Europe%29.zip"},
+{"name": "Ninja Remix (USA, Europe)", "size": 323276, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Ninja%20Remix%20%28USA%2C%20Europe%29.zip"},
+{"name": "Nordic Power Action Cartridge (USA, Europe) (v7.2) (Program)", "size": 25804, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Nordic%20Power%20Action%20Cartridge%20%28USA%2C%20Europe%29%20%28v7.2%29%20%28Program%29.zip"},
+{"name": "Nova Blast (USA, Europe)", "size": 14028, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Nova%20Blast%20%28USA%2C%20Europe%29.zip"},
+{"name": "Number Nabber, Shape Grabber (USA, Europe)", "size": 5529, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Number%20Nabber%2C%20Shape%20Grabber%20%28USA%2C%20Europe%29.zip"},
+{"name": "Number Tumblers (USA, Europe)", "size": 6758, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Number%20Tumblers%20%28USA%2C%20Europe%29.zip"},
+{"name": "Oil's Well (USA, Europe)", "size": 7680, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Oil%27s%20Well%20%28USA%2C%20Europe%29.zip"},
+{"name": "Omega Race (Japan) (v02) (MAX)", "size": 5324, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Omega%20Race%20%28Japan%29%20%28v02%29%20%28MAX%29.zip"},
+{"name": "Omega Race (USA, Europe)", "size": 5632, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Omega%20Race%20%28USA%2C%20Europe%29.zip"},
+{"name": "PS-64 (Finland) (v2.00) (Program)", "size": 3993, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/PS-64%20%28Finland%29%20%28v2.00%29%20%28Program%29.zip"},
+{"name": "Pac-Man (USA, Europe)", "size": 6656, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Pac-Man%20%28USA%2C%20Europe%29.zip"},
+{"name": "Pagefox (Finland) (Program)", "size": 31027, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Pagefox%20%28Finland%29%20%28Program%29.zip"},
+{"name": "Paint Brush (USA, Europe)", "size": 6656, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Paint%20Brush%20%28USA%2C%20Europe%29.zip"},
+{"name": "Pancho (France)", "size": 7987, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Pancho%20%28France%29.zip"},
+{"name": "Pang (Europe)", "size": 104755, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Pang%20%28Europe%29.zip"},
+{"name": "Park Patrol (USA, Europe)", "size": 18944, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Park%20Patrol%20%28USA%2C%20Europe%29.zip"},
+{"name": "Pastfinder (USA, Europe)", "size": 15564, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Pastfinder%20%28USA%2C%20Europe%29.zip"},
+{"name": "Peanut Butter Panic (USA, Europe)", "size": 6656, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Peanut%20Butter%20Panic%20%28USA%2C%20Europe%29.zip"},
+{"name": "Pinball Spectacular (World) (MAX)", "size": 7475, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Pinball%20Spectacular%20%28World%29%20%28MAX%29.zip"},
+{"name": "Pipes (USA, Europe)", "size": 5734, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Pipes%20%28USA%2C%20Europe%29.zip"},
+{"name": "Pit, The (USA, Europe)", "size": 5529, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Pit%2C%20The%20%28USA%2C%20Europe%29.zip"},
+{"name": "Pitfall II - Lost Caverns (USA, Europe)", "size": 9728, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Pitfall%20II%20-%20Lost%20Caverns%20%28USA%2C%20Europe%29.zip"},
+{"name": "Pitfall! (USA, Europe)", "size": 6144, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Pitfall%21%20%28USA%2C%20Europe%29.zip"},
+{"name": "Pitstop (USA, Europe)", "size": 12390, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Pitstop%20%28USA%2C%20Europe%29.zip"},
+{"name": "Pole Position (USA, Europe)", "size": 11161, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Pole%20Position%20%28USA%2C%20Europe%29.zip"},
+{"name": "Popeye (USA, Europe)", "size": 13516, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Popeye%20%28USA%2C%20Europe%29.zip"},
+{"name": "Power Cartridge (USA, Europe) (Program)", "size": 13004, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Power%20Cartridge%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Princess and the Frog (USA, Europe)", "size": 12595, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Princess%20and%20the%20Frog%20%28USA%2C%20Europe%29.zip"},
+{"name": "Professional Skateboard Simulator + Fast Food + Pro Tennis Simulator (USA, Europe) (Fun Play)", "size": 110284, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Professional%20Skateboard%20Simulator%20%2B%20Fast%20Food%20%2B%20Pro%20Tennis%20Simulator%20%28USA%2C%20Europe%29%20%28Fun%20Play%29.zip"},
+{"name": "Q-bert (USA, Europe)", "size": 10547, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Q-bert%20%28USA%2C%20Europe%29.zip"},
+{"name": "REX-Ramfloppy (USA, Europe) (v4.0) (Program)", "size": 3891, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/REX-Ramfloppy%20%28USA%2C%20Europe%29%20%28v4.0%29%20%28Program%29.zip"},
+{"name": "Rack 'em Up! (USA, Europe)", "size": 10444, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Rack%20%27em%20Up%21%20%28USA%2C%20Europe%29.zip"},
+{"name": "Radar Rat Race (Japan) (v02) (MAX) (Alt)", "size": 5836, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Radar%20Rat%20Race%20%28Japan%29%20%28v02%29%20%28MAX%29%20%28Alt%29.zip"},
+{"name": "Radar Rat Race (Japan) (v02) (MAX)", "size": 5427, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Radar%20Rat%20Race%20%28Japan%29%20%28v02%29%20%28MAX%29.zip"},
+{"name": "Ranch (USA, Europe)", "size": 11161, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Ranch%20%28USA%2C%20Europe%29.zip"},
+{"name": "Rechenlowe, Der - Fit in Addition und Subtraktion - 2.-3. Schuljahr (Germany)", "size": 11571, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Rechenlowe%2C%20Der%20-%20Fit%20in%20Addition%20und%20Subtraktion%20-%202.-3.%20Schuljahr%20%28Germany%29.zip"},
+{"name": "Rechenlowe, Der - Fit in Addition und Subtraktion - 3.-4. Schuljahr (Germany)", "size": 10240, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Rechenlowe%2C%20Der%20-%20Fit%20in%20Addition%20und%20Subtraktion%20-%203.-4.%20Schuljahr%20%28Germany%29.zip"},
+{"name": "Rechenlowe, Der - Fit in Geometrie - 3.-4. Schuljahr (Germany)", "size": 11059, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Rechenlowe%2C%20Der%20-%20Fit%20in%20Geometrie%20-%203.-4.%20Schuljahr%20%28Germany%29.zip"},
+{"name": "Rechenlowe, Der - Fit in Mathematik - 1. Schuljahr (Germany)", "size": 11776, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Rechenlowe%2C%20Der%20-%20Fit%20in%20Mathematik%20-%201.%20Schuljahr%20%28Germany%29.zip"},
+{"name": "Rechenlowe, Der - Fit in Multiplikation und Division - 2.-3. Schuljahr (Germany)", "size": 11571, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Rechenlowe%2C%20Der%20-%20Fit%20in%20Multiplikation%20und%20Division%20-%202.-3.%20Schuljahr%20%28Germany%29.zip"},
+{"name": "Rechenlowe, Der - Fit in Multiplikation und Division - 3.-4. Schuljahr (Germany)", "size": 10752, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Rechenlowe%2C%20Der%20-%20Fit%20in%20Multiplikation%20und%20Division%20-%203.-4.%20Schuljahr%20%28Germany%29.zip"},
+{"name": "Rechtschreiblowe, Der - Fit in Rechtschreibung - 3.-4. Schuljahr (Germany)", "size": 36556, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Rechtschreiblowe%2C%20Der%20-%20Fit%20in%20Rechtschreibung%20-%203.-4.%20Schuljahr%20%28Germany%29.zip"},
+{"name": "Retro Ball (USA, Europe)", "size": 3379, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Retro%20Ball%20%28USA%2C%20Europe%29.zip"},
+{"name": "River Raid (USA, Europe)", "size": 8601, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/River%20Raid%20%28USA%2C%20Europe%29.zip"},
+{"name": "Road Race (Japan) (v02) (MAX)", "size": 3788, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Road%20Race%20%28Japan%29%20%28v02%29%20%28MAX%29.zip"},
+{"name": "RoboCop 2 (Europe)", "size": 102195, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/RoboCop%202%20%28Europe%29.zip"},
+{"name": "RoboCop 3 (Europe)", "size": 71782, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/RoboCop%203%20%28Europe%29.zip"},
+{"name": "Robotron - 2084 (USA, Europe)", "size": 8908, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Robotron%20-%202084%20%28USA%2C%20Europe%29.zip"},
+{"name": "Rootin' Tootin' (USA, Europe)", "size": 8601, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Rootin%27%20Tootin%27%20%28USA%2C%20Europe%29.zip"},
+{"name": "Sales Cartridge (USA, Europe)", "size": 9932, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Sales%20Cartridge%20%28USA%2C%20Europe%29.zip"},
+{"name": "Sammy Lightfoot (USA, Europe)", "size": 10752, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Sammy%20Lightfoot%20%28USA%2C%20Europe%29.zip"},
+{"name": "Satan (USA, Europe)", "size": 63180, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Satan%20%28USA%2C%20Europe%29.zip"},
+{"name": "Save New York (USA, Europe)", "size": 6656, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Save%20New%20York%20%28USA%2C%20Europe%29.zip"},
+{"name": "Sea Speller (USA, Europe)", "size": 6144, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Sea%20Speller%20%28USA%2C%20Europe%29.zip"},
+{"name": "Sea Wolf (USA, Europe) (MAX)", "size": 3993, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Sea%20Wolf%20%28USA%2C%20Europe%29%20%28MAX%29.zip"},
+{"name": "Seafox (USA, Europe)", "size": 9728, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Seafox%20%28USA%2C%20Europe%29.zip"},
+{"name": "Seahorse Hide'n Seek (USA, Europe)", "size": 10956, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Seahorse%20Hide%27n%20Seek%20%28USA%2C%20Europe%29.zip"},
+{"name": "Serpentine (USA, Europe)", "size": 8806, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Serpentine%20%28USA%2C%20Europe%29.zip"},
+{"name": "Sesame Street - Letter-Go-Round (USA, Europe)", "size": 13004, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Sesame%20Street%20-%20Letter-Go-Round%20%28USA%2C%20Europe%29.zip"},
+{"name": "Shadow of the Beast (Europe)", "size": 141926, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Shadow%20of%20the%20Beast%20%28Europe%29.zip"},
+{"name": "Simons' BASIC (USA, Europe) (Program)", "size": 11264, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Simons%27%20BASIC%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Solar Fox (USA, Europe)", "size": 12185, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Solar%20Fox%20%28USA%2C%20Europe%29.zip"},
+{"name": "Song Maker (USA, Europe)", "size": 6041, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Song%20Maker%20%28USA%2C%20Europe%29.zip"},
+{"name": "Space Action (USA, Europe)", "size": 3072, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Space%20Action%20%28USA%2C%20Europe%29.zip"},
+{"name": "Space Gun (Europe)", "size": 90726, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Space%20Gun%20%28Europe%29.zip"},
+{"name": "Space Ric-O-Shay (USA, Europe)", "size": 3379, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Space%20Ric-O-Shay%20%28USA%2C%20Europe%29.zip"},
+{"name": "Space Shuttle - A Journey into Space (USA, Europe)", "size": 10956, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Space%20Shuttle%20-%20A%20Journey%20into%20Space%20%28USA%2C%20Europe%29.zip"},
+{"name": "Speed Math & Bingo Math (USA, Europe) (v01) (MAX)", "size": 5017, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Speed%20Math%20%26%20Bingo%20Math%20%28USA%2C%20Europe%29%20%28v01%29%20%28MAX%29.zip"},
+{"name": "Speedsaver $C000 (USA, Europe) (Program)", "size": 3584, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Speedsaver%20%24C000%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Speedsaver Combi (USA, Europe) (Program)", "size": 6656, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Speedsaver%20Combi%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Spitball (USA, Europe)", "size": 6246, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Spitball%20%28USA%2C%20Europe%29.zip"},
+{"name": "Spy Hunter (USA, Europe)", "size": 12697, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Spy%20Hunter%20%28USA%2C%20Europe%29.zip"},
+{"name": "Star Post (USA, Europe)", "size": 5836, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Star%20Post%20%28USA%2C%20Europe%29.zip"},
+{"name": "Star Ranger (USA, Europe)", "size": 12390, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Star%20Ranger%20%28USA%2C%20Europe%29.zip"},
+{"name": "Star Trek - Strategic Operations Simulator (USA, Europe)", "size": 10240, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Star%20Trek%20-%20Strategic%20Operations%20Simulator%20%28USA%2C%20Europe%29.zip"},
+{"name": "Star Wars - The Arcade Game (USA, Europe)", "size": 9932, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Star%20Wars%20-%20The%20Arcade%20Game%20%28USA%2C%20Europe%29.zip"},
+{"name": "Stat 64 (USA, Europe) (Program)", "size": 5017, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Stat%2064%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "States and Capitals Tutorial (USA)", "size": 6041, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/States%20and%20Capitals%20Tutorial%20%28USA%29.zip"},
+{"name": "Stix (USA, Europe)", "size": 4710, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Stix%20%28USA%2C%20Europe%29.zip"},
+{"name": "Story Machine (USA, Europe)", "size": 9113, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Story%20Machine%20%28USA%2C%20Europe%29.zip"},
+{"name": "Super Alien (Japan) (v01) (MAX)", "size": 4915, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Super%20Alien%20%28Japan%29%20%28v01%29%20%28MAX%29.zip"},
+{"name": "Super Expander 64 (USA, Europe) (Program)", "size": 6758, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Super%20Expander%2064%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Super Explode 5 (USA, Europe) (Program)", "size": 11468, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Super%20Explode%205%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Super Sketch (USA, Europe)", "size": 6758, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Super%20Sketch%20%28USA%2C%20Europe%29.zip"},
+{"name": "Super Smash (USA, Europe)", "size": 4198, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Super%20Smash%20%28USA%2C%20Europe%29.zip"},
+{"name": "Super Snapshot 5 (Europe) (Program)", "size": 44441, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Super%20Snapshot%205%20%28Europe%29%20%28Program%29.zip"},
+{"name": "Super Snapshot 5 (USA) (Program)", "size": 43212, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Super%20Snapshot%205%20%28USA%29%20%28Program%29.zip"},
+{"name": "Super Zaxxon (USA, Europe)", "size": 14643, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Super%20Zaxxon%20%28USA%2C%20Europe%29.zip"},
+{"name": "Tank Wars (USA, Europe)", "size": 3072, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Tank%20Wars%20%28USA%2C%20Europe%29.zip"},
+{"name": "Tapper (USA, Europe)", "size": 12390, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Tapper%20%28USA%2C%20Europe%29.zip"},
+{"name": "Teledata (Sweden) (Program)", "size": 5120, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Teledata%20%28Sweden%29%20%28Program%29.zip"},
+{"name": "Tennis (USA) (CCS)", "size": 15360, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Tennis%20%28USA%29%20%28CCS%29.zip"},
+{"name": "Tennis (USA) (VICE)", "size": 15360, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Tennis%20%28USA%29%20%28VICE%29.zip"},
+{"name": "Tenpins (USA, Europe)", "size": 2048, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Tenpins%20%28USA%2C%20Europe%29.zip"},
+{"name": "Tenpins + Meteor Runner + Vortex (USA, Europe) (Megafun)", "size": 5427, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Tenpins%20%2B%20Meteor%20Runner%20%2B%20Vortex%20%28USA%2C%20Europe%29%20%28Megafun%29.zip"},
+{"name": "Terminator 2 - Judgment Day + Modern Music Maker + Image System, The (Europe)", "size": 371916, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Terminator%202%20-%20Judgment%20Day%20%2B%20Modern%20Music%20Maker%20%2B%20Image%20System%2C%20The%20%28Europe%29.zip"},
+{"name": "Threshold (USA, Europe)", "size": 5939, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Threshold%20%28USA%2C%20Europe%29.zip"},
+{"name": "Timebound (USA, Europe)", "size": 9728, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Timebound%20%28USA%2C%20Europe%29.zip"},
+{"name": "Toki (Europe)", "size": 91545, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Toki%20%28Europe%29.zip"},
+{"name": "Tool-64, The (USA, Europe)", "size": 6348, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Tool-64%2C%20The%20%28USA%2C%20Europe%29.zip"},
+{"name": "Tooth Invaders (USA, Europe)", "size": 7680, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Tooth%20Invaders%20%28USA%2C%20Europe%29.zip"},
+{"name": "Toy Bizarre (USA, Europe)", "size": 16179, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Toy%20Bizarre%20%28USA%2C%20Europe%29.zip"},
+{"name": "Trashman (USA, Europe)", "size": 5836, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Trashman%20%28USA%2C%20Europe%29.zip"},
+{"name": "Turbo Maze Man (USA, Europe)", "size": 3174, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Turbo%20Maze%20Man%20%28USA%2C%20Europe%29.zip"},
+{"name": "Tyler's Dungeons (USA, Europe)", "size": 5120, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Tyler%27s%20Dungeons%20%28USA%2C%20Europe%29.zip"},
+{"name": "Ultrex Quadro Maze (USA, Europe)", "size": 4198, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Ultrex%20Quadro%20Maze%20%28USA%2C%20Europe%29.zip"},
+{"name": "Up & Add'Em (USA, Europe)", "size": 11161, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Up%20%26%20Add%27Em%20%28USA%2C%20Europe%29.zip"},
+{"name": "Up for Grabs (USA, Europe)", "size": 6144, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Up%20for%20Grabs%20%28USA%2C%20Europe%29.zip"},
+{"name": "Up'n Down (USA, Europe)", "size": 11161, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Up%27n%20Down%20%28USA%2C%20Europe%29.zip"},
+{"name": "Utah Counties Tutorial (USA)", "size": 5324, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Utah%20Counties%20Tutorial%20%28USA%29.zip"},
+{"name": "VIC-Text 64 (Sweden) (Program)", "size": 11059, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/VIC-Text%2064%20%28Sweden%29%20%28Program%29.zip"},
+{"name": "Videomate (USA, Europe) (Program)", "size": 7475, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Videomate%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Viduzzles - Computerized Jigsaw Puzzles (USA, Europe)", "size": 11161, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Viduzzles%20-%20Computerized%20Jigsaw%20Puzzles%20%28USA%2C%20Europe%29.zip"},
+{"name": "Viking Raider (USA, Europe)", "size": 76492, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Viking%20Raider%20%28USA%2C%20Europe%29.zip"},
+{"name": "Vindicators (USA, Europe)", "size": 37478, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Vindicators%20%28USA%2C%20Europe%29.zip"},
+{"name": "Visible Solar System, The (USA, Europe) (MAX)", "size": 6553, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Visible%20Solar%20System%2C%20The%20%28USA%2C%20Europe%29%20%28MAX%29.zip"},
+{"name": "Warp Speed (USA, Europe) (v1) (Program)", "size": 12697, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Warp%20Speed%20%28USA%2C%20Europe%29%20%28v1%29%20%28Program%29.zip"},
+{"name": "Warp Speed (USA, Europe) (v2.0) (Program)", "size": 13004, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Warp%20Speed%20%28USA%2C%20Europe%29%20%28v2.0%29%20%28Program%29.zip"},
+{"name": "Webster - The Word Game (USA, Europe)", "size": 7475, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Webster%20-%20The%20Word%20Game%20%28USA%2C%20Europe%29.zip"},
+{"name": "Wizard of Id's Wiztype, The (USA, Europe)", "size": 12185, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Wizard%20of%20Id%27s%20Wiztype%2C%20The%20%28USA%2C%20Europe%29.zip"},
+{"name": "Wizard of Wor (Japan) (MAX)", "size": 4608, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Wizard%20of%20Wor%20%28Japan%29%20%28MAX%29.zip"},
+{"name": "Wizard of Wor (Japan) (v02) (MAX)", "size": 4300, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Wizard%20of%20Wor%20%28Japan%29%20%28v02%29%20%28MAX%29.zip"},
+{"name": "Wizard of Wor (USA, Europe)", "size": 13414, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Wizard%20of%20Wor%20%28USA%2C%20Europe%29.zip"},
+{"name": "Wonder Boy (USA, Europe)", "size": 35020, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Wonder%20Boy%20%28USA%2C%20Europe%29.zip"},
+{"name": "Write Now! 64 (USA, Europe) (Program)", "size": 10854, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Write%20Now%21%2064%20%28USA%2C%20Europe%29%20%28Program%29.zip"},
+{"name": "Zaxxon (USA, Europe)", "size": 14438, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Zaxxon%20%28USA%2C%20Europe%29.zip"},
+{"name": "Zenji (USA, Europe)", "size": 8294, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Zenji%20%28USA%2C%20Europe%29.zip"},
+{"name": "Zone Ranger (USA, Europe)", "size": 15667, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/Zone%20Ranger%20%28USA%2C%20Europe%29.zip"},
+{"name": "[BIOS] Commodore 1541 (Japan, USA) (En)", "size": 12288, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201541%20%28Japan%2C%20USA%29%20%28En%29.zip"},
+{"name": "[BIOS] Commodore 1541 (World) (R1)", "size": 12288, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201541%20%28World%29%20%28R1%29.zip"},
+{"name": "[BIOS] Commodore 1541 (World) (R2)", "size": 12288, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201541%20%28World%29%20%28R2%29.zip"},
+{"name": "[BIOS] Commodore 1541 (World)", "size": 12288, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201541%20%28World%29.zip"},
+{"name": "[BIOS] Commodore 1541-II (World)", "size": 12083, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201541-II%20%28World%29.zip"},
+{"name": "[BIOS] Commodore 1541C (World) (R1)", "size": 12083, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201541C%20%28World%29%20%28R1%29.zip"},
+{"name": "[BIOS] Commodore 1541C (World)", "size": 11878, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201541C%20%28World%29.zip"},
+{"name": "[BIOS] Commodore 1570 (World)", "size": 17920, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201570%20%28World%29.zip"},
+{"name": "[BIOS] Commodore 1571 (World) (R1)", "size": 18227, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201571%20%28World%29%20%28R1%29.zip"},
+{"name": "[BIOS] Commodore 1571 (World)", "size": 17817, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201571%20%28World%29.zip"},
+{"name": "[BIOS] Commodore 1571CR (World)", "size": 18432, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201571CR%20%28World%29.zip"},
+{"name": "[BIOS] Commodore 1581 (World) (R1)", "size": 14745, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201581%20%28World%29%20%28R1%29.zip"},
+{"name": "[BIOS] Commodore 1581 (World)", "size": 14745, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%201581%20%28World%29.zip"},
+{"name": "[BIOS] Commodore 64 (Sweden) (R2)", "size": 15155, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%2064%20%28Sweden%29%20%28R2%29.zip"},
+{"name": "[BIOS] Commodore 64 (Sweden) (R3)", "size": 15155, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%2064%20%28Sweden%29%20%28R3%29.zip"},
+{"name": "[BIOS] Commodore 64 (USA, Europe) (R1)", "size": 15155, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%2064%20%28USA%2C%20Europe%29%20%28R1%29.zip"},
+{"name": "[BIOS] Commodore 64 (USA, Europe) (R2)", "size": 15155, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%2064%20%28USA%2C%20Europe%29%20%28R2%29.zip"},
+{"name": "[BIOS] Commodore 64 (USA, Europe) (R3)", "size": 15257, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%2064%20%28USA%2C%20Europe%29%20%28R3%29.zip"},
+{"name": "[BIOS] Commodore 64C (USA, Europe)", "size": 14950, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%2064C%20%28USA%2C%20Europe%29.zip"},
+{"name": "[BIOS] Commodore 64GS (Europe)", "size": 14643, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%2064GS%20%28Europe%29.zip"},
+{"name": "[BIOS] Commodore Educator 64 - CBM 4064 - PET 64 (USA, Europe)", "size": 15360, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%20Educator%2064%20-%20CBM%204064%20-%20PET%2064%20%28USA%2C%20Europe%29.zip"},
+{"name": "[BIOS] Commodore SX-64 (USA, Europe)", "size": 15257, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%20SX-64%20%28USA%2C%20Europe%29.zip"},
+{"name": "[BIOS] Commodore VIP 64 (Sweden)", "size": 15155, "url": "https://myrient.erista.me/files/No-Intro/Commodore%20-%20Commodore%2064/%5BBIOS%5D%20Commodore%20VIP%2064%20%28Sweden%29.zip"}]
